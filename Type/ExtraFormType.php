@@ -27,8 +27,8 @@ class ExtraFormType implements ExtraFormTypeInterface
      */
     public function __construct(array $configuration)
     {
-        die('ExtraFormType:__construct');
         var_dump($configuration);
+        die('ExtraFormType:__construct');
     }
 
     /**

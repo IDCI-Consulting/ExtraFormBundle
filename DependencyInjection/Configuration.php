@@ -73,6 +73,11 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                     ->end()
+                    ->arrayNode('extra_form_constraints')
+                        ->defaultValue(array())
+                        ->prototype('array')
+                        ->end()
+                    ->end()
                 ->end()
             ->end()
         ;
@@ -81,14 +86,39 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * addFormFieldConstraintsNode
+     * addExtraFormConstraintsNode
      *
      * @return ArrayNodeDefinition|NodeDefinition
      */
-    protected function addFormFieldConstraintsNode()
+    protected function addExtraFormConstraintsNode()
     {
         $builder = new TreeBuilder();
         $node = $builder->root('constraints');
+
+        $node
+            ->defaultValue(array())
+            ->useAttributeAsKey('id')
+            ->prototype('array')
+                ->children()
+                    ->scalarNode('class')->isRequired()->end()
+                    ->scalarNode('description')->defaultNull()->end()
+                    ->arrayNode('extra_form_options')
+                        ->defaultValue(array())
+                        ->prototype('array')
+                            ->children()
+                                ->scalarNode('extra_form_type')->end()
+                                ->arrayNode('options')
+                                    ->prototype('variable')->end()
+                                ->end()
+                                ->arrayNode('constraints')
+                                    ->prototype('variable')->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
 
         return $node;
     }

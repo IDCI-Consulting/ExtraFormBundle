@@ -34,6 +34,14 @@ public function registerBundles()
 }
 ```
 
+Import the bundle configuration:
+```yml
+# app/config/config.yml
+
+imports:
+    - { resource: @IDCIExtraFormBundle/Resources/config/config.yml }
+```
+
 
 Documentation
 -------------
