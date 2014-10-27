@@ -40,7 +40,7 @@ Documentation
 
 * [Introduction](Resources/doc/introduction.md)
 * [Architecture](Resources/doc/architecture.md)
-* [Configuration Reference](Resources/doc/configuration_reference.md)
+* [Configuration reference](Resources/doc/configuration_reference.md)
 * [ExtraFormType](Resources/doc/extra_form_type.md)
 * [ExtraFormConstraint](Resources/doc/extra_form_constraint.md)
 * [ExtraFormConfigurator](Resources/doc/extra_form_configurator.md)
