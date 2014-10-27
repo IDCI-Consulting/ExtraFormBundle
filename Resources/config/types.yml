@@ -1,0 +1,47 @@
+idci_extra_form:
+    types:
+        form:
+            parent:      ~
+            form_type:   form
+            abstract:    true
+            description: ~
+            extra_form_options:
+                label:          { extra_form_type: "text",     "options": {"required": false} }
+                required:       { extra_form_type: "checkbox", "options": {"required": false} }
+                disabled:       { extra_form_type: "checkbox", "options": {"required": false} }
+                read_only:      { extra_form_type: "checkbox", "options": {"required": false} }
+                error_bubbling: { extra_form_type: "checkbox", "options": {"required": false} }
+                data:           { extra_form_type: "text",     "options": {"required": false} }
+                attr:           { extra_form_type: "text",     "options": {"required": false} }
+                help:           { extra_form_type: "textarea", "options": {"required": false} }
+            extra_form_constraints: ~
+
+        text:
+            parent:      form
+            form_type:   text
+            description: "Input text field"
+            extra_form_options:
+                max_length:     { extra_form_type: "number",    "options": {"required": false} }
+                trim:           { extra_form_type: "checkbox",  "options": {"required": false} }
+
+        regexp:
+            parent:      text
+            form_type:   text
+            description: "Input text field with regular expression"
+            extra_form_options:
+                pattern:        { extra_form_type: "text",     "options": {"required": false} }
+
+        textarea:
+            parent:      form
+            form_type:   textarea
+            description: "Text entry field"
+            extra_form_options:
+                max_length:     { extra_form_type: "number",    "options": {"required": false} }
+                trim:           { extra_form_type: "checkbox",  "options": {"required": false} }
+
+        checkbox:
+            parent:      form
+            form_type:   checkbox
+            description: "Boolean input field (checkbox)"
+            extra_form_options:
+                value:          { extra_form_type: "text",      "options": {"required": false} }
