@@ -7,7 +7,7 @@
  *
  */
 
-namespace IDCI\ExtraFormBundle\Constraint;
+namespace IDCI\Bundle\ExtraFormBundle\Constraint;
 
 
 class ExtraFormConstraintHandler

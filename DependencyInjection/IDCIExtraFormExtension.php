@@ -7,7 +7,7 @@
  *
  */
 
-namespace IDCI\ExtraFormBundle\DependencyInjection;
+namespace IDCI\Bundle\ExtraFormBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;

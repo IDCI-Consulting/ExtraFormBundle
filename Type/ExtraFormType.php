@@ -7,7 +7,7 @@
  *
  */
 
-namespace IDCI\ExtraFormBundle\Type;
+namespace IDCI\Bundle\ExtraFormBundle\Type;
 
 
 class ExtraFormType implements ExtraFormTypeInterface 

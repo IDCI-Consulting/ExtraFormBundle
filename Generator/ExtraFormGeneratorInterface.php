@@ -7,9 +7,9 @@
  *
  */
 
-namespace IDCI\ExtraFormBundle\Generator;
+namespace IDCI\Bundle\ExtraFormBundle\Generator;
 
-use IDCI\ExtraFormBundle\Configurator\ExtraFormConfiguratorInterface;
+use IDCI\Bundle\ExtraFormBundle\Configurator\ExtraFormConfiguratorInterface;
 
 interface ExtraFormGeneratorInterface
 {

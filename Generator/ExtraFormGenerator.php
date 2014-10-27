@@ -7,11 +7,11 @@
  *
  */
 
-namespace IDCI\ExtraFormBundle\Generator;
+namespace IDCI\Bundle\ExtraFormBundle\Generator;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use IDCI\ExtraFormBundle\Configurator\ExtraFormConfiguratorInterface;
+use IDCI\Bundle\ExtraFormBundle\Configurator\ExtraFormConfiguratorInterface;
 
 class ExtraFormGenerator implements ExtraFormGeneratorInterface
 {

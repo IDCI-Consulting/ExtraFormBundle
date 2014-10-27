@@ -7,7 +7,7 @@
  *
  */
 
-namespace IDCI\ExtraFormBundle\DependencyInjection;
+namespace IDCI\Bundle\ExtraFormBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

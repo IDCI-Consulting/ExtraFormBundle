@@ -7,7 +7,7 @@
  *
  */
 
-namespace IDCI\ExtraFormBundle\Configurator;
+namespace IDCI\Bundle\ExtraFormBundle\Configurator;
 
 
 interface ExtraFormConfiguratorInterface

@@ -7,13 +7,13 @@
  *
  */
 
-namespace IDCI\ExtraFormBundle;
+namespace IDCI\Bundle\ExtraFormBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use IDCI\ExtraFormBundle\DependencyInjection\Compiler\TypeCompilerPass;
-use IDCI\ExtraFormBundle\DependencyInjection\Compiler\ConstraintCompilerPass;
-use IDCI\ExtraFormBundle\DependencyInjection\Compiler\ConfiguratorCompilerPass;
+use IDCI\Bundle\ExtraFormBundle\DependencyInjection\Compiler\TypeCompilerPass;
+use IDCI\Bundle\ExtraFormBundle\DependencyInjection\Compiler\ConstraintCompilerPass;
+use IDCI\Bundle\ExtraFormBundle\DependencyInjection\Compiler\ConfiguratorCompilerPass;
 
 class IDCIExtraFormBundle extends Bundle
 {

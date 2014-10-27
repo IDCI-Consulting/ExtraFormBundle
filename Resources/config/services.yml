@@ -1,7 +1,7 @@
 services:
 
     idci_extra_form.type_handler:
-        class: IDCI\ExtraFormBundle\Type\ExtraFormTypeHandler
+        class: IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeHandler
 
     idci_extra_form.constraint_handler:
-        class: IDCI\ExtraFormBundle\Constraint\ExtraFormConstraintHandler
+        class: IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintHandler
