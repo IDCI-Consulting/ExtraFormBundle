@@ -23,14 +23,6 @@ class ExtraFormConfigurator extends AbstractExtraFormConfigurator
     {
         $this->raw = $raw;
     }
-    
-    /**
-     * {@inheritDoc}
-     */
-    public function getRaw()
-    {
-        return $this->raw;
-    }
 
     /**
      * {@inheritDoc}

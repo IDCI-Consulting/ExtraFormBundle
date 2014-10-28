@@ -32,6 +32,11 @@ services:
         arguments: [null]
         abstract: true
 
+    idci_extra_form.configurator.doctrine:
+        class: IDCI\Bundle\ExtraFormBundle\Configurator\DoctrineExtraFormConfigurator
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: idci_extra_form.configurator, alias: doctrine }
         
     # ExtraFormGenerator
 

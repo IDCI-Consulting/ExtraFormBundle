@@ -38,7 +38,7 @@ in the `buildForm` method, you declare the fields in a configuration file.
 Generated form are [without class](http://symfony.com/doc/current/book/forms.html#using-a-form-without-a-class)
 
 
-### HMIExtraFormConfigurator
+### DoctrineExtraFormConfigurator
 
 WIP
 

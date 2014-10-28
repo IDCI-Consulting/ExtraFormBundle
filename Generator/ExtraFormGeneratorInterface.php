@@ -17,10 +17,11 @@ interface ExtraFormGeneratorInterface
      * Generate
      *
      * @param  string $configuratorAlias
+     * @param  array  $parameters
      * @param  array  $data
      * @return Symfony\Component\Form\FormBuilderInterface
      */
-    public function generate($configuratorAlias, array $data = array());
+    public function generate($configuratorAlias, array $parameters = array(), array $data = array());
 
     /**
      * set configurator
@@ -42,6 +43,7 @@ interface ExtraFormGeneratorInterface
      *
      * @param  string $alias
      * @return ExtraFormConfiguratorInterface
+     * @throw  IDCI\Bundle\ExtraFormBundle\Exception\UndefinedExtraFormConfiguratorException
      */
     public function getConfigurator($alias);
 }

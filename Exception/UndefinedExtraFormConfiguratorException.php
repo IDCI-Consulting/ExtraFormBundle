@@ -9,7 +9,7 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Exception;
 
-class UndefinedExtraFormConstraintException extends \Exception
+class UndefinedExtraFormConfiguratorException extends \Exception
 {
     /**
      * The constructor
@@ -19,7 +19,7 @@ class UndefinedExtraFormConstraintException extends \Exception
     public function __construct($name)
     {
         parent::__construct(sprintf(
-            'The ExtraFormConstraint %s is undefined',
+            'The ExtraFormConfigurator %s is undefined',
             $name
         ));
     }

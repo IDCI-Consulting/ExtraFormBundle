@@ -13,13 +13,6 @@ namespace IDCI\Bundle\ExtraFormBundle\Configurator;
 interface ExtraFormConfiguratorInterface
 {
     /**
-     * Get raw
-     *
-     * @return array
-     */
-    public function getRaw();
-
-    /**
      * Make configuration
      *
      * @param  array $parameters
