@@ -8,10 +8,10 @@ Mainly, informations about how create dynamicaly a Symfony2 FormType, like:
  * The ExtraFormType parent associated to the parent FormType (parent)
  * Is the FormType is abstract or not (abstract)
  * A description (description)
- * And a list of available FormType options (extra_form_options)  
+ * And a list of available FormType options (extra_form_options)
 
+  
  To create an ExtraFormType, simply use the configuration:
-
  ```yml
   idci_extra_form:
     types:
@@ -27,10 +27,7 @@ Mainly, informations about how create dynamicaly a Symfony2 FormType, like:
 
 Take a look at the [default ExtraFormTypes configuration](../config/types.yml)
 
-
 To check if a ExtraFormType is well configurated, you could list all them:
-
 ```sh
 $ php app/console container:debug | grep "idci_extra_form\.type\."
 ```
-
