@@ -4,12 +4,11 @@ ExtraFormType
 
 ExtraFormType is a service that add extra informations about existing FormType.
 Mainly, informations about how create dynamicaly a Symfony2 FormType, like:
- * The associated FormType (form_type),
- * The ExtraFormType parent associated to the parent FormType (parent),
- * Is the FormType is abstract or not (abstract),
- * A description (description),
- * And a list of available FormType options (extra_form_options)
-
+ * The associated FormType (form_type)
+ * The ExtraFormType parent associated to the parent FormType (parent)
+ * Is the FormType is abstract or not (abstract)
+ * A description (description)
+ * And a list of available FormType options (extra_form_options)  
 
  To create an ExtraFormType, simply use the configuration:
 
