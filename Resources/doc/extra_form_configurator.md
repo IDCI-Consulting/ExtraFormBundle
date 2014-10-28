@@ -7,9 +7,9 @@ configuration that is use by a ExtraFormGenerator to generate a FormBuilder.
 By default this bundle provide two kind of configurator.
 
 
-# Default configurators
+## Default configurators
 
-## ExtraFormConfigurator
+### ExtraFormConfigurator
 
 This is the default ExtraFormConfigurator, the specific raw is located in your configuration.
 
@@ -38,12 +38,12 @@ in the `buildForm` method, you declare the fields in a configuration file.
 Generated form are [without class](http://symfony.com/doc/current/book/forms.html#using-a-form-without-a-class)
 
 
-## HMIExtraFormConfigurator
+### HMIExtraFormConfigurator
 
 WIP
 
 
-# Create your own configurator
+## Create your own configurator
 
 If you wish to create your own configurator, you have to create a class which
 extends `AbstractExtraFormConfigurator` and implement necessary methods.
