@@ -10,6 +10,9 @@
 namespace IDCI\Bundle\ExtraFormBundle\Constraint;
 
 
+use IDCI\Bundle\ExtraFormBundle\Exception\UndefinedExtraFormConstraintException;
+
+
 class ExtraFormConstraintHandler
 {
     protected $constraints;
@@ -22,7 +25,9 @@ class ExtraFormConstraintHandler
      */
     public function setConstraint($name, ExtraFormConstraintInterface $constraint)
     {
+        $this->constraints[$name] = $constraint;
     }
+
     /**
      * Get constraints
      *
@@ -30,6 +35,7 @@ class ExtraFormConstraintHandler
      */
     public function getConstraints()
     {
+        return $this->constraints;
     }
 
     /**
@@ -41,5 +47,10 @@ class ExtraFormConstraintHandler
      */
     public function getConstraint($name)
     {
+        if (!isset($this->constraints[$name])) {
+            throw new UndefinedExtraFormConstraintException($name);
+        }
+
+        return $this->constraints[$name];
     }
 }

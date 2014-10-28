@@ -12,9 +12,9 @@ namespace IDCI\Bundle\ExtraFormBundle\Type;
 
 class ExtraFormType implements ExtraFormTypeInterface 
 {
+    protected $name;
     protected $formType;
     protected $parent;
-    protected $name;
     protected $description;
     protected $abstract;
     protected $extraFormOptions;
@@ -29,6 +29,13 @@ class ExtraFormType implements ExtraFormTypeInterface
     {
         var_dump($configuration);
         die('ExtraFormType:__construct');
+        $this->name                 = $configuration['name'];
+        $this->formType             = $configuration['form_type'];
+        $this->parent               = $configuration['parent'];
+        $this->description          = $configuration['description'];
+        $this->abstract             = $configuration['abstract'];
+        $this->extraFormOptions     = $configuration['extra_form_options'];
+        $this->extraFormConstraints = $configuration['extra_form_constraints'];
     }
 
     /**

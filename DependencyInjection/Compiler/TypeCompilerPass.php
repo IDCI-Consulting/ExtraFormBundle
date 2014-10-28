@@ -8,10 +8,12 @@
 namespace IDCI\Bundle\ExtraFormBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use IDCI\Bundle\ExtraFormBundle\Exception\UndefinedExtraFormTypeException;
+use IDCI\Bundle\ExtraFormBundle\Exception\WrongExtraFormOptionException;
 
 class TypeCompilerPass implements CompilerPassInterface
 {
@@ -29,11 +31,15 @@ class TypeCompilerPass implements CompilerPassInterface
         $handlerDefinition = $container->getDefinition('idci_extra_form.type_handler');
 
         $types = $container->getParameter('idci_extra_form.types');
+        $extraFormOptions = array();
         foreach ($types as $name => $configuration) {
             $serviceDefinition = new DefinitionDecorator('idci_extra_form.type');
 
             if (null !== $configuration['parent']) {
-                if (!$container->hasDefinition($this->getDefinitionName($configuration['parent']))) {
+                if (!$this->isExtraFormTypeDefined(
+                    $container,
+                    $configuration['parent']
+                )) {
                     throw new UndefinedExtraFormTypeException($configuration['parent']);
                 }
 
@@ -54,16 +60,47 @@ class TypeCompilerPass implements CompilerPassInterface
                 'setType',
                 array($name, new Reference($this->getDefinitionName($name)))
             );
+            
+            $extraFormOptions[$name] = $configuration['extra_form_options'];
+        }
+
+        // Check extra_form_options
+        foreach ($extraFormOptions as $name => $options) {
+            foreach ($options as $optionName => $optionValue) {
+                if (!$this->isExtraFormTypeDefined(
+                    $container,
+                    $optionValue['extra_form_type']
+                )) {
+                    throw new WrongExtraFormOptionException(
+                        $name,
+                        $optionName,
+                        sprintf('Undefined ExtraFormType "%s"', $optionValue['extra_form_type'])
+                    );
+                }
+            }
         }
     }
 
     /**
      * Get definition name
      *
-     * @return string $name
+     * @param  string $name
+     * @return string
      */
     protected function getDefinitionName($name)
     {
         return sprintf('idci_extra_form.type.%s', $name);
+    }
+
+    /**
+     * Get definition name
+     *
+     * @param  Container $container
+     * @param  string $name
+     * @return string
+     */
+    protected function isExtraFormTypeDefined(Container $container, $name)
+    {
+        return $container->hasDefinition($this->getDefinitionName($name));
     }
 }

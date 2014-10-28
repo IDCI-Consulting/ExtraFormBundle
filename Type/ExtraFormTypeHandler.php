@@ -10,6 +10,9 @@
 namespace IDCI\Bundle\ExtraFormBundle\Type;
 
 
+use IDCI\Bundle\ExtraFormBundle\Exception\UndefinedExtraFormTypeException;
+
+
 class ExtraFormTypeHandler
 {
     protected $types;
@@ -22,6 +25,7 @@ class ExtraFormTypeHandler
      */
     public function setType($name, ExtraFormTypeInterface $type)
     {
+        $this->types[$name] = $type;
     }
 
     /**
@@ -31,6 +35,7 @@ class ExtraFormTypeHandler
      */
     public function getTypes()
     {
+        return $this->types;
     }
 
     /**
@@ -42,5 +47,10 @@ class ExtraFormTypeHandler
      */
     public function getType($name)
     {
+        if (!isset($this->types[$name])) {
+            throw new UndefinedExtraFormTypeException($name);
+        }
+
+        return $this->types[$name];
     }
 }
