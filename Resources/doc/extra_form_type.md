@@ -10,6 +10,7 @@ Mainly, informations about how create dynamicaly a Symfony2 FormType, like:
  * A list of available FormType options (extra_form_options),
  * And a description (description)
 
+
  To create an ExtraFormType, simply use the configuration:
 
  ```yml
