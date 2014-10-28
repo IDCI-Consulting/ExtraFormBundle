@@ -49,6 +49,7 @@ If you wish to create your own configurator, you have to create a class which
 extends `AbstractExtraFormConfigurator` and implement necessary methods.
 
 ```php
+<?php
 // src/My/Bundle/ExtraFormConfigurator/MyConfigurator.php
 
 namespace My\Bundle\ExtraFormConfigurator\MyConfigurator
