@@ -1,3 +1,6 @@
+parameters:
+    idci_extra_form.generator.class: IDCI\Bundle\ExtraFormBundle\Generator\ExtraFormGenerator
+
 services:
 
     # ExtraFormType
@@ -10,7 +13,27 @@ services:
     idci_extra_form.type_handler:
         class: IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeHandler
 
+
     # ExtraFormConstraint
+
+    idci_extra_form.constraint:
+        class: IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraint
+        arguments: [null]
+        abstract: true
 
     idci_extra_form.constraint_handler:
         class: IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintHandler
+
+
+    # ExtraFormConfigurator
+
+    idci_extra_form.configurator:
+        class: IDCI\Bundle\ExtraFormBundle\Configurator\ExtraFormConfigurator
+        arguments: [null]
+        abstract: true
+
+        
+    # ExtraFormGenerator
+
+    idci_extra_form.generator:
+        class: %idci_extra_form.generator.class%

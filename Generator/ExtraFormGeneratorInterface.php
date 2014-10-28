@@ -23,11 +23,12 @@ interface ExtraFormGeneratorInterface
     public function generate($configuratorAlias, array $data = array());
 
     /**
-     * Add configurator
+     * set configurator
      *
+     * @param string $alias
      * @param ExtraFormConfiguratorInterface $configurator
      */
-    public function addConfigurator(ExtraFormConfiguratorInterface $configurator);
+    public function setConfigurator($alias, ExtraFormConfiguratorInterface $configurator);
 
     /**
      * Get configurators

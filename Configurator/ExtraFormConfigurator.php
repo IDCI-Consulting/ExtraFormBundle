@@ -10,7 +10,33 @@
 namespace IDCI\Bundle\ExtraFormBundle\Configurator;
 
 
-class ExtraFormConfigurator implements ExtraFormConfiguratorInterface 
+class ExtraFormConfigurator extends AbstractExtraFormConfigurator
 {
+    protected $raw;
 
+    /**
+     * Constructor
+     *
+     * @param array $raw
+     */
+    public function __construct(array $raw)
+    {
+        $this->raw = $raw;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public function getRaw()
+    {
+        return $this->raw;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function doMakeConfiguration(array $parameters = array())
+    {
+        return $this->raw['fields'];
+    }
 }

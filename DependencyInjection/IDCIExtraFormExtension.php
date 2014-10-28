@@ -34,5 +34,6 @@ class IDCIExtraFormExtension extends Extension
 
         $container->setParameter('idci_extra_form.types', $config['types']);
         $container->setParameter('idci_extra_form.constraints', $config['constraints']);
+        $container->setParameter('idci_extra_form.configurators', $config['configurators']);
     }
 }

@@ -34,6 +34,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->append($this->addExtraFormTypesNode())
                 ->append($this->addExtraFormConstraintsNode())
+                ->append($this->addExtraFormConfiguratorsNode())
             ->end()
         ;
 
@@ -106,13 +107,49 @@ class Configuration implements ConfigurationInterface
                         ->defaultValue(array())
                         ->prototype('array')
                             ->children()
-                                ->scalarNode('extra_form_type')->end()
+                                ->scalarNode('extra_form_type')->isRequired()->end()
                                 ->arrayNode('options')
-                                    ->prototype('variable')->end()
+                                    ->defaultValue(array())->prototype('variable')->end()
                                 ->end()
                                 ->arrayNode('constraints')
-                                    ->prototype('variable')->end()
+                                    ->defaultValue(array())->prototype('variable')->end()
                                 ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+
+        return $node;
+    }
+
+    /**
+     * addExtraFormConfiguratorsNode
+     *
+     * @return ArrayNodeDefinition|NodeDefinition
+     */
+    protected function addExtraFormConfiguratorsNode()
+    {
+        $builder = new TreeBuilder();
+        $node = $builder->root('configurators');
+
+        $node
+            ->defaultValue(array())
+            ->useAttributeAsKey('id')
+            ->prototype('array')
+                ->children()
+                    ->arrayNode('fields')
+                    ->defaultValue(array())
+                    ->useAttributeAsKey('id')
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('extra_form_type')->isRequired()->end()
+                            ->arrayNode('options')
+                                ->defaultValue(array())->prototype('variable')->end()
+                            ->end()
+                            ->arrayNode('constraints')
+                                ->defaultValue(array())->prototype('variable')->end()
                             ->end()
                         ->end()
                     ->end()
