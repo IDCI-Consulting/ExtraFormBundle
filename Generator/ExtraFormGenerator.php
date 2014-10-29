@@ -44,14 +44,32 @@ class ExtraFormGenerator implements ExtraFormGeneratorInterface
     /**
      * {@inheritDoc}
      */
-    public function generate($configuratorAlias, array $parameters = array(), array $data = array())
+    public function generate(
+        $configuratorAlias,
+        array $configuratorParameters = array(),
+        $formName = null,
+        array $formOptions = array()
+    )
     {
         $configuration = $this
             ->getConfigurator($configuratorAlias)
-            ->makeConfiguration($parameters)
+            ->makeConfiguration($configuratorParameters)
         ;
 
-        var_dump($configuration); die('TODO: generate now !!!');
+        if (null === $formName) {
+            $formBuilder = $this
+                ->formFactory
+                ->createBuilder('form', null, $formOptions);
+        } else {
+            $formBuilder = $this
+                ->formFactory
+                ->createNamedBuilder($formName, 'form', null, $formOptions)
+            ;
+        }
+
+        // TODO: buildForm
+
+        return $formBuilder;
     }
 
     /**

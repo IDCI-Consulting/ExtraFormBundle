@@ -25,21 +25,30 @@ class TestController extends Controller
     public function indexAction(Request $request)
     {
         /*
-        $generated = $this
+        $generatedForm = $this
             ->get('idci_extra_form.generator')
             ->generate('doctrine', array(
                 'class'    => 'TmsOperationBundle:ParticipationStep',
                 'criteria' => array('id' => 2),
                 'property' => 'content_parameters'
             ))
+            ->getForm()
         ;
         */
 
-        $generated = $this
+        $generatedForm = $this
             ->get('idci_extra_form.generator')
-            ->generate('my_first_form', array())
+            ->generate(
+                'my_first_form', // configurator alias
+                array(),         // configurator parameters
+                'my_form_name',  // form name (or null)
+                array('csrf_protection' => false) // form options
+            )
+            ->getForm()
         ;
 
-        var_dump($generated);die;
+        return array(
+            'form' => $generatedForm->createView()
+        );
     }
 }

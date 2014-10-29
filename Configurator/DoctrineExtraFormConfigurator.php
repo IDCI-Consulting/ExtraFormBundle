@@ -37,6 +37,8 @@ class DoctrineExtraFormConfigurator extends AbstractExtraFormConfigurator
      */
     protected function configureParameters(OptionsResolver $resolver)
     {
+        parent::configureParameters($resolver);
+
         $resolver
             ->setRequired(array('class', 'criteria', 'property'))
             ->setAllowedTypes(array(
