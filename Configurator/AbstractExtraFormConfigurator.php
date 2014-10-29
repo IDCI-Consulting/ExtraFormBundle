@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
 abstract class AbstractExtraFormConfigurator implements ExtraFormConfiguratorInterface 
-{   
+{
     /**
      * {@inheritDoc}
      */
@@ -23,7 +23,7 @@ abstract class AbstractExtraFormConfigurator implements ExtraFormConfiguratorInt
         $resolver = new OptionsResolver();
         $this->configureParameters($resolver);
 
-        return $this->doMakeConfiguration($resolver->resolve($parameters));
+        return $this->buildConfiguration($resolver->resolve($parameters));
     }
 
     /**
@@ -36,10 +36,11 @@ abstract class AbstractExtraFormConfigurator implements ExtraFormConfiguratorInt
     }
 
     /**
-     * Do make configuration
+     * Build configuration
      *
      * @param  array $parameters
      * @return array
+     * @throw  IDCI\Bundle\ExtraFormBundle\Exception\BuildConfigurationException
      */
-    abstract protected function doMakeConfiguration(array $parameters = array());
+    abstract protected function buildConfiguration(array $parameters = array());
 }

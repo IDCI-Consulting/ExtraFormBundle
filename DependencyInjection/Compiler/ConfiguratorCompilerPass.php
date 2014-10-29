@@ -45,10 +45,9 @@ class ConfiguratorCompilerPass implements CompilerPassInterface
 
         $taggedServices = $container->findTaggedServiceIds('idci_extra_form.configurator');
         foreach ($taggedServices as $id => $attributes) {
-            var_dump($attributes);
             $generatorDefinition->addMethodCall(
                 'setConfigurator',
-                array(new Reference($id))
+                array($attributes[0]['alias'], new Reference($id))
             );
         }
     }

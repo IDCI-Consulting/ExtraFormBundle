@@ -21,8 +21,8 @@ class ExtraFormGenerator implements ExtraFormGeneratorInterface
     protected $configurators;
     protected $formFactory;
     protected $typeHandler;
-    protected $typeHandler;
-    
+    protected $constraintHandler;
+
     /**
      * Constructor
      *
@@ -69,16 +69,16 @@ class ExtraFormGenerator implements ExtraFormGeneratorInterface
     {
         return $this->configurators;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     public function getConfigurator($alias)
     {
-        if (!isset($this->configurators[$name])) {
-            throw new UndefinedExtraFormConfiguratorException($name);
+        if (!isset($this->configurators[$alias])) {
+            throw new UndefinedExtraFormConfiguratorException($alias);
         }
 
-        return $this->configurators[$name];
+        return $this->configurators[$alias];
     }
 }

@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use IDCI\Bundle\ExtraFormBundle\Exception\UndefinedExtraFormTypeException;
-use IDCI\Bundle\ExtraFormBundle\Exception\WrongExtraFormOptionException;
+use IDCI\Bundle\ExtraFormBundle\Exception\WrongExtraFormTypeOptionException;
 
 class TypeCompilerPass implements CompilerPassInterface
 {
@@ -55,12 +55,12 @@ class TypeCompilerPass implements CompilerPassInterface
                 $this->getDefinitionName($name),
                 $serviceDefinition
             );
-            
+
             $handlerDefinition->addMethodCall(
                 'setType',
                 array($name, new Reference($this->getDefinitionName($name)))
             );
-            
+
             $extraFormOptions[$name] = $configuration['extra_form_options'];
         }
 
@@ -71,7 +71,7 @@ class TypeCompilerPass implements CompilerPassInterface
                     $container,
                     $optionValue['extra_form_type']
                 )) {
-                    throw new WrongExtraFormOptionException(
+                    throw new WrongExtraFormTypeOptionException(
                         $name,
                         $optionName,
                         sprintf('Undefined ExtraFormType "%s"', $optionValue['extra_form_type'])

@@ -9,7 +9,7 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Exception;
 
-class WrongExtraFormOptionException extends \Exception
+class WrongExtraFormTypeOptionException extends \Exception
 {
     /**
      * The constructor

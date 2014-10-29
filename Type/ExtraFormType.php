@@ -27,9 +27,6 @@ class ExtraFormType implements ExtraFormTypeInterface
      */
     public function __construct(array $configuration)
     {
-        var_dump($configuration);
-        die('ExtraFormType:__construct');
-        $this->name                 = $configuration['name'];
         $this->formType             = $configuration['form_type'];
         $this->parent               = $configuration['parent'];
         $this->description          = $configuration['description'];
@@ -57,14 +54,6 @@ class ExtraFormType implements ExtraFormTypeInterface
     /**
      * {@inheritDoc}
      */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function getDescription()
     {
         return $this->description;
@@ -83,7 +72,14 @@ class ExtraFormType implements ExtraFormTypeInterface
      */
     public function getExtraFormOptions()
     {
-        return $this->extraFormOptions;
+        if (null === $this->getParent()) {
+            return $this->extraFormOptions;
+        }
+
+        return array_merge_recursive(
+            $this->getParent()->getExtraFormOptions(),
+            $this->extraFormOptions
+        );
     }
 
     /**
@@ -91,6 +87,13 @@ class ExtraFormType implements ExtraFormTypeInterface
      */
     public function getExtraFormConstraints()
     {
-        return $this->extraFormConstraints;
+        if (null === $this->getParent()) {
+            return $this->extraFormConstraints;
+        }
+
+        return array_merge_recursive(
+            $this->getParent()->getExtraFormConstraints(),
+            $this->extraFormConstraints
+        );
     }
 }

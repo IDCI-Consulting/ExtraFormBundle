@@ -9,8 +9,12 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Configurator;
 
+
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Common\Util\Inflector;
+use IDCI\Bundle\ExtraFormBundle\Exception\BuildConfigurationException;
+
 
 class DoctrineExtraFormConfigurator extends AbstractExtraFormConfigurator
 {
@@ -46,17 +50,39 @@ class DoctrineExtraFormConfigurator extends AbstractExtraFormConfigurator
     /**
      * {@inheritDoc}
      */
-    public function doMakeConfiguration(array $parameters = array())
+    public function buildConfiguration(array $parameters = array())
     {
         $entity = $this
             ->entityManager
             ->getRepository($parameters['class'])
-            ->findBy($criteria)
+            ->findOneBy($parameters['criteria'])
         ;
 
-        $getter = Inflector::camelize($parameters['property']);
-        $rawConfiguration = call_user_func_array(array($entity, $getter), array());
-        var_dump($rawConfiguration); die('Doctrine raw configuration');
+        if (null === $entity) {
+            throw new BuildConfigurationException(sprintf(
+                'Wrong criteria: \'%s\'',
+                json_encode($parameters['criteria'])
+            ));
+        }
+
+        $getter = sprintf(
+            'get%s',
+            Inflector::classify($parameters['property'])
+        );
+
+        $rc = new \ReflectionClass($entity);
+        if (!$rc->hasMethod($getter)) {
+            throw new BuildConfigurationException(sprintf(
+                'Undefined method \'%s\' in \'%s\' class',
+                $getter,
+                get_class($entity)
+            ));
+        }
+
+        $rawConfiguration = call_user_func_array(
+            array($entity, $getter),
+            array()
+        );
 
         return json_decode($rawConfiguration, true);
     }

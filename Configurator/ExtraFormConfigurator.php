@@ -27,7 +27,7 @@ class ExtraFormConfigurator extends AbstractExtraFormConfigurator
     /**
      * {@inheritDoc}
      */
-    public function doMakeConfiguration(array $parameters = array())
+    public function buildConfiguration(array $parameters = array())
     {
         return $this->raw['fields'];
     }

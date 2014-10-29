@@ -27,13 +27,6 @@ interface ExtraFormTypeInterface
     public function getParent();
 
     /**
-     * Get alias
-     *
-     * @return string
-     */
-    public function getAlias();
-
-    /**
      * Is abstract
      *
      * @return boolean

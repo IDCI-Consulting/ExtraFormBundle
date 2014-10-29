@@ -37,8 +37,13 @@ services:
         arguments: [@doctrine.orm.entity_manager]
         tags:
             - { name: idci_extra_form.configurator, alias: doctrine }
-        
+
+
     # ExtraFormGenerator
 
     idci_extra_form.generator:
         class: %idci_extra_form.generator.class%
+        arguments:
+            - @form.factory
+            - @idci_extra_form.type_handler
+            - @idci_extra_form.constraint_handler
