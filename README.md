@@ -48,11 +48,11 @@ Documentation
 
 * [Introduction](Resources/doc/introduction.md)
 * [Architecture](Resources/doc/architecture.md)
-* [Configuration reference](Resources/doc/configuration_reference.md)
+* [ExtraFormGenerator](Resources/doc/extra_form_generator.md)
 * [ExtraFormType](Resources/doc/extra_form_type.md)
 * [ExtraFormConstraint](Resources/doc/extra_form_constraint.md)
 * [ExtraFormConfigurator](Resources/doc/extra_form_configurator.md)
-* [ExtraFormBuilderGenerator](Resources/doc/extra_form_builder_generator.md)
+* [Configuration reference](Resources/doc/configuration_reference.md)
 
 
 Tests

@@ -39,18 +39,17 @@ class TestController extends Controller
         $generatedForm = $this
             ->get('idci_extra_form.generator')
             ->generate(
-                'my_first_form', // configurator alias
+                'identity_form', // configurator alias
                 array(),         // configurator parameters
                 array(           // form data
                     'first_name' => 'Gabriel',
                     'last_name'  => 'BONDAZ'
                 )
             )
-            ->getForm()
         ;
 
         return array(
-            'form' => $generatedForm->createView()
+            'form' => $generatedForm->getForm()->createView()
         );
     }
 }
