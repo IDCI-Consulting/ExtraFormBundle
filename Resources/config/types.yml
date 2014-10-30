@@ -16,22 +16,6 @@ idci_extra_form:
                 help:           { extra_form_type: "textarea", options: {required: false} }
             extra_form_constraints: ~
 
-        text:
-            parent:      form
-            form_type:   text
-            description: "Input text field"
-            extra_form_options:
-                max_length: { extra_form_type: "number",   options: {required: false} }
-                trim:       { extra_form_type: "checkbox", options: {required: false} }
-                test:       { extra_form_type: "checkbox", options: {required: false} }
-
-        regexp:
-            parent:      text
-            form_type:   text
-            description: "Input text field with regular expression"
-            extra_form_options:
-                pattern: { extra_form_type: "text", options: {required: false} }
-
         textarea:
             parent:      form
             form_type:   textarea
@@ -63,5 +47,134 @@ idci_extra_form:
             form_type:   number
             description: "Decimal input field"
             extra_form_options:
-                precision:       { extra_form_type: "number", options: {required: false, "data": 2} }
+                precision:       { extra_form_type: "number", options: {required: false, data: 2} }
                 invalid_message: { extra_form_type: "text",   options: {required: false} }
+
+        integer:
+            parent:      form
+            form_type:   integer
+            description: "Integer input field"
+            extra_form_options:
+                precision:       { extra_form_type: "number", options: {required: false, data: 2} }
+                invalid_message: { extra_form_type: "text",   options: {required: false} }
+
+        money:
+            parent:      form
+            form_type:   money
+            description: "Monetary input field"
+            extra_form_options:
+                currency:        { extra_form_type: "text",   options: {required: false, data: "EUR"} }
+                precision:       { extra_form_type: "number", options: {required: false, data: 2} }
+                invalid_message: { extra_form_type: "text",   options: {required: false} }
+
+        percent:
+            parent:      form
+            form_type:   percent
+            description: "Percentage input field"
+            extra_form_options:
+                type:            { extra_form_type: "text",   options: {required: false} }
+                precision:       { extra_form_type: "number", options: {required: false, data: 0} }
+                invalid_message: { extra_form_type: "text",   options: {required: false} }
+
+        text:
+            parent:      form
+            form_type:   text
+            description: "Input text field"
+            extra_form_options:
+                max_length: { extra_form_type: "number",   options: {required: false} }
+                trim:       { extra_form_type: "checkbox", options: {required: false} }
+                test:       { extra_form_type: "checkbox", options: {required: false} }
+
+        repeated:
+            parent:      form
+            form_type:   repeated
+            description: "Repeated input field"
+            extra_form_options:
+                type:            { extra_form_type: "text", options: {required: true} }
+                options:         { extra_form_type: "text", options: {required: false} }
+                first_options:   { extra_form_type: "text", options: {required: false} }
+                second_options:  { extra_form_type: "text", options: {required: false} }
+                invalid_message: { extra_form_type: "text", options: {required: false} }
+
+        hidden:
+            parent:      form
+            form_type:   hidden
+            description: "Hidden input field"
+
+        regexp:
+            parent:      text
+            form_type:   text
+            description: "Input text field with regular expression"
+            extra_form_options:
+                pattern: { extra_form_type: "text", options: {required: false} }
+
+        email:
+            parent:      regexp
+            form_type:   email
+            description: "Email input field"
+
+        url:
+            parent:      regexp
+            form_type:   url
+            description: "URL input field"
+            extra_form_options:
+                default_protocol: { extra_form_type: "choice", options: {choices: {http: "http", https: "https"}} }
+
+        password:
+            parent:      text
+            form_type:   password
+            description: "Password input field"
+            extra_form_options:
+                always_empty:   { extra_form_type: "checkbox", options: {required: false} }
+
+        time:
+            parent:      form
+            form_type:   time
+            description: "Time input field"
+            extra_form_options:
+                widget:          { extra_form_type: "choice",   options: {choices: {choice: "Makes two (or three if with_seconds is true) dropdowns", text: "Makes two or three text input fields (hours, minutes, seconds)", single_text: "Makes a simple input text"}, data: "choice"} }
+                input:           { extra_form_type: "choice",   options: {choices: {string: "string", datetime: "datetime", array: "array", timestamp: "timestamp"}, data: "datetime"} }
+                with_seconds:    { extra_form_type: "checkbox", options: {required: false} }
+                hours:           { extra_form_type: "text",     options: {required: false} }
+                minutes:         { extra_form_type: "text",     options: {required: false} }
+                seconds:         { extra_form_type: "text",     options: {required: false} }
+                empty_value:     { extra_form_type: "text",     options: {required: false} }
+                invalid_message: { extra_form_type: "text",     options: {required: false} }
+
+        datetime:
+            parent:      form
+            form_type:   datetime
+            description: "Date and time input field"
+            extra_form_options:
+                date_format:     { extra_form_type: "text",     options: {data: "dd-MM-yyyy"}}
+                date_widget:     { extra_form_type: "choice",   options: {choices: {choice: "Displays three drop-down lists. The order of the list is defined by the size option", text: "Displays three text fields (month, day, year)", single_text: "Displays a single text field. The user input is validated based on the format option"}, data: "choice"} }
+                time_widget:     { extra_form_type: "choice",   options: {choices: {choice: "Rend deux (ou trois si with_seconds est à true) listes déroulantes", text: "Rend deux ou trois champs input texte (heures, minutes, secondes)", single_text: "Rend un simple input texte"}, data: "choice"} }
+                input:           { extra_form_type: "choice",   options: {choices: {string: "string", datetime: "datetime", array: "array", timestamp: "timestamp"}, data: "datetime"} }
+                years:           { extra_form_type: "text",     options: {required: false} }
+                months:          { extra_form_type: "text",     options: {required: false} }
+                days:            { extra_form_type: "text",     options: {required: false} }
+                hours:           { extra_form_type: "text",     options: {required: false} }
+                minutes:         { extra_form_type: "text",     options: {required: false} }
+                seconds:         { extra_form_type: "text",     options: {required: false} }
+                with_seconds:    { extra_form_type: "checkbox", options: {required: false} }
+                empty_value:     { extra_form_type: "text",     options: {required: false} }
+                invalid_message: { extra_form_type: "text",     options: {required: false} }
+
+        date:
+            parent:      form
+            form_type:   date
+            description: "Date input field"
+            extra_form_options:
+                format:          { extra_form_type: "text",   options: {data: "dd-MM-yyyy"} }
+                widget:          { extra_form_type: "choice", options: {choices: {choice: "Displays three drop-down lists. The order of the list is defined by the size option", text: "Displays three text fields (month, day, year)", single_text: "Displays a single text field. The user input is validated based on the format option"}, data: "choice"} }
+                input:           { extra_form_type: "choice", options: {choices: {string: "string", datetime: "datetime", array: "array", timestamp: "timestamp"}, data: "datetime"} }
+                years:           { extra_form_type: "text",   options: {required: false} }
+                months:          { extra_form_type: "text",   options: {required: false} }
+                days:            { extra_form_type: "text",   options: {required: false} }
+                empty_value:     { extra_form_type: "text",   options: {required: false} }
+                invalid_message: { extra_form_type: "text",   options: {required: false} }
+
+        birthday:
+            parent:      date
+            form_type:   birthday
+            description: "Birthday input field"
