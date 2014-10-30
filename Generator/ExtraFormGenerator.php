@@ -12,6 +12,7 @@ namespace IDCI\Bundle\ExtraFormBundle\Generator;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use IDCI\Bundle\ExtraFormBundle\Configurator\ExtraFormConfiguratorInterface;
+use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeInterface;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeHandler;
 use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintHandler;
 use IDCI\Bundle\ExtraFormBundle\Exception\UndefinedExtraFormConfiguratorException;
@@ -44,37 +45,6 @@ class ExtraFormGenerator implements ExtraFormGeneratorInterface
     /**
      * {@inheritDoc}
      */
-    public function generate(
-        $configuratorAlias,
-        array $configuratorParameters = array(),
-        $formName = null,
-        array $formOptions = array()
-    )
-    {
-        $configuration = $this
-            ->getConfigurator($configuratorAlias)
-            ->makeConfiguration($configuratorParameters)
-        ;
-
-        if (null === $formName) {
-            $formBuilder = $this
-                ->formFactory
-                ->createBuilder('form', null, $formOptions);
-        } else {
-            $formBuilder = $this
-                ->formFactory
-                ->createNamedBuilder($formName, 'form', null, $formOptions)
-            ;
-        }
-
-        // TODO: buildForm
-
-        return $formBuilder;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function setConfigurator($alias, ExtraFormConfiguratorInterface $configurator)
     {
         $this->configurators[$alias] = $configurator;
@@ -98,5 +68,93 @@ class ExtraFormGenerator implements ExtraFormGeneratorInterface
         }
 
         return $this->configurators[$alias];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function generate(
+        $configuratorAlias,
+        array $configuratorParameters = array(),
+        array $data = array()
+    )
+    {
+        $configuration = $this
+            ->getConfigurator($configuratorAlias)
+            ->makeConfiguration($configuratorParameters)
+        ;
+
+        if (null === $configuration['name']) {
+            $configuration['name'] = $configuratorAlias;
+        }
+
+        $formBuilder = $this
+            ->formFactory
+            ->createNamedBuilder(
+                $configuration['name'],
+                'form',
+                $data,
+                $configuration['options']
+            )
+        ;
+
+        foreach ($configuration['fields'] as $name => $field) {
+            $this->addFormField(
+                $formBuilder,
+                $name,
+                $this->generateFieldType($field),
+                $this->generateFieldOptions($field)
+            );
+        }
+
+        return $formBuilder;
+    }
+
+    /**
+     * Add form field
+     *
+     * @param FormBuilderInterface $formBuilder
+     * @param string $name
+     * @param ExtraFormTypeInterface $extraFormType
+     * @param array  $options
+     */
+    protected function addFormField(
+        FormBuilderInterface & $formBuilder,
+        $name,
+        ExtraFormTypeInterface $extraFormType,
+        array $options
+    )
+    {
+        $formBuilder->add(
+            $name,
+            $extraFormType->getFormType(),
+            $options
+        );
+    }
+
+    /**
+     * Generate field type
+     *
+     * @param  array $field
+     * @return string
+     */
+    protected function generateFieldType(array $field)
+    {
+        return $this
+            ->typeHandler
+            ->getType($field['extra_form_type'])
+        ;
+    }
+
+    /**
+     * Generate field options
+     *
+     * @param  array $field
+     * @return array
+     */
+    protected function generateFieldOptions(array $field)
+    {
+        // TODO: build constraints and merge
+        return $field['options'];
     }
 }

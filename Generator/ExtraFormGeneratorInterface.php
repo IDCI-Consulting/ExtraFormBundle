@@ -18,15 +18,13 @@ interface ExtraFormGeneratorInterface
      *
      * @param  string $configuratorAlias
      * @param  array  $configuratorParameters
-     * @param  string $formName
-     * @param  array  $formOpions
+     * @param  array  $data
      * @return Symfony\Component\Form\FormBuilderInterface
      */
     public function generate(
         $configuratorAlias,
         array $configuratorParameters = array(),
-        $formName = null,
-        array $formOptions = array()
+        array $data = array()
     );
 
     /**

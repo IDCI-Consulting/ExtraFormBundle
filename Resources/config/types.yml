@@ -46,7 +46,18 @@ idci_extra_form:
             description: "Boolean input field (checkbox)"
             extra_form_options:
                 value: { extra_form_type: "text", options: {required: false} }
-      
+
+        choice:
+            parent:      form
+            form_type:   choice
+            description: "Selection field"
+            extra_form_options:
+                choices:           { extra_form_type: "text",     options: {required: false} }
+                multiple:          { extra_form_type: "checkbox", options: {required: false} }
+                expanded:          { extra_form_type: "checkbox", options: {required: false} }
+                preferred_choices: { extra_form_type: "text",     options: {required: false} }
+                empty_value:       { extra_form_type: "text",     options: {required: false} }
+
         number:
             parent:      form
             form_type:   number

@@ -41,8 +41,10 @@ class TestController extends Controller
             ->generate(
                 'my_first_form', // configurator alias
                 array(),         // configurator parameters
-                'my_form_name',  // form name (or null)
-                array('csrf_protection' => false) // form options
+                array(           // form data
+                    'first_name' => 'Gabriel',
+                    'last_name'  => 'BONDAZ'
+                )
             )
             ->getForm()
         ;
