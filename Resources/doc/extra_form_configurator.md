@@ -72,7 +72,7 @@ extends `AbstractExtraFormConfigurator` and implement necessary methods.
 
 namespace My\Bundle\ExtraFormConfigurator;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use IDCI\Bundle\ExtraFormBundle\Configurator\AbstractExtraFormConfigurator;
 
 class MyConfigurator extends AbstractExtraFormConfigurator
@@ -80,7 +80,7 @@ class MyConfigurator extends AbstractExtraFormConfigurator
     /**
      * {@inheritDoc}
      */
-    public function doMakeConfiguration(array $parameters = array())
+    public function buildConfiguration(array $parameters = array())
     {
         ...
     }
