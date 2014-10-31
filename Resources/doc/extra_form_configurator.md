@@ -114,18 +114,16 @@ services:
 
 The alias "my_configurator" will be the ExtraFormConfigurator identifier.
 
-The doMakeConfiguration function must return an array that should be in the following format:
+The buildConfiguration function must return an array that should be in the following format:
 
 ```
 array(
-    'name'    => ...<string without special characters>
-    'fields'  => array(
-        'field_name' => array(
-            'extra_form_type' => ...<string a valid ExtraFormType name>
-            'options'         => ...<array list of valid options>
-            'constraints'     => ...<array list of valid constraints>
-        )
-    'options' => <array>...
+    'field_name' => array(
+        'extra_form_type' => ...<string a valid ExtraFormType name>
+        'options'         => ...<array list of valid options>
+        'constraints'     => ...<array list of valid constraints>
+    )
+    // ...
 )
 ```
 
