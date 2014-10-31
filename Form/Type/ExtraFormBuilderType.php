@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 
+ *
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
  * @license: MIT
  *
@@ -14,6 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\OptionsResolver\Options;
 use IDCI\Bundle\ExtraFormBundle\Builder\ExtraFormBuilderInterface;
+
 
 class ExtraFormBuilderType extends AbstractType
 {
@@ -34,6 +35,14 @@ class ExtraFormBuilderType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        if (null !== $options['transform_method']) {
+            $listenerClassName = sprintf(
+                'IDCI\Bundle\ExtraFormBundle\Form\Event\%sEventSubscriber',
+                ucfirst(strtolower($options['transform_method']))
+            );
+            $builder->addEventSubscriber(new $listenerClassName());
+        }
+
         $this
             ->extraFormBuilder
             ->build(
@@ -57,7 +66,11 @@ class ExtraFormBuilderType extends AbstractType
                 'configurator_alias' => 'string'
             ))
             ->setDefaults(array(
-                'configurator_parameters' => array()
+                'configurator_parameters' => array(),
+                'transform_method'        => 'jsonize'
+            ))
+            ->setAllowedValues(array(
+                'transform_method' => array(null, 'jsonize', 'serialize')
             ))
         ;
     }
