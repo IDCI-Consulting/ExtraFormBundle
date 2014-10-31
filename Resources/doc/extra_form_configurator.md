@@ -74,6 +74,7 @@ namespace My\Bundle\ExtraFormConfigurator;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use IDCI\Bundle\ExtraFormBundle\Configurator\AbstractExtraFormConfigurator;
+use IDCI\Bundle\ExtraFormBundle\Exception\BuildConfigurationException;
 
 class MyConfigurator extends AbstractExtraFormConfigurator
 {
