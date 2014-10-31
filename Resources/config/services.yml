@@ -1,5 +1,6 @@
 parameters:
-    idci_extra_form.generator.class: IDCI\Bundle\ExtraFormBundle\Generator\ExtraFormGenerator
+    idci_extra_form.builder.class: IDCI\Bundle\ExtraFormBundle\Builder\ExtraFormBuilder
+
 
 services:
 
@@ -39,11 +40,17 @@ services:
             - { name: idci_extra_form.configurator, alias: doctrine }
 
 
-    # ExtraFormGenerator
+    # ExtraFormBuilder
 
-    idci_extra_form.generator:
-        class: %idci_extra_form.generator.class%
+    idci_extra_form.builder:
+        class: %idci_extra_form.builder.class%
         arguments:
-            - @form.factory
             - @idci_extra_form.type_handler
             - @idci_extra_form.constraint_handler
+
+    idci_extra_form.form.type.extra_form_builder:
+        class: IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormBuilderType
+        arguments: [@idci_extra_form.builder]
+        tags:
+            - { name: form.type, alias: extra_form_builder }
+

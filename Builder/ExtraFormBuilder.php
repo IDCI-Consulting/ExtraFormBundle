@@ -7,37 +7,32 @@
  *
  */
 
-namespace IDCI\Bundle\ExtraFormBundle\Generator;
+namespace IDCI\Bundle\ExtraFormBundle\Builder;
 
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormFactoryInterface;
 use IDCI\Bundle\ExtraFormBundle\Configurator\ExtraFormConfiguratorInterface;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeInterface;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeHandler;
 use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintHandler;
 use IDCI\Bundle\ExtraFormBundle\Exception\UndefinedExtraFormConfiguratorException;
 
-class ExtraFormGenerator implements ExtraFormGeneratorInterface
+class ExtraFormBuilder implements ExtraFormBuilderInterface
 {
     protected $configurators;
-    protected $formFactory;
     protected $typeHandler;
     protected $constraintHandler;
 
     /**
      * Constructor
      *
-     * @param FormFactoryInterface       $formFactory
      * @param ExtraFormTypeHandler       $typeHandler
      * @param ExtraFormConstraintHandler $constraintHandler
      */
     public function __construct(
-        FormFactoryInterface       $formFactory,
         ExtraFormTypeHandler       $typeHandler,
         ExtraFormConstraintHandler $constraintHandler
     )
     {
-        $this->formFactory       = $formFactory;
         $this->typeHandler       = $typeHandler;
         $this->constraintHandler = $constraintHandler;
     }
@@ -73,10 +68,10 @@ class ExtraFormGenerator implements ExtraFormGeneratorInterface
     /**
      * {@inheritDoc}
      */
-    public function generate(
+    public function build(
+        FormBuilderInterface & $formBuilder,
         $configuratorAlias,
-        array $configuratorParameters = array(),
-        array $data = array()
+        array $configuratorParameters = array()
     )
     {
         $configuration = $this
@@ -84,61 +79,22 @@ class ExtraFormGenerator implements ExtraFormGeneratorInterface
             ->makeConfiguration($configuratorParameters)
         ;
 
-        if (null === $configuration['name']) {
-            $configuration['name'] = $configuratorAlias;
-        }
-
-        $formBuilder = $this
-            ->formFactory
-            ->createNamedBuilder(
-                $configuration['name'],
-                'form',
-                $data,
-                $configuration['options']
-            )
-        ;
-
         foreach ($configuration['fields'] as $name => $field) {
-            $this->addFormField(
-                $formBuilder,
+            $formBuilder->add(
                 $name,
-                $this->generateFieldType($field),
-                $this->generateFieldOptions($field)
+                $this->buildFieldType($field)->getFormType(),
+                $this->buildFieldOptions($field)
             );
         }
-
-        return $formBuilder;
     }
 
     /**
-     * Add form field
-     *
-     * @param FormBuilderInterface $formBuilder
-     * @param string $name
-     * @param ExtraFormTypeInterface $extraFormType
-     * @param array  $options
-     */
-    protected function addFormField(
-        FormBuilderInterface & $formBuilder,
-        $name,
-        ExtraFormTypeInterface $extraFormType,
-        array $options
-    )
-    {
-        $formBuilder->add(
-            $name,
-            $extraFormType->getFormType(),
-            $options
-        );
-    }
-
-    /**
-     * Generate field type
+     * Build field type
      *
      * @param  array $field
      * @return string
      */
-    protected function generateFieldType(array $field)
+    protected function buildFieldType(array $field)
     {
         return $this
             ->typeHandler
@@ -147,12 +103,12 @@ class ExtraFormGenerator implements ExtraFormGeneratorInterface
     }
 
     /**
-     * Generate field options
+     * Build field options
      *
      * @param  array $field
      * @return array
      */
-    protected function generateFieldOptions(array $field)
+    protected function buildFieldOptions(array $field)
     {
         // TODO: build constraints and merge
         return $field['options'];

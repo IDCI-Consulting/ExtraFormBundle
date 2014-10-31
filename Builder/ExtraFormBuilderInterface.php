@@ -7,24 +7,24 @@
  *
  */
 
-namespace IDCI\Bundle\ExtraFormBundle\Generator;
+namespace IDCI\Bundle\ExtraFormBundle\Builder;
 
+use Symfony\Component\Form\FormBuilderInterface;
 use IDCI\Bundle\ExtraFormBundle\Configurator\ExtraFormConfiguratorInterface;
 
-interface ExtraFormGeneratorInterface
+interface ExtraFormBuilderInterface
 {
     /**
-     * Generate
+     * Build
      *
+     * @param  FormBuilderInterface $formBuilder
      * @param  string $configuratorAlias
      * @param  array  $configuratorParameters
-     * @param  array  $data
-     * @return Symfony\Component\Form\FormBuilderInterface
      */
-    public function generate(
+    public function build(
+        FormBuilderInterface & $formBuilder,
         $configuratorAlias,
-        array $configuratorParameters = array(),
-        array $data = array()
+        array $configuratorParameters = array()
     );
 
     /**
