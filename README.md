@@ -49,6 +49,7 @@ Documentation
 * [Introduction](Resources/doc/introduction.md)
 * [Architecture](Resources/doc/architecture.md)
 * [ExtraFormBuilder](Resources/doc/extra_form_builder.md)
+* [ExtraFormBuilderType](Resources/doc/extra_form_builder_type.md)
 * [ExtraFormType](Resources/doc/extra_form_type.md)
 * [ExtraFormConstraint](Resources/doc/extra_form_constraint.md)
 * [ExtraFormConfigurator](Resources/doc/extra_form_configurator.md)

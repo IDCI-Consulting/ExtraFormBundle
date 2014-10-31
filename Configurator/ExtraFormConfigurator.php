@@ -29,6 +29,6 @@ class ExtraFormConfigurator extends AbstractExtraFormConfigurator
      */
     public function buildConfiguration(array $parameters = array())
     {
-        return $this->raw;
+        return $this->raw['fields'];
     }
 }

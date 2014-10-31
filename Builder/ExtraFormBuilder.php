@@ -79,7 +79,7 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
             ->makeConfiguration($configuratorParameters)
         ;
 
-        foreach ($configuration['fields'] as $name => $field) {
+        foreach ($configuration as $name => $field) {
             $formBuilder->add(
                 $name,
                 $this->buildFieldType($field)->getFormType(),

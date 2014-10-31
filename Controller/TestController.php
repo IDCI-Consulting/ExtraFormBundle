@@ -42,12 +42,12 @@ class TestController extends Controller
     */
         $form = $this
             ->createFormBuilder(array(
-                'data' => array(
+                'sub_form' => array(
                     'first_name' => 'John',
                     'last_name'  => 'DOE'
                 )
             ))
-            ->add('data', 'extra_form_builder', array(
+            ->add('sub_form', 'extra_form_builder', array(
                 'configurator_alias' => 'identity_form'
             ))
             ->getForm()

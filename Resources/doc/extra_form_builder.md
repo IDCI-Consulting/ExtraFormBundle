@@ -1,5 +1,5 @@
 ExtraFormBuilder
-==================
+================
 
 ExtraFormBuilder is the main service that you will use in order to generate
 your forms. The build process is the following:
