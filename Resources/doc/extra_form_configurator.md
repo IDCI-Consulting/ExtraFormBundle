@@ -79,14 +79,6 @@ class MyConfigurator extends AbstractExtraFormConfigurator
     /**
      * {@inheritDoc}
      */
-    public function getRaw()
-    {
-        ...
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function doMakeConfiguration(array $parameters = array())
     {
         ...
