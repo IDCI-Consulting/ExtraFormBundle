@@ -70,7 +70,7 @@ extends `AbstractExtraFormConfigurator` and implement necessary methods.
 <?php
 // src/My/Bundle/ExtraFormConfigurator/MyConfigurator.php
 
-namespace My\Bundle\ExtraFormConfigurator\MyConfigurator
+namespace My\Bundle\ExtraFormConfigurator;
 
 use IDCI\Bundle\ExtraFormBundle\Configurator\AbstractExtraFormConfigurator;
 
