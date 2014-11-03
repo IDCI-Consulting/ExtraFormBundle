@@ -53,4 +53,3 @@ services:
         arguments: [@idci_extra_form.builder]
         tags:
             - { name: form.type, alias: extra_form_builder }
-

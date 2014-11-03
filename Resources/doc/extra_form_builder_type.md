@@ -21,7 +21,7 @@ $form = $this
 ;
 ```
 
-Once the mapping beetween the form and a request is done, you will get jsonize data.
+Once the mapping beetween the form and a request is done, you will get your data.
 Here is an exemple on how to check this case:
 
 ```php
@@ -33,8 +33,8 @@ if ($form->isValid()) {
 }
 ```
 
-The json format is used by default, but you could change this behavior.
-You have the choice beetween *jsonize*, *serialize* or *null* (no tranformation).
+But you could change this by using a transform method.
+You have the choice beetween *jsonize*, *serialize* or *null* (no tranformation, use by default).
 This transformation is done using EventSubscriber, to choose one, specify the
 `transform_method` option:
 

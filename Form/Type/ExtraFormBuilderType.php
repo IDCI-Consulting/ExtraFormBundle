@@ -36,11 +36,11 @@ class ExtraFormBuilderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if (null !== $options['transform_method']) {
-            $listenerClassName = sprintf(
+            $subscriberClassName = sprintf(
                 'IDCI\Bundle\ExtraFormBundle\Form\Event\%sEventSubscriber',
                 ucfirst(strtolower($options['transform_method']))
             );
-            $builder->addEventSubscriber(new $listenerClassName());
+            $builder->addEventSubscriber(new $subscriberClassName);
         }
 
         $this
@@ -67,7 +67,7 @@ class ExtraFormBuilderType extends AbstractType
             ))
             ->setDefaults(array(
                 'configurator_parameters' => array(),
-                'transform_method'        => 'jsonize'
+                'transform_method'        => null
             ))
             ->setAllowedValues(array(
                 'transform_method' => array(null, 'jsonize', 'serialize')
