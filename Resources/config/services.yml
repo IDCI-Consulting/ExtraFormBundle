@@ -53,3 +53,11 @@ services:
         arguments: [@idci_extra_form.builder]
         tags:
             - { name: form.type, alias: extra_form_builder }
+
+
+    # Form Types
+
+    idci_extra_form.form.type.json_textarea:
+        class: IDCI\Bundle\ExtraFormBundle\Form\Type\JsonTextareaType
+        tags:
+            - { name: form.type, alias: json_textarea }
