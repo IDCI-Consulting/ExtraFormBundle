@@ -1,3 +1,4 @@
+# Types
 "Textarea input field": "Zone de saisie de texte"
 "Text input field in JSON format": "Champ de saisie de texte au format JSON"
 "Boolean input field (checkbox)": "Champ de saisie booléenne (case à cocher)"
@@ -18,40 +19,41 @@
 "Date input field": "Champ de saisie date"
 "Birthday input field": "Champ de saisie anniversaire"
 
-"Not blank constraint": 
-"Blank constraint":
-"Not null constraint":
-"Null constraint":
-"True constraint":
-"False constraint":
-"Type constraint":
-"Email constraint":
-"Length constraint":
-"Url constraint":
-"Regex constraint":
-"Ip constraint":
-"Range constraint":
-"Equal to constraint":
-"Not equal to constraint":
-"Identical to constraint":
-"Not identical to constraint":
-"Less than constraint":
-"Less than or equal constraint":
-"Greater than constraint":
-"Greater than or equal constraint":
-"Date constraint constraint":
-"Date time constraint":
-"Time constraint":
-"Choice constraint":
-"Collection constraint":
-"Count constraint":
-"Language constraint":
-"Locale constraint":
-"Country constraint":
-"File constraint":
-"Image constraint":
-"Card scheme constraint":
-"Luhn constraint":
-"Iban constraint":
-"Isbn constraint":
-"Issn constraint":
+# Constraints
+"Not blank constraint": "Contrainte non vide"
+"Blank constraint": "Contrainte vide"
+"Not null constraint": "Contrainte non null"
+"Null constraint": "Contrainte null"
+"True constraint": "Contrainte vrai"
+"False constraint": "Contrainte faux"
+"Type constraint": "Contrainte Type"
+"Email constraint": "Contrainte couriel"
+"Length constraint": "Contrainte longueur"
+"URL constraint": "Contrainte URL"
+"Regular expression constraint": "Contrainte expression régulière"
+"IP constraint":  "Contrainte IP"
+"Range constraint": "Contrainte gamme"
+"Equal to constraint": "Contrainte égal"
+"Not equal to constraint": "Contrainte non égal"
+"Identical to constraint": "Contrainte identique"
+"Not identical to constraint": "Contrainte non identique"
+"Less than constraint": "Contrainte inférieur à"
+"Less than or equal constraint": "Contrainte inférieur à ou égal"
+"Greater than constraint": "Contrainte supérieure à"
+"Greater than or equal constraint": "Contrainte supérieure à ou égal"
+"Date constraint": "Contrainte de date"
+"Date time constraint": "Contrainte de date et heure"
+"Time constraint": "Contrainte d'heure"
+"Choice constraint": "Contrainte de choix"
+"Collection constraint": "Contrainte collection"
+"Count constraint": "Contrainte compter"
+"Language constraint": "Contrainte langue"
+"Locale constraint": "Contrainte lieu"
+"Country constraint": "Contrainte pays"
+"File constraint": "Contrainte fichier"
+"Image constraint": "Contrainte image"
+"Card scheme constraint": "Contrainte carte de crédit"
+"Luhn constraint": "Contrainte Luhn"
+"Iban constraint": "Contrainte Iban"
+"Isbn constraint": "Contrainte Isbn"
+"Issn constraint": "Contrainte Issn"

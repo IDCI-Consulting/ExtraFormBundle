@@ -63,7 +63,7 @@ idci_extra_form:
 
         url:
             class: \Symfony\Component\Validator\Constraints\Url
-            description: "Url constraint"
+            description: "URL constraint"
             options:
                 protocols: {"type": "choice", "options": {"required": true, "choices": {"http": "http", "https": "https"}}}
                 message: {"type": "text", "options": {"required": false}}
@@ -78,7 +78,7 @@ idci_extra_form:
 
         ip:
             class: \Symfony\Component\Validator\Constraints\Ip
-            description: "Ip constraint"
+            description: "IP constraint"
             options:
                 version: {"type": "choice", "options": {"required": true, "choices": {"4": "Validates for IPv4 addresses", "6": "Validates for IPv6 addresses", "all": "Validates all IP formats", "4_no_priv": "Validates for IPv4 but without private IP ranges", "6_no_priv": "Validates for IPv6 but without private IP ranges", "all_no_priv": "Validates for all IP formats but without private IP ranges", "4_no_res": "Validates for IPv4 but without reserved IP ranges", "6_no_res": "Validates for IPv6 but without reserved IP ranges", "all_no_res": "Validates for all IP formats but without reserved IP ranges", "4_public": "Validates for IPv4 but without private and reserved ranges", "6_public": "Validates for IPv6 but without private and reserved ranges", "all_public": "Validates for all IP formats but without private and reserved ranges"}}}
                 message: {"type": "text", "options": {"required": false}}
@@ -151,7 +151,7 @@ idci_extra_form:
 
         date:
             class: \Symfony\Component\Validator\Constraints\Date
-            description: "Date constraint constraint"
+            description: "Date constraint"
             options:
                 message: {"type": "text", "options": {"required": false}}
 
