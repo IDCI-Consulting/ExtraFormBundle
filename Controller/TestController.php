@@ -25,6 +25,7 @@ class TestController extends Controller
     public function indexAction(Request $request)
     {
     /*
+        Single form using the builder service directly
         $builder = $this->createFormBuilder(array(
             'first_name' => 'John',
             'last_name'  => 'DOE'
@@ -39,6 +40,10 @@ class TestController extends Controller
             )
         ;
         $form = $builder->getForm();
+    */
+
+    /*
+        Sub form using the builder service through a form type
     */
         $form = $this
             ->createFormBuilder(array(

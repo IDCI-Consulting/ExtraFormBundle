@@ -41,7 +41,7 @@ interface ExtraFormBuilderInterface
      * @return array
      */
     public function getConfigurators();
-    
+
     /**
      * Get configurator
      *

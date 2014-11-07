@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class JsonizeEventSubscriber implements EventSubscriberInterface
+class RawEventSubscriber implements EventSubscriberInterface
 {
     /**
      * {@inheritdoc}
@@ -22,8 +22,8 @@ class JsonizeEventSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            FormEvents::PRE_SET_DATA => array('preSetData', 10),
-            FormEvents::SUBMIT => array('onSubmit', 40)
+            FormEvents::PRE_SET_DATA => array('preSetData', 1),
+            FormEvents::SUBMIT => array('onSubmit', 900)
         );
     }
 
@@ -35,13 +35,7 @@ class JsonizeEventSubscriber implements EventSubscriberInterface
         $form = $event->getForm();
         $data = $event->getData();
 
-        if (empty($data)) {
-            $data = array();
-        } else {
-            $data = json_decode($data, true);
-        }
-
-        $event->setData($data);
+        $event->setData(array('raw' => $data));
     }
 
     /**
@@ -49,6 +43,7 @@ class JsonizeEventSubscriber implements EventSubscriberInterface
      */
     public function onSubmit(FormEvent $event)
     {
-        $event->setData(json_encode($event->getData()));
+        $data = $event->getData();
+        $event->setData($data['raw']);
     }
 }

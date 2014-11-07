@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class SerializeEventSubscriber implements EventSubscriberInterface
+class SerializeTransformEventSubscriber implements EventSubscriberInterface
 {
     /**
      * {@inheritdoc}
@@ -22,8 +22,8 @@ class SerializeEventSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            FormEvents::PRE_SET_DATA => array('preSetData', 10),
-            FormEvents::SUBMIT => array('onSubmit', 40)
+            FormEvents::PRE_SET_DATA => array('preSetData', 100),
+            FormEvents::SUBMIT => array('onSubmit', 100)
         );
     }
 

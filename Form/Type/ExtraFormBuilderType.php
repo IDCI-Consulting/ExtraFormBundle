@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\OptionsResolver\Options;
 use IDCI\Bundle\ExtraFormBundle\Builder\ExtraFormBuilderInterface;
-
+use IDCI\Bundle\ExtraFormBundle\Form\Event\RawEventSubscriber;
 
 class ExtraFormBuilderType extends AbstractType
 {
@@ -37,20 +37,25 @@ class ExtraFormBuilderType extends AbstractType
     {
         if (null !== $options['transform_method']) {
             $subscriberClassName = sprintf(
-                'IDCI\Bundle\ExtraFormBundle\Form\Event\%sEventSubscriber',
+                'IDCI\Bundle\ExtraFormBundle\Form\Event\%sTransformEventSubscriber',
                 ucfirst(strtolower($options['transform_method']))
             );
             $builder->addEventSubscriber(new $subscriberClassName);
         }
 
-        $this
-            ->extraFormBuilder
-            ->build(
-                $builder,
-                $options['configurator_alias'],
-                $options['configurator_parameters']
-            )
-        ;
+        try {
+            $this
+                ->extraFormBuilder
+                ->build(
+                    $builder,
+                    $options['configurator_alias'],
+                    $options['configurator_parameters']
+                )
+            ;
+        } catch (\Exception $e) {
+            $builder->add('raw', 'json_textarea');
+            $builder->addEventSubscriber(new RawEventSubscriber());
+        }
     }
 
     /**
