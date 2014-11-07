@@ -1,288 +1,288 @@
 idci_extra_form:
     constraints:
-        not_blank:
+        "not_blank":
             class: \Symfony\Component\Validator\Constraints\NotBlank
             description: "Not blank constraint"
-            options:
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                message: { extra_form_type: "text", options: {"required": false}}
 
-        blank:
+        "blank":
             class: \Symfony\Component\Validator\Constraints\Blank
             description: "Blank constraint"
-            options:
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                message: { extra_form_type: "text", options: {"required": false}}
 
-        not_null:
+        "not_null":
             class: \Symfony\Component\Validator\Constraints\NotNull
             description: "Not null constraint"
-            options:
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                message: { extra_form_type: "text", options: {"required": false}}
 
-        _null:
+        "null":
             class: \Symfony\Component\Validator\Constraints\Null
             description: "Null constraint"
-            options:
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                message: { extra_form_type: "text", options: {"required": false}}
 
-        _true:
+        "true":
             class: \Symfony\Component\Validator\Constraints\True
             description: "True constraint"
-            options:
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                message: { extra_form_type: "text", options: {"required": false}}
 
-        _false:
+        "false":
             class: \Symfony\Component\Validator\Constraints\False
             description: "False constraint"
-            options:
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                message: { extra_form_type: "text", options: {"required": false}}
 
-        type:
+        "type":
             class: \Symfony\Component\Validator\Constraints\Type
             description: "Type constraint"
-            options:
-                type: {"type": "choice", "options": {"required": true, "choices": {"array": "array", "bool": "bool", "callable": "callable", "float": "float", "double": "double", "int": "int", "integer": "integer", "long": "long", "null": "null", "numeric": "numeric", "object": "object", "real": "real", "resource": "resource", "scalar": "scalar", "string": "string"}}}
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                type:    { extra_form_type: "choice", options: {"required": true, "choices": {"array": "array", "bool": "bool", "callable": "callable", "float": "float", "double": "double", "int": "int", "integer": "integer", "long": "long", "null": "null", "numeric": "numeric", "object": "object", "real": "real", "resource": "resource", "scalar": "scalar", "string": "string"}}}
+                message: { extra_form_type: "text",   options: {"required": false}}
 
-        email:
+        "email":
             class: \Symfony\Component\Validator\Constraints\Email
             description: "Email constraint"
-            options:
-                checkMX: {"type": "checkbox", "options": {"required": false}}
-                checkHost: {"type": "checkbox", "options": {"required": false}}
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                checkMX:   { extra_form_type: "checkbox", options: {"required": false}}
+                checkHost: { extra_form_type: "checkbox", options: {"required": false}}
+                message:   { extra_form_type: "text",     options: {"required": false}}
 
-        length:
+        "length":
             class: \Symfony\Component\Validator\Constraints\Length
             description: "Length constraint"
-            options:
-                min: {"type": "number", "options": {"required": false}}
-                max: {"type": "number", "options": {"required": false}}
-                minMessage: {"type": "text", "options": {"required": false}}
-                maxMessage: {"type": "text", "options": {"required": false}}
-                exactMessage: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                min:          { extra_form_type: "number", options: {"required": false}}
+                max:          { extra_form_type: "number", options: {"required": false}}
+                minMessage:   { extra_form_type: "text",   options: {"required": false}}
+                maxMessage:   { extra_form_type: "text",   options: {"required": false}}
+                exactMessage: { extra_form_type: "text",   options: {"required": false}}
 
-        url:
+        "url":
             class: \Symfony\Component\Validator\Constraints\Url
             description: "URL constraint"
-            options:
-                protocols: {"type": "choice", "options": {"required": true, "choices": {"http": "http", "https": "https"}}}
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                protocols: { extra_form_type: "choice", options: {"required": true, "choices": {"http": "http", "https": "https"}}}
+                message:   { extra_form_type: "text",   options: {"required": false}}
 
-        regex:
+        "regex":
             class: \Symfony\Component\Validator\Constraints\Regex
             description: "Regex constraint"
-            options:
-                pattern: {"type": "text", "options": {"required": false}}
-                match: {"type": "checkbox", "options": {"required": false}}
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                pattern: { extra_form_type: "text",     options: {"required": false}}
+                match:   { extra_form_type: "checkbox", options: {"required": false}}
+                message: { extra_form_type: "text",     options: {"required": false}}
 
-        ip:
+        "ip":
             class: \Symfony\Component\Validator\Constraints\Ip
             description: "IP constraint"
-            options:
-                version: {"type": "choice", "options": {"required": true, "choices": {"4": "Validates for IPv4 addresses", "6": "Validates for IPv6 addresses", "all": "Validates all IP formats", "4_no_priv": "Validates for IPv4 but without private IP ranges", "6_no_priv": "Validates for IPv6 but without private IP ranges", "all_no_priv": "Validates for all IP formats but without private IP ranges", "4_no_res": "Validates for IPv4 but without reserved IP ranges", "6_no_res": "Validates for IPv6 but without reserved IP ranges", "all_no_res": "Validates for all IP formats but without reserved IP ranges", "4_public": "Validates for IPv4 but without private and reserved ranges", "6_public": "Validates for IPv6 but without private and reserved ranges", "all_public": "Validates for all IP formats but without private and reserved ranges"}}}
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                version: { extra_form_type: "choice", options: {"required": true, "choices": {"4": "Validates for IPv4 addresses", "6": "Validates for IPv6 addresses", "all": "Validates all IP formats", "4_no_priv": "Validates for IPv4 but without private IP ranges", "6_no_priv": "Validates for IPv6 but without private IP ranges", "all_no_priv": "Validates for all IP formats but without private IP ranges", "4_no_res": "Validates for IPv4 but without reserved IP ranges", "6_no_res": "Validates for IPv6 but without reserved IP ranges", "all_no_res": "Validates for all IP formats but without reserved IP ranges", "4_public": "Validates for IPv4 but without private and reserved ranges", "6_public": "Validates for IPv6 but without private and reserved ranges", "all_public": "Validates for all IP formats but without private and reserved ranges"}}}
+                message: { extra_form_type: "text",   options: {"required": false}}
 
-        range:
+        "range":
             class: \Symfony\Component\Validator\Constraints\Range
             description: "Range constraint"
-            options:
-                min: {"type": "number", "options": {"required": false}}
-                max: {"type": "number", "options": {"required": false}}
-                minMessage: {"type": "text", "options": {"required": false}}
-                maxMessage: {"type": "text", "options": {"required": false}}
-                invalidMessage: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                min:            { extra_form_type: "number", options: {"required": false}}
+                max:            { extra_form_type: "number", options: {"required": false}}
+                minMessage:     { extra_form_type: "text",   options: {"required": false}}
+                maxMessage:     { extra_form_type: "text",   options: {"required": false}}
+                invalidMessage: { extra_form_type: "text",   options: {"required": false}}
 
-        equal_to:
+        "equal_to":
             class: \Symfony\Component\Validator\Constraints\EqualTo
             description: "Equal to constraint"
-            options:
-                value: {"type": "text", "options": {"required": true}}
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                value:   { extra_form_type: "text", options: {"required": true}}
+                message: { extra_form_type: "text", options: {"required": false}}
 
-        not_equal_to:
+        "not_equal_to":
             class: \Symfony\Component\Validator\Constraints\NotEqualTo
             description: "Not equal to constraint"
-            options:
-                value: {"type": "text", "options": {"required": true}}
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                value:   { extra_form_type: "text", options: {"required": true}}
+                message: { extra_form_type: "text", options: {"required": false}}
 
-        identical_to:
+        "identical_to":
             class: \Symfony\Component\Validator\Constraints\IdenticalTo
             description: "Identical to constraint"
-            options:
-                value: {"type": "text", "options": {"required": true}}
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                value:   { extra_form_type: "text", options: {"required": true}}
+                message: { extra_form_type: "text", options: {"required": false}}
 
-        not_identical_to:
+        "not_identical_to":
             class: \Symfony\Component\Validator\Constraints\NotIdenticalTo
             description: "Not identical to constraint"
-            options:
-                value: {"type": "text", "options": {"required": true}}
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                value:   { extra_form_type: "text", options: {"required": true}}
+                message: { extra_form_type: "text", options: {"required": false}}
 
-        less_than:
+        "less_than":
             class: \Symfony\Component\Validator\Constraints\LessThan
             description: "Less than constraint"
-            options:
-                value: {"type": "text", "options": {"required": true}}
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                value:   { extra_form_type: "text", options: {"required": true}}
+                message: { extra_form_type: "text", options: {"required": false}}
 
-        less_than_or_equal:
+        "less_than_or_equal":
             class: \Symfony\Component\Validator\Constraints\LessThanOrEqual
             description: "Less than or equal constraint"
-            options:
-                value: {"type": "text", "options": {"required": true}}
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                value:   { extra_form_type: "text", options: {"required": true}}
+                message: { extra_form_type: "text", options: {"required": false}}
 
-        greater_than:
+        "greater_than":
             class: \Symfony\Component\Validator\Constraints\GreaterThan
             description: "Greater than constraint"
-            options:
-                value: {"type": "text", "options": {"required": true}}
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                value:   { extra_form_type: "text", options: {"required": true}}
+                message: { extra_form_type: "text", options: {"required": false}}
 
-        greater_than_or_equal:
+        "greater_than_or_equal":
             class: \Symfony\Component\Validator\Constraints\GreaterThanOrEqual
             description: "Greater than or equal constraint"
-            options:
-                value: {"type": "text", "options": {"required": true}}
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                value:   { extra_form_type: "text", options: {"required": true}}
+                message: { extra_form_type: "text", options: {"required": false}}
 
-        date:
+        "date":
             class: \Symfony\Component\Validator\Constraints\Date
             description: "Date constraint"
-            options:
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                message: { extra_form_type: "text", options: {"required": false}}
 
-        date_time:
+        "date_time":
             class: \Symfony\Component\Validator\Constraints\DateTime
             description: "Date time constraint"
-            options:
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                message: { extra_form_type: "text", options: {"required": false}}
 
-        time:
+        "time":
             class: \Symfony\Component\Validator\Constraints\Time
             description: "Time constraint"
-            options:
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                message: { extra_form_type: "text", options: {"required": false}}
 
-        choice:
+        "choice":
             class: \Symfony\Component\Validator\Constraints\Choice
             description: "Choice constraint"
-            options:
-                choices: {"type": "text", "options": {"required": false}}
-                callback: {"type": "text", "options": {"required": false}}
-                multiple: {"type": "checkbox", "options": {"required": false}}
-                min: {"type": "number", "options": {"required": false}}
-                max: {"type": "number", "options": {"required": false}}
-                message: {"type": "text", "options": {"required": false}}
-                multipleMessage: {"type": "text", "options": {"required": false}}
-                minMessage: {"type": "text", "options": {"required": false}}
-                maxMessage: {"type": "text", "options": {"required": false}}
-                strict: {"type": "checkbox", "options": {"required": false}}
+            extra_form_options:
+                choices:         { extra_form_type: "text",     options: {"required": false}}
+                callback:        { extra_form_type: "text",     options: {"required": false}}
+                multiple:        { extra_form_type: "checkbox", options: {"required": false}}
+                min:             { extra_form_type: "number",   options: {"required": false}}
+                max:             { extra_form_type: "number",   options: {"required": false}}
+                message:         { extra_form_type: "text",     options: {"required": false}}
+                multipleMessage: { extra_form_type: "text",     options: {"required": false}}
+                minMessage:      { extra_form_type: "text",     options: {"required": false}}
+                maxMessage:      { extra_form_type: "text",     options: {"required": false}}
+                strict:          { extra_form_type: "checkbox", options: {"required": false}}
 
-        collection:
+        "collection":
             class: \Symfony\Component\Validator\Constraints\Collection
             description: "Collection constraint"
-            options:
-                fields: {"type": "text", "options": {"required": true}}
-                allowExtraFields: {"type": "checkbox", "options": {"required": false}}
-                extraFieldsMessage: {"type": "text", "options": {"required": false}}
-                allowMissingFields: {"type": "checkbox", "options": {"required": false}}
-                missingFieldsMessage: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                fields:               { extra_form_type: "text",     options: {"required": true}}
+                allowExtraFields:     { extra_form_type: "checkbox", options: {"required": false}}
+                extraFieldsMessage:   { extra_form_type: "text",     options: {"required": false}}
+                allowMissingFields:   { extra_form_type: "checkbox", options: {"required": false}}
+                missingFieldsMessage: { extra_form_type: "text",     options: {"required": false}}
 
-        count:
+        "count":
             class: \Symfony\Component\Validator\Constraints\Count
             description: "Count constraint"
-            options:
-                min: {"type": "number", "options": {"required": false}}
-                max: {"type": "number", "options": {"required": false}}
-                minMessage: {"type": "text", "options": {"required": false}}
-                maxMessage: {"type": "text", "options": {"required": false}}
-                exactMessage: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                min:          { extra_form_type: "number", options: {"required": false}}
+                max:          { extra_form_type: "number", options: {"required": false}}
+                minMessage:   { extra_form_type: "text",   options: {"required": false}}
+                maxMessage:   { extra_form_type: "text",   options: {"required": false}}
+                exactMessage: { extra_form_type: "text",   options: {"required": false}}
 
-        language:
+        "language":
             class: \Symfony\Component\Validator\Constraints\Language
             description: "Language constraint"
-            options:
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                message: { extra_form_type: "text", options: {"required": false}}
 
-        locale:
+        "locale":
             class: \Symfony\Component\Validator\Constraints\Locale
             description: "Locale constraint"
-            options:
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                message: { extra_form_type: "text", options: {"required": false}}
 
-        country:
+        "country":
             class: \Symfony\Component\Validator\Constraints\Country
             description: "Country constraint"
-            options:
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                message: { extra_form_type: "text", options: {"required": false}}
 
-        file:
+        "file":
             class: \Symfony\Component\Validator\Constraints\File
             description: "File constraint"
-            options:
-                maxSize: {"type": "text", "options": {"required": false}}
-                maxSizeMessage: {"type": "text", "options": {"required": false}}
-                mimeTypes: {"type": "text", "options": {"required": false}}
-                mimeTypesMessage: {"type": "text", "options": {"required": false}}
-                notFoundMessage: {"type": "text", "options": {"required": false}}
-                notReadableMessage: {"type": "text", "options": {"required": false}}
-                uploadIniSizeErrorMessage: {"type": "text", "options": {"required": false}}
-                uploadFormSizeErrorMessage: {"type": "text", "options": {"required": false}}
-                uploadErrorMessage: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                maxSize:                    { extra_form_type: "text", options: {"required": false}}
+                maxSizeMessage:             { extra_form_type: "text", options: {"required": false}}
+                mimeTypes:                  { extra_form_type: "text", options: {"required": false}}
+                mimeTypesMessage:           { extra_form_type: "text", options: {"required": false}}
+                notFoundMessage:            { extra_form_type: "text", options: {"required": false}}
+                notReadableMessage:         { extra_form_type: "text", options: {"required": false}}
+                uploadIniSizeErrorMessage:  { extra_form_type: "text", options: {"required": false}}
+                uploadFormSizeErrorMessage: { extra_form_type: "text", options: {"required": false}}
+                uploadErrorMessage:         { extra_form_type: "text", options: {"required": false}}
 
-        image:
+        "image":
             class: \Symfony\Component\Validator\Constraints\Image
             description: "Image constraint"
-            options:
-                mimeTypes: {"type": "text", "options": {"required": false}}
-                mimeTypesMessage: {"type": "text", "options": {"required": false}}
-                minWidth: {"type": "number", "options": {"required": false}}
-                minWidthMessage: {"type": "text", "options": {"required": false}}
-                maxWidth: {"type": "number", "options": {"required": false}}
-                maxWidthMessage: {"type": "text", "options": {"required": false}}
-                minHeight: {"type": "number", "options": {"required": false}}
-                minHeightMessage: {"type": "text", "options": {"required": false}}
-                maxHeight: {"type": "number", "options": {"required": false}}
-                maxHeightMessage: {"type": "text", "options": {"required": false}}
-                sizeNotDetectedMessage: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                mimeTypes:              { extra_form_type: "text",   options: {"required": false}}
+                mimeTypesMessage:       { extra_form_type: "text",   options: {"required": false}}
+                minWidth:               { extra_form_type: "number", options: {"required": false}}
+                minWidthMessage:        { extra_form_type: "text",   options: {"required": false}}
+                maxWidth:               { extra_form_type: "number", options: {"required": false}}
+                maxWidthMessage:        { extra_form_type: "text",   options: {"required": false}}
+                minHeight:              { extra_form_type: "number", options: {"required": false}}
+                minHeightMessage:       { extra_form_type: "text",   options: {"required": false}}
+                maxHeight:              { extra_form_type: "number", options: {"required": false}}
+                maxHeightMessage:       { extra_form_type: "text",   options: {"required": false}}
+                sizeNotDetectedMessage: { extra_form_type: "text",   options: {"required": false}}
 
-        card_scheme:
+        "card_scheme":
             class: \Symfony\Component\Validator\Constraints\CardScheme
             description: "Card scheme constraint"
-            options:
-                schemes: {"type": "choice", "options": {"required": true, "choices": {"AMEX": "AMEX", "CHINA_UNIONPAY": "CHINA_UNIONPAY", "DINERS": "DINERS", "DISCOVER": "DISCOVER", "INSTAPAYMENT": "INSTAPAYMENT", "JCB": "JCB", "LASER": "LASER", "MAESTRO": "MAESTRO", "MASTERCARD": "MASTERCARD", "VISA": "VISA"}}}
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                schemes: { extra_form_type: "choice", options: {"required": true, "choices": {"AMEX": "AMEX", "CHINA_UNIONPAY": "CHINA_UNIONPAY", "DINERS": "DINERS", "DISCOVER": "DISCOVER", "INSTAPAYMENT": "INSTAPAYMENT", "JCB": "JCB", "LASER": "LASER", "MAESTRO": "MAESTRO", "MASTERCARD": "MASTERCARD", "VISA": "VISA"}}}
+                message: { extra_form_type: "text",   options: {"required": false}}
 
-        luhn:
+        "luhn":
             class: \Symfony\Component\Validator\Constraints\Luhn
             description: "Luhn constraint"
-            options:
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                message: { extra_form_type: "text", options: {"required": false}}
 
-        iban:
+        "iban":
             class: \Symfony\Component\Validator\Constraints\Iban
             description: "Iban constraint"
-            options:
-                message: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                message: { extra_form_type: "text", options: {"required": false}}
 
-        isbn:
+        "isbn":
             class: \Symfony\Component\Validator\Constraints\Isbn
             description: "Isbn constraint"
-            options:
-                isbn10: {"type": "checkbox", "options": {"required": false}}
-                isbn13: {"type": "checkbox", "options": {"required": false}}
-                isbn10Message: {"type": "text", "options": {"required": false}}
-                isbn13Message: {"type": "text", "options": {"required": false}}
-                bothIsbnMessage: {"type": "text", "options": {"required": false}}
+            extra_form_options:
+                isbn10:          { extra_form_type: "checkbox", options: {"required": false}}
+                isbn13:          { extra_form_type: "checkbox", options: {"required": false}}
+                isbn10Message:   { extra_form_type: "text",     options: {"required": false}}
+                isbn13Message:   { extra_form_type: "text",     options: {"required": false}}
+                bothIsbnMessage: { extra_form_type: "text",     options: {"required": false}}
 
-        issn:
+        "issn":
             class: \Symfony\Component\Validator\Constraints\Issn
             description: "Issn constraint"
-            options:
-                message: {"type": "text", "options": {"required": false}}
-                caseSensitive: {"type": "checkbox", "options": {"required": false}}
-                requireHyphen: {"type": "checkbox", "options": {"required": false}}
+            extra_form_options:
+                message:       { extra_form_type: "text",     options: {"required": false}}
+                caseSensitive: { extra_form_type: "checkbox", options: {"required": false}}
+                requireHyphen: {extra_form_type: "checkbox",  options: {"required": false}}

@@ -48,16 +48,16 @@ services:
             - @idci_extra_form.type_handler
             - @idci_extra_form.constraint_handler
 
-    idci_extra_form.form.type.extra_form_builder:
+
+    # Form Types
+
+    form.type.idci_extra_form.extra_form_builder:
         class: IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormBuilderType
         arguments: [@idci_extra_form.builder]
         tags:
             - { name: form.type, alias: extra_form_builder }
 
-
-    # Form Types
-
-    idci_extra_form.form.type.json_textarea:
+    form.type.idci_extra_form.json_textarea:
         class: IDCI\Bundle\ExtraFormBundle\Form\Type\JsonTextareaType
         tags:
             - { name: form.type, alias: json_textarea }
