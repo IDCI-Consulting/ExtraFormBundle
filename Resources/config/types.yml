@@ -19,7 +19,7 @@ idci_extra_form:
         textarea:
             parent:      form
             form_type:   textarea
-            description: "Text entry field"
+            description: "Textarea input field"
             extra_form_options:
                 max_length: { extra_form_type: "number",   options: {required: false} }
                 trim:       { extra_form_type: "checkbox", options: {required: false} }
@@ -27,7 +27,7 @@ idci_extra_form:
         json_textarea:
             parent:      textarea
             form_type:   json_textarea
-            description: "Text entry field in JSON format"
+            description: "Text input field in JSON format"
 
         checkbox:
             parent:      form
@@ -109,7 +109,7 @@ idci_extra_form:
         regexp:
             parent:      text
             form_type:   text
-            description: "Input text field with regular expression"
+            description: "Text input field with regular expression"
             extra_form_options:
                 pattern: { extra_form_type: "text", options: {required: false} }
 

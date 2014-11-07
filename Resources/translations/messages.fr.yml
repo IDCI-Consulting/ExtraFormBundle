@@ -1,0 +1,57 @@
+"Textarea input field": "Zone de saisie de texte"
+"Text input field in JSON format": "Champ de saisie de texte au format JSON"
+"Boolean input field (checkbox)": "Champ de saisie booléenne (case à cocher)"
+"Selection field": "Champ de sélection"
+"Decimal input field": "Champ de saisie décimale"
+"Integer input field": "Champ de saisie entier"
+"Monetary input field": "Champ de saisie monétaire"
+"Percentage input field": "Champ de saisie pourcentage"
+"Input text field": "Champ de saisie text"
+"Repeated input field": "Champ de saisie répété"
+"Hidden input field": "Champ de saisie caché"
+"Text input field with regular expression": "Champ de saisie texte avec expression régulière"
+"Email input field": "Champ de saisie couriel"
+"URL input field": "Champ de saisie URL"
+"Password input field": "Champ de saisie de mot de passe"
+"Time input field": "Champ de saisie d'heure"
+"Date and time input field": "Champ de saisie date et heure"
+"Date input field": "Champ de saisie date"
+"Birthday input field": "Champ de saisie anniversaire"
+
+"Not blank constraint": 
+"Blank constraint":
+"Not null constraint":
+"Null constraint":
+"True constraint":
+"False constraint":
+"Type constraint":
+"Email constraint":
+"Length constraint":
+"Url constraint":
+"Regex constraint":
+"Ip constraint":
+"Range constraint":
+"Equal to constraint":
+"Not equal to constraint":
+"Identical to constraint":
+"Not identical to constraint":
+"Less than constraint":
+"Less than or equal constraint":
+"Greater than constraint":
+"Greater than or equal constraint":
+"Date constraint constraint":
+"Date time constraint":
+"Time constraint":
+"Choice constraint":
+"Collection constraint":
+"Count constraint":
+"Language constraint":
+"Locale constraint":
+"Country constraint":
+"File constraint":
+"Image constraint":
+"Card scheme constraint":
+"Luhn constraint":
+"Iban constraint":
+"Isbn constraint":
+"Issn constraint":
