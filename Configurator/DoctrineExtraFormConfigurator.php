@@ -1,27 +1,23 @@
 <?php
 
 /**
- * 
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
  * @license: MIT
- *
  */
 
 namespace IDCI\Bundle\ExtraFormBundle\Configurator;
-
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Common\Util\Inflector;
 use IDCI\Bundle\ExtraFormBundle\Exception\BuildConfigurationException;
 
-
 class DoctrineExtraFormConfigurator extends AbstractExtraFormConfigurator
 {
     protected $entityManager;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param EntityManager $entityManager
      */
@@ -31,7 +27,7 @@ class DoctrineExtraFormConfigurator extends AbstractExtraFormConfigurator
     }
 
     /**
-     * Configure parameters
+     * Configure parameters.
      *
      * @param  OptionsResolver $resolver
      */

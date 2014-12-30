@@ -20,12 +20,12 @@ class ConfiguratorCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         if (!$container->hasDefinition('idci_extra_form.configurator') ||
-            !$container->hasDefinition('idci_extra_form.builder')
+            !$container->hasDefinition('idci_extra_form.configurator_registry')
         ) {
             return;
         }
 
-        $builderDefinition = $container->getDefinition('idci_extra_form.builder');
+        $registryDefinition = $container->getDefinition('idci_extra_form.configurator_registry');
 
         $configurators = $container->getParameter('idci_extra_form.configurators');
         foreach ($configurators as $name => $configuration) {
@@ -37,7 +37,7 @@ class ConfiguratorCompilerPass implements CompilerPassInterface
 
             $container->setDefinition($serviceName, $serviceDefinition);
 
-            $builderDefinition->addMethodCall(
+            $registryDefinition->addMethodCall(
                 'setConfigurator',
                 array($name, new Reference($serviceName))
             );
@@ -45,7 +45,7 @@ class ConfiguratorCompilerPass implements CompilerPassInterface
 
         $taggedServices = $container->findTaggedServiceIds('idci_extra_form.configurator');
         foreach ($taggedServices as $id => $attributes) {
-            $builderDefinition->addMethodCall(
+            $registryDefinition->addMethodCall(
                 'setConfigurator',
                 array($attributes[0]['alias'], new Reference($id))
             );

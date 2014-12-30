@@ -1,53 +1,30 @@
 <?php
 
 /**
- * 
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
  * @license: MIT
- *
  */
 
 namespace IDCI\Bundle\ExtraFormBundle\Builder;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use IDCI\Bundle\ExtraFormBundle\Configurator\ExtraFormConfiguratorInterface;
+use IDCI\Bundle\ExtraFormBundle\Exception\UndefinedExtraFormConfiguratorException;
 
 interface ExtraFormBuilderInterface
 {
     /**
-     * Build
+     * Build the extra form.
      *
-     * @param  FormBuilderInterface $formBuilder
-     * @param  string $configuratorAlias
-     * @param  array  $configuratorParameters
+     * @param  ExtraFormConfiguratorInterface|string $configurator
+     * @param  array                                 $parameters
+     * @param  FormBuilderInterface                  $formBuilder
+     *
+     * @return FormBuilderInterface The built form builder.
      */
     public function build(
-        FormBuilderInterface & $formBuilder,
-        $configuratorAlias,
-        array $configuratorParameters = array()
+        $configurator,
+        array $parameters = array(),
+        FormBuilderInterface $formBuilder = null
     );
-
-    /**
-     * set configurator
-     *
-     * @param string $alias
-     * @param ExtraFormConfiguratorInterface $configurator
-     */
-    public function setConfigurator($alias, ExtraFormConfiguratorInterface $configurator);
-
-    /**
-     * Get configurators
-     *
-     * @return array
-     */
-    public function getConfigurators();
-
-    /**
-     * Get configurator
-     *
-     * @param  string $alias
-     * @return ExtraFormConfiguratorInterface
-     * @throw  IDCI\Bundle\ExtraFormBundle\Exception\UndefinedExtraFormConfiguratorException
-     */
-    public function getConfigurator($alias);
 }

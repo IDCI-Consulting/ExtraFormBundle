@@ -13,9 +13,10 @@ namespace IDCI\Bundle\ExtraFormBundle\Configurator;
 interface ExtraFormConfiguratorInterface
 {
     /**
-     * Make configuration
+     * Make configuration.
      *
-     * @param  array $parameters
+     * @param array $parameters The parameters used to make the configuration.
+     *
      * @return array
      */
     public function makeConfiguration(array $parameters = array());

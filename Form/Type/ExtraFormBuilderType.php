@@ -1,10 +1,8 @@
 <?php
 
 /**
- *
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
  * @license: MIT
- *
  */
 
 namespace IDCI\Bundle\ExtraFormBundle\Form\Type;
@@ -21,7 +19,7 @@ class ExtraFormBuilderType extends AbstractType
     protected $extraFormBuilder;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ExtraFormBuilderInterface $extraFormBuilder
      */
@@ -47,9 +45,9 @@ class ExtraFormBuilderType extends AbstractType
             $this
                 ->extraFormBuilder
                 ->build(
-                    $builder,
-                    $options['configurator_alias'],
-                    $options['configurator_parameters']
+                    $options['configurator'],
+                    $options['parameters'],
+                    $builder
                 )
             ;
         } catch (\Exception $e) {
@@ -65,14 +63,17 @@ class ExtraFormBuilderType extends AbstractType
     {
         $resolver
             ->setRequired(array(
-                'configurator_alias'
+                'configurator'
             ))
             ->setAllowedTypes(array(
-                'configurator_alias' => 'string'
+                'configurator' => array(
+                    'string',
+                    'IDCI\Bundle\ExtraFormBundle\Configurator\ExtraFormConfiguratorInterface'
+                )
             ))
             ->setDefaults(array(
-                'configurator_parameters' => array(),
-                'transform_method'        => null
+                'parameters'       => array(),
+                'transform_method' => null
             ))
             ->setAllowedValues(array(
                 'transform_method' => array(null, 'jsonize', 'serialize')

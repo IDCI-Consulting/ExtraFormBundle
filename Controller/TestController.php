@@ -26,20 +26,28 @@ class TestController extends Controller
     {
     /*
         Single form using the builder service directly
-        $builder = $this->createFormBuilder(array(
-            'first_name' => 'John',
-            'last_name'  => 'DOE'
-        ));
 
-        $this
+        $form = $this
             ->get('idci_extra_form.builder')
             ->build(
-                $builder,
                 'identity_form', // configurator alias
-                array()          // configurator parameters
+                array(),         // configurator parameters
+                $this->createFormBuilder(array(
+                    'first_name' => 'John',
+                    'last_name'  => 'DOE'
+                ))
             )
+            ->getForm();
         ;
-        $form = $builder->getForm();
+    */
+
+    /*
+        Without builder
+        $form = $this
+            ->get('idci_extra_form.builder')
+            ->build('identity_form', array())
+            ->getForm()
+        ;
     */
 
     /*
@@ -53,7 +61,8 @@ class TestController extends Controller
                 )
             ))
             ->add('sub_form', 'extra_form_builder', array(
-                'configurator_alias' => 'identity_form'
+                'configurator' => 'identity_form',
+                'parameters'   => array(),
             ))
             ->getForm()
         ;

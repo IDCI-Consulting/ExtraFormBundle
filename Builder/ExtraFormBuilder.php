@@ -1,84 +1,70 @@
 <?php
 
 /**
- * 
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
  * @license: MIT
- *
  */
 
 namespace IDCI\Bundle\ExtraFormBundle\Builder;
 
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use IDCI\Bundle\ExtraFormBundle\Configurator\ExtraFormConfiguratorInterface;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeInterface;
-use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeHandler;
-use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintHandler;
+use IDCI\Bundle\ExtraFormBundle\Configurator\ExtraFormConfiguratorRegistry;
+use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistry;
+use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry;
 use IDCI\Bundle\ExtraFormBundle\Exception\UndefinedExtraFormConfiguratorException;
 
 class ExtraFormBuilder implements ExtraFormBuilderInterface
 {
-    protected $configurators;
-    protected $typeHandler;
-    protected $constraintHandler;
+    protected $formFactory;
+    protected $configuratorRegistry;
+    protected $typeRegistry;
+    protected $constraintRegistry;
 
     /**
      * Constructor
      *
-     * @param ExtraFormTypeHandler       $typeHandler
-     * @param ExtraFormConstraintHandler $constraintHandler
+     * @param FormFactoryInterface          $formFactory The form factory.
+     * @param ExtraFormConfiguratorRegistry $configuratorRegistry The configurator registry.
+     * @param ExtraFormTypeRegistry         $typeRegistry         The type registry.
+     * @param ExtraFormConstraintRegistry   $constraintRegistry   The constraint registry.
      */
     public function __construct(
-        ExtraFormTypeHandler       $typeHandler,
-        ExtraFormConstraintHandler $constraintHandler
+        FormFactoryInterface          $formFactory,
+        ExtraFormConfiguratorRegistry $configuratorRegistry,
+        ExtraFormTypeRegistry         $typeRegistry,
+        ExtraFormConstraintRegistry   $constraintRegistry
     )
     {
-        $this->typeHandler       = $typeHandler;
-        $this->constraintHandler = $constraintHandler;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setConfigurator($alias, ExtraFormConfiguratorInterface $configurator)
-    {
-        $this->configurators[$alias] = $configurator;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getConfigurators()
-    {
-        return $this->configurators;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getConfigurator($alias)
-    {
-        if (!isset($this->configurators[$alias])) {
-            throw new UndefinedExtraFormConfiguratorException($alias);
-        }
-
-        return $this->configurators[$alias];
+        $this->formFactory          = $formFactory;
+        $this->configuratorRegistry = $configuratorRegistry;
+        $this->typeRegistry         = $typeRegistry;
+        $this->constraintRegistry   = $constraintRegistry;
     }
 
     /**
      * {@inheritDoc}
      */
     public function build(
-        FormBuilderInterface & $formBuilder,
-        $configuratorAlias,
-        array $configuratorParameters = array()
+        $configurator,
+        array $parameters = array(),
+        FormBuilderInterface $formBuilder = null
     )
     {
-        $configuration = $this
-            ->getConfigurator($configuratorAlias)
-            ->makeConfiguration($configuratorParameters)
-        ;
+        if (null === $formBuilder) {
+            $formBuilder = $this->formFactory->createBuilder();
+        }
 
+        if (! $configurator instanceof ExtraFormConfiguratorInterface) {
+            $configurator = $this
+                ->configuratorRegistry
+                ->getConfigurator($configurator)
+            ;
+        }
+
+        $configuration = $configurator->makeConfiguration($parameters);
         foreach ($configuration as $name => $field) {
             $formBuilder->add(
                 $name,
@@ -86,26 +72,30 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
                 $this->buildFieldOptions($field)
             );
         }
+
+        return $formBuilder;
     }
 
     /**
-     * Build field type
+     * Build field type.
      *
-     * @param  array $field
+     * @param array $field
+     *
      * @return string
      */
     protected function buildFieldType(array $field)
     {
         return $this
-            ->typeHandler
+            ->typeRegistry
             ->getType($field['extra_form_type'])
         ;
     }
 
     /**
-     * Build field options
+     * Build field options.
      *
-     * @param  array $field
+     * @param array $field
+     *
      * @return array
      */
     protected function buildFieldOptions(array $field)

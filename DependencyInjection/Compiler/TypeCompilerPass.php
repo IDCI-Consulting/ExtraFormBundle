@@ -23,12 +23,12 @@ class TypeCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         if (!$container->hasDefinition('idci_extra_form.type') ||
-            !$container->hasDefinition('idci_extra_form.type_handler')
+            !$container->hasDefinition('idci_extra_form.type_registry')
         ) {
             return;
         }
 
-        $handlerDefinition = $container->getDefinition('idci_extra_form.type_handler');
+        $registryDefinition = $container->getDefinition('idci_extra_form.type_registry');
 
         $types = $container->getParameter('idci_extra_form.types');
         $extraFormOptions = array();
@@ -56,7 +56,7 @@ class TypeCompilerPass implements CompilerPassInterface
                 $serviceDefinition
             );
 
-            $handlerDefinition->addMethodCall(
+            $registryDefinition->addMethodCall(
                 'setType',
                 array($name, new Reference($this->getDefinitionName($name)))
             );

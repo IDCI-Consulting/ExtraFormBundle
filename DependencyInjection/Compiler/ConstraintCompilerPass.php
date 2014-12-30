@@ -20,12 +20,12 @@ class ConstraintCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         if (!$container->hasDefinition('idci_extra_form.constraint') ||
-            !$container->hasDefinition('idci_extra_form.constraint_handler')
+            !$container->hasDefinition('idci_extra_form.constraint_registry')
         ) {
             return;
         }
 
-        $handlerDefinition = $container->getDefinition('idci_extra_form.constraint_handler');
+        $registryDefinition = $container->getDefinition('idci_extra_form.constraint_registry');
 
         $constraints = $container->getParameter('idci_extra_form.constraints');
         foreach ($constraints as $name => $configuration) {
@@ -37,7 +37,7 @@ class ConstraintCompilerPass implements CompilerPassInterface
                 $serviceDefinition
             );
 
-            $handlerDefinition->addMethodCall(
+            $registryDefinition->addMethodCall(
                 'setConstraint',
                 array($name, new Reference($this->getDefinitionName($name)))
             );

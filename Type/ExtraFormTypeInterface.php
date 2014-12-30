@@ -1,10 +1,8 @@
 <?php
 
 /**
- * 
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
  * @license: MIT
- *
  */
 
 namespace IDCI\Bundle\ExtraFormBundle\Type;
@@ -13,35 +11,35 @@ namespace IDCI\Bundle\ExtraFormBundle\Type;
 interface ExtraFormTypeInterface
 {
     /**
-     * Get form type
+     * Get form type.
      *
      * @return string
      */
     public function getFormType();
 
     /**
-     * Get parent
+     * Returns the parent.
      *
      * @return ExtraFormTypeInterface
      */
     public function getParent();
 
     /**
-     * Is abstract
+     * Is abstract.
      *
      * @return boolean
      */
     public function isAbstract();
 
     /**
-     * Get extra form options
+     * Returns extra form options.
      *
      * @return array
      */
     public function getExtraFormOptions();
 
     /**
-     * Get extra form constraints
+     * Returns extra form constraints
      *
      * @return array
      */

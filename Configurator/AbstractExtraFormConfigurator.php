@@ -1,17 +1,14 @@
 <?php
 
 /**
- * 
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
  * @license: MIT
- *
  */
 
 namespace IDCI\Bundle\ExtraFormBundle\Configurator;
 
-
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use IDCI\Bundle\ExtraFormBundle\Exception\BuildConfigurationException;
 
 abstract class AbstractExtraFormConfigurator implements ExtraFormConfiguratorInterface 
 {
@@ -27,20 +24,21 @@ abstract class AbstractExtraFormConfigurator implements ExtraFormConfiguratorInt
     }
 
     /**
-     * Configure parameters
+     * Configure parameters.
      *
-     * @param  OptionsResolver $resolver
+     * @param OptionsResolver $resolver
      */
     protected function configureParameters(OptionsResolver $resolver)
     {
     }
 
     /**
-     * Build configuration
+     * Build configuration.
      *
      * @param  array $parameters
+     *
      * @return array
-     * @throw  IDCI\Bundle\ExtraFormBundle\Exception\BuildConfigurationException
+     * @throw  BuildConfigurationException
      */
     abstract protected function buildConfiguration(array $parameters = array());
 }

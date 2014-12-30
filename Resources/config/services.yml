@@ -11,8 +11,8 @@ services:
         arguments: [null]
         abstract: true
 
-    idci_extra_form.type_handler:
-        class: IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeHandler
+    idci_extra_form.type_registry:
+        class: IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry
 
 
     # ExtraFormConstraint
@@ -22,8 +22,8 @@ services:
         arguments: [null]
         abstract: true
 
-    idci_extra_form.constraint_handler:
-        class: IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintHandler
+    idci_extra_form.constraint_registry:
+        class: IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistry
 
 
     # ExtraFormConfigurator
@@ -32,6 +32,9 @@ services:
         class: IDCI\Bundle\ExtraFormBundle\Configurator\ExtraFormConfigurator
         arguments: [null]
         abstract: true
+
+    idci_extra_form.configurator_registry:
+        class: IDCI\Bundle\ExtraFormBundle\Configurator\ExtraFormConfiguratorRegistry
 
     idci_extra_form.configurator.doctrine:
         class: IDCI\Bundle\ExtraFormBundle\Configurator\DoctrineExtraFormConfigurator
@@ -45,8 +48,10 @@ services:
     idci_extra_form.builder:
         class: %idci_extra_form.builder.class%
         arguments:
-            - @idci_extra_form.type_handler
-            - @idci_extra_form.constraint_handler
+            - @form.factory
+            - @idci_extra_form.configurator_registry
+            - @idci_extra_form.type_registry
+            - @idci_extra_form.constraint_registry
 
 
     # Form Types

@@ -1,10 +1,8 @@
 <?php
 
 /**
- *
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
  * @license: MIT
- *
  */
 
 namespace IDCI\Bundle\ExtraFormBundle\Exception;
@@ -12,7 +10,7 @@ namespace IDCI\Bundle\ExtraFormBundle\Exception;
 class WrongExtraFormTypeOptionException extends \Exception
 {
     /**
-     * The constructor
+     * The constructor.
      *
      * @param string $name
      * @param string $optionName
