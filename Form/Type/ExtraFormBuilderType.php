@@ -45,7 +45,7 @@ class ExtraFormBuilderType extends AbstractType
             $this
                 ->extraFormBuilder
                 ->build(
-                    $options['configurator'],
+                    $options['configuration'],
                     $options['parameters'],
                     $builder
                 )
@@ -63,12 +63,13 @@ class ExtraFormBuilderType extends AbstractType
     {
         $resolver
             ->setRequired(array(
-                'configurator'
+                'configuration'
             ))
             ->setAllowedTypes(array(
-                'configurator' => array(
+                'configuration' => array(
                     'string',
-                    'IDCI\Bundle\ExtraFormBundle\Configurator\ExtraFormConfiguratorInterface'
+                    'array',
+                    'IDCI\Bundle\ExtraFormBundle\Builder\ConfigurationBuilderInterface'
                 )
             ))
             ->setDefaults(array(

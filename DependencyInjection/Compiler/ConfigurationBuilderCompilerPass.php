@@ -12,25 +12,25 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 
-class ConfiguratorCompilerPass implements CompilerPassInterface
+class ConfigurationBuilderCompilerPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('idci_extra_form.configurator') ||
-            !$container->hasDefinition('idci_extra_form.configurator_registry')
+        if (!$container->hasDefinition('idci_extra_form.configuration_builder') ||
+            !$container->hasDefinition('idci_extra_form.configuration_builder_registry')
         ) {
             return;
         }
 
-        $registryDefinition = $container->getDefinition('idci_extra_form.configurator_registry');
+        $registryDefinition = $container->getDefinition('idci_extra_form.configuration_builder_registry');
 
-        $configurators = $container->getParameter('idci_extra_form.configurators');
-        foreach ($configurators as $name => $configuration) {
-            $serviceDefinition = new DefinitionDecorator('idci_extra_form.configurator');
-            $serviceName = sprintf('idci_extra_form.configurator.%s', $name);
+        $configurations = $container->getParameter('idci_extra_form.configurations');
+        foreach ($configurations as $name => $configuration) {
+            $serviceDefinition = new DefinitionDecorator('idci_extra_form.configuration_builder');
+            $serviceName = sprintf('idci_extra_form.configuration.%s', $name);
 
             $serviceDefinition->isAbstract(false);
             $serviceDefinition->replaceArgument(0, $configuration);
@@ -38,15 +38,15 @@ class ConfiguratorCompilerPass implements CompilerPassInterface
             $container->setDefinition($serviceName, $serviceDefinition);
 
             $registryDefinition->addMethodCall(
-                'setConfigurator',
+                'setBuilder',
                 array($name, new Reference($serviceName))
             );
         }
 
-        $taggedServices = $container->findTaggedServiceIds('idci_extra_form.configurator');
+        $taggedServices = $container->findTaggedServiceIds('idci_extra_form.configuration_builder');
         foreach ($taggedServices as $id => $attributes) {
             $registryDefinition->addMethodCall(
-                'setConfigurator',
+                'setBuilder',
                 array($attributes[0]['alias'], new Reference($id))
             );
         }

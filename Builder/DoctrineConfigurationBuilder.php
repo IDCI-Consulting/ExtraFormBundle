@@ -5,14 +5,14 @@
  * @license: MIT
  */
 
-namespace IDCI\Bundle\ExtraFormBundle\Configurator;
+namespace IDCI\Bundle\ExtraFormBundle\Builder;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Common\Util\Inflector;
 use IDCI\Bundle\ExtraFormBundle\Exception\BuildConfigurationException;
 
-class DoctrineExtraFormConfigurator extends AbstractExtraFormConfigurator
+class DoctrineConfigurationBuilder extends AbstractConfigurationBuilder
 {
     protected $entityManager;
 
@@ -27,11 +27,9 @@ class DoctrineExtraFormConfigurator extends AbstractExtraFormConfigurator
     }
 
     /**
-     * Configure parameters.
-     *
-     * @param  OptionsResolver $resolver
+     * {@inheritDoc}
      */
-    protected function configureParameters(OptionsResolver $resolver)
+    protected function setup(OptionsResolver $resolver)
     {
         parent::configureParameters($resolver);
 
@@ -48,7 +46,7 @@ class DoctrineExtraFormConfigurator extends AbstractExtraFormConfigurator
     /**
      * {@inheritDoc}
      */
-    public function buildConfiguration(array $parameters = array())
+    public function make(array $parameters = array())
     {
         $entity = $this
             ->entityManager

@@ -9,46 +9,43 @@ namespace IDCI\Bundle\ExtraFormBundle\Builder;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use IDCI\Bundle\ExtraFormBundle\Configurator\ExtraFormConfiguratorInterface;
-use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeInterface;
-use IDCI\Bundle\ExtraFormBundle\Configurator\ExtraFormConfiguratorRegistry;
 use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistry;
+use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeInterface;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry;
-use IDCI\Bundle\ExtraFormBundle\Exception\UndefinedExtraFormConfiguratorException;
 
 class ExtraFormBuilder implements ExtraFormBuilderInterface
 {
     protected $formFactory;
-    protected $configuratorRegistry;
+    protected $configurationBuilderRegistry;
     protected $typeRegistry;
     protected $constraintRegistry;
 
     /**
      * Constructor
      *
-     * @param FormFactoryInterface          $formFactory The form factory.
-     * @param ExtraFormConfiguratorRegistry $configuratorRegistry The configurator registry.
-     * @param ExtraFormTypeRegistry         $typeRegistry         The type registry.
-     * @param ExtraFormConstraintRegistry   $constraintRegistry   The constraint registry.
+     * @param FormFactoryInterface         $formFactory                  The form factory.
+     * @param ConfigurationBuilderRegistry $configurationBuilderRegistry The configuration builder registry.
+     * @param ExtraFormTypeRegistry        $typeRegistry                 The type registry.
+     * @param ExtraFormConstraintRegistry  $constraintRegistry           The constraint registry.
      */
     public function __construct(
-        FormFactoryInterface          $formFactory,
-        ExtraFormConfiguratorRegistry $configuratorRegistry,
-        ExtraFormTypeRegistry         $typeRegistry,
-        ExtraFormConstraintRegistry   $constraintRegistry
+        FormFactoryInterface         $formFactory,
+        ConfigurationBuilderRegistry $configurationBuilderRegistry,
+        ExtraFormTypeRegistry        $typeRegistry,
+        ExtraFormConstraintRegistry  $constraintRegistry
     )
     {
-        $this->formFactory          = $formFactory;
-        $this->configuratorRegistry = $configuratorRegistry;
-        $this->typeRegistry         = $typeRegistry;
-        $this->constraintRegistry   = $constraintRegistry;
+        $this->formFactory                  = $formFactory;
+        $this->configurationBuilderRegistry = $configurationBuilderRegistry;
+        $this->typeRegistry                 = $typeRegistry;
+        $this->constraintRegistry           = $constraintRegistry;
     }
 
     /**
      * {@inheritDoc}
      */
     public function build(
-        $configurator,
+        $configuration,
         array $parameters = array(),
         FormBuilderInterface $formBuilder = null
     )
@@ -57,14 +54,17 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
             $formBuilder = $this->formFactory->createBuilder();
         }
 
-        if (! $configurator instanceof ExtraFormConfiguratorInterface) {
-            $configurator = $this
-                ->configuratorRegistry
-                ->getConfigurator($configurator)
+        if (is_string($configuration)) {
+            $configuration = $this
+                ->configurationBuilderRegistry
+                ->getBuilder($configuration)
             ;
         }
 
-        $configuration = $configurator->makeConfiguration($parameters);
+        if ($configuration instanceof ConfigurationBuilderInterface) {
+            $configuration = $configuration->build($parameters);
+        }
+
         foreach ($configuration as $name => $field) {
             $formBuilder->add(
                 $name,

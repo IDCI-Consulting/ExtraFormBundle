@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use IDCI\Bundle\ExtraFormBundle\DependencyInjection\Compiler\TypeCompilerPass;
 use IDCI\Bundle\ExtraFormBundle\DependencyInjection\Compiler\ConstraintCompilerPass;
-use IDCI\Bundle\ExtraFormBundle\DependencyInjection\Compiler\ConfiguratorCompilerPass;
+use IDCI\Bundle\ExtraFormBundle\DependencyInjection\Compiler\ConfigurationBuilderCompilerPass;
 
 class IDCIExtraFormBundle extends Bundle
 {
@@ -21,6 +21,6 @@ class IDCIExtraFormBundle extends Bundle
 
         $container->addCompilerPass(new TypeCompilerPass());
         $container->addCompilerPass(new ConstraintCompilerPass());
-        $container->addCompilerPass(new ConfiguratorCompilerPass());
+        $container->addCompilerPass(new ConfigurationBuilderCompilerPass());
     }
 }

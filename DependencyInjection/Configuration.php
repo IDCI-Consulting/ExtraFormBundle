@@ -132,7 +132,7 @@ class Configuration implements ConfigurationInterface
     protected function addExtraFormConfiguratorsNode()
     {
         $builder = new TreeBuilder();
-        $node = $builder->root('configurators');
+        $node = $builder->root('configurations');
 
         $node
             ->defaultValue(array())

@@ -6,41 +6,41 @@ services:
 
     # ExtraFormType
 
+    idci_extra_form.type_registry:
+        class: IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry
+
     idci_extra_form.type:
         class: IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType
         arguments: [null]
         abstract: true
 
-    idci_extra_form.type_registry:
-        class: IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry
-
 
     # ExtraFormConstraint
+
+    idci_extra_form.constraint_registry:
+        class: IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistry
 
     idci_extra_form.constraint:
         class: IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraint
         arguments: [null]
         abstract: true
 
-    idci_extra_form.constraint_registry:
-        class: IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistry
 
+    # ConfigurationBuilder
 
-    # ExtraFormConfigurator
+    idci_extra_form.configuration_builder_registry:
+        class: IDCI\Bundle\ExtraFormBundle\Builder\ConfigurationBuilderRegistry
 
-    idci_extra_form.configurator:
-        class: IDCI\Bundle\ExtraFormBundle\Configurator\ExtraFormConfigurator
+    idci_extra_form.configuration_builder:
+        class: IDCI\Bundle\ExtraFormBundle\Builder\ConfigurationBuilder
         arguments: [null]
         abstract: true
 
-    idci_extra_form.configurator_registry:
-        class: IDCI\Bundle\ExtraFormBundle\Configurator\ExtraFormConfiguratorRegistry
-
-    idci_extra_form.configurator.doctrine:
-        class: IDCI\Bundle\ExtraFormBundle\Configurator\DoctrineExtraFormConfigurator
+    idci_extra_form.configuration_builder.doctrine:
+        class: IDCI\Bundle\ExtraFormBundle\Builder\DoctrineConfigurationBuilder
         arguments: [@doctrine.orm.entity_manager]
         tags:
-            - { name: idci_extra_form.configurator, alias: doctrine }
+            - { name: idci_extra_form.configuration_builder, alias: doctrine }
 
 
     # ExtraFormBuilder
@@ -49,7 +49,7 @@ services:
         class: %idci_extra_form.builder.class%
         arguments:
             - @form.factory
-            - @idci_extra_form.configurator_registry
+            - @idci_extra_form.configuration_builder_registry
             - @idci_extra_form.type_registry
             - @idci_extra_form.constraint_registry
 

@@ -5,22 +5,22 @@
  * @license: MIT
  */
 
-namespace IDCI\Bundle\ExtraFormBundle\Configurator;
+namespace IDCI\Bundle\ExtraFormBundle\Builder;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use IDCI\Bundle\ExtraFormBundle\Exception\BuildConfigurationException;
 
-abstract class AbstractExtraFormConfigurator implements ExtraFormConfiguratorInterface 
+abstract class AbstractConfigurationBuilder implements ConfigurationBuilderInterface
 {
     /**
      * {@inheritDoc}
      */
-    public function makeConfiguration(array $parameters = array())
+    public function build(array $parameters = array())
     {
         $resolver = new OptionsResolver();
-        $this->configureParameters($resolver);
+        $this->setup($resolver);
 
-        return $this->buildConfiguration($resolver->resolve($parameters));
+        return $this->make($resolver->resolve($parameters));
     }
 
     /**
@@ -28,17 +28,17 @@ abstract class AbstractExtraFormConfigurator implements ExtraFormConfiguratorInt
      *
      * @param OptionsResolver $resolver
      */
-    protected function configureParameters(OptionsResolver $resolver)
+    protected function setup(OptionsResolver $resolver)
     {
     }
 
     /**
-     * Build configuration.
+     * Make the configuration.
      *
      * @param  array $parameters
      *
      * @return array
      * @throw  BuildConfigurationException
      */
-    abstract protected function buildConfiguration(array $parameters = array());
+    abstract protected function make(array $parameters = array());
 }

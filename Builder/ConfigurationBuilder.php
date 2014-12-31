@@ -5,9 +5,9 @@
  * @license: MIT
  */
 
-namespace IDCI\Bundle\ExtraFormBundle\Configurator;
+namespace IDCI\Bundle\ExtraFormBundle\Builder;
 
-class ExtraFormConfigurator extends AbstractExtraFormConfigurator
+class ConfigurationBuilder extends AbstractConfigurationBuilder
 {
     protected $raw;
 
@@ -24,7 +24,7 @@ class ExtraFormConfigurator extends AbstractExtraFormConfigurator
     /**
      * {@inheritDoc}
      */
-    public function buildConfiguration(array $parameters = array())
+    public function make(array $parameters = array())
     {
         return $this->raw['fields'];
     }

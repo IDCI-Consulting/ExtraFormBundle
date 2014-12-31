@@ -16,14 +16,14 @@ interface ExtraFormBuilderInterface
     /**
      * Build the extra form.
      *
-     * @param  ExtraFormConfiguratorInterface|string $configurator
-     * @param  array                                 $parameters
-     * @param  FormBuilderInterface                  $formBuilder
+     * @param  mixed                $configuration
+     * @param  array                $parameters
+     * @param  FormBuilderInterface $formBuilder
      *
      * @return FormBuilderInterface The built form builder.
      */
     public function build(
-        $configurator,
+        $configuration,
         array $parameters = array(),
         FormBuilderInterface $formBuilder = null
     );
