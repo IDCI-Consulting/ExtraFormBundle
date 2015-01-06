@@ -1,24 +1,22 @@
-ExtraFormConfigurator
-=====================
+ConfigurationBuilder
+====================
 
 
-ExtraFormConfigurator are services that transform a specific raw data to an understandable
+ConfigurationBuilder are services that transform a specific raw data to an understandable
 configuration that is use by a ExtraFormGenerator to generate a FormBuilder.
-An ExtraFormConfigurator is identitfy by a name.
-By default this bundle provide two kind of configurator.
+An ConfigurationBuilder is identitfy by a name.
+By default this bundle provide a configuration builder.
 
 
-## Default configurators
+## Default configuration builder
 
-### ExtraFormConfigurator
+This is the default ConfigurationBuilder, the specific raw is located in your configuration.
 
-This is the default ExtraFormConfigurator, the specific raw is located in your configuration.
-
-To define an ExtraFormConfiguration, simply use the configuration:
+To define a configuration :
 
 ```yml
 idci_extra_form:
-    configurators:
+    configurations:
         identity_form:
             name: ~
             fields:
@@ -46,7 +44,7 @@ idci_extra_form:
             options: ~
 ```
 
-In this example, "identity_form" became the ExtraFormConfigurator identifier.
+In this example, "identity_form" became the ConfigurationBuilder identifier.
 
 **use case**:
 It can be use to replace the default FormType behavior, but instead of added fields
@@ -56,65 +54,62 @@ in the `buildForm` method, you declare the fields in a configuration file.
 Generated form are [without class](http://symfony.com/doc/current/book/forms.html#using-a-form-without-a-class)
 
 
-### DoctrineExtraFormConfigurator
+## Create your own configuration builder
 
-WIP
-
-
-## Create your own configurator
-
-If you wish to create your own configurator, you have to create a class which
-extends `AbstractExtraFormConfigurator` and implement necessary methods.
+If you wish to create your own configuration builder, you have to create a class
+which extends `AbstractConfigurationBuilder` and implement necessary methods.
 
 ```php
 <?php
-// src/My/Bundle/ExtraFormConfigurator/MyConfigurator.php
+// src/My/Bundle/ExtraForm/MyConfigurationBuilder.php
 
-namespace My\Bundle\ExtraFormConfigurator;
+namespace My\Bundle\ExtraForm;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use IDCI\Bundle\ExtraFormBundle\Configurator\AbstractExtraFormConfigurator;
+use IDCI\Bundle\ExtraFormBundle\Builder\AbstractConfigurationBuilder;
 use IDCI\Bundle\ExtraFormBundle\Exception\BuildConfigurationException;
 
-class MyConfigurator extends AbstractExtraFormConfigurator
+class MyConfigurationBuilder extends AbstractConfigurationBuilder
 {
     /**
-     * {@inheritDoc}
+     * Configure parameters.
+     *
+     * @param OptionsResolver $resolver
      */
-    public function buildConfiguration(array $parameters = array())
+    protected function setup(OptionsResolver $resolver)
     {
         ...
     }
 
     /**
-     * Configure parameters
+     * Make the configuration.
      *
-     * This method allow you to configure the needed parameters before call
-     * doMakeConfiguration function
+     * @param  array $parameters
      *
-     * @param OptionsResolver $resolver
+     * @return array
+     * @throw  BuildConfigurationException
      */
-    protected function configureParameters(OptionsResolver $resolver)
+    protected function make(array $parameters = array())
     {
-        // $resolver-> ...
+        ...
     }
 }
 ```
 
-Then declare this new ExtraFormConfigurator as service:
+Then declare this new ConfigurationBuilder as service:
 
 ```yml
 services:
-    idci_extra_form.configurator.my_configurator:
-        class: My\Bundle\ExtraFormConfigurator\MyConfigurator
+    idci_extra_form.configuration_builder.my_configuration:
+        class: My\Bundle\ExtraForm\MyConfigurationBuilder
         arguments: []
         tags:
-            - { name: idci_extra_form.configurator, alias: my_configurator }
+            - { name: idci_extra_form.configuration_builder, alias: my_configuration }
 ```
 
-The alias "my_configurator" will be the ExtraFormConfigurator identifier.
+The alias "my_configuration" will be the ConfigurationBuilder identifier.
 
-The buildConfiguration function must return an array that should be in the following format:
+The make function must return an array that should be in the following format:
 
 ```
 array(
@@ -128,7 +123,7 @@ array(
 ```
 
 
-To check if ExtraFormConfigurator are well configurated, you could list all them:
+To check if ConfigurationBuilder are well configurated, you could list all them:
 ```sh
-$ php app/console container:debug | grep "idci_extra_form\.configurator\."
+$ php app/console container:debug | grep "idci_extra_form\.configuration_builder"
 ```

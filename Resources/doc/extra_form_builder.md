@@ -2,47 +2,111 @@ ExtraFormBuilder
 ================
 
 ExtraFormBuilder is the main service that you will use in order to generate
-your forms. The build process is the following:
+your forms.
 
-1] Create a FormBuilder:
-```php
-$builder = $this->createFormBuilder(array(
-    'first_name' => 'John',
-    'last_name'  => 'DOE'
-));
-```
-The data must be an array containing a key value pair.
+You can use it in two different way.
 
-2] Use the `idci_extra_form.builder` service:
+
+## As service
+
+To use the `idci_extra_form.builder` as service :
 ```php
-$this
+$builder = $this
     ->get('idci_extra_form.builder')
-    ->build(
-        $builder,
-        'identity_form', // configurator alias
-        array()          // configurator parameters
-    )
+    ->build(array(
+        'first_name' => array(
+            'extra_form_type' => 'text',
+            'options' => array(
+                'label' => 'Prénom',
+            ),
+            'constraints' => array(),
+        ),
+        'last_name' => array(
+            'extra_form_type' => 'text',
+            'options' => array(
+                'label' => 'Nom',
+            ),
+            'constraints' => array(),
+        )
+    ))
 ;
 ```
-You need to have an [ExtraFormConfigurator](extra_form_configurator.md) configurated.
 
-3] Get your form:
+Now you get a Symfony2 [FormBuilder](https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/FormBuilder.php) object.
+So simply call the getForm() method :
 ```php
 $form = $builder->getForm();
 ```
-You work with a Symfony2 [FormBuilder](https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/FormBuilder.php) object.
-So simply call the getForm() method
 
-4] Follow the usual process with forms:
+And follow the usual process with symfony2 forms :
 Return a view from your controller
 ```php
 return array(
     'form' => $form->createView()
 );
 ```
-Then you could display it in your twig
+
+Finally you could display it in your twig :
 ```twig
 <form>
 {{ form_widget(form) }}
 </form>
 ```
+
+You could use a [ConfigurationBuilder](configuration_builder.md) instead of declare
+all the configuration in the first argument of the build method as shown after :
+
+```php
+$form = $this
+    ->get('idci_extra_form.builder')
+    ->build('identity_form', array())
+    ->getForm()
+;
+```
+
+
+## As Symfony2 a FormType
+
+In this case you must create a form first, and then add a field using the special
+FormType *extra_form_builder*. The generated form will be a field of the created form.
+```php
+$form = $this
+    ->createFormBuilder()
+    ->add('my_form', 'extra_form_builder', array(
+        'configuration' => array(
+            'first_name' => array(
+                'extra_form_type' => 'text',
+                'options' => array(
+                    'label' => 'Prénom',
+                ),
+                'constraints' => array(),
+            ),
+            'last_name' => array(
+                'extra_form_type' => 'text',
+                'options' => array(
+                    'label' => 'Nom',
+                ),
+                'constraints' => array(),
+            )
+        ),
+        'parameters' => array(),
+    ))
+    ->getForm()
+```
+
+And follow the usual process with symfony2 forms :
+Return a view from your controller
+```php
+return array(
+    'form' => $form->createView()
+);
+```
+
+Finally you could display it in your twig
+```twig
+<form>
+{{ form_widget(form) }}
+</form>
+```
+
+To get more informations about this method, read the [ExtraFormBuilderType](extra_form_builder_type.md) section.
