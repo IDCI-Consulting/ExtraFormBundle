@@ -29,7 +29,7 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new IDCI\ExtraFormBundle\IDCIExtraFormBundle(),
+        new IDCI\Bundle\ExtraFormBundle\IDCIExtraFormBundle(),
     );
 }
 ```
@@ -52,7 +52,7 @@ Documentation
 * [ExtraFormBuilderType](Resources/doc/extra_form_builder_type.md)
 * [ExtraFormType](Resources/doc/extra_form_type.md)
 * [ExtraFormConstraint](Resources/doc/extra_form_constraint.md)
-* [ExtraFormConfigurator](Resources/doc/extra_form_configurator.md)
+* [ConfigurationBuilder](Resources/doc/configuration_builder.md)
 * [Configuration reference](Resources/doc/configuration_reference.md)
 
 
