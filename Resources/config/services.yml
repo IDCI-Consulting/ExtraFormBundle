@@ -36,11 +36,11 @@ services:
         arguments: [null]
         abstract: true
 
-    idci_extra_form.configuration_builder.doctrine:
-        class: IDCI\Bundle\ExtraFormBundle\Builder\DoctrineConfigurationBuilder
-        arguments: [@doctrine.orm.entity_manager]
-        tags:
-            - { name: idci_extra_form.configuration_builder, alias: doctrine }
+    #idci_extra_form.configuration_builder.doctrine:
+    #    class: IDCI\Bundle\ExtraFormBundle\Builder\DoctrineConfigurationBuilder
+    #    arguments: [@doctrine.orm.entity_manager]
+    #    tags:
+    #        - { name: idci_extra_form.configuration_builder, alias: doctrine }
 
 
     # ExtraFormBuilder
