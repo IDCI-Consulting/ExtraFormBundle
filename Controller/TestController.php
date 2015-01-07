@@ -20,7 +20,7 @@ class TestController extends Controller
      * Test.
      *
      * @Route("/", name="idci_extra_form")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      * @Template()
      */
     public function indexAction(Request $request)
@@ -28,7 +28,7 @@ class TestController extends Controller
     /*
         Single form using the builder service directly
 
-        $form = $this
+        $builder = $this
             ->get('idci_extra_form.builder')
             ->build(
                 'identity_form', // configuration alias
@@ -38,22 +38,20 @@ class TestController extends Controller
                     'last_name'  => 'DOE'
                 ))
             )
-            ->getForm();
         ;
     */
 
     /*
         Without form builder
-        $form = $this
+        $builder = $this
             ->get('idci_extra_form.builder')
             ->build('identity_form', array())
-            ->getForm()
         ;
     */
 
     /*
         Without form builder and without declared configurator
-        $form = $this
+        $builder = $this
             ->get('idci_extra_form.builder')
             ->build(array(
                 'first_name' => array(
@@ -71,14 +69,13 @@ class TestController extends Controller
                     'constraints' => array(),
                 )
             ))
-            ->getForm();
         ;
     */
 
     /*
         Sub form using the builder service through a form type
     */
-        $form = $this
+        $builder = $this
             ->createFormBuilder(array(
                 'sub_form' => array(
                     'first_name' => 'John',
@@ -89,11 +86,10 @@ class TestController extends Controller
                 'configuration' => 'identity_form',
                 'parameters'    => array(),
             ))
-            ->getForm()
         ;
 
     /*
-        $form = $this
+        $builder = $this
             ->createFormBuilder(array(
                 'sub_form' => array(
                     'first_name' => 'John',
@@ -119,9 +115,20 @@ class TestController extends Controller
                 ),
                 'parameters'    => array(),
             ))
-            ->getForm()
         ;
     */
+
+        $form = $builder
+            ->add('send', 'submit')
+            ->setMethod('POST')
+            ->getForm()
+        ;
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            var_dump($form->getData()); die;
+        }
 
         return array('form' => $form->createView());
     }

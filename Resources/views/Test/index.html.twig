@@ -1,3 +1,5 @@
-<form>
-{{ form_widget(form) }}
-</form>
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    {{ form(form) }}
+{% endblock %}
