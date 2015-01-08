@@ -74,7 +74,6 @@ class TestController extends Controller
 
     /*
         Sub form using the builder service through a form type
-    */
         $builder = $this
             ->createFormBuilder(array(
                 'sub_form' => array(
@@ -87,8 +86,10 @@ class TestController extends Controller
                 'parameters'    => array(),
             ))
         ;
+    */
 
     /*
+    */
         $builder = $this
             ->createFormBuilder(array(
                 'sub_form' => array(
@@ -111,12 +112,26 @@ class TestController extends Controller
                             'label' => 'Nom',
                         ),
                         'constraints' => array(),
+                    ),
+                    'purchase' => array(
+                        'extra_form_type' => 'extra_form_builder',
+                        'options' => array(
+                            'configuration' => array(
+                                'date' => array(
+                                    'extra_form_type' => 'datetime',
+                                    'options' => array(
+                                        'label' => 'Date d\'achat',
+                                    ),
+                                    'constraints' => array(),
+                                ),
+                            )
+                        ),
+                        'constraints' => array(),
                     )
                 ),
                 'parameters'    => array(),
             ))
         ;
-    */
 
         $form = $builder
             ->add('send', 'submit')

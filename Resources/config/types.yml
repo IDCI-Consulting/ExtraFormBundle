@@ -16,6 +16,14 @@ idci_extra_form:
                 help:           { extra_form_type: "textarea", options: {required: false} }
             extra_form_constraints: ~
 
+        "extra_form_builder":
+            parent:      form
+            form_type:   extra_form_builder
+            description: ~
+            extra_form_options:
+                configuration:  { extra_form_type: "textarea", options: {required: false} }
+            extra_form_constraints: ~
+
         "textarea":
             parent:      form
             form_type:   textarea
