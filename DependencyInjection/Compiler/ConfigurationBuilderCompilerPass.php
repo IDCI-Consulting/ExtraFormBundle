@@ -44,11 +44,13 @@ class ConfigurationBuilderCompilerPass implements CompilerPassInterface
         }
 
         $taggedServices = $container->findTaggedServiceIds('idci_extra_form.configuration_builder');
-        foreach ($taggedServices as $id => $attributes) {
-            $registryDefinition->addMethodCall(
-                'setBuilder',
-                array($attributes[0]['alias'], new Reference($id))
-            );
+        foreach ($taggedServices as $id => $tags) {
+            foreach ($tags as $attributes) {
+                $registryDefinition->addMethodCall(
+                    'setBuilder',
+                     array($attributes['alias'], new Reference($id))
+                );
+            }
         }
     }
 }
