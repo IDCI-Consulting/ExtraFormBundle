@@ -7,12 +7,12 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Builder;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Common\Util\Inflector;
-use IDCI\Bundle\ExtraFormBundle\Exception\BuildConfigurationException;
+use IDCI\Bundle\ExtraFormBundle\Exception\FetchConfigurationException;
 
-class DoctrineConfigurationBuilder extends AbstractConfigurationBuilder
+class DoctrineConfigurationFetcher extends AbstractConfigurationFetcher
 {
     protected $entityManager;
 
@@ -29,7 +29,7 @@ class DoctrineConfigurationBuilder extends AbstractConfigurationBuilder
     /**
      * {@inheritDoc}
      */
-    protected function setup(OptionsResolver $resolver)
+    protected function setDefaultParameters(OptionsResolverInterface $resolver)
     {
         parent::configureParameters($resolver);
 
@@ -46,7 +46,7 @@ class DoctrineConfigurationBuilder extends AbstractConfigurationBuilder
     /**
      * {@inheritDoc}
      */
-    public function make(array $parameters = array())
+    public function doFetch(array $parameters = array())
     {
         $entity = $this
             ->entityManager
@@ -55,9 +55,9 @@ class DoctrineConfigurationBuilder extends AbstractConfigurationBuilder
         ;
 
         if (null === $entity) {
-            throw new BuildConfigurationException(sprintf(
-                'Wrong criteria: \'%s\'',
-                json_encode($parameters['criteria'])
+            throw new FetchConfigurationException(
+                'doctrine',
+                $parameters
             ));
         }
 
@@ -68,11 +68,14 @@ class DoctrineConfigurationBuilder extends AbstractConfigurationBuilder
 
         $rc = new \ReflectionClass($entity);
         if (!$rc->hasMethod($getter)) {
-            throw new BuildConfigurationException(sprintf(
-                'Undefined method \'%s\' in \'%s\' class',
-                $getter,
-                get_class($entity)
-            ));
+            throw new FetchConfigurationException(
+                'doctrine',
+                $parameters,
+                sprintf('Undefined method \'%s\' in \'%s\' class',
+                    $getter,
+                    get_class($entity)
+                )
+            );
         }
 
         $rawConfiguration = call_user_func_array(

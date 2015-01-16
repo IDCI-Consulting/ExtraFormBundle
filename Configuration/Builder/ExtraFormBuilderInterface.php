@@ -5,7 +5,7 @@
  * @license: MIT
  */
 
-namespace IDCI\Bundle\ExtraFormBundle\Builder;
+namespace IDCI\Bundle\ExtraFormBundle\Configuration\Builder;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use IDCI\Bundle\ExtraFormBundle\Configurator\ExtraFormConfiguratorInterface;

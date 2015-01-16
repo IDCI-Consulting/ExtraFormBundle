@@ -31,8 +31,8 @@ class TestController extends Controller
         $builder = $this
             ->get('idci_extra_form.builder')
             ->build(
-                'identity_form', // configuration alias
-                array(),         // configuration parameters
+                'identity_form', // configuration fetcher alias
+                array(),         // configuration fetcher parameters
                 $this->createFormBuilder(array(
                     'first_name' => 'John',
                     'last_name'  => 'DOE'
@@ -50,7 +50,7 @@ class TestController extends Controller
     */
 
     /*
-        Without form builder and without declared configurator
+        Without form builder and configuration fetcher
         $builder = $this
             ->get('idci_extra_form.builder')
             ->build(array(

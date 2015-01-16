@@ -11,7 +11,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\OptionsResolver\Options;
-use IDCI\Bundle\ExtraFormBundle\Builder\ExtraFormBuilderInterface;
+use IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilderInterface;
 use IDCI\Bundle\ExtraFormBundle\Form\Event\RawEventSubscriber;
 
 class ExtraFormBuilderType extends AbstractType

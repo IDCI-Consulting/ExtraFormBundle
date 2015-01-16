@@ -5,9 +5,9 @@
  * @license: MIT
  */
 
-namespace IDCI\Bundle\ExtraFormBundle\Builder;
+namespace IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher;
 
-class ConfigurationBuilder extends AbstractConfigurationBuilder
+class ConfigurationFetcher extends AbstractConfigurationFetcher
 {
     protected $raw;
 
@@ -24,7 +24,7 @@ class ConfigurationBuilder extends AbstractConfigurationBuilder
     /**
      * {@inheritDoc}
      */
-    public function make(array $parameters = array())
+    public function doFetch(array $parameters = array())
     {
         return $this->raw['fields'];
     }

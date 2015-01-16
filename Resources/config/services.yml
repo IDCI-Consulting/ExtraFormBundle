@@ -1,16 +1,21 @@
 parameters:
-    idci_extra_form.builder.class: IDCI\Bundle\ExtraFormBundle\Builder\ExtraFormBuilder
-
+    idci_extra_form.type_registry.class:                  IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry
+    idci_extra_form.type.class:                           IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType
+    idci_extra_form.constraint_registry.class:            IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistry
+    idci_extra_form.constraint.class:                     IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraint
+    idci_extra_form.configuration.fetcher_registry.class: IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherRegistry
+    idci_extra_form.configuration.fetcher.class:          IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcher
+    idci_extra_form.builder.class:                        IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilder
 
 services:
 
     # ExtraFormType
 
     idci_extra_form.type_registry:
-        class: IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry
+        class: %idci_extra_form.type_registry.class%
 
     idci_extra_form.type:
-        class: IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType
+        class: %idci_extra_form.type.class%
         arguments: [null]
         abstract: true
 
@@ -18,25 +23,25 @@ services:
     # ExtraFormConstraint
 
     idci_extra_form.constraint_registry:
-        class: IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistry
+        class: %idci_extra_form.constraint_registry.class%
 
     idci_extra_form.constraint:
-        class: IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraint
+        class: %idci_extra_form.constraint.class%
         arguments: [null]
         abstract: true
 
 
-    # ConfigurationBuilder
+    # ConfigurationFetcher
 
-    idci_extra_form.configuration_builder_registry:
-        class: IDCI\Bundle\ExtraFormBundle\Builder\ConfigurationBuilderRegistry
+    idci_extra_form.configuration.fetcher_registry:
+        class: %idci_extra_form.configuration.fetcher_registry.class%
 
-    idci_extra_form.configuration_builder:
-        class: IDCI\Bundle\ExtraFormBundle\Builder\ConfigurationBuilder
+    idci_extra_form.configuration.fetcher:
+        class: %idci_extra_form.configuration.fetcher.class%
         arguments: [null]
         abstract: true
 
-    #idci_extra_form.configuration_builder.doctrine:
+    #idci_extra_form.configuration.fetcher.doctrine:
     #    class: IDCI\Bundle\ExtraFormBundle\Builder\DoctrineConfigurationBuilder
     #    arguments: [@doctrine.orm.entity_manager]
     #    tags:
@@ -49,7 +54,7 @@ services:
         class: %idci_extra_form.builder.class%
         arguments:
             - @form.factory
-            - @idci_extra_form.configuration_builder_registry
+            - @idci_extra_form.configuration.fetcher_registry
             - @idci_extra_form.type_registry
             - @idci_extra_form.constraint_registry
 
