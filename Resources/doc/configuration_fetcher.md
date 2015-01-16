@@ -57,9 +57,9 @@ If you wish to create your own configuration fetcher, you have to create a class
 which extends `AbstractConfigurationFetcher` and implement necessary methods.
 ```php
 <?php
-// src/My/Bundle/ExtraForm/Configuration/Fetcher/MyConfigurationFetcher.php
+// src/My/Bundle/Configuration/ExtraFormFetcher/MyConfigurationFetcher.php
 
-namespace My\Bundle\ExtraForm\Configuration\Fetcher;
+namespace My\Bundle\Configuration\ExtraFormFetcher;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\AbstractConfigurationFetcher;
@@ -90,7 +90,7 @@ Then declare this new ConfigurationFetcher as service:
 ```yml
 services:
     idci_extra_form.configuration.fetcher.my_fetcher:
-        class: My\Bundle\ExtraForm\Configuration\Fetcher\MyConfigurationFetcher
+        class: My\Bundle\Configuration\ExtraFormFetcher\MyConfigurationFetcher
         arguments: []
         tags:
             - { name: idci_extra_form.configuration.fetcher, alias: my_fetcher }
