@@ -11,7 +11,6 @@ Mainly, informations about how create dynamicaly a Symfony2 FormType, like:
  * And a list of available FormType options (extra_form_options)
 
 To create your own ExtraFormType, simply use the configuration:
-
 ```yml
 idci_extra_form:
     types:
@@ -27,9 +26,7 @@ idci_extra_form:
 
 Take a look at the [default ExtraFormTypes configuration](../config/types.yml)
 
-
 To check if ExtraFormType are well configurated, you could list all them:
-
 ```sh
 $ php app/console container:debug | grep "idci_extra_form\.type\."
 ```

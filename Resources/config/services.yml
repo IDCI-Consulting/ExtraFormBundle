@@ -42,10 +42,10 @@ services:
         abstract: true
 
     #idci_extra_form.configuration.fetcher.doctrine:
-    #    class: IDCI\Bundle\ExtraFormBundle\Builder\DoctrineConfigurationBuilder
+    #    class: IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\DoctrineConfigurationFetcher
     #    arguments: [@doctrine.orm.entity_manager]
     #    tags:
-    #        - { name: idci_extra_form.configuration_builder, alias: doctrine }
+    #        - { name: idci_extra_form.configuration.fetcher, alias: doctrine }
 
 
     # ExtraFormBuilder

@@ -53,9 +53,8 @@ Finally you could display it in your twig :
 </form>
 ```
 
-You could use a [ConfigurationBuilder](configuration_builder.md) instead of declare
+You could use a [ConfigurationFetcher](configuration_fetcher.md) instead of declare
 all the configuration in the first argument of the build method as shown after :
-
 ```php
 $form = $this
     ->get('idci_extra_form.builder')

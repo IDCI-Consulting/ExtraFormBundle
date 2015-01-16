@@ -52,7 +52,7 @@ Documentation
 * [ExtraFormBuilderType](Resources/doc/extra_form_builder_type.md)
 * [ExtraFormType](Resources/doc/extra_form_type.md)
 * [ExtraFormConstraint](Resources/doc/extra_form_constraint.md)
-* [ConfigurationBuilder](Resources/doc/configuration_builder.md)
+* [ConfigurationFetcher](Resources/doc/configuration_fetcher.md)
 * [Configuration reference](Resources/doc/configuration_reference.md)
 
 
