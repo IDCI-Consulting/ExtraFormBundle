@@ -44,11 +44,13 @@ class ConfigurationFetcherCompilerPass implements CompilerPassInterface
         }
 
         $taggedServices = $container->findTaggedServiceIds('idci_extra_form.configuration.fetcher');
-        foreach ($taggedServices as $id => $attributes) {
-            $registryDefinition->addMethodCall(
-                'setFetcher',
-                array($attributes[0]['alias'], new Reference($id))
-            );
+        foreach ($taggedServices as $id => $tags) {
+            foreach ($tags as $attributes) {
+                $registryDefinition->addMethodCall(
+                    'setFetcher',
+                     array($attributes['alias'], new Reference($id))
+                );
+            }
         }
     }
 }
