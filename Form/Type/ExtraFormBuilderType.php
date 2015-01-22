@@ -69,7 +69,7 @@ class ExtraFormBuilderType extends AbstractType
                 'configuration' => array(
                     'string',
                     'array',
-                    'IDCI\Bundle\ExtraFormBundle\Builder\ConfigurationBuilderInterface'
+                    'IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherInterface'
                 )
             ))
             ->setDefaults(array(

@@ -10,6 +10,7 @@ namespace IDCI\Bundle\ExtraFormBundle\Configuration\Builder;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherRegistry;
+use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherInterface;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeInterface;
 use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistry;
