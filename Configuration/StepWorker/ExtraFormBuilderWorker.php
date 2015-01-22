@@ -5,7 +5,7 @@
  * @license: MIT
  */
 
-namespace IDCI\Bundle\ExtraFormBundle\Step\Configuration\Worker;
+namespace IDCI\Bundle\ExtraFormBundle\Configuration\StepWorker;
 
 use IDCI\Bundle\StepBundle\Configuration\Worker\ConfigurationWorkerInterface;
 use IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilderInterface;
