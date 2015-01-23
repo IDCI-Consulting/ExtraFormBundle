@@ -104,7 +104,14 @@ class TestController extends Controller
                         'options' => array(
                             'label' => 'Prénom',
                         ),
-                        'constraints' => array(),
+                        'constraints' => array(
+                            array(
+                                'extra_form_constraint' => 'not_blank',
+                                'options' => array(
+                                    'message' => 'Pas vide on a dit !'
+                                )
+                            )
+                        ),
                     ),
                     'last_name' => array(
                         'extra_form_type' => 'text',
