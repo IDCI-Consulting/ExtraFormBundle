@@ -49,6 +49,7 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
     public function build(
         $configuration,
         array $parameters = array(),
+        array $data = array(),
         FormBuilderInterface $formBuilder = null
     )
     {
@@ -71,7 +72,10 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
             $formBuilder->add(
                 $name,
                 $this->builFormType($field),
-                $this->buildFormOptions($field)
+                $this->buildFormOptions(
+                    $field,
+                    isset($data[$name]) ? $data[$name] : null
+                )
             );
         }
 
@@ -121,7 +125,7 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
      *
      * @return array
      */
-    protected function buildFormOptions(array $field)
+    protected function buildFormOptions(array $field, $data = null)
     {
         $constraints = array();
         foreach ($field['constraints'] as $constraint) {
@@ -129,6 +133,9 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
         }
 
         $field['options']['constraints'] = $constraints;
+        if (null !== $data) {
+            $field['options']['data'] = $data;
+        }
 
         return $field['options'];
     }

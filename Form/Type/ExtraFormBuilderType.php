@@ -47,6 +47,7 @@ class ExtraFormBuilderType extends AbstractType
                 ->build(
                     $options['configuration'],
                     $options['parameters'],
+                    $options['data'],
                     $builder
                 )
             ;
@@ -74,7 +75,8 @@ class ExtraFormBuilderType extends AbstractType
             ))
             ->setDefaults(array(
                 'parameters'       => array(),
-                'transform_method' => null
+                'transform_method' => null,
+                'data'             => array(),
             ))
             ->setAllowedValues(array(
                 'transform_method' => array(null, 'jsonize', 'serialize')

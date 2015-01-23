@@ -18,6 +18,7 @@ interface ExtraFormBuilderInterface
      *
      * @param  mixed                $configuration
      * @param  array                $parameters
+     * @param  array                $data
      * @param  FormBuilderInterface $formBuilder
      *
      * @return FormBuilderInterface The built form builder.
@@ -25,6 +26,7 @@ interface ExtraFormBuilderInterface
     public function build(
         $configuration,
         array $parameters = array(),
+        array $data = array(),
         FormBuilderInterface $formBuilder = null
     );
 }

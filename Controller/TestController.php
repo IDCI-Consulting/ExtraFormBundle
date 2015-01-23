@@ -27,19 +27,18 @@ class TestController extends Controller
     {
     /*
         Single form using the builder service directly
-
+    */
         $builder = $this
             ->get('idci_extra_form.builder')
             ->build(
                 'identity_form', // configuration fetcher alias
                 array(),         // configuration fetcher parameters
-                $this->createFormBuilder(array(
-                    'first_name' => 'John',
+                array(
+                    'first_name' => 'Johnny',
                     'last_name'  => 'DOE'
-                ))
+                )
             )
         ;
-    */
 
     /*
         Without form builder
@@ -57,7 +56,7 @@ class TestController extends Controller
                 'first_name' => array(
                     'extra_form_type' => 'text',
                     'options' => array(
-                        'label' => 'Prénom',
+                        'label' => 'Prénom'
                     ),
                     'constraints' => array(),
                 ),
@@ -75,28 +74,21 @@ class TestController extends Controller
     /*
         Sub form using the builder service through a form type
         $builder = $this
-            ->createFormBuilder(array(
-                'sub_form' => array(
-                    'first_name' => 'John',
-                    'last_name'  => 'DOE'
-                )
-            ))
+            ->createFormBuilder()
             ->add('sub_form', 'extra_form_builder', array(
                 'configuration' => 'identity_form',
                 'parameters'    => array(),
+                'data'          => array(
+                    'first_name' => 'Johnny',
+                    'last_name'  => 'DOE'
+                )
             ))
         ;
     */
 
     /*
-    */
         $builder = $this
-            ->createFormBuilder(array(
-                'sub_form' => array(
-                    'first_name' => 'John',
-                    'last_name'  => 'DOE'
-                )
-            ))
+            ->createFormBuilder()
             ->add('sub_form', 'extra_form_builder', array(
                 'configuration' => array(
                     'first_name' => array(
@@ -136,9 +128,10 @@ class TestController extends Controller
                         'constraints' => array(),
                     )
                 ),
-                'parameters'    => array(),
+                'parameters'    => array()
             ))
         ;
+    */
 
         $form = $builder
             ->add('send', 'submit')
