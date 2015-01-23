@@ -70,8 +70,8 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
         foreach ($configuration as $name => $field) {
             $formBuilder->add(
                 $name,
-                $this->buildFieldType($field)->getFormType(),
-                $this->buildFieldOptions($field)
+                $this->builFormType($field),
+                $this->buildFormOptions($field)
             );
         }
 
@@ -79,30 +79,57 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
     }
 
     /**
-     * Build field type.
+     * Build form type.
      *
      * @param array $field
      *
      * @return string
      */
-    protected function buildFieldType(array $field)
+    protected function builFormType(array $field)
     {
-        return $this
+        $extraFormType = $this
             ->typeRegistry
             ->getType($field['extra_form_type'])
         ;
+
+        return $extraFormType->getFormType();
     }
 
     /**
-     * Build field options.
+     * Build constraint.
+     *
+     * @param array $constraint
+     *
+     * @return Symfony\Component\Validator\Constraint
+     */
+    protected function buildConstraint(array $constraint)
+    {
+        $extraFormConstraint = $this
+            ->constraintRegistry
+            ->getConstraint($constraint['extra_form_constraint'])
+        ;
+
+        $className = $extraFormConstraint->getClassName();
+
+        return new $className($constraint['options']);
+    }
+
+    /**
+     * Build form options.
      *
      * @param array $field
      *
      * @return array
      */
-    protected function buildFieldOptions(array $field)
+    protected function buildFormOptions(array $field)
     {
-        // TODO: build constraints and merge
+        $constraints = array();
+        foreach ($field['constraints'] as $constraint) {
+            $constraints[] = $this->buildConstraint($constraint);
+        }
+
+        $field['options']['constraints'] = $constraints;
+
         return $field['options'];
     }
 }

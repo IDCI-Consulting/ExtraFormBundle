@@ -10,7 +10,6 @@ namespace IDCI\Bundle\ExtraFormBundle\Type;
 
 class ExtraFormType implements ExtraFormTypeInterface 
 {
-    protected $name;
     protected $formType;
     protected $parent;
     protected $description;

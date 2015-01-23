@@ -12,4 +12,24 @@ namespace IDCI\Bundle\ExtraFormBundle\Constraint;
 
 interface ExtraFormConstraintInterface
 {
+    /**
+     * Get class name.
+     *
+     * @return string
+     */
+    public function getClassName();
+
+    /**
+     * Returns the description.
+     *
+     * @return string
+     */
+    public function getDescription();
+
+    /**
+     * Returns extra form options.
+     *
+     * @return array
+     */
+    public function getExtraFormOptions();
 }

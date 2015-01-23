@@ -25,6 +25,13 @@ interface ExtraFormTypeInterface
     public function getParent();
 
     /**
+     * Returns the description.
+     *
+     * @return string
+     */
+    public function getDescription();
+
+    /**
      * Is abstract.
      *
      * @return boolean
