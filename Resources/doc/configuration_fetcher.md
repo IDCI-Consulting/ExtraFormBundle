@@ -111,5 +111,5 @@ array(
 
 To check if ConfigurationFetcher are well configurated, you could list all them:
 ```sh
-$ php app/console container:debug | grep "idci_extra_form\.configuration.fetcher\."
+$ php app/console container:debug | grep "idci_extra_form\.configuration\.fetcher\."
 ```
