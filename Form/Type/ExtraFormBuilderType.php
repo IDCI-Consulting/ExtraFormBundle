@@ -47,7 +47,7 @@ class ExtraFormBuilderType extends AbstractType
                 ->build(
                     $options['configuration'],
                     $options['parameters'],
-                    $options['data'],
+                    isset($options['data']) ? $options['data'] : null,
                     $builder
                 )
             ;
@@ -74,9 +74,9 @@ class ExtraFormBuilderType extends AbstractType
                 )
             ))
             ->setDefaults(array(
+                'inherit_data'     => false,
                 'parameters'       => array(),
                 'transform_method' => null,
-                'data'             => array(),
             ))
             ->setAllowedValues(array(
                 'transform_method' => array(null, 'jsonize', 'serialize')

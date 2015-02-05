@@ -27,7 +27,6 @@ class TestController extends Controller
     {
     /*
         Single form using the builder service directly
-    */
         $builder = $this
             ->get('idci_extra_form.builder')
             ->build(
@@ -39,6 +38,7 @@ class TestController extends Controller
                 )
             )
         ;
+    */
 
     /*
         Without form builder
@@ -87,9 +87,15 @@ class TestController extends Controller
     */
 
     /*
+    */
         $builder = $this
-            ->createFormBuilder()
+            ->createFormBuilder(array(
+                'message'  => 'messge test',
+                'sub_form' => '{"first_name":"test"}'
+            ))
+            ->add('message', 'text')
             ->add('sub_form', 'extra_form_builder', array(
+                'transform_method' => 'jsonize',
                 'configuration' => array(
                     'first_name' => array(
                         'extra_form_type' => 'text',
@@ -131,7 +137,6 @@ class TestController extends Controller
                 'parameters'    => array()
             ))
         ;
-    */
 
         $form = $builder
             ->add('send', 'submit')
