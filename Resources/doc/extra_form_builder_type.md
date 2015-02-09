@@ -4,7 +4,7 @@ ExtraFormBuilderType
 ExtraFormBuilderType is a Symfony2 FormType [define as service](http://symfony.com/doc/current/book/forms.html#defining-your-forms-as-services).
 This FormType will allow you to generate just a part of a Form.
 
-Here is a quick exemple :
+Here is a quick example :
 ```php
 $form = $this
     ->createFormBuilder()
@@ -30,8 +30,8 @@ $form = $this
 ;
 ```
 
-Once the mapping beetween the form and a request is done, you will get your data.
-Here is an exemple on how to check this case:
+Once the mapping between the form and a request is done, you will get your data.
+Here is an example on how to check this case:
 ```php
 $form->submit($request);
 
@@ -41,7 +41,7 @@ if ($form->isValid()) {
 ```
 
 But you could change this by using a transform method.
-You have the choice beetween *jsonize*, *serialize* or *null* (no tranformation, use by default).
+You have the choice between *jsonize*, *serialize* or *null* (no transformation, use by default).
 This transformation is done using EventSubscriber, to choose one, specify the
 `transform_method` option:
 ```php

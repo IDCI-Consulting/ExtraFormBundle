@@ -1,10 +1,9 @@
 ConfigurationFetcher
 ====================
 
-
 ConfigurationFetcher are services that fetch a configuration raw and provide an
 understandable data structure that is use by a ExtraFormBuilder to build a FormBuilder.
-A ConfigurationFetcher is identitfy by a name.
+A ConfigurationFetcher is identify by a name.
 By default this bundle provide some configuration fetcher.
 
 
@@ -109,7 +108,7 @@ array(
 )
 ```
 
-To check if ConfigurationFetcher are well configurated, you could list all them:
+To check if ConfigurationFetcher are well configured, you could list all them:
 ```sh
 $ php app/console container:debug | grep "idci_extra_form\.configuration\.fetcher\."
 ```

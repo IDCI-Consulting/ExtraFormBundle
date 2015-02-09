@@ -1,9 +1,8 @@
 ExtraFormType
 =============
 
-
 ExtraFormType are services that add extra informations about existing FormType.
-Mainly, informations about how create dynamicaly a Symfony2 FormType, like:
+Mainly, informations about how create dynamically a Symfony2 FormType, like:
  * The associated FormType (form_type)
  * The ExtraFormType parent associated to the parent FormType (parent)
  * Is the FormType is abstract or not (abstract)
@@ -26,7 +25,7 @@ idci_extra_form:
 
 Take a look at the [default ExtraFormTypes configuration](../config/types.yml)
 
-To check if ExtraFormType are well configurated, you could list all them:
+To check if ExtraFormType are well configured, you could list all them:
 ```sh
 $ php app/console container:debug | grep "idci_extra_form\.type\."
 ```
