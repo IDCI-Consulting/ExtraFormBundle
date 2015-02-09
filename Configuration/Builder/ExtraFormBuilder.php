@@ -9,6 +9,8 @@ namespace IDCI\Bundle\ExtraFormBundle\Configuration\Builder;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherRegistry;
 use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherInterface;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry;
@@ -44,6 +46,22 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
     }
 
     /**
+     * Define the field configuration using the option resolver component.
+     *
+     * @param OptionsResolverInterface $resolver
+     */
+    protected function configureField(OptionsResolverInterface $resolver)
+    {
+        $resolver
+            ->setDefaults(array(
+                'extra_form_type' => 'text',
+                'options'         => array(),
+                'constraints'     => array()
+            ))
+        ;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function build(
@@ -69,10 +87,14 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
         }
 
         foreach ($configuration as $name => $field) {
+            $resolver = new OptionsResolver();
+            $this->configureField($resolver);
+            $resolvedField = $resolver->resolve($field);
+
             $formBuilder->add(
                 $name,
-                $this->builFormType($field),
-                $this->buildFormOptions($name, $field, $data)
+                $this->builFormType($resolvedField),
+                $this->buildFormOptions($name, $resolvedField, $data)
             );
         }
 
