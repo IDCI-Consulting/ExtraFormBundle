@@ -71,3 +71,8 @@ services:
         class: IDCI\Bundle\ExtraFormBundle\Form\Type\JsonTextareaType
         tags:
             - { name: form.type, alias: json_textarea }
+
+    form.type.idci_extra_form.editor:
+        class: IDCI\Bundle\ExtraFormBundle\Editor\Form\Type\ExtraFormEditorType
+        tags:
+            - { name: form.type, alias: extra_form_editor }
