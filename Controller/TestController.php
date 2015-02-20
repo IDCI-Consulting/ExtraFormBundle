@@ -19,7 +19,7 @@ class TestController extends Controller
     /**
      * Test.
      *
-     * @Route("/", name="idci_extra_form")
+     * @Route("/render", name="idci_extra_form")
      * @Method({"GET", "POST"})
      * @Template()
      */
@@ -151,5 +151,27 @@ class TestController extends Controller
         }
 
         return array('form' => $form->createView());
+    }
+
+    /**
+     * Test Editor.
+     *
+     * @Route("/editor", name="idci_extra_form_editor")
+     * @Method({"GET"})
+     * @Template()
+     */
+    public function editorAction(Request $request)
+    {
+        $form = $this
+            ->createFormBuilder()
+            ->add('editor', 'extra_form_editor', array(
+                'display_raw' => true
+            ))
+            ->getForm()
+        ;
+
+        return array(
+            'form' => $form->createView()
+        );
     }
 }
