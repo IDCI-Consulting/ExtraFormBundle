@@ -191,3 +191,9 @@ idci_extra_form:
             parent:      date
             form_type:   birthday
             description: "Birthday input field"
+
+        "country":
+            parent:      choice
+            form_type:   country
+            description: "Country selection field"
+
