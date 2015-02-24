@@ -197,3 +197,7 @@ idci_extra_form:
             form_type:   country
             description: "Country selection field"
 
+        "iban":
+            parent:      form
+            form_type:   _iban
+            description: "Iban input field"
