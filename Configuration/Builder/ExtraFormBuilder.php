@@ -133,8 +133,9 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
         ;
 
         $className = $extraFormConstraint->getClassName();
+        $options = isset($constraint['options']) ? $constraint['options'] : array();
 
-        return new $className($constraint['options']);
+        return new $className($options);
     }
 
     /**
