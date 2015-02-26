@@ -34,7 +34,7 @@ idci_extra_form:
 
         "json_textarea":
             parent:      textarea
-            form_type:   json_textarea
+            form_type:   extra_form_json_textarea
             description: "Text input field in JSON format"
 
         "checkbox":
@@ -199,5 +199,5 @@ idci_extra_form:
 
         "iban":
             parent:      form
-            form_type:   _iban
+            form_type:   extra_form_iban
             description: "Iban input field"

@@ -1,3 +1,8 @@
 imports:
     - { resource: types.yml }
     - { resource: constraints.yml }
+
+twig:
+    form:
+        resources:
+            - 'IDCIExtraFormBundle:Form:fields.html.twig'

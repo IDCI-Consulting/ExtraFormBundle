@@ -24,43 +24,35 @@ class IbanType extends AbstractType
         $builder->addModelTransformer($transformer);
 
         $builder
-            ->add('c1', 'text', array(
-                'label'      => ' ',
+            ->add('c1', 'extra_form_iban_text', array(
                 'attr'       => array('style' => 'width: 4em;'),
                 'max_length' => 4
             ))
-            ->add('c2', 'text', array(
-                'label'      => ' ',
+            ->add('c2', 'extra_form_iban_text', array(
                 'attr'       => array('style' => 'width: 4em;'),
                 'max_length' => 4
             ))
-            ->add('c3', 'text', array(
-                'label'      => ' ',
+            ->add('c3', 'extra_form_iban_text', array(
                 'attr'       => array('style' => 'width: 4em;'),
                 'max_length' => 4
             ))
-            ->add('c4', 'text', array(
-                'label'      => ' ',
+            ->add('c4', 'extra_form_iban_text', array(
                 'attr'       => array('style' => 'width: 4em;'),
                 'max_length' => 4
             ))
-            ->add('c5', 'text', array(
-                'label'      => ' ',
+            ->add('c5', 'extra_form_iban_text', array(
                 'attr'       => array('style' => 'width: 4em;'),
                 'max_length' => 4
             ))
-            ->add('c6', 'text', array(
-                'label'      => ' ',
+            ->add('c6', 'extra_form_iban_text', array(
                 'attr'       => array('style' => 'width: 4em;'),
                 'max_length' => 4
             ))
-            ->add('c7', 'text', array(
-                'label'      => ' ',
+            ->add('c7', 'extra_form_iban_text', array(
                 'attr'       => array('style' => 'width: 3.5em;'),
                 'max_length' => 3
             ))
-            ->add('c8', 'text', array(
-                'label'      => ' ',
+            ->add('c8', 'extra_form_iban_text', array(
                 'attr'       => array('style' => 'width: 6em;background:#DDD;'),
                 'max_length' => 7
             ))
@@ -72,6 +64,6 @@ class IbanType extends AbstractType
      */
     public function getName()
     {
-        return '_iban';
+        return 'extra_form_iban';
     }
 }
