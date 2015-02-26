@@ -34,6 +34,6 @@ class JsonTextareaType extends AbstractType
      */
     public function getName()
     {
-        return 'json_textarea';
+        return 'extra_form_json_textarea';
     }
 }
