@@ -9,15 +9,15 @@ namespace IDCI\Bundle\ExtraFormBundle\Constraint;
 
 use IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException;
 
-class ExtraFormConstraintRegistry
+class ExtraFormConstraintRegistry implements ExtraFormConstraintRegistryInterface
 {
+    /**
+     * @var array
+     */
     protected $constraints;
 
     /**
-     * Set constraint.
-     *
-     * @param string                        $alias      The alias.
-     * @param ExtraFormConstraintInterface  $constraint The constraint.
+     * {@inheritDoc}
      */
     public function setConstraint($alias, ExtraFormConstraintInterface $constraint)
     {
@@ -25,21 +25,7 @@ class ExtraFormConstraintRegistry
     }
 
     /**
-     * Returns constraints.
-     *
-     * @return array
-     */
-    public function getConstraints()
-    {
-        return $this->constraints;
-    }
-
-    /**
-     * Returns a constraint
-     *
-     * @param string $alias
-     *
-     * @return ExtraFormConstraintInterface
+     * {@inheritDoc}
      */
     public function getConstraint($alias)
     {
@@ -52,5 +38,17 @@ class ExtraFormConstraintRegistry
         }
 
         return $this->constraints[$alias];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasConstraint($alias)
+    {
+        if (!isset($this->constraints[$alias])) {
+            return true;
+        }
+
+        return false;
     }
 }

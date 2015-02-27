@@ -9,15 +9,15 @@ namespace IDCI\Bundle\ExtraFormBundle\Type;
 
 use IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException;
 
-class ExtraFormTypeRegistry
+class ExtraFormTypeRegistry implements ExtraFormTypeRegistryInterface
 {
+    /**
+     * @var array
+     */
     protected $types;
 
     /**
-     * Set type.
-     *
-     * @param string                 $alias The alias.
-     * @param ExtraFormTypeInterface $type  The type.
+     * {@inheritDoc}
      */
     public function setType($alias, ExtraFormTypeInterface $type)
     {
@@ -25,21 +25,7 @@ class ExtraFormTypeRegistry
     }
 
     /**
-     * Returns types.
-     *
-     * @return array
-     */
-    public function getTypes()
-    {
-        return $this->types;
-    }
-
-    /**
-     * Returns type.
-     *
-     * @param string $alias The name.
-     *
-     * @return ExtraFormTypeInterface
+     * {@inheritDoc}
      */
     public function getType($alias)
     {
@@ -52,5 +38,17 @@ class ExtraFormTypeRegistry
         }
 
         return $this->types[$alias];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasType($alias)
+    {
+        if (!isset($this->types[$alias])) {
+            return true;
+        }
+
+        return false;
     }
 }

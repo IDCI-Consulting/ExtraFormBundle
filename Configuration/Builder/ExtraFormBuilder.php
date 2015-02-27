@@ -13,9 +13,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherRegistry;
 use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherInterface;
-use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry;
+use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistryInterface;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeInterface;
-use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistry;
+use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistryInterface;
 
 class ExtraFormBuilder implements ExtraFormBuilderInterface
 {
@@ -27,16 +27,16 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
     /**
      * Constructor
      *
-     * @param FormFactoryInterface         $formFactory                  The form factory.
-     * @param ConfigurationFetcherRegistry $configurationFetcherRegistry The configuration fetcher registry.
-     * @param ExtraFormTypeRegistry        $typeRegistry                 The type registry.
-     * @param ExtraFormConstraintRegistry  $constraintRegistry           The constraint registry.
+     * @param FormFactoryInterface                 $formFactory                  The form factory.
+     * @param ConfigurationFetcherRegistry         $configurationFetcherRegistry The configuration fetcher registry.
+     * @param ExtraFormTypeRegistryInterface       $typeRegistry                 The type registry.
+     * @param ExtraFormConstraintRegistryInterface $constraintRegistry           The constraint registry.
      */
     public function __construct(
-        FormFactoryInterface         $formFactory,
-        ConfigurationFetcherRegistry $configurationFetcherRegistry,
-        ExtraFormTypeRegistry        $typeRegistry,
-        ExtraFormConstraintRegistry  $constraintRegistry
+        FormFactoryInterface                 $formFactory,
+        ConfigurationFetcherRegistry         $configurationFetcherRegistry,
+        ExtraFormTypeRegistryInterface       $typeRegistry,
+        ExtraFormConstraintRegistryInterface $constraintRegistry
     )
     {
         $this->formFactory                  = $formFactory;
