@@ -54,7 +54,8 @@ class IbanType extends AbstractType
             ))
             ->add('c8', 'extra_form_iban_text', array(
                 'attr'       => array('style' => 'width: 6em;background:#DDD;'),
-                'max_length' => 7
+                'max_length' => 7,
+                'required'   => false
             ))
         ;
     }
