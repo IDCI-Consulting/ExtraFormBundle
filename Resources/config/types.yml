@@ -201,3 +201,11 @@ idci_extra_form:
             parent:      form
             form_type:   extra_form_iban
             description: "Iban input field"
+
+        "html":
+            parent:      form
+            form_type:   extra_form_html
+            description: "Html text field"
+            extra_form_options:
+                content: { extra_form_type: "textarea", options: {required: false} }
+                mapped:  { extra_form_type: "checkbox", options: {required: false, data: false} }

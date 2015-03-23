@@ -81,3 +81,8 @@ services:
         class: IDCI\Bundle\ExtraFormBundle\Form\Type\IbanTextType
         tags:
             - { name: form.type, alias: extra_form_iban_text }
+
+    form.type.idci_extra_form.html:
+        class: IDCI\Bundle\ExtraFormBundle\Form\Type\HtmlType
+        tags:
+            - { name: form.type, alias: extra_form_html }

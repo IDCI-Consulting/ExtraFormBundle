@@ -3,3 +3,12 @@
         {{- form_widget(form) -}}
     </div>
 {%- endblock extra_form_iban_text_row -%}
+
+{%- block extra_form_html_row -%}
+    {{- form_widget(form) -}}
+{%- endblock extra_form_html_row -%}
+{%- block extra_form_html_widget -%}
+    <div class="extra_form_html">
+        {{- content | raw -}}
+    </div>
+{%- endblock extra_form_html_widget -%}
