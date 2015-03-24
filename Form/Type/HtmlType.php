@@ -19,9 +19,12 @@ class HtmlType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars = array_merge($view->vars, array(
-            'content' => $options['content'],
-        ));
+        $content = $options['content'];
+        if (null !== $form->getData('content')) {
+            $content = $form->getData('content');
+        }
+
+        $view->vars['content'] = $content;
     }
 
     /**

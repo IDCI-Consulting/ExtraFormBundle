@@ -8,7 +8,7 @@
     {{- form_widget(form) -}}
 {%- endblock extra_form_html_row -%}
 {%- block extra_form_html_widget -%}
-    <div class="extra_form_html">
+    <div{% for attrname, attrvalue in attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
         {{- content | raw -}}
     </div>
 {%- endblock extra_form_html_widget -%}
