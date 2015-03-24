@@ -20,8 +20,8 @@ class HtmlType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $content = $options['content'];
-        if (null !== $form->getData('content')) {
-            $content = $form->getData('content');
+        if ($form->getData()) {
+            $content = $form->getData();
         }
 
         $view->vars['content'] = $content;
