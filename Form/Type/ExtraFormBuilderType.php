@@ -52,7 +52,7 @@ class ExtraFormBuilderType extends AbstractType
                 )
             ;
         } catch (\Exception $e) {
-            $builder->add('raw', 'json_textarea');
+            $builder->add('raw', 'extra_form_json_textarea');
             $builder->addEventSubscriber(new RawEventSubscriber());
         }
     }
