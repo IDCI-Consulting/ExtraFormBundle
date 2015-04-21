@@ -90,7 +90,7 @@ class TestController extends Controller
     */
         $builder = $this
             ->createFormBuilder(array(
-                'message'  => 'messge test',
+                'message'  => 'message test',
                 'sub_form' => '{"first_name":"test"}'
             ))
             ->add('message', 'text')
@@ -164,9 +164,7 @@ class TestController extends Controller
     {
         $form = $this
             ->createFormBuilder()
-            ->add('editor', 'extra_form_editor', array(
-                'display_raw' => true
-            ))
+            ->add('editor', 'extra_form_editor')
             ->getForm()
         ;
 

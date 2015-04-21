@@ -19,14 +19,14 @@ class ExtraFormEditorType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver
+        /*$resolver
             ->setAllowedTypes(array(
                 'display_raw' => array('boolean')
             ))
             ->setDefaults(array(
                 'display_raw' => false,
             ))
-        ;
+        ;*/
     }
 
     /**
