@@ -33,7 +33,8 @@ class HtmlType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'content' => null
+            'content' => null,
+            'mapped'  => false,
         ));
     }
 
