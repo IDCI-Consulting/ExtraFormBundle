@@ -9,7 +9,7 @@ namespace IDCI\Bundle\ExtraFormBundle\Constraint;
 
 use IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException;
 
-class ExtraFormConstraintRegistry
+class ExtraFormConstraintRegistry implements ExtraFormConstraintRegistryInterface
 {
     protected $constraints;
 
@@ -52,5 +52,17 @@ class ExtraFormConstraintRegistry
         }
 
         return $this->constraints[$alias];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function hasConstraint($alias)
+    {
+        if (!isset($this->constraints[$alias])) {
+            return false;
+        }
+
+        return true;
     }
 }
