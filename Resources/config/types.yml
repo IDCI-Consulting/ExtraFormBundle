@@ -24,6 +24,19 @@ idci_extra_form:
                 configuration:  { extra_form_type: "textarea", options: {required: false} }
             extra_form_constraints: ~
 
+        "collection":
+            parent:      form
+            form_type:   extra_form_collection
+            description: "Form collection"
+            extra_form_options:
+                type:           { extra_form_type: "text", options: {required: false} }
+                options:        { extra_form_type: "textarea", options: {required: false} }
+                allow_add:      { extra_form_type: "checkbox", options: {required: false} }
+                allow_delete:   { extra_form_type: "checkbox", options: {required: false} }
+                min_items:      { extra_form_type: "number", options: {required: false, data: 1} }
+                max_items:      { extra_form_type: "number", options: {required: false, data: 10} }
+            extra_form_constraints: ~
+
         "textarea":
             parent:      form
             form_type:   textarea

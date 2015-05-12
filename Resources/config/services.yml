@@ -67,6 +67,11 @@ services:
         tags:
             - { name: form.type, alias: extra_form_builder }
 
+    form.type.idci_extra_form.extra_form_collection:
+        class: IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormCollectionType
+        tags:
+            - { name: form.type, alias: extra_form_collection }
+
     form.type.idci_extra_form.json_textarea:
         class: IDCI\Bundle\ExtraFormBundle\Form\Type\JsonTextareaType
         tags:
