@@ -55,7 +55,7 @@ class ExtraFormCollectionType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'min_items'    => 2,
+                'min_items'    => 1,
                 'max_items'    => 10,
                 'allow_add'    => true,
                 'allow_delete' => true,
