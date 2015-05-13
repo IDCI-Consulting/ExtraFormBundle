@@ -1,3 +1,67 @@
+{%- block extra_form_collection_widget -%}
+    {{- form_widget(form) -}}
+    <script>
+        window.jQuery ||
+        document.write("<script src='{{ asset('bundles/idciextraform/js/jquery-1.11.3.min.js') }}'>\x3C/script>")
+    </script>
+    <script type="text/javascript">
+        $(function() {
+            var $div = $('#{{ form.vars.id }}');
+            var countActionable = 0;
+
+            var showItem = function(item) {
+                item.attr('data-display', 'show');
+                item.closest('fieldset').show();
+                countActionable--;
+            };
+
+            var hideItem = function(item) {
+                item.attr('value', null);
+                item.attr('data-display', 'hide');
+                item.closest('fieldset').hide();
+                countActionable++;
+            };
+
+            var $addButton = $('<button class="button tiny">{% trans %}Add{% endtrans %}</button>');
+            $addButton.on('click', function(event) {
+                event.preventDefault();
+                if (countActionable > 0) {
+                    showItem($div.find('[data-display="hide"]').first());
+                    resetAddButton();
+                }
+            });
+
+            $div.find('[data-display]').each(function() {
+                if ($(this).data('display') == 'hide') {
+                    countActionable++;
+                    $(this).closest('fieldset').hide();
+                }
+
+                if (!$(this).attr('required')) {
+                    var $removeButton = $('<button class="button tiny alert">{% trans %}Remove{% endtrans %}</button>');
+                    $removeButton.on('click', function(event) {
+                        event.preventDefault();
+                        hideItem($(this).siblings('[data-display]'));
+                        resetAddButton();
+                    });
+                    $(this).after($removeButton);
+                }
+            });
+
+            var resetAddButton = function() {
+                if (countActionable > 0) {
+                    $addButton.prop('disabled', false).removeClass('disabled').addClass('success');
+                } else {
+                    $addButton.prop('disabled', true).removeClass('success').addClass('disabled');
+                }
+            };
+            resetAddButton();
+
+            $div.append($addButton);
+        });
+    </script>
+{%- endblock extra_form_collection_widget -%}
+
 {%- block extra_form_iban_text_row -%}
     <div style="display:inline-block">
         {{- form_widget(form) -}}
