@@ -10,16 +10,30 @@
             var countActionable = 0;
 
             var showItem = function(item) {
-                item.attr('data-display', 'show');
+                item
+                    .attr('data-display', 'show')
+                    .prop('disabled', false)
+                ;
                 item.closest('fieldset').show();
                 countActionable--;
             };
 
             var hideItem = function(item) {
-                item.attr('value', null);
-                item.attr('data-display', 'hide');
+                item
+                    .attr('value', null)
+                    .attr('data-display', 'hide')
+                    .prop('disabled', true)
+                ;
                 item.closest('fieldset').hide();
                 countActionable++;
+            };
+
+            var resetAddButton = function() {
+                if (countActionable > 0) {
+                    $addButton.prop('disabled', false).removeClass('disabled').addClass('success');
+                } else {
+                    $addButton.prop('disabled', true).removeClass('success').addClass('disabled');
+                }
             };
 
             var $addButton = $('<button class="button tiny">{% trans %}Add{% endtrans %}</button>');
@@ -33,8 +47,7 @@
 
             $div.find('[data-display]').each(function() {
                 if ($(this).data('display') == 'hide') {
-                    countActionable++;
-                    $(this).closest('fieldset').hide();
+                    hideItem($(this));
                 }
 
                 if (!$(this).attr('required')) {
@@ -47,14 +60,6 @@
                     $(this).after($removeButton);
                 }
             });
-
-            var resetAddButton = function() {
-                if (countActionable > 0) {
-                    $addButton.prop('disabled', false).removeClass('disabled').addClass('success');
-                } else {
-                    $addButton.prop('disabled', true).removeClass('success').addClass('disabled');
-                }
-            };
             resetAddButton();
 
             $div.append($addButton);

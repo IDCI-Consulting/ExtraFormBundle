@@ -46,6 +46,14 @@ class ExtraFormCollectionType extends AbstractType
                 }
             }
         );
+
+        $builder->addEventListener(
+            FormEvents::PRE_SUBMIT,
+            function(FormEvent $event) {
+                $event->setData(array_values($event->getData()));
+            },
+            9999
+        );
     }
 
     /**
