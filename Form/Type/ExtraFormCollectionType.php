@@ -40,7 +40,7 @@ class ExtraFormCollectionType extends AbstractType
                             'label'    => ' ',
                             'data'     => isset($data[$i]) ? $data[$i] : null,
                             'required' => $required,
-                            'attr'     => array('data-display' => $display)
+                            'attr'     => array('data-display' => $display),
                         )
                     ));
                 }
