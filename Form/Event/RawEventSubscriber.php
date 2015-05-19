@@ -21,7 +21,7 @@ class RawEventSubscriber implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => array('preSetData', 1),
-            FormEvents::SUBMIT => array('onSubmit', 900)
+            FormEvents::SUBMIT => array('submit', 900)
         );
     }
 
@@ -39,7 +39,7 @@ class RawEventSubscriber implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public function onSubmit(FormEvent $event)
+    public function submit(FormEvent $event)
     {
         $data = $event->getData();
         $event->setData($data['raw']);

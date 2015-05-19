@@ -149,6 +149,11 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
      */
     protected function buildFormOptions($name, array $field, $data = null)
     {
+        // Allow sub options structure (collection case)
+        if (isset($field['options']['constraints'])) {
+            $field['options']['options'] = $this->buildFormOptions('', $field['options']);
+        }
+
         $constraints = array();
         foreach ($field['constraints'] as $constraint) {
             $constraints[] = $this->buildConstraint($constraint);
