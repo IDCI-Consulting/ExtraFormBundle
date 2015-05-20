@@ -9,12 +9,24 @@
             var $div = $('#{{ form.vars.id }}');
             var countActionable = 0;
 
+            var getItemContainer = function(item) {
+                var itemContainer;
+
+                $div.children().each(function() {
+                    if ($(this).find(item).length !== 0) {
+                        itemContainer = $(this);
+                    }
+                });
+
+                return itemContainer;
+            };
+
             var showItem = function(item) {
                 item
                     .attr('data-display', 'show')
                     .prop('disabled', false)
                 ;
-                item.closest('fieldset').show();
+                getItemContainer(item).show();
                 countActionable--;
             };
 
@@ -24,7 +36,7 @@
                     .attr('data-display', 'hide')
                     .prop('disabled', true)
                 ;
-                item.closest('fieldset').hide();
+                getItemContainer(item).hide();
                 countActionable++;
             };
 
