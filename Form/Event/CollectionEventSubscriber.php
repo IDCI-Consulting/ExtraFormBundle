@@ -36,8 +36,10 @@ class CollectionEventSubscriber implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => array('preSetData'),
-            FormEvents::PRE_SUBMIT => array('preSubmit'),
-            FormEvents::PRE_SUBMIT => array('changeData', 9999)
+            FormEvents::PRE_SUBMIT   => array(
+                array('preSubmit', 0),
+                array('changeData', 9999)
+            )
         );
     }
 
@@ -49,6 +51,7 @@ class CollectionEventSubscriber implements EventSubscriberInterface
      */
     private function buildCollection(FormInterface $form, array $data = array())
     {
+        var_dump($this->options['max_items']);
         for ($i = 0; $i < $this->options['max_items']; $i++) {
             $display  = $i < $this->options['min_items'] || isset($data[$i]) ? 'show' : 'hide';
             $required = $i < $this->options['min_items'] ? true : false;
@@ -56,10 +59,10 @@ class CollectionEventSubscriber implements EventSubscriberInterface
             $form->add($i, $this->options['type'], array_replace_recursive(
                 $this->options['options'],
                 array(
-                    'label'       => ' ',
-                    'data'        => isset($data[$i]) ? $data[$i] : null,
-                    'required'    => $required,
-                    'attr'        => array('data-display' => $display),
+                    'label'    => ' ',
+                    'data'     => isset($data[$i]) ? $data[$i] : null,
+                    'required' => $required,
+                    'attr'     => array('data-display' => $display),
                 )
             ));
         }
