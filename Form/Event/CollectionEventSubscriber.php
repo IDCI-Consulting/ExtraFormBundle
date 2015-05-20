@@ -47,9 +47,9 @@ class CollectionEventSubscriber implements EventSubscriberInterface
      * Build the collection.
      *
      * @param FormInterface $form The form.
-     * @param array $data         The form data.
+     * @param array|null    $data The form data.
      */
-    private function buildCollection(FormInterface $form, array $data = array())
+    private function buildCollection(FormInterface $form, array $data = null)
     {
         for ($i = 0; $i < $this->options['max_items']; $i++) {
             $display  = $i < $this->options['min_items'] || isset($data[$i]) ? 'show' : 'hide';
