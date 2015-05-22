@@ -13,6 +13,7 @@ idci_extra_form:
                 error_bubbling: { extra_form_type: "checkbox", options: {required: false} }
                 data:           { extra_form_type: "text",     options: {required: false} }
                 attr:           { extra_form_type: "text",     options: {required: false} }
+                pattern:        { extra_form_type: "text",     options: {required: false} }
                 help:           { extra_form_type: "textarea", options: {required: false} }
             extra_form_constraints: ~
 
@@ -127,20 +128,13 @@ idci_extra_form:
             form_type:   hidden
             description: "Hidden input field"
 
-        "regexp":
-            parent:      text
-            form_type:   text
-            description: "Text input field with regular expression"
-            extra_form_options:
-                pattern: { extra_form_type: "text", options: {required: false} }
-
         "email":
-            parent:      regexp
+            parent:      text
             form_type:   email
             description: "Email input field"
 
         "url":
-            parent:      regexp
+            parent:      text
             form_type:   url
             description: "URL input field"
             extra_form_options:
