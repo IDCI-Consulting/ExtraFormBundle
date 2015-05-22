@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\Options;
 use IDCI\Bundle\ExtraFormBundle\Form\Event\CollectionEventSubscriber;
 
 class ExtraFormCollectionType extends AbstractType
@@ -45,9 +46,23 @@ class ExtraFormCollectionType extends AbstractType
                 'allow_add'     => true,
                 'allow_delete'  => true,
                 'prototype'     => false,
-                'add_button'    => array('label' => 'add', 'attr' => array()),
-                'remove_button' => array('label' => 'remove', 'attr' => array()),
+                'add_button'    => array(),
+                'remove_button' => array(),
                 'options'       => array('label' => ' '),
+            ))
+            ->setNormalizers(array(
+                'add_button' => function(Options $options, $value) {
+                    return array_replace_recursive(
+                        array('label' => 'add', 'attr' => array()),
+                        $value
+                    );
+                },
+                'remove_button' => function(Options $options, $value) {
+                    return array_replace_recursive(
+                        array('label' => 'remove', 'attr' => array()),
+                        $value
+                    );
+                },
             ))
             ->setAllowedTypes(array(
                 'add_button'    => array('array'),
