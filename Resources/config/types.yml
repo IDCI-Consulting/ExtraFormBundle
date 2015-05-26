@@ -216,3 +216,34 @@ idci_extra_form:
             extra_form_options:
                 content: { extra_form_type: "textarea", options: {required: false} }
                 mapped:  { extra_form_type: "checkbox", options: {required: false, data: false} }
+
+        "captcha":
+            parent:      text
+            form_type:   captcha
+            description: "Input captcha field"
+            extra_form_options:
+                length:           { extra_form_type: "number",   options: {required: false} }
+                width:            { extra_form_type: "number",   options: {required: false} }
+                height:           { extra_form_type: "number",   options: {required: false} }
+                font:             { extra_form_type: "text",     options: {required: false} }
+                keep_value:       { extra_form_type: "checkbox", options: {required: false} }
+                charset:          { extra_form_type: "text",     options: {required: false} }
+                as_file:          { extra_form_type: "checkbox", options: {required: false} }
+                as_url:           { extra_form_type: "checkbox", options: {required: false} }
+                reload:           { extra_form_type: "checkbox", options: {required: false} }
+                image_folder:     { extra_form_type: "text",     options: {required: false} }
+                web_path:         { extra_form_type: "text",     options: {required: false} }
+                gc_freq:          { extra_form_type: "number",   options: {required: false} }
+                expiration:       { extra_form_type: "number",   options: {required: false} }
+                quality:          { extra_form_type: "number",   options: {required: false} }
+                invalid_message:  { extra_form_type: "text",     options: {required: false} }
+                bypass_code:      { extra_form_type: "text",     options: {required: false} }
+                whitelist_key:    { extra_form_type: "text",     options: {required: false} }
+                humanity:         { extra_form_type: "number",   options: {required: false} }
+                distortion:       { extra_form_type: "checkbox", options: {required: false} }
+                max_front_lines:  { extra_form_type: "number",   options: {required: false} }
+                max_behind_lines: { extra_form_type: "number",   options: {required: false} }
+                interpolation:    { extra_form_type: "checkbox", options: {required: false} }
+                text_color:       { extra_form_type: "text",     options: {required: false} }
+                background_color: { extra_form_type: "text",     options: {required: false} }
+                disabled:         { extra_form_type: "checkbox", options: {required: false} }

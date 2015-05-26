@@ -29,6 +29,7 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
+        new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
         new IDCI\Bundle\ExtraFormBundle\IDCIExtraFormBundle(),
     );
 }
