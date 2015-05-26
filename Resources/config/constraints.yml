@@ -286,3 +286,45 @@ idci_extra_form:
                 message:       { extra_form_type: "text",     options: {"required": false} }
                 caseSensitive: { extra_form_type: "checkbox", options: {"required": false} }
                 requireHyphen: {extra_form_type: "checkbox",  options: {"required": false} }
+
+        "date_equal_to":
+            class: \IDCI\Bundle\ExtraFormBundle\Validator\Constraints\DateEqualTo
+            description: "date equal to"
+            extra_form_options:
+                value:   {"extra_form_type": "text", "options": {"required": true} }
+                message: {"extra_form_type": "text", "options": {"required": false} }
+
+        "date_not_equal_to":
+            class: \IDCI\Bundle\ExtraFormBundle\Validator\Constraints\DateNotEqualTo
+            description: "date not equal to"
+            extra_form_options:
+                value:   {"extra_form_type": "text", "options": {"required": true} }
+                message: {"extra_form_type": "text", "options": {"required": false} }
+
+        "date_less_than":
+            class: \IDCI\Bundle\ExtraFormBundle\Validator\Constraints\DateLessThan
+            description: "date less than"
+            extra_form_options:
+                value:   {"extra_form_type": "text", "options": {"required": true} }
+                message: {"extra_form_type": "text", "options": {"required": false} }
+
+        "date_less_than_or_equal":
+            class: \IDCI\Bundle\ExtraFormBundle\Validator\Constraints\DateLessThanOrEqual
+            description: "date less than or equal"
+            extra_form_options:
+                value:   {"extra_form_type": "text", "options": {"required": true} }
+                message: {"extra_form_type": "text", "options": {"required": false} }
+
+        "date_greater_than":
+            class: \IDCI\Bundle\ExtraFormBundle\Validator\Constraints\DateGreaterThan
+            description: "date greater than"
+            extra_form_options:
+                value:   {"extra_form_type": "text", "options": {"required": true} }
+                message: {"extra_form_type": "text", "options": {"required": false} }
+
+        "date_greater_than_or_equal":
+            class: \IDCI\Bundle\ExtraFormBundle\Validator\Constraints\DateGreaterThanOrEqual
+            description: "date greater than or equal"
+            extra_form_options:
+                value:   {"extra_form_type": "text", "options": {"required": true} }
+                message: {"extra_form_type": "text", "options": {"required": false} }
