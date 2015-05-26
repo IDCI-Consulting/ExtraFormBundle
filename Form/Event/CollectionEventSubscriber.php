@@ -58,7 +58,6 @@ class CollectionEventSubscriber implements EventSubscriberInterface
             $form->add($i, $this->options['type'], array_replace_recursive(
                 $this->options['options'],
                 array(
-                    'label'    => ' ',
                     'data'     => isset($data[$i]) ? $data[$i] : null,
                     'required' => $required,
                     'attr'     => array('data-display' => $display),
