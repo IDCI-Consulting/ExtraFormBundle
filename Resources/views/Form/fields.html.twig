@@ -32,11 +32,13 @@
 
             var hideItem = function(item) {
                 item
-                    .attr('value', null)
+                    .val(null)
                     .attr('data-display', 'hide')
                     .prop('disabled', true)
                 ;
-                getItemContainer(item).hide();
+
+                getItemContainer(item).hide().insertBefore($addButton);
+
                 countActionable++;
             };
 
@@ -57,6 +59,8 @@
                 }
             });
 
+            $div.append($addButton);
+
             $div.find('[data-display]').each(function() {
                 if ($(this).data('display') == 'hide') {
                     hideItem($(this));
@@ -74,7 +78,6 @@
             });
             resetAddButton();
 
-            $div.append($addButton);
         });
     </script>
 {%- endblock extra_form_collection_widget -%}
