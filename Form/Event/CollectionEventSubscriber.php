@@ -37,8 +37,7 @@ class CollectionEventSubscriber implements EventSubscriberInterface
         return array(
             FormEvents::PRE_SET_DATA => array('preSetData'),
             FormEvents::PRE_SUBMIT   => array(
-                array('preSubmit', 0),
-                array('changeData', 9999)
+                array('changeData', 9999),
             )
         );
     }
@@ -70,14 +69,6 @@ class CollectionEventSubscriber implements EventSubscriberInterface
      * {@inheritdoc}
      */
     public function preSetData(FormEvent $event)
-    {
-        $this->buildCollection($event->getForm(), $event->getData());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function preSubmit(FormEvent $event)
     {
         $this->buildCollection($event->getForm(), $event->getData());
     }

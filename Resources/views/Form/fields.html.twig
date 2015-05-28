@@ -22,23 +22,36 @@
             };
 
             var showItem = function(item) {
-                item
-                    .attr('data-display', 'show')
-                    .prop('disabled', false)
+                item.attr('data-display', 'show');
+
+                $(':disabled', item)
+                    .each(function(i,e) {
+                        $(e).prop('disabled', false);
+                    })
                 ;
+
                 getItemContainer(item).show();
                 countActionable--;
             };
 
             var hideItem = function(item) {
-                item
-                    .val(null)
-                    .attr('data-display', 'hide')
-                    .prop('disabled', true)
+                item.attr('data-display', 'hide');
+
+                $(':input', item)
+                    .not(':button, :submit, :reset, :hidden')
+                    .each(function(i,e) {
+                        $(e).val($(e).attr('value') || '')
+                            .prop('checked',  false)
+                            .prop('selected', false)
+                            .prop('disabled', true)
+                        ;
+                    })
                 ;
+                $('option[selected]', item).prop('selected', true);
+                $('input[checked]',   item).prop('checked',  true);
+                $('textarea',         item).each(function(i,e) { $(e).val($(e).html()) });
 
                 getItemContainer(item).hide().insertBefore($addButton);
-
                 countActionable++;
             };
 
@@ -66,7 +79,7 @@
                     hideItem($(this));
                 }
 
-                if (!$(this).attr('required')) {
+                if (!$(this).find('[required="required"]').length) {
                     var $removeButton = $('<button{%- for attrname, attrvalue in remove_button.attr %} {{ attrname }}="{{ attrvalue }}"{%- endfor -%}>{{ remove_button.label|trans }}</button>');
                     $removeButton.on('click', function(event) {
                         event.preventDefault();
