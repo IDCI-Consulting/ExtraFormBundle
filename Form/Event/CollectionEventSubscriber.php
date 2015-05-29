@@ -35,34 +35,17 @@ class CollectionEventSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            FormEvents::PRE_SET_DATA => array('preSetData'),
+            FormEvents::PRE_SET_DATA => array(
+                array('preSetData', 0),
+            ),
             FormEvents::PRE_SUBMIT   => array(
-                array('changeData', 9999),
+                array('preSubmitData', 0),
+                array('changeData', 100),
+            ),
+            FormEvents::SUBMIT       => array(
+                array('onSubmit', 50),
             )
         );
-    }
-
-    /**
-     * Build the collection.
-     *
-     * @param FormInterface $form The form.
-     * @param array|null    $data The form data.
-     */
-    private function buildCollection(FormInterface $form, array $data = null)
-    {
-        for ($i = 0; $i < $this->options['max_items']; $i++) {
-            $display  = $i < $this->options['min_items'] || isset($data[$i]) ? 'show' : 'hide';
-            $required = $i < $this->options['min_items'] ? true : false;
-
-            $form->add($i, $this->options['type'], array_replace_recursive(
-                $this->options['options'],
-                array(
-                    'data'     => isset($data[$i]) ? $data[$i] : null,
-                    'required' => $required,
-                    'attr'     => array('data-display' => $display),
-                )
-            ));
-        }
     }
 
     /**
@@ -70,7 +53,58 @@ class CollectionEventSubscriber implements EventSubscriberInterface
      */
     public function preSetData(FormEvent $event)
     {
-        $this->buildCollection($event->getForm(), $event->getData());
+        $form = $event->getForm();
+        $data = $event->getData();
+
+        foreach ($form as $name => $child) {
+            $form->remove($name);
+        }
+
+        for ($i = 0; $i < $this->options['max_items']; $i++) {
+            $required = $i < $this->options['min_items'] ? true : false;
+            $display  = $i < $this->options['min_items'] || isset($data[$i]) ? 'show' : 'hide';
+
+            $form->add($i, $this->options['type'], array_replace_recursive(
+                array(
+                    'required' => $required,
+                    'attr'     => array('data-display' => $display),
+                ),
+                $this->options['options']
+            ));
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function preSubmitData(FormEvent $event)
+    {
+        $form = $event->getForm();
+        $data = $event->getData();
+
+        if (null === $data || '' === $data) {
+            $data = array();
+        }
+
+        foreach ($form as $name => $child) {
+            if (!isset($data[$name])) {
+                $form->remove($name);
+            }
+        }
+
+        for ($i = 0; $i < $this->options['max_items']; $i++) {
+            $required = $i < $this->options['min_items'] ? true : false;
+            // isDisplayable is an hugly hack for collection with sub form using hidden field !
+            $display  = $i < $this->options['min_items'] ||$this->isDisplayable($event, $i) ? 'show' : 'hide';
+
+            $form->add($i, $this->options['type'], array_replace_recursive(
+                array(
+                    'required' => $required,
+                    'attr'     => array('data-display' => $display),
+                ),
+                $this->options['options']
+            ));
+        }
     }
 
     /**
@@ -79,5 +113,67 @@ class CollectionEventSubscriber implements EventSubscriberInterface
     public function changeData(FormEvent $event)
     {
         $event->setData(array_values($event->getData()));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function onSubmit(FormEvent $event)
+    {
+        $form = $event->getForm();
+        $data = $event->getData();
+
+        if (null === $data) {
+            $data = array();
+        }
+
+        if (!is_array($data) && !($data instanceof \Traversable && $data instanceof \ArrayAccess)) {
+            throw new UnexpectedTypeException($data, 'array or (\Traversable and \ArrayAccess)');
+        }
+
+        // The data mapper only adds, but does not remove items, so do this here
+        $toDelete = array();
+
+        foreach ($data as $name => $child) {
+            if (!$form->has($name)) {
+                $toDelete[] = $name;
+            }
+        }
+
+        foreach ($toDelete as $name) {
+            unset($data[$name]);
+        }
+
+        $event->setData($data);
+    }
+
+    /**
+     * Is displayable
+     *
+     * @param FormEvent $event
+     * @param integer   $i
+     *
+     * @return boolean
+     */
+    protected function isDisplayable(FormEvent $event, $i)
+    {
+        $form = $event->getForm();
+        $data = $event->getData();
+
+        if (!isset($data[$i])) {
+            return false;
+        }
+
+        if (!is_array($data[$i])) {
+            return true;
+        }
+
+        foreach ($data[$i] as $k => $v) {
+            if ('hidden' !== $form->get($i)->get($k)->getConfig()->getType()->getName()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

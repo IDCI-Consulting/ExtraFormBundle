@@ -30,6 +30,7 @@ class ExtraFormCollectionType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
+        $view->vars['min_items']     = $options['min_items'];
         $view->vars['add_button']    = $options['add_button'];
         $view->vars['remove_button'] = $options['remove_button'];
     }
@@ -43,8 +44,7 @@ class ExtraFormCollectionType extends AbstractType
             ->setDefaults(array(
                 'min_items'     => 1,
                 'max_items'     => 10,
-                'allow_add'     => true,
-                'allow_delete'  => true,
+                'type'          => 'text',
                 'prototype'     => false,
                 'add_button'    => array(),
                 'remove_button' => array(),
@@ -69,14 +69,6 @@ class ExtraFormCollectionType extends AbstractType
                 'remove_button' => array('array'),
             ))
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getParent()
-    {
-        return 'collection';
     }
 
     /**
