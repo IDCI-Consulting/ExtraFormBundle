@@ -31,6 +31,7 @@ class ExtraFormCollectionType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars['min_items']     = $options['min_items'];
+        $view->vars['max_items']     = $options['max_items'];
         $view->vars['add_button']    = $options['add_button'];
         $view->vars['remove_button'] = $options['remove_button'];
     }

@@ -7,7 +7,11 @@
     <script type="text/javascript">
         $(function() {
             var $div = $('#{{ form.vars.id }}');
+            var $items = $div.find('[data-display]');
+            var minItems = {{ form.vars.min_items }};
+            var maxItems = {{ form.vars.max_items }};
             var countActionable = 0;
+            var hasRemovedButtons = false;
 
             var getItemContainer = function(item) {
                 var itemContainer;
@@ -26,7 +30,10 @@
 
                 $(':disabled', item)
                     .each(function(i,e) {
-                        $(e).prop('disabled', false);
+                        $(e)
+                            .prop('disabled', false)
+                            .prop('required', true)
+                        ;
                     })
                 ;
 
@@ -40,10 +47,12 @@
                 $(':input', item)
                     .not(':button, :submit, :reset, :hidden')
                     .each(function(i,e) {
-                        $(e).val($(e).attr('value') || '')
+                        $(e).val($(e).attr('placeholder') || '')
                             .prop('checked',  false)
                             .prop('selected', false)
+                            .prop('required', false)
                             .prop('disabled', true)
+                            .trigger('change')
                         ;
                     })
                 ;
@@ -55,12 +64,32 @@
                 countActionable++;
             };
 
-            var resetAddButton = function() {
-                if (countActionable > 0) {
-                    $addButton.prop('disabled', false).removeClass('disabled').addClass('success');
-                } else {
-                    $addButton.prop('disabled', true).removeClass('success').addClass('disabled');
+            var addRemoveButton = function() {
+                if (hasRemovedButtons) {
+                    return;
                 }
+
+                $items.each(function() {
+                    var $removeButton = $('<button{%- for attrname, attrvalue in remove_button.attr %} {{ attrname }}="{{ attrvalue }}"{%- endfor -%}>{{ remove_button.label|trans }}</button>');
+                    $removeButton.on('click', function(event) {
+                        event.preventDefault();
+                        hideItem($(this).siblings('[data-display]'));
+                        initAddButton();
+                    });
+                    $(this).after($removeButton);
+                });
+                hasRemovedButtons = true;
+            };
+
+            var removeRemoveButton = function() {
+                if (!hasRemovedButtons) {
+                    return;
+                }
+
+                $items.each(function() {
+                    $(this).siblings('button').remove();
+                });
+                hasRemovedButtons = false;
             };
 
             var $addButton = $('<button{%- for attrname, attrvalue in add_button.attr %} {{ attrname }}="{{ attrvalue }}"{%- endfor -%}>{{ add_button.label|trans }}</button>');
@@ -68,28 +97,33 @@
                 event.preventDefault();
                 if (countActionable > 0) {
                     showItem($div.find('[data-display="hide"]').first());
-                    resetAddButton();
+                    initAddButton();
                 }
             });
 
-            $div.append($addButton);
+            var initAddButton = function() {
+                console.log('min:'+minItems, 'max:'+maxItems, 'count:'+countActionable);
+                if (countActionable > 0) {
+                    $addButton.prop('disabled', false).removeClass('disabled').addClass('success');
+                } else {
+                    $addButton.prop('disabled', true).removeClass('success').addClass('disabled');
+                }
 
-            $div.find('[data-display]').each(function() {
+                if (maxItems - countActionable > minItems) {
+                    addRemoveButton();
+                } else {
+                    removeRemoveButton();
+                }
+            };
+
+            // INIT
+            $div.append($addButton);
+            $items.each(function() {
                 if ($(this).data('display') == 'hide') {
                     hideItem($(this));
                 }
-
-                if (!$(this).find('[required="required"]').length) {
-                    var $removeButton = $('<button{%- for attrname, attrvalue in remove_button.attr %} {{ attrname }}="{{ attrvalue }}"{%- endfor -%}>{{ remove_button.label|trans }}</button>');
-                    $removeButton.on('click', function(event) {
-                        event.preventDefault();
-                        hideItem($(this).siblings('[data-display]'));
-                        resetAddButton();
-                    });
-                    $(this).after($removeButton);
-                }
             });
-            resetAddButton();
+            initAddButton();
         });
     </script>
 {%- endblock extra_form_collection_widget -%}
