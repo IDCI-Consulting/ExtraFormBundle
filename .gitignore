@@ -1,0 +1,7 @@
+phpunit.xml
+
+# IDE specificities
+# Netbean
+nbproject/
+# Gedit
+*~
