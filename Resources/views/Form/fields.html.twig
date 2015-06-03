@@ -1,8 +1,10 @@
 {%- block extra_form_collection_widget -%}
     {{- form_widget(form) -}}
     <script>
-        window.jQuery ||
-        document.write("<script src='{{ asset('bundles/idciextraform/js/jquery-1.11.3.min.js') }}'>\x3C/script>")
+        var scriptTag = document.createElement('script');
+        scriptTag.src = '{{ asset('bundles/idciextraform/js/jquery-1.11.3.min.js') }}';
+
+        window.jQuery || document.getElementsByTagName('head')[0].appendChild(scriptTag);
     </script>
     <script type="text/javascript">
         $(function() {
