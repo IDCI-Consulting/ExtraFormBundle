@@ -49,7 +49,7 @@
                 $(':input', item)
                     .not(':button, :submit, :reset, :hidden')
                     .each(function(i,e) {
-                        $(e).val($(e).attr('placeholder') || '')
+                        $(e).val('')
                             .prop('checked',  false)
                             .prop('selected', false)
                             .prop('required', false)
