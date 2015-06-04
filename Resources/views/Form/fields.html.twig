@@ -4,12 +4,11 @@
         function getJquery(callback) {
             if (!window.jQuery) {
                 var sJquery = document.createElement("script");
-                sJquery.async = true;
                 sJquery.src = "{{ asset('bundles/idciextraform/js/jquery-1.11.3.min.js') }}";
                 sJquery.type = "text/javascript";
 
-                var s0 = document.getElementsByTagName('script')[0];
-                s0.parentNode.insertBefore(sJquery, s0);
+                var head = document.getElementsByTagName('head')[0];
+                head.parentNode.insertBefore(sJquery, head);
 
                 sJquery.onload = sJquery.onreadystatechange = function() {
                     callback();
