@@ -1,13 +1,25 @@
 {%- block extra_form_collection_widget -%}
     {{- form_widget(form) -}}
-    <script>
-        var scriptTag = document.createElement('script');
-        scriptTag.src = '{{ asset('bundles/idciextraform/js/jquery-1.11.3.min.js') }}';
-
-        window.jQuery || document.getElementsByTagName('head')[0].appendChild(scriptTag);
-    </script>
     <script type="text/javascript">
-        $(function() {
+        function getJquery(callback) {
+            if (!window.jQuery) {
+                var sJquery = document.createElement("script");
+                sJquery.async = true;
+                sJquery.src = "{{ asset('bundles/idciextraform/js/jquery-1.11.3.min.js') }}";
+                sJquery.type = "text/javascript";
+
+                var s0 = document.getElementsByTagName('script')[0];
+                s0.parentNode.insertBefore(sJquery, s0);
+
+                sJquery.onload = sJquery.onreadystatechange = function() {
+                    callback();
+                }
+            } else {
+                callback();
+            }
+        };
+
+        getJquery(function() {
             var $div = $('#{{ form.vars.id }}');
             var $items = $div.find('[data-display]');
             var minItems = {{ form.vars.min_items }};
