@@ -2,27 +2,26 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\View\View;
+use FOS\RestBundle\Controller\Annotations as Annotations;
 
 /**
  * Api controller.
  */
-class ApiController extends Controller
+class ApiController extends FOSRestController
 {
     /**
      * Retrieve extra form type option
      *
-     * @Route("/types/{typeName}/options.{_format}", name="idci_extra_form_render_options", requirements={"_format" = "json|xml|html"}, defaults={"_format" = "json"})
-     * @Method({"POST", "PUT"})
-     * @Template()
+     * @Annotations\Post("/types/{typeName}/options.{_format}", name="idci_extra_form_render_options_post", requirements={"_format" = "json|xml|html"}, defaults={"_format" = "json"})
+     * @Annotations\Put("/types/{typeName}/options.{_format}", name="idci_extra_form_render_options_put", requirements={"_format" = "json|xml|html"}, defaults={"_format" = "json"})
+     * @Annotations\View()
+     *
+     * @return View
      */
-    public function optionsAction(Request $request, $_format, $typeName)
+    public function optionsAction($typeName, $_format)
     {
         $typeRegistry = $this->get('idci_extra_form.type_registry');
 
@@ -36,34 +35,34 @@ class ApiController extends Controller
         $type = $typeRegistry->getType($typeName);
         $options = $type->getExtraFormOptions();
 
-        $response = new Response();
-        if ($_format === 'json') {
-            $response->setContent(json_encode($options));
-            $response->headers->set('Content-Type', 'application/json');
-
-            return $response;
-        }
+        $view = View::create();
 
         if ($_format === 'html') {
             $builder = $this
                 ->get('idci_extra_form.builder')
-                ->build($options)
-            ;
+                ->build($options);
+            $form = $builder->getForm();
 
-            $form = $builder->getForm() ;
+            $view->setData(array('form' => $form->createView()))->setStatusCode(200);
 
-            return array('form' => $form->createView());
+            return $view;
         }
+
+        $view->setData($options)->setStatusCode(200);
+
+        return $view;
     }
 
     /**
-     * Retrieve extra form type constraint
+     * Retrieve extra form constraint options
      *
-     * @Route("/constraints/{constraintName}/options.{_format}", name="idci_extra_form_render_constraints", requirements={"_format" = "json|xml|html"}, defaults={"_format" = "json"})
-     * @Method({"POST", "PUT"})
-     * @Template()
+     * @Annotations\Post("/constraints/{constraintName}/options.{_format}", name="idci_extra_form_render_constraints_post", requirements={"_format" = "json|xml|html"}, defaults={"_format" = "json"})
+     * @Annotations\Put("/constraints/{constraintName}/options.{_format}", name="idci_extra_form_render_constraints_put", requirements={"_format" = "json|xml|html"}, defaults={"_format" = "json"})
+     * @Annotations\View
+     *
+     * @return View
      */
-    public function constraintsAction(Request $request, $_format, $constraintName)
+    public function constraintsAction($constraintName, $_format)
     {
         $constraintRegistry = $this->get('idci_extra_form.constraint_registry');
 
@@ -74,26 +73,24 @@ class ApiController extends Controller
             ));
         }
 
-        $type = $constraintRegistry->getConstraint($constraintName);
-        $options = $type->getExtraFormOptions();
+        $constraint = $constraintRegistry->getConstraint($constraintName);
+        $options = $constraint->getExtraFormOptions();
 
-        $response = new Response();
-        if ($_format === 'json') {
-            $response->setContent(json_encode($options));
-            $response->headers->set('Content-Type', 'application/json');
-
-            return $response;
-        }
+        $view = View::create();
 
         if ($_format === 'html') {
             $builder = $this
                 ->get('idci_extra_form.builder')
-                ->build($options)
-            ;
-
+                ->build($options);
             $form = $builder->getForm();
 
-            return array('form' => $form->createView());
+            $view->setData(array('form' => $form->createView()))->setStatusCode(200);
+
+            return $view;
         }
+
+        $view->setData($options)->setStatusCode(200);
+
+        return $view;
     }
 }
