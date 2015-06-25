@@ -22,6 +22,16 @@ class ExtraFormConstraintRegistry implements ExtraFormConstraintRegistryInterfac
     public function setConstraint($alias, ExtraFormConstraintInterface $constraint)
     {
         $this->constraints[$alias] = $constraint;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getConstraints()
+    {
+        return $this->constraints;
     }
 
     /**
@@ -41,7 +51,7 @@ class ExtraFormConstraintRegistry implements ExtraFormConstraintRegistryInterfac
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function hasConstraint($alias)
     {

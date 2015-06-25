@@ -19,7 +19,7 @@ class TestController extends Controller
     /**
      * Test.
      *
-     * @Route("/", name="idci_extra_form")
+     * @Route("/render", name="idci_extra_form")
      * @Method({"GET", "POST"})
      * @Template()
      */
@@ -90,7 +90,7 @@ class TestController extends Controller
     */
         $builder = $this
             ->createFormBuilder(array(
-                'message'  => 'messge test',
+                'message'  => 'message test',
                 'sub_form' => '{"first_name":"test"}'
             ))
             ->add('message', 'text')
@@ -151,5 +151,25 @@ class TestController extends Controller
         }
 
         return array('form' => $form->createView());
+    }
+
+    /**
+     * Test Editor.
+     *
+     * @Route("/editor", name="idci_extra_form_editor")
+     * @Method({"GET"})
+     * @Template()
+     */
+    public function editorAction(Request $request)
+    {
+        $form = $this
+            ->createFormBuilder()
+            ->add('editor', 'extra_form_editor')
+            ->getForm()
+        ;
+
+        return array(
+            'form' => $form->createView()
+        );
     }
 }

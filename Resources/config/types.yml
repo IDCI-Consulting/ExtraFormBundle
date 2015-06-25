@@ -110,7 +110,6 @@ idci_extra_form:
             extra_form_options:
                 max_length: { extra_form_type: "number",   options: {required: false} }
                 trim:       { extra_form_type: "checkbox", options: {required: false} }
-                test:       { extra_form_type: "checkbox", options: {required: false} }
 
         "repeated":
             parent:      form

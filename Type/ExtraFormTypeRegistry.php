@@ -22,6 +22,16 @@ class ExtraFormTypeRegistry implements ExtraFormTypeRegistryInterface
     public function setType($alias, ExtraFormTypeInterface $type)
     {
         $this->types[$alias] = $type;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getTypes()
+    {
+        return $this->types;
     }
 
     /**
@@ -41,7 +51,7 @@ class ExtraFormTypeRegistry implements ExtraFormTypeRegistryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function hasType($alias)
     {

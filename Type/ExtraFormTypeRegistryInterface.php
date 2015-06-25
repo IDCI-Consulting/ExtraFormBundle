@@ -2,9 +2,10 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ * @author:  Brahim BOUKOUFALLAH <brahim.boukoufallah@idci-consulting.fr>
  * @license: MIT
  */
- 
+
 namespace IDCI\Bundle\ExtraFormBundle\Type;
 
 interface ExtraFormTypeRegistryInterface
@@ -20,13 +21,20 @@ interface ExtraFormTypeRegistryInterface
     public function setType($alias, ExtraFormTypeInterface $type);
 
     /**
+     * Returns types.
+     *
+     * @return array
+     */
+    public function getTypes();
+
+    /**
      * Returns an extra form type by alias.
      *
-     * @param string $alias The alias of the type.
+     * @param string $alias The type alias.
      *
-     * @return ExtraFormTypeInterface The type
+     * @return ExtraFormTypeInterface
      *
-     * @throws Exception\UnexpectedTypeException  if the passed alias is not a string.
+     * @throws \IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException if the passed alias is not a string.
      * @throws Exception\InvalidArgumentException if the type can not be retrieved.
      */
     public function getType($alias);

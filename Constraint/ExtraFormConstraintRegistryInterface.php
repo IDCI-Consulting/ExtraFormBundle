@@ -2,6 +2,7 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ * @author:  Brahim BOUKOUFALLAH <brahim.boukoufallah@idci-consulting.fr>
  * @license: MIT
  */
 
@@ -20,13 +21,20 @@ interface ExtraFormConstraintRegistryInterface
     public function setConstraint($alias, ExtraFormConstraintInterface $constraint);
 
     /**
+     * Returns constraints.
+     *
+     * @return array
+     */
+    public function getConstraints();
+
+    /**
      * Returns an extra form constraint by alias.
      *
      * @param string $alias The alias of the constraint.
      *
      * @return ExtraFormConstraintInterface The constraint
      *
-     * @throws Exception\UnexpectedTypeException  if the passed alias is not a string.
+     * @throws \IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException  if the passed alias is not a string.
      * @throws Exception\InvalidArgumentException if the constraint can not be retrieved.
      */
     public function getConstraint($alias);
