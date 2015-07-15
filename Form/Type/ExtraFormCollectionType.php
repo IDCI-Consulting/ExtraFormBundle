@@ -34,6 +34,7 @@ class ExtraFormCollectionType extends AbstractType
         $view->vars['max_items']     = $options['max_items'];
         $view->vars['add_button']    = $options['add_button'];
         $view->vars['remove_button'] = $options['remove_button'];
+        $view->vars['collection_id'] = $options['collection_id'];
     }
 
     /**
@@ -50,6 +51,7 @@ class ExtraFormCollectionType extends AbstractType
                 'add_button'    => array(),
                 'remove_button' => array(),
                 'options'       => array('label' => ' '),
+                'collection_id' => 'default'
             ))
             ->setNormalizers(array(
                 'add_button' => function(Options $options, $value) {
@@ -68,6 +70,7 @@ class ExtraFormCollectionType extends AbstractType
             ->setAllowedTypes(array(
                 'add_button'    => array('array'),
                 'remove_button' => array('array'),
+                'collection_id' => array('string'),
             ))
         ;
     }

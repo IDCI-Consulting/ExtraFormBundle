@@ -20,7 +20,7 @@
 
         getJquery(function($) {
             var $div = $('#{{ form.vars.id }}');
-            var $items = $div.find('[data-display]');
+            var $items = $div.find('[data-collection-id={{ form.vars.collection_id }}]');
             var minItems = {{ form.vars.min_items }};
             var maxItems = {{ form.vars.max_items }};
             var countActionable = 0;
@@ -86,7 +86,7 @@
                     var $removeButton = $('<button{%- for attrname, attrvalue in remove_button.attr %} {{ attrname }}="{{ attrvalue }}"{%- endfor -%}>{{ remove_button.label|trans }}</button>');
                     $removeButton.on('click', function(event) {
                         event.preventDefault();
-                        hideItem($(this).siblings('[data-display]'));
+                        hideItem($(this).siblings('[data-collection-id={{ form.vars.collection_id }}][data-display]'));
                         initAddButton();
                     });
                     $(this).after($removeButton);
@@ -109,7 +109,7 @@
             $addButton.on('click', function(event) {
                 event.preventDefault();
                 if (countActionable > 0) {
-                    showItem($div.find('[data-display="hide"]').first());
+                    showItem($div.find('[data-collection-id={{ form.vars.collection_id }}][data-display="hide"]').first());
                     initAddButton();
                 }
             });
