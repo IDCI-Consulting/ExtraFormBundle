@@ -45,7 +45,6 @@
                     .each(function(i,e) {
                         $(e)
                             .prop('disabled', false)
-                            .prop('required', true)
                         ;
                     })
                 ;
@@ -63,7 +62,6 @@
                         $(e).val($(e).attr('value') || '')
                             .prop('checked',  false)
                             .prop('selected', false)
-                            .prop('required', false)
                             .prop('disabled', true)
                             .trigger('change')
                         ;

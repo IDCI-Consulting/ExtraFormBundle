@@ -5,12 +5,13 @@
  * @license: MIT
  */
 
- namespace IDCI\Bundle\ExtraFormBundle\Form\Event;
+namespace IDCI\Bundle\ExtraFormBundle\Form\Event;
 
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException;
 
 class CollectionEventSubscriber implements EventSubscriberInterface
 {
@@ -115,7 +116,9 @@ class CollectionEventSubscriber implements EventSubscriberInterface
      */
     public function changeData(FormEvent $event)
     {
-        $event->setData(array_values($event->getData()));
+        if (is_array($event->getData())) {
+            $event->setData(array_values($event->getData()));
+        }
     }
 
     /**
