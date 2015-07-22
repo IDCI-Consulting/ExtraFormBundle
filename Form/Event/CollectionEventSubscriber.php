@@ -104,7 +104,10 @@ class CollectionEventSubscriber implements EventSubscriberInterface
             $form->add($i, $this->options['type'], array_replace_recursive(
                 array(
                     'required' => $required,
-                    'attr'     => array('data-display' => $display),
+                    'attr'     => array(
+                        'data-collection-id' => $this->options['collection_id'],
+                        'data-display'       => $display
+                    ),
                 ),
                 $this->options['options']
             ));
