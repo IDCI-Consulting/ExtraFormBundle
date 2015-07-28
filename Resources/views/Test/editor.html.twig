@@ -2,5 +2,8 @@
 
 {% block body %}
     <h1>Extra Form Editor</h1>
-    {{ form(form) }}
+
+    <div data-ng-app="editorApp">
+        {{ form(form) }}
+    </div>
 {% endblock %}
