@@ -15,42 +15,51 @@ class ApiController extends FOSRestController
     /**
      * Retrieve extra form type option
      *
-     * @Annotations\Post("/types/{typeName}/options.{_format}", name="idci_extra_form_render_options_post", requirements={"_format" = "json|xml|html"}, defaults={"_format" = "json"})
-     * @Annotations\Put("/types/{typeName}/options.{_format}", name="idci_extra_form_render_options_put", requirements={"_format" = "json|xml|html"}, defaults={"_format" = "json"})
+     * @Annotations\Post("/types/{type_alias}/options.{_format}", name="idci_extra_form_render_options_post", requirements={"_format" = "json|xml|html"}, defaults={"_format" = "json"})
+     * @Annotations\Put("/types/{type_alias}/options.{_format}", name="idci_extra_form_render_options_put", requirements={"_format" = "json|xml|html"}, defaults={"_format" = "json"})
      * @Annotations\View()
      *
      * @return View
      */
-    public function optionsAction($typeName, $_format)
+    public function optionsAction($type_alias, $_format)
     {
         $typeRegistry = $this->get('idci_extra_form.type_registry');
 
-        if (!($typeRegistry->hasType($typeName))) {
+        if (!($typeRegistry->hasType($type_alias))) {
             throw new NotFoundHttpException(sprintf(
                 '%s is not found',
-                $typeName
+                $type_alias
             ));
         }
 
-        $type = $typeRegistry->getType($typeName);
-        $options = $type->getExtraFormOptions();
+        $options = $typeRegistry
+            ->getType($type_alias)
+            ->getExtraFormOptions()
+        ;
 
         $view = View::create();
 
-        if ($_format === 'html') {
-            $builder = $this
+        if ('html' === $_format) {
+            $form = $this
                 ->get('idci_extra_form.builder')
-                ->build($options);
-            $form = $builder->getForm();
+                ->build($options)
+                ->getForm()
+            ;
 
-            $view->setData(array('form' => $form->createView()))->setStatusCode(200);
+            $view
+                ->setData(array('form' => $form->createView()))
+                ->setStatusCode(200)
+            ;
 
-            return $view;
+            return $this->handleView($view);
         }
 
-        $view->setData($options)->setStatusCode(200);
+        $view
+            ->setData($options)
+            ->setStatusCode(200)
+        ;
 
-        return $view;
+        return $this->handleView($view);
     }
 
     /**
@@ -78,19 +87,27 @@ class ApiController extends FOSRestController
 
         $view = View::create();
 
-        if ($_format === 'html') {
+        if ('html' === $_format) {
             $builder = $this
                 ->get('idci_extra_form.builder')
-                ->build($options);
+                ->build($options)
+            ;
+
             $form = $builder->getForm();
 
-            $view->setData(array('form' => $form->createView()))->setStatusCode(200);
+            $view
+                ->setData(array('form' => $form->createView()))
+                ->setStatusCode(200)
+            ;
 
-            return $view;
+            return $this->handleView($view);
         }
 
-        $view->setData($options)->setStatusCode(200);
+        $view
+            ->setData($options)
+            ->setStatusCode(200)
+        ;
 
-        return $view;
+        return $this->handleView($view);
     }
 }

@@ -56,9 +56,9 @@ class ExtraFormTypeRegistry implements ExtraFormTypeRegistryInterface
     public function hasType($alias)
     {
         if (!isset($this->types[$alias])) {
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
     }
 }

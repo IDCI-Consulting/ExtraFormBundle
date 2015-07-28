@@ -138,11 +138,13 @@
     </script>
 {%- endblock extra_form_collection_widget -%}
 
+
 {%- block extra_form_iban_text_row -%}
     <div style="display:inline-block">
         {{- form_widget(form) -}}
     </div>
 {%- endblock extra_form_iban_text_row -%}
+
 
 {%- block extra_form_html_row -%}
     {{- form_widget(form) -}}
@@ -152,3 +154,14 @@
         {{- content | raw -}}
     </div>
 {%- endblock extra_form_html_widget -%}
+
+
+{%- block extra_form_editor_widget -%}
+    <div data-ng-app="editorApp">
+        <div data-ng-controller="EditorController">
+            {{- form_widget(form) -}}
+        </div>
+    </div>
+    <script type="text/javascript" src="{{ asset('bundles/idciextraform/angular-1.3.16/angular.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/idciextraform/editor/editorApp.js') }}"></script>
+{%- endblock extra_form_editor_widget -%}
