@@ -1,3 +1,4 @@
+
 {%- block extra_form_collection_widget -%}
     {{- form_widget(form) -}}
     <script type="text/javascript">
@@ -160,10 +161,9 @@
     <div data-ng-app="editorApp">
         <div data-ng-controller="EditorController">
             <div id="extraform-editor">
-                <select data-ng-options="type as type for type in types" data-ng-model="selectedFieldtype"></select>
-                <button data-ng-click="addField()">Add</button>
-                <form id="extraform-editor-preview">
-                </form>
+                <typechoice>Waiting while we get form types list...</typechoice>
+                <div id="extraform-editor-preview">
+                </div>
             </div>
             <!-- <textarea data-ng-model="json"></textarea> -->
             {{- form_widget(form) -}}
