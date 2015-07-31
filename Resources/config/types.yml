@@ -4,7 +4,7 @@ idci_extra_form:
             parent:      ~
             form_type:   form
             abstract:    true
-            description: ~
+            description: "Form"
             extra_form_options:
                 label:          { extra_form_type: "text",     options: {required: false} }
                 required:       { extra_form_type: "checkbox", options: {required: false} }
@@ -20,7 +20,7 @@ idci_extra_form:
         "extra_form_builder":
             parent:      form
             form_type:   extra_form_builder
-            description: ~
+            description: "Extra form"
             extra_form_options:
                 configuration:  { extra_form_type: "textarea", options: {required: false} }
             extra_form_constraints: ~
