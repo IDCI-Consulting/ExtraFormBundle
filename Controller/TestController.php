@@ -164,7 +164,7 @@ class TestController extends Controller
     {
         $form = $this
             ->createFormBuilder()
-            ->add('editor', 'extra_form_editor')
+            ->add('editor', 'extra_form_editor', array('display_raw' => true))
             ->getForm()
         ;
 

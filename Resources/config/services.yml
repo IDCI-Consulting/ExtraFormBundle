@@ -105,6 +105,6 @@ services:
                 - { name: form.type, alias: extra_form_constraint_choice }
 
     form.type.idci_extra_form.editor:
-        class: IDCI\Bundle\ExtraFormBundle\Editor\Form\Type\ExtraFormEditorType
+        class: IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormEditorType
         tags:
             - { name: form.type, alias: extra_form_editor }
