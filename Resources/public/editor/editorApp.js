@@ -1,101 +1,116 @@
 var editorApp = angular.module('editorApp', []);
 
-editorApp.controller('editorController', function($scope, $http) {
-        $scope.formFetcherURI = function(type, format) {
-            return "/app_dev.php/_testsapi/extra-form-types/" + type + "/options." + format;
-        };
-        $scope.typesFetcherURI = "/app_dev.php/_testsapi/extra-form-types.html";
+editorApp.controller('editorController', function($scope, $http, $compile) {
+    $scope.editor = angular.element(document.querySelector('#extraform-editor'));
+    $scope.extraformTypes = {};
+    $scope.extraformConstraints = {};
+    $scope.fields = [];
+    $scope.newExtraformField = 'text';
+    $scope.newExtraformConstraint = {
+        'default' : 'not_blank',
+        'fields' : []
+    };
 
-        $scope.json = {};
-        $scope.selectedFieldtype = undefined;
-        $scope.previewElement = angular.element(document.querySelector('#extraform-editor-preview'));
+    $scope.uniqueId = function () {
+        return '_' + Math.random().toString(36).substr(2, 9);
+    };
 
-        $scope.appendToJson = function(html) {
-            //TO DO
-        }
-    }
-);
+    $http.get('/app_dev.php/_testsapi/extra-form-types.json')
+        .success(function(data, status, headers, config) {
+            $scope.extraformTypes = data;
+        })
+        .error(function(data, status, headers, config) {
+            console.log(data, status, headers);
+        })
+    ;
 
-editorApp.directive('typechoice', [
-    '$http',
-    '$compile',
-    function($http, $compile) {
-        return {
-            restrict : "E",
-            link : function(scope, element, attributes) {
-                scope.addField = function() {
-                    var field = angular.element('<field fieldtype="' + scope.selectedFieldtype + '"></field>');
+    $http.get('/app_dev.php/_testsapi/extra-form-constraints.json')
+        .success(function(data, status, headers, config) {
+            $scope.extraformConstraints = data;
+        })
+        .error(function(data, status, headers, config) {
+            console.log(data, status, headers);
+        })
+    ;
 
-                    $compile(field)(scope);
-                    scope.previewElement.append(field);
+    $scope.addField = function(event) {
+        event.preventDefault();
+        $scope.fields.push({
+            'name': 'field'+$scope.uniqueId(),
+            'extra_form_type':  $scope.newExtraformField,
+            'options': {},
+            'constraints': []
+        });
+
+        $scope.newExtraformField = 'text';
+    };
+
+    $scope.removeField = function(event, index) {
+        event.preventDefault();
+        $scope.fields.splice(index, 1);
+    };
+
+    $scope.addConstraint = function(event, index) {
+        event.preventDefault();
+
+        $scope.fields[index].constraints.push({
+            'extra_form_constraint': $scope.newExtraformConstraint.fields[index],
+            'options': {}
+        });
+    };
+
+    $scope.removeConstraint = function(event, fieldIndex, constraintIndex) {
+        event.preventDefault();
+        $scope.fields[fieldIndex].constraints.splice(constraintIndex, 1);
+    };
+
+    $scope.$watch(
+        'fields',
+        function(newVal, oldVal) {
+            var extraform = {};
+            angular.forEach($scope.fields, function(field, key) {
+                extraform[field.name] = {
+                    "extra_form_type": field.extra_form_type,
+                    "options": field.options,
+                    "constraints": field.constraints
                 };
+            });
 
-                //Get field types from api
-                $http.get(scope.typesFetcherURI).
-                    success(function(data, status, headers, config) {
-                        var select = angular.element(data);
-                        select.attr("data-ng-model", "selectedFieldtype");
+            $scope.output = angular.toJson(extraform, true);
 
-                        var addButton = angular.element('<span data-ng-click="addField()" style="cursor:pointer;">Add Field</span>');
+            var typeChanged = false;
+            angular.forEach(newVal, function(field, key) {
+                if (undefined == oldVal[key]) {
+                    typeChanged = {
+                        "key": key,
+                        "from": undefined,
+                        "to": field['extra_form_type']
+                    };
+                } else if (oldVal[key]['extra_form_type'] !== field['extra_form_type']) {
+                    typeChanged = {
+                        "key": key,
+                        "from": oldVal[key]['extra_form_type'],
+                        "to": field['extra_form_type']
+                    };
+                }
+            });
 
-                        $compile(select)(scope);
-                        $compile(addButton)(scope);
-
-                        element.after(addButton);
-                        element.replaceWith(select);
-                    }).
-                    error(function(data, status, headers, config) {
-                        console.log(data);
-                        element.replaceWith('<span style="color:red;">Unable to get form types list !</span>');
+            if (typeChanged) {
+                // TODO: Keep same data or clean
+                //$scope.fields[typeChanged.key].options = {};
+                $http.get('/app_dev.php/_testsapi/extra-form-types/'+typeChanged.to+'/options.html')
+                    .success(function(data, status, headers, config) {
+                        var fieldOptions = angular.element(document.querySelector('#extraform-field-'+typeChanged.key+' .extraform-field-options'));
+                        var options = data.replace(/name\=\"/g, 'data-ng-model="fields['+typeChanged.key+'].options.');
+                        fieldOptions.html(options);
+                        $compile(fieldOptions)($scope);
+                    })
+                    .error(function(data, status, headers, config) {
+                        console.log(data, status, headers);
                     })
                 ;
             }
-        }
-    }
-]);
-
-editorApp.directive('field', [
-    '$http',
-    '$compile',
-    function($http, $compile) {
-        return {
-            restrict : "E",
-            scope : {
-                fieldtype : "@"
-            },
-            link : function (scope, element, attributes) {
-                scope.save = function() {
-                    var fieldsets = element.find("fieldset");
-                    for(fieldset in fieldsets) {
-                        var label = fieldset.find("label");
-
-                        /*
-                        *
-                        *  TO DO get form and label value and save it in JSON
-                        *
-                        */
-                    }
-                };
-
-                $http.get(scope.$parent.formFetcherURI(scope.fieldtype, "html")).
-                    success(function(data, status, headers, config) {
-                        var block = angular.element('<div ><span ng-init="isVisible = false" ng-click="isVisible = !isVisible" style="cursor:pointer;">' + scope.fieldtype + ' </span><input name="name" data-ng-model="name" value="" placeholder="name"/><span data-ng-click="save()">SAVE</span></div>');
-                        var field = angular.element(data);
-
-                        field.attr('data-ng-show','isVisible');
-
-                        block.append(field);
-                        $compile(block)(scope);
-
-                        element.replaceWith(block);
-
-                        scope.$parent.appendToJson(data);
-                    }).
-                    error(function(data, status, headers, config) {
-                        console.log(data);
-                    })
-                ;
-            }
-        }
-    }
-]);
+        },
+        true
+    );
+});

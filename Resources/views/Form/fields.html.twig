@@ -159,10 +159,51 @@
 {%- block extra_form_editor_widget -%}
     <div data-ng-app="editorApp" data-ng-controller="editorController">
         {{- form_widget(form) -}}
+        {% if not form.vars['disabled_editor'] %}
         <div id="extraform-editor">
-            <typechoice>Waiting while we get form types list...</typechoice>
-            <div id="extraform-editor-preview"></div>
+            <div class="extraform-field" id="extraform-field-{{ '{{ fieldIndex }}' }}" data-ng-repeat="(fieldIndex, field) in fields">
+                <div>
+                    <label>{% trans %}Name{% endtrans %}:</label>
+                    <input type="text" data-ng-model="field.name" />
+
+                    <label>{% trans %}Type{% endtrans %}:</label>
+                    <select data-ng-model="field.extra_form_type">
+                        <option data-ng-repeat="(name, item) in extraformTypes" data-ng-selected="name == field.extra_form_type" data-ng-if="item.abstract == false" value="{{ '{{ name }}' }}">{{ '{{ name }} [{{ item.description }}]' }}</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label data-ng-init="showOptions[fieldIndex] = false" data-ng-click="showOptions[fieldIndex] = !showOptions[fieldIndex]">{% trans %}Options{% endtrans %}:</label>
+                    <div class="extraform-field-options" data-ng-show="showOptions[fieldIndex]"></div>
+                </div>
+
+                <div>
+                    <label data-ng-init="showConstraints[fieldIndex] = false" data-ng-click="showConstraints[fieldIndex] = !showConstraints[fieldIndex]">{% trans %}Constraints{% endtrans %}:</label>
+                    <div class="extraform-field-constraints" data-ng-show="showConstraints[fieldIndex]">
+                        <div data-ng-repeat="(constraintIndex, constraint) in field.constraints">
+                            <div class="extraform-field-constraint">
+                                <select data-ng-model="constraint.extra_form_constraint">
+                                    <option data-ng-repeat="(name, item) in extraformConstraints" data-ng-selected="name == constraint.extra_form_constraint" value="{{ '{{ name }}' }}">{{ '{{ name }}' }}</option>
+                                </select>
+
+                                <button data-ng-click="removeConstraint($event, fieldIndex, constraintIndex)">x</button>
+                            </div>
+                        </div>
+                        <select data-ng-model="newExtraformConstraint.fields[fieldIndex]" data-ng-init="newExtraformConstraint.fields[fieldIndex] = newExtraformConstraint.default">
+                            <option data-ng-repeat="(name, constraint) in extraformConstraints" data-ng-selected="name == newExtraformConstraint.default" value="{{ '{{ name }}' }}">{{ '{{ name }}' }}</option>
+                        </select>
+                        <button data-ng-click="addConstraint($event, fieldIndex)">Add constraint</button>
+                    </div>
+                </div>
+
+                <button data-ng-click="removeField($event, fieldIndex)">x</button>
+            </div>
         </div>
+        <select data-ng-model="newExtraformField">
+            <option data-ng-repeat="(name, type) in extraformTypes" data-ng-selected="name == newExtraformField" data-ng-if="type.abstract == false" value="{{ '{{ name }}' }}">{{ '{{ name }} [{{ type.description }}]' }}</option>
+        </select>
+        <button data-ng-click="addField($event)">Add field</button>
+        {% endif %}
     </div>
     <script type="text/javascript" src="{{ asset('bundles/idciextraform/angular-1.3.16/angular.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/idciextraform/editor/editorApp.js') }}"></script>

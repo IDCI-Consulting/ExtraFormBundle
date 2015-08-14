@@ -157,16 +157,26 @@ class TestController extends Controller
      * Test Editor.
      *
      * @Route("/editor", name="idci_extra_form_editor")
-     * @Method({"GET"})
+     * @Method({"GET", "POST"})
      * @Template()
      */
     public function editorAction(Request $request)
     {
         $form = $this
             ->createFormBuilder()
-            ->add('editor', 'extra_form_editor', array('display_raw' => true))
+            ->add('editor', 'extra_form_editor', array(
+                'display_raw'     => true,
+                //'disabled_editor' => true,
+            ))
+            ->add('send', 'submit')
             ->getForm()
         ;
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            var_dump($form->getData()); die;
+        }
 
         return array(
             'form' => $form->createView()

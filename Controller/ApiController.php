@@ -35,7 +35,9 @@ class ApiController extends FOSRestController
                 ->setTemplateVar('form')
             ;
         } else {
-            $view->setData($this->get('idci_extra_form.type_registry')->getTypes());
+            $types = $this->get('idci_extra_form.type_registry')->getTypes();
+            ksort($types);
+            $view->setData($types);
         }
 
         return $this->handleView($view);
@@ -63,7 +65,20 @@ class ApiController extends FOSRestController
         $options = $registry->getType($type)->getExtraFormOptions();
 
         if ('html' === $_format) {
-            $form = $this->get('idci_extra_form.builder')->build($options)->getForm();
+            $form = $this
+                ->get('idci_extra_form.builder')
+                ->build($options,
+                    array(),
+                    null,
+                    $this->container->get('form.factory')->createNamedBuilder(
+                        null,
+                        'form',
+                        null,
+                        array('csrf_protection' => false)
+                    )
+                )
+                ->getForm()
+            ;
 
             $view
                 ->setData($form->createView())
@@ -125,7 +140,21 @@ class ApiController extends FOSRestController
         $options = $registry->getConstraint($constraint)->getExtraFormOptions();
 
         if ('html' === $_format) {
-            $form = $this->get('idci_extra_form.builder')->build($options)->getForm();
+            $form = $this
+                ->get('idci_extra_form.builder')
+                ->build(
+                    $options,
+                    array(),
+                    null,
+                    $this->container->get('form.factory')->createNamedBuilder(
+                        null,
+                        'form',
+                        null,
+                        array('csrf_protection' => false)
+                    )
+                )
+                ->getForm()
+            ;
 
             $view
                 ->setData($form->createView())

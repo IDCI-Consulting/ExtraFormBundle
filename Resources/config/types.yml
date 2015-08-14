@@ -54,7 +54,7 @@ idci_extra_form:
         "checkbox":
             parent:      form
             form_type:   checkbox
-            description: "Boolean input field (checkbox)"
+            description: "Boolean input field"
             extra_form_options:
                 value: { extra_form_type: "text", options: {required: false} }
 

@@ -23,6 +23,7 @@ class ExtraFormEditorType extends AbstractType
     {
         $view->vars['attr']['data-ng-model'] = 'output';
         $view->vars['attr']['data-ng-show'] = $options['display_raw'] ? 'true' : 'false';
+        $view->vars['disabled_editor'] = $options['disabled_editor'];
 
         return $view->vars;
     }
@@ -34,10 +35,16 @@ class ExtraFormEditorType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'display_raw' => false,
+                'required'        => false,
+                'display_raw'     => false,
+                'disabled_editor' => false,
+                'attr'            => array(
+                    'style' => 'display: block; width: 100%; height: 150px;'
+                ),
             ))
             ->setAllowedTypes(array(
-                'display_raw' => array('bool')
+                'display_raw'     => array('bool'),
+                'disabled_editor' => array('bool'),
             ))
         ;
     }
