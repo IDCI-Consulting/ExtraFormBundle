@@ -7,6 +7,7 @@ idci_extra_form:
             description: "Form"
             extra_form_options:
                 label:          { extra_form_type: "text",     options: {required: false} }
+                label_attr:     { extra_form_type: "text",     options: {required: false} }
                 required:       { extra_form_type: "checkbox", options: {required: false} }
                 disabled:       { extra_form_type: "checkbox", options: {required: false} }
                 read_only:      { extra_form_type: "checkbox", options: {required: false} }
