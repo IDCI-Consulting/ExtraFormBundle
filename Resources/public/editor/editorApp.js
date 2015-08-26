@@ -1,15 +1,16 @@
 var editorApp = angular.module('editorApp', []);
 
 editorApp.controller('editorController', function($scope, $http, $compile) {
+    $scope.defaults = {
+        'extraformField': 'text',
+        'extraformConstraint': 'not_blank'
+    }
     $scope.editor = angular.element(document.querySelector('#extraform-editor'));
     $scope.extraformTypes = {};
     $scope.extraformConstraints = {};
     $scope.fields = [];
-    $scope.newExtraformField = 'text';
-    $scope.newExtraformConstraint = {
-        'default' : 'not_blank',
-        'fields' : []
-    };
+    $scope.newExtraformField = $scope.defaults['extraformField'];
+    $scope.newExtraformConstraints = [];
 
     $scope.uniqueId = function () {
         return '_' + Math.random().toString(36).substr(2, 9);
@@ -42,7 +43,7 @@ editorApp.controller('editorController', function($scope, $http, $compile) {
             'constraints': []
         });
 
-        $scope.newExtraformField = 'text';
+        $scope.newExtraformField = $scope.defaults['extraformField'];
     };
 
     $scope.removeField = function(event, index) {
@@ -54,9 +55,11 @@ editorApp.controller('editorController', function($scope, $http, $compile) {
         event.preventDefault();
 
         $scope.fields[index].constraints.push({
-            'extra_form_constraint': $scope.newExtraformConstraint.fields[index],
+            'extra_form_constraint': $scope.newExtraformConstraints[index],
             'options': {}
         });
+
+        $scope.newExtraformConstraints[index] = $scope.defaults['extraformConstraint'];
     };
 
     $scope.removeConstraint = function(event, fieldIndex, constraintIndex) {
@@ -78,24 +81,7 @@ editorApp.controller('editorController', function($scope, $http, $compile) {
 
             $scope.output = angular.toJson(extraform, true);
 
-            var typeChanged = false;
-            angular.forEach(newVal, function(field, key) {
-                if (undefined == oldVal[key]) {
-                    typeChanged = {
-                        "key": key,
-                        "from": undefined,
-                        "to": field['extra_form_type']
-                    };
-                } else if (oldVal[key]['extra_form_type'] !== field['extra_form_type']) {
-                    typeChanged = {
-                        "key": key,
-                        "from": oldVal[key]['extra_form_type'],
-                        "to": field['extra_form_type']
-                    };
-                }
-            });
-
-            if (typeChanged) {
+            if (typeChanged = $scope.getChangedType(newVal, oldVal)) {
                 // TODO: Keep same data or clean
                 //$scope.fields[typeChanged.key].options = {};
                 $http.get('/app_dev.php/_testsapi/extra-form-types/'+typeChanged.to+'/options.html')
@@ -110,7 +96,58 @@ editorApp.controller('editorController', function($scope, $http, $compile) {
                     })
                 ;
             }
+
+            if (constraintChanged = $scope.getChangedConstraint(newVal, oldVal)) {
+                console.log('todo');
+            }
         },
         true
     );
+
+    $scope.getChangedType = function(newVal, oldVal) {
+        var typeChanged = false;
+
+        angular.forEach(newVal, function(field, key) {
+            if (undefined == oldVal[key]) {
+                typeChanged = {
+                    "key": key,
+                    "from": undefined,
+                    "to": field['extra_form_type']
+                };
+            } else if (oldVal[key]['extra_form_type'] !== field['extra_form_type']) {
+                typeChanged = {
+                    "key": key,
+                    "from": oldVal[key]['extra_form_type'],
+                    "to": field['extra_form_type']
+                };
+            }
+        });
+
+        return typeChanged;
+    };
+
+    $scope.getChangedConstraint = function(newVal, oldVal) {
+        var constraintChanged = false;
+
+        console.log(newVal, oldVal);
+        /*
+        angular.forEach(newVal, function(field, key) {
+            if (undefined == oldVal[key]) {
+                typeChanged = {
+                    "key": key,
+                    "from": undefined,
+                    "to": field['extra_form_type']
+                };
+            } else if (oldVal[key]['extra_form_type'] !== field['extra_form_type']) {
+                typeChanged = {
+                    "key": key,
+                    "from": oldVal[key]['extra_form_type'],
+                    "to": field['extra_form_type']
+                };
+            }
+        });
+        */
+
+        return constraintChanged;
+    };
 });

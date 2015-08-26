@@ -189,8 +189,8 @@
                                 <button data-ng-click="removeConstraint($event, fieldIndex, constraintIndex)">x</button>
                             </div>
                         </div>
-                        <select data-ng-model="newExtraformConstraint.fields[fieldIndex]" data-ng-init="newExtraformConstraint.fields[fieldIndex] = newExtraformConstraint.default">
-                            <option data-ng-repeat="(name, constraint) in extraformConstraints" data-ng-selected="name == newExtraformConstraint.default" value="{{ '{{ name }}' }}">{{ '{{ name }}' }}</option>
+                        <select data-ng-model="newExtraformConstraints[fieldIndex]" data-ng-init="newExtraformConstraints[fieldIndex] = defaults.extraformConstraint">
+                            <option data-ng-repeat="(name, constraint) in extraformConstraints" data-ng-selected="name == defaults.extraformConstraint" value="{{ '{{ name }}' }}">{{ '{{ name }}' }}</option>
                         </select>
                         <button data-ng-click="addConstraint($event, fieldIndex)">Add constraint</button>
                     </div>
