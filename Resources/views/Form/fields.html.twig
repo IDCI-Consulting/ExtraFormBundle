@@ -3,14 +3,23 @@
     <script type="text/javascript">
         function getJquery(callback) {
             if (!window.jQuery) {
-                var sJquery = document.createElement("script");
-                sJquery.src = "{{ asset('bundles/idciextraform/js/jquery-1.11.3.min.js') }}";
-                sJquery.type = "text/javascript";
+                if (!document.getElementById('idci_jquery')) {
+                    var sJquery = document.createElement("script");
+                    sJquery.id = "idci_jquery";
+                    sJquery.src = "{{ asset('bundles/idciextraform/js/jquery-1.11.3.min.js') }}";
+                    sJquery.type = "text/javascript";
 
-                var head = document.getElementsByTagName('head')[0];
-                head.parentNode.insertBefore(sJquery, head);
+                    var head = document.getElementsByTagName('head')[0];
+                    head.appendChild(sJquery);
+                } else {
+                    var sJquery = document.getElementById('idci_jquery');
+                }
 
+                var onload = sJquery.onload;
                 sJquery.onload = sJquery.onreadystatechange = function() {
+                    if (typeof onload == 'function') {
+                        onload();
+                    }
                     callback(window.jQuery);
                 }
             } else {
