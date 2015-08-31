@@ -63,7 +63,7 @@ class CollectionEventSubscriber implements EventSubscriberInterface
 
         for ($i = 0; $i < $this->options['max_items']; $i++) {
             $required = $i < $this->options['min_items'] ? true : false;
-            $display  = $i < $this->options['min_items'] || isset($data[$i]) ? 'show' : 'hide';
+            $display  = $i < $this->options['min_items'] || $this->isDisplayable($event, $i) ? 'show' : 'hide';
 
             $form->add($i, $this->options['type'], array_replace_recursive(
                 array(
@@ -98,8 +98,7 @@ class CollectionEventSubscriber implements EventSubscriberInterface
 
         for ($i = 0; $i < $this->options['max_items']; $i++) {
             $required = $i < $this->options['min_items'] ? true : false;
-            // isDisplayable is an hugly hack for collection with sub form using hidden field !
-            $display  = $i < $this->options['min_items'] ||$this->isDisplayable($event, $i) ? 'show' : 'hide';
+            $display  = $i < $this->options['min_items'] || $this->isDisplayable($event, $i) ? 'show' : 'hide';
 
             $form->add($i, $this->options['type'], array_replace_recursive(
                 array(
@@ -144,7 +143,7 @@ class CollectionEventSubscriber implements EventSubscriberInterface
         $toDelete = array();
 
         foreach ($data as $name => $child) {
-            if (!$form->has($name)) {
+            if (!$this->isDisplayable($event, $name)) {
                 $toDelete[] = $name;
             }
         }
@@ -173,10 +172,22 @@ class CollectionEventSubscriber implements EventSubscriberInterface
             return false;
         }
 
-        if (!is_array($data[$i])) {
+        $item = is_object($data[$i]) ? (array)$data[$i] : $data[$i];
+
+        if (!is_array($item)) {
             return true;
         }
 
+        foreach ($item as $k => $v) {
+            if (null !== $v) {
+                return true;
+            }
+        }
+
+        return false;
+
+        // A hugly hack for collection with sub form using hidden field !
+        /*
         foreach ($data[$i] as $k => $v) {
             if ('hidden' !== $form->get($i)->get($k)->getConfig()->getType()->getName()) {
                 return true;
@@ -184,5 +195,6 @@ class CollectionEventSubscriber implements EventSubscriberInterface
         }
 
         return false;
+        */
     }
 }
