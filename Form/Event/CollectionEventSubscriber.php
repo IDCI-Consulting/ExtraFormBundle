@@ -179,22 +179,15 @@ class CollectionEventSubscriber implements EventSubscriberInterface
         }
 
         foreach ($item as $k => $v) {
-            if (null !== $v) {
+            // Value not null and not an hidden field
+            if (
+                null !== $v &&
+                'hidden' !== $form->get($i)->get($k)->getConfig()->getType()->getName()
+            ) {
                 return true;
             }
         }
 
         return false;
-
-        // A hugly hack for collection with sub form using hidden field !
-        /*
-        foreach ($data[$i] as $k => $v) {
-            if ('hidden' !== $form->get($i)->get($k)->getConfig()->getType()->getName()) {
-                return true;
-            }
-        }
-
-        return false;
-        */
     }
 }
