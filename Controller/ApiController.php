@@ -15,8 +15,8 @@ class ApiController extends FOSRestController
     /**
      * Retrieve extra form type option
      *
-     * @Annotations\Post("/types/{typeName}/options.{_format}", name="idci_extra_form_render_options_post", requirements={"_format" = "json|xml|html"}, defaults={"_format" = "json"})
-     * @Annotations\Put("/types/{typeName}/options.{_format}", name="idci_extra_form_render_options_put", requirements={"_format" = "json|xml|html"}, defaults={"_format" = "json"})
+     * @Annotations\Post("/types/{typeName}/options", name="idci_extra_form_render_options_post", requirements={"_format" = "json|xml|html"}, defaults={"_format" = "json"})
+     * @Annotations\Put("/types/{typeName}/options", name="idci_extra_form_render_options_put", requirements={"_format" = "json|xml|html"}, defaults={"_format" = "json"})
      * @Annotations\View()
      *
      * @return View
@@ -56,8 +56,8 @@ class ApiController extends FOSRestController
     /**
      * Retrieve extra form constraint options
      *
-     * @Annotations\Post("/constraints/{constraintName}/options.{_format}", name="idci_extra_form_render_constraints_post", requirements={"_format" = "json|xml|html"}, defaults={"_format" = "json"})
-     * @Annotations\Put("/constraints/{constraintName}/options.{_format}", name="idci_extra_form_render_constraints_put", requirements={"_format" = "json|xml|html"}, defaults={"_format" = "json"})
+     * @Annotations\Post("/constraints/{constraintName}/options", name="idci_extra_form_render_constraints_post", requirements={"_format" = "json|xml|html"}, defaults={"_format" = "json"})
+     * @Annotations\Put("/constraints/{constraintName}/options", name="idci_extra_form_render_constraints_put", requirements={"_format" = "json|xml|html"}, defaults={"_format" = "json"})
      * @Annotations\View
      *
      * @return View
