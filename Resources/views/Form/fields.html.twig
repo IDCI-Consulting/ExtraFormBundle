@@ -50,12 +50,12 @@
             var showItem = function(item) {
                 item.attr('data-display', 'show');
 
-                $(':disabled', item)
-                    .each(function(i,e) {
-                        $(e)
-                            .prop('disabled', false)
-                        ;
-                    })
+                // Uncheck remove input
+
+                item
+                    .find('.idci_collection_item_remove')
+                    .prop('checked', false)
+                    .attr('checked', false)
                 ;
 
                 getItemContainer(item).show();
@@ -65,24 +65,26 @@
             var hideItem = function(item) {
                 item.attr('data-display', 'hide');
 
-                $(':input', item)
-                    .not(':button, :submit, :reset, :hidden')
-                    .each(function(i,e) {
-                        $(e).val($(e).attr('value') || '')
-                            .prop('checked',  false)
-                            .prop('selected', false)
-                            .prop('disabled', true)
-                            .trigger('change')
-                        ;
-                    })
+                // Check remove input
+                item
+                    .find('.idci_collection_item_remove')
+                    .prop('checked', true)
+                    .attr('checked', true)
                 ;
-                $('option[selected]', item).prop('selected', true);
-                $('input[checked]',   item).prop('checked',  true);
-                $('textarea',         item).each(function(i,e) { $(e).val($(e).html()) });
 
                 getItemContainer(item).hide().insertBefore($addButton);
                 countActionable++;
             };
+
+            var hideRemoveCheckbox = function(item) {
+                var $removeCheckbox = item.find('.idci_collection_item_remove');
+
+                $removeCheckbox.closest('.inputs').attr('style', 'display:none;');
+                getItemContainer(item)
+                    .find('label[for='+$removeCheckbox.attr('id')+']')
+                    .attr('style', 'display:none;')
+                ;
+            }
 
             var addRemoveButton = function() {
                 if (hasRemovedButtons) {
@@ -138,6 +140,8 @@
             // INIT
             $div.append($addButton);
             $items.each(function() {
+                hideRemoveCheckbox($(this));
+
                 if ($(this).data('display') == 'hide') {
                     hideItem($(this));
                 }

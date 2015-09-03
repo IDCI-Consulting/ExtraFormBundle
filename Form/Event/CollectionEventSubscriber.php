@@ -37,11 +37,13 @@ class CollectionEventSubscriber implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => array(
-                array('preSetData', 0),
+                array('preSetData', 1),
+                array('buildCollection', 0),
             ),
             FormEvents::PRE_SUBMIT   => array(
-                array('preSubmitData', 0),
-                array('changeData', 100),
+                array('preSubmitData', 1),
+                array('buildCollection', 0),
+                array('changeData', -1),
             ),
             FormEvents::SUBMIT       => array(
                 array('onSubmit', 50),
@@ -50,36 +52,23 @@ class CollectionEventSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Pre set data.
+     *
+     * @param FormEvent $event
      */
     public function preSetData(FormEvent $event)
     {
         $form = $event->getForm();
-        $data = $event->getData();
 
         foreach ($form as $name => $child) {
             $form->remove($name);
         }
-
-        for ($i = 0; $i < $this->options['max_items']; $i++) {
-            $required = $i < $this->options['min_items'] ? true : false;
-            $display  = $i < $this->options['min_items'] || $this->isDisplayable($event, $i) ? 'show' : 'hide';
-
-            $form->add($i, $this->options['type'], array_replace_recursive(
-                array(
-                    'required' => $required,
-                    'attr'     => array(
-                        'data-collection-id' => $this->options['collection_id'],
-                        'data-display'       => $display,
-                    ),
-                ),
-                $this->options['options']
-            ));
-        }
     }
 
     /**
-     * {@inheritdoc}
+     * Pre submit data.
+     *
+     * @param FormEvent $event
      */
     public function preSubmitData(FormEvent $event)
     {
@@ -95,26 +84,47 @@ class CollectionEventSubscriber implements EventSubscriberInterface
                 $form->remove($name);
             }
         }
+    }
+
+    /**
+     * Build collection.
+     *
+     * @param FormEvent $event
+     */
+    public function buildCollection(FormEvent $event)
+    {
+        $form = $event->getForm();
 
         for ($i = 0; $i < $this->options['max_items']; $i++) {
-            $required = $i < $this->options['min_items'] ? true : false;
-            $display  = $i < $this->options['min_items'] || $this->isDisplayable($event, $i) ? 'show' : 'hide';
+            $required  = $i < $this->options['min_items'] ? true : false;
+            $displayed = $i < $this->options['min_items'] || $this->isDisplayable($event, $i);
 
             $form->add($i, $this->options['type'], array_replace_recursive(
                 array(
                     'required' => $required,
                     'attr'     => array(
                         'data-collection-id' => $this->options['collection_id'],
-                        'data-display'       => $display
+                        'data-display'       => $displayed ? 'show' : 'hide',
                     ),
                 ),
                 $this->options['options']
+            ));
+
+            $form->get($i)->add('__to_remove', 'checkbox', array(
+                'mapped'   => false,
+                'required' => false,
+                'data'     => !$displayed,
+                'attr'     => array(
+                    'class' => 'unchangeable_field idci_collection_item_remove'
+                )
             ));
         }
     }
 
     /**
-     * {@inheritdoc}
+     * Change data.
+     *
+     * @param FormEvent $event
      */
     public function changeData(FormEvent $event)
     {
@@ -124,7 +134,9 @@ class CollectionEventSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * {@inheritdoc}
+     * On submit.
+     *
+     * @param FormEvent $event
      */
     public function onSubmit(FormEvent $event)
     {
@@ -143,7 +155,10 @@ class CollectionEventSubscriber implements EventSubscriberInterface
         $toDelete = array();
 
         foreach ($data as $name => $child) {
-            if (!$this->isDisplayable($event, $name)) {
+            if (null === $child || (
+                $form->get($name)->has('__to_remove') &&
+                true === $form->get($name)->get('__to_remove')->getData()
+            )) {
                 $toDelete[] = $name;
             }
         }
