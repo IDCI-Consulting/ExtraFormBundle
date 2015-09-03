@@ -100,14 +100,14 @@ class CollectionEventSubscriber implements EventSubscriberInterface
             $displayed = $i < $this->options['min_items'] || $this->isDisplayable($event, $i);
 
             $form->add($i, $this->options['type'], array_replace_recursive(
+                $this->options['options'],
                 array(
                     'required' => $required,
                     'attr'     => array(
                         'data-collection-id' => $this->options['collection_id'],
                         'data-display'       => $displayed ? 'show' : 'hide',
                     ),
-                ),
-                $this->options['options']
+                )
             ));
 
             $form->get($i)->add('__to_remove', 'checkbox', array(
