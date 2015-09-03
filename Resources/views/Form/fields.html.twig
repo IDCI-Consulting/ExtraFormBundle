@@ -79,7 +79,7 @@
             var hideRemoveCheckbox = function(item) {
                 var $removeCheckbox = item.find('.idci_collection_item_remove');
 
-                $removeCheckbox.closest('.inputs').attr('style', 'display:none;');
+                $removeCheckbox.attr('style', 'display:none;');
                 getItemContainer(item)
                     .find('label[for='+$removeCheckbox.attr('id')+']')
                     .attr('style', 'display:none;')
