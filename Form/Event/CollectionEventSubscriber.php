@@ -194,6 +194,10 @@ class CollectionEventSubscriber implements EventSubscriberInterface
         }
 
         foreach ($item as $k => $v) {
+            if ('__to_remove' === $k) {
+                continue;
+            }
+
             if (FormEvents::PRE_SUBMIT === $event->getName()) {
                 // Not an hidden field
                 if ('hidden' === $form->get($i)->get($k)->getConfig()->getType()->getName()) {
