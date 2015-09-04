@@ -104,9 +104,12 @@ class CollectionEventSubscriber implements EventSubscriberInterface
                 $options['required'] && $required :
                 $required
             ;
-            $options['attr'] = array(
-                'data-collection-id' => $this->options['collection_id'],
-                'data-display'       => $displayed ? 'show' : 'hide',
+            $options['attr'] = array_replace(
+                isset($options['attr']) ? $options['attr'] : array(),
+                array(
+                    'data-collection-id' => $this->options['collection_id'],
+                    'data-display'       => $displayed ? 'show' : 'hide',
+                )
             );
 
             $form->add($i, $this->options['type'], $options);
