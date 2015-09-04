@@ -99,16 +99,17 @@ class CollectionEventSubscriber implements EventSubscriberInterface
             $required  = $i < $this->options['min_items'] ? true : false;
             $displayed = $i < $this->options['min_items'] || $this->isDisplayable($event, $i);
 
-            $form->add($i, $this->options['type'], array_replace_recursive(
-                $this->options['options'],
-                array(
-                    'required' => $required,
-                    'attr'     => array(
-                        'data-collection-id' => $this->options['collection_id'],
-                        'data-display'       => $displayed ? 'show' : 'hide',
-                    ),
-                )
-            ));
+            $options = $this->options['options'];
+            $options['required'] = isset($options['required']) ?
+                $options['required'] && $required :
+                $required
+            ;
+            $options['attr'] = array(
+                'data-collection-id' => $this->options['collection_id'],
+                'data-display'       => $displayed ? 'show' : 'hide',
+            );
+
+            $form->add($i, $this->options['type'], $options);
 
             $form->get($i)->add('__to_remove', 'checkbox', array(
                 'mapped'   => false,
@@ -193,20 +194,22 @@ class CollectionEventSubscriber implements EventSubscriberInterface
             return true;
         }
 
+        if (FormEvents::PRE_SUBMIT === $event->getName()) {
+            if (isset($item['__to_remove'])) {
+                return !(bool)$item['__to_remove'];
+            }
+        }
+
         foreach ($item as $k => $v) {
-            if ('__to_remove' === $k) {
+            if (
+                FormEvents::PRE_SUBMIT === $event->getName() &&
+                'hidden' === $form->get($i)->get($k)->getConfig()->getType()->getName()
+            ) {
                 continue;
             }
 
-            if (FormEvents::PRE_SUBMIT === $event->getName()) {
-                // Not an hidden field
-                if ('hidden' === $form->get($i)->get($k)->getConfig()->getType()->getName()) {
-                    continue;
-                }
-            }
-
             // Value not null
-            if (null !== $v) {
+            if (null !== $v && '' !== $v) {
                 return true;
             }
         }
