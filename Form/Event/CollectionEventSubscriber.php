@@ -109,6 +109,7 @@ class CollectionEventSubscriber implements EventSubscriberInterface
                 array(
                     'data-collection-id' => $this->options['collection_id'],
                     'data-display'       => $displayed ? 'show' : 'hide',
+                    'data-position'      => $i,
                 )
             );
 
