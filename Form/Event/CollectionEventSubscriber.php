@@ -47,7 +47,7 @@ class CollectionEventSubscriber implements EventSubscriberInterface
             ),
             FormEvents::SUBMIT       => array(
                 array('onSubmit', 50),
-            )
+            ),
         );
     }
 
@@ -120,7 +120,7 @@ class CollectionEventSubscriber implements EventSubscriberInterface
                 'required' => false,
                 'data'     => !$displayed,
                 'attr'     => array(
-                    'class' => 'unchangeable_field idci_collection_item_remove'
+                    'class' => 'idci_collection_item_remove'
                 )
             ));
         }
@@ -133,9 +133,19 @@ class CollectionEventSubscriber implements EventSubscriberInterface
      */
     public function changeData(FormEvent $event)
     {
-        if (is_array($event->getData())) {
-            $event->setData(array_values($event->getData()));
+        $form = $event->getForm();
+        $data = $event->getData();
+
+        foreach ($form as $name => $child) {
+            if (!isset($data[$name]) || (
+                isset($data[$name]['__to_remove']) && (bool)$data[$name]['__to_remove']
+            )) {
+                $form->remove($name);
+                unset($data[$name]);
+            }
         }
+
+        $event->setData($data);
     }
 
     /**
@@ -160,10 +170,7 @@ class CollectionEventSubscriber implements EventSubscriberInterface
         $toDelete = array();
 
         foreach ($data as $name => $child) {
-            if (null === $child || (
-                $form->get($name)->has('__to_remove') &&
-                true === $form->get($name)->get('__to_remove')->getData()
-            )) {
+            if (null === $child || !$form->has($name)) {
                 $toDelete[] = $name;
             }
         }
@@ -172,7 +179,7 @@ class CollectionEventSubscriber implements EventSubscriberInterface
             unset($data[$name]);
         }
 
-        $event->setData($data);
+        $event->setData(array_values($data));
     }
 
     /**
