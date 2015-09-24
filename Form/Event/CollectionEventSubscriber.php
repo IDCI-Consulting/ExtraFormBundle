@@ -52,6 +52,26 @@ class CollectionEventSubscriber implements EventSubscriberInterface
     }
 
     /**
+     * Disable constraints
+     *
+     * @param array $options
+     */
+    public static function disableConstraints(& $options)
+    {
+        if (!is_array($options)) {
+            return;
+        }
+
+        foreach ($options as $key => $value) {
+            if ('constraints' === $key) {
+                $options[$key] = array();
+            } elseif (is_array($value)) {
+                self::disableConstraints($options[$key]);
+            }
+        }
+    }
+
+    /**
      * Pre set data.
      *
      * @param FormEvent $event
@@ -113,6 +133,10 @@ class CollectionEventSubscriber implements EventSubscriberInterface
                 )
             );
 
+            if (!$displayed) {
+                self::disableConstraints($options);
+            }
+
             $form->add($i, $this->options['type'], $options);
 
             $form->get($i)->add('__to_remove', 'checkbox', array(
@@ -136,16 +160,7 @@ class CollectionEventSubscriber implements EventSubscriberInterface
         $form = $event->getForm();
         $data = $event->getData();
 
-        foreach ($form as $name => $child) {
-            if (!isset($data[$name]) || (
-                isset($data[$name]['__to_remove']) && (bool)$data[$name]['__to_remove']
-            )) {
-                $form->remove($name);
-                unset($data[$name]);
-            }
-        }
-
-        $event->setData($data);
+        $event->setData(array_values($data));
     }
 
     /**
@@ -170,7 +185,10 @@ class CollectionEventSubscriber implements EventSubscriberInterface
         $toDelete = array();
 
         foreach ($data as $name => $child) {
-            if (null === $child || !$form->has($name)) {
+            if (null === $child || (
+                $form->get($name)->has('__to_remove') &&
+                true === $form->get($name)->get('__to_remove')->getData()
+            )) {
                 $toDelete[] = $name;
             }
         }
