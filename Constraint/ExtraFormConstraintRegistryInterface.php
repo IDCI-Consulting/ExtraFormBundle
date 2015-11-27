@@ -16,7 +16,7 @@ interface ExtraFormConstraintRegistryInterface
      * @param string                       $alias      The constraint alias.
      * @param ExtraFormConstraintInterface $constraint The constraint.
      *
-     * @return ExtraFormConstraintInterface
+     * @return ExtraFormConstraintRegistryInterface
      */
     public function setConstraint($alias, ExtraFormConstraintInterface $constraint);
 
