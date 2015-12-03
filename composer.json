@@ -14,7 +14,8 @@
     "require": {
         "php": ">=5.3.2",
         "symfony/framework-bundle": ">=2.3",
-        "gregwar/captcha-bundle": "dev-master"
+        "gregwar/captcha-bundle": "dev-master",
+        "friendsofsymfony/rest-bundle": "1.5.*"
     },
     "suggest": {
         "idci/step-bundle": "Allow to use the extra form mechanism in a step workflow"
