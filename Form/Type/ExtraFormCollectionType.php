@@ -80,14 +80,24 @@ class ExtraFormCollectionType extends AbstractType
             ))
             ->setNormalizers(array(
                 'add_button' => function(Options $options, $value) {
+                    $attr = ($options['min_items'] == $options['max_items']) ?
+                        array('style' => 'display:none;') :
+                        array()
+                    ;
+
                     return array_replace_recursive(
-                        array('label' => 'add', 'attr' => array()),
+                        array('label' => 'add', 'attr' => $attr),
                         $value
                     );
                 },
                 'remove_button' => function(Options $options, $value) {
+                    $attr = ($options['min_items'] == $options['max_items']) ?
+                        array('style' => 'display:none;') :
+                        array()
+                    ;
+
                     return array_replace_recursive(
-                        array('label' => 'remove', 'attr' => array()),
+                        array('label' => 'remove', 'attr' => $attr),
                         $value
                     );
                 },
