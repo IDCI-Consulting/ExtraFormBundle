@@ -82,15 +82,15 @@ services:
         tags:
             - { name: form.type, alias: extra_form_iban }
 
-    form.type.idci_extra_form.iban_text:
-        class: IDCI\Bundle\ExtraFormBundle\Form\Type\IbanTextType
-        tags:
-            - { name: form.type, alias: extra_form_iban_text }
-
     form.type.idci_extra_form.html:
         class: IDCI\Bundle\ExtraFormBundle\Form\Type\HtmlType
         tags:
             - { name: form.type, alias: extra_form_html }
+
+    form.type.idci_extra_form.range:
+        class: IDCI\Bundle\ExtraFormBundle\Form\Type\RangeType
+        tags:
+            - { name: form.type, alias: extra_form_range }
 
     form.type.idci_extra_form.extra_form_type_choice:
         class: IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormTypeChoiceType

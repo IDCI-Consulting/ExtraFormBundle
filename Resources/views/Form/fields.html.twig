@@ -183,3 +183,8 @@
         {{- content | raw -}}
     </div>
 {%- endblock extra_form_html_widget -%}
+
+{%- block extra_form_range_widget -%}
+    {% set type = type|default('range') %}
+    {{- block('form_widget_simple') -}}
+{%- endblock extra_form_range_widget %}
