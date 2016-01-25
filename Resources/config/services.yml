@@ -77,6 +77,11 @@ services:
         tags:
             - { name: form.type, alias: extra_form_json_textarea }
 
+    form.type.idci_extra_form.iban_text:
+        class: IDCI\Bundle\ExtraFormBundle\Form\Type\IbanTextType
+        tags:
+            - { name: form.type, alias: extra_form_iban_text }
+
     form.type.idci_extra_form.iban:
         class: IDCI\Bundle\ExtraFormBundle\Form\Type\IbanType
         tags:
