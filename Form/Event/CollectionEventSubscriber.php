@@ -41,9 +41,9 @@ class CollectionEventSubscriber implements EventSubscriberInterface
                 array('buildCollection', 0),
             ),
             FormEvents::PRE_SUBMIT   => array(
-                array('preSubmitData', 1),
+                array('preSubmitData', 2),
+                array('changeData', 1),
                 array('buildCollection', 0),
-                array('changeData', -1),
             ),
             FormEvents::SUBMIT       => array(
                 array('onSubmit', 50),
