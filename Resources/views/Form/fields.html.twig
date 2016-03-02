@@ -137,10 +137,9 @@
                     $addButton.prop('disabled', true).removeClass('success').addClass('disabled');
                 }
 
+                removeRemoveButtons();
                 if (maxItems - countActionable > minItems) {
                     addRemoveButtons();
-                } else {
-                    removeRemoveButtons();
                 }
             };
 
