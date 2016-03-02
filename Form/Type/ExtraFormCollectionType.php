@@ -30,7 +30,7 @@ class ExtraFormCollectionType extends AbstractType
                 array(
                     'required' => false,
                     'attr'     => array_merge(
-                        $options['attr'],
+                        $options['options']['attr'],
                         array(
                             'data-collection-id' => $options['collection_id'],
                             'data-display'       => 'prototype',
@@ -78,7 +78,7 @@ class ExtraFormCollectionType extends AbstractType
                 'type'          => 'text',
                 'add_button'    => array(),
                 'remove_button' => array(),
-                'options'       => array('label' => ' '),
+                'options'       => array(),
                 'collection_id' => 'default'
             ))
             ->setNormalizers(array(
@@ -104,6 +104,15 @@ class ExtraFormCollectionType extends AbstractType
                         $value
                     );
                 },
+                'options' => function(Options $options, $value) {
+                    return array_merge(
+                        array(
+                            'label' => ' ',
+                            'attr'  => array()
+                        ),
+                        $value
+                    );
+                }
             ))
             ->setAllowedTypes(array(
                 'add_button'    => array('array'),
