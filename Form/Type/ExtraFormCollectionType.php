@@ -29,9 +29,12 @@ class ExtraFormCollectionType extends AbstractType
                 $options['options'],
                 array(
                     'required' => false,
-                    'attr'     => array(
-                        'data-collection-id' => $options['collection_id'],
-                        'data-display'       => 'prototype',
+                    'attr'     => array_merge(
+                        $options['attr'],
+                        array(
+                            'data-collection-id' => $options['collection_id'],
+                            'data-display'       => 'prototype',
+                        )
                     )
                 )
             )
