@@ -160,7 +160,11 @@ class CollectionEventSubscriber implements EventSubscriberInterface
         $form = $event->getForm();
         $data = $event->getData();
 
-        $event->setData(array_values($data));
+        if ($data instanceof Doctrine\Common\Collections\Collection) {
+            $event->setData($data->getValues());
+        } else {
+            $event->setData(array_values($data));
+        }
     }
 
     /**
@@ -197,7 +201,11 @@ class CollectionEventSubscriber implements EventSubscriberInterface
             unset($data[$name]);
         }
 
-        $event->setData(array_values($data));
+        if ($data instanceof Doctrine\Common\Collections\Collection) {
+            $event->setData($data->getValues());
+        } else {
+            $event->setData(array_values($data));
+        }
     }
 
     /**
