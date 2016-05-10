@@ -160,6 +160,10 @@ class CollectionEventSubscriber implements EventSubscriberInterface
         $form = $event->getForm();
         $data = $event->getData();
 
+        if (null === $data) {
+            $data = array();
+        }
+
         if ($data instanceof \Doctrine\Common\Collections\Collection) {
             $event->setData($data->getValues());
         } else {
