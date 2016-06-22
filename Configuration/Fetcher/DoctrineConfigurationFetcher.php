@@ -58,7 +58,7 @@ class DoctrineConfigurationFetcher extends AbstractConfigurationFetcher
             throw new FetchConfigurationException(
                 'doctrine',
                 $parameters
-            ));
+            );
         }
 
         $getter = sprintf(
