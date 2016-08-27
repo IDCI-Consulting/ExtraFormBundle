@@ -59,6 +59,14 @@ services:
             - @idci_extra_form.constraint_registry
 
 
+    # Form type extensions
+
+    form.type_extension.help_message:
+        class: IDCI\Bundle\ExtraFormBundle\Form\Extension\HelpMessageTypeExtension
+        tags:
+          - { name: "form.type_extension", alias: "form" }
+
+
     # Form Types
 
     form.type.idci_extra_form.extra_form_builder:
