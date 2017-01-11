@@ -22,6 +22,34 @@ class ExtraFormCollectionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $prototype = $builder->create(
+            '__collection_item_prototype__',
+            $options['type'],
+            array_merge(
+                $options['options'],
+                array(
+                    'required' => false,
+                    'attr'     => array_merge(
+                        $options['options']['attr'],
+                        array(
+                            'data-collection-id' => $options['collection_id'],
+                            'data-display'       => 'prototype',
+                        )
+                    )
+                )
+            )
+        );
+        $prototype->add('__to_remove', 'checkbox', array(
+            'mapped'   => false,
+            'required' => false,
+            'data'     => true,
+            'attr'     => array(
+                'class' => 'unchangeable_field idci_collection_item_remove'
+            )
+        ));
+
+        $builder->setAttribute('prototype', $prototype->getForm());
+
         $builder->addEventSubscriber(new CollectionEventSubscriber($options));
     }
 
@@ -35,6 +63,7 @@ class ExtraFormCollectionType extends AbstractType
         $view->vars['add_button']    = $options['add_button'];
         $view->vars['remove_button'] = $options['remove_button'];
         $view->vars['collection_id'] = $options['collection_id'];
+        $view->vars['prototype']     = $form->getConfig()->getAttribute('prototype')->createView($view);
     }
 
     /**
@@ -47,25 +76,43 @@ class ExtraFormCollectionType extends AbstractType
                 'min_items'     => 1,
                 'max_items'     => 10,
                 'type'          => 'text',
-                'prototype'     => false,
                 'add_button'    => array(),
                 'remove_button' => array(),
-                'options'       => array('label' => ' '),
+                'options'       => array(),
                 'collection_id' => 'default'
             ))
             ->setNormalizers(array(
                 'add_button' => function(Options $options, $value) {
+                    $attr = ($options['min_items'] == $options['max_items']) ?
+                        array('style' => 'display:none;') :
+                        array()
+                    ;
+
                     return array_replace_recursive(
-                        array('label' => 'add', 'attr' => array()),
+                        array('label' => 'add', 'attr' => $attr),
                         $value
                     );
                 },
                 'remove_button' => function(Options $options, $value) {
+                    $attr = ($options['min_items'] == $options['max_items']) ?
+                        array('style' => 'display:none;') :
+                        array()
+                    ;
+
                     return array_replace_recursive(
-                        array('label' => 'remove', 'attr' => array()),
+                        array('label' => 'remove', 'attr' => $attr),
                         $value
                     );
                 },
+                'options' => function(Options $options, $value) {
+                    return array_merge(
+                        array(
+                            'label' => ' ',
+                            'attr'  => array()
+                        ),
+                        $value
+                    );
+                }
             ))
             ->setAllowedTypes(array(
                 'add_button'    => array('array'),

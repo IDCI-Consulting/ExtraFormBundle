@@ -13,7 +13,7 @@ class IbanTextType extends AbstractType
 {
     /**
      * {@inheritdoc}
-     */
+    */
     public function getName()
     {
         return 'extra_form_iban_text';

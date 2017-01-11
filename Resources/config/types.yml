@@ -47,7 +47,7 @@ idci_extra_form:
                 max_length: { extra_form_type: "number",   options: {required: false} }
                 trim:       { extra_form_type: "checkbox", options: {required: false} }
 
-        "json_textarea":
+        "extra_form_json_textarea":
             parent:      textarea
             form_type:   extra_form_json_textarea
             description: "Text input field in JSON format"
@@ -247,3 +247,12 @@ idci_extra_form:
                 text_color:       { extra_form_type: "text",     options: {required: false} }
                 background_color: { extra_form_type: "text",     options: {required: false} }
                 disabled:         { extra_form_type: "checkbox", options: {required: false} }
+
+        "extra_form_range":
+            parent:      form
+            form_type:   extra_form_range
+            description: "Range text field"
+            extra_form_options:
+                min:  { extra_form_type: "integer", options: {required: false, data: 0} }
+                max:  { extra_form_type: "integer", options: {required: false, data: 100} }
+                step: { extra_form_type: "integer", options: {required: false, data: 1} }

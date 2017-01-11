@@ -37,49 +37,58 @@ class CollectionEventSubscriber implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => array(
-                array('preSetData', 0),
+                array('preSetData', 1),
+                array('buildCollection', 0),
             ),
             FormEvents::PRE_SUBMIT   => array(
-                array('preSubmitData', 0),
-                array('changeData', 100),
+                array('preSubmitData', 2),
+                array('changeData', 1),
+                array('buildCollection', 0),
             ),
             FormEvents::SUBMIT       => array(
                 array('onSubmit', 50),
-            )
+            ),
         );
     }
 
     /**
-     * {@inheritdoc}
+     * Disable constraints
+     *
+     * @param array $options
      */
-    public function preSetData(FormEvent $event)
+    public static function disableConstraints(& $options)
     {
-        $form = $event->getForm();
-        $data = $event->getData();
-
-        foreach ($form as $name => $child) {
-            $form->remove($name);
+        if (!is_array($options)) {
+            return;
         }
 
-        for ($i = 0; $i < $this->options['max_items']; $i++) {
-            $required = $i < $this->options['min_items'] ? true : false;
-            $display  = $i < $this->options['min_items'] || isset($data[$i]) ? 'show' : 'hide';
-
-            $form->add($i, $this->options['type'], array_replace_recursive(
-                array(
-                    'required' => $required,
-                    'attr'     => array(
-                        'data-collection-id' => $this->options['collection_id'],
-                        'data-display'       => $display,
-                    ),
-                ),
-                $this->options['options']
-            ));
+        foreach ($options as $key => $value) {
+            if ('constraints' === $key) {
+                $options[$key] = array();
+            } elseif (is_array($value)) {
+                self::disableConstraints($options[$key]);
+            }
         }
     }
 
     /**
-     * {@inheritdoc}
+     * Pre set data.
+     *
+     * @param FormEvent $event
+     */
+    public function preSetData(FormEvent $event)
+    {
+        $form = $event->getForm();
+
+        foreach ($form as $name => $child) {
+            $form->remove($name);
+        }
+    }
+
+    /**
+     * Pre submit data.
+     *
+     * @param FormEvent $event
      */
     public function preSubmitData(FormEvent $event)
     {
@@ -95,37 +104,77 @@ class CollectionEventSubscriber implements EventSubscriberInterface
                 $form->remove($name);
             }
         }
+    }
+
+    /**
+     * Build collection.
+     *
+     * @param FormEvent $event
+     */
+    public function buildCollection(FormEvent $event)
+    {
+        $form = $event->getForm();
 
         for ($i = 0; $i < $this->options['max_items']; $i++) {
-            $required = $i < $this->options['min_items'] ? true : false;
-            // isDisplayable is an hugly hack for collection with sub form using hidden field !
-            $display  = $i < $this->options['min_items'] ||$this->isDisplayable($event, $i) ? 'show' : 'hide';
+            $required  = $i < $this->options['min_items'] ? true : false;
+            $displayed = $i < $this->options['min_items'] || $this->isDisplayable($event, $i);
 
-            $form->add($i, $this->options['type'], array_replace_recursive(
+            $options = $this->options['options'];
+            $options['required'] = isset($options['required']) ?
+                $options['required'] && $required :
+                $required
+            ;
+            $options['attr'] = array_replace(
+                isset($options['attr']) ? $options['attr'] : array(),
                 array(
-                    'required' => $required,
-                    'attr'     => array(
-                        'data-collection-id' => $this->options['collection_id'],
-                        'data-display'       => $display
-                    ),
-                ),
-                $this->options['options']
+                    'data-collection-id' => $this->options['collection_id'],
+                    'data-display'       => $displayed ? 'show' : 'hide',
+                    'data-position'      => $i,
+                )
+            );
+
+            if (!$displayed) {
+                self::disableConstraints($options);
+            }
+
+            $form->add($i, $this->options['type'], $options);
+
+            $form->get($i)->add('__to_remove', 'checkbox', array(
+                'mapped'   => false,
+                'required' => false,
+                'data'     => !$displayed,
+                'attr'     => array(
+                    'class' => 'idci_collection_item_remove'
+                )
             ));
         }
     }
 
     /**
-     * {@inheritdoc}
+     * Change data.
+     *
+     * @param FormEvent $event
      */
     public function changeData(FormEvent $event)
     {
-        if (is_array($event->getData())) {
-            $event->setData(array_values($event->getData()));
+        $form = $event->getForm();
+        $data = $event->getData();
+
+        if (null === $data) {
+            $data = array();
+        }
+
+        if ($data instanceof \Doctrine\Common\Collections\Collection) {
+            $event->setData($data->getValues());
+        } else {
+            $event->setData(array_values($data));
         }
     }
 
     /**
-     * {@inheritdoc}
+     * On submit.
+     *
+     * @param FormEvent $event
      */
     public function onSubmit(FormEvent $event)
     {
@@ -144,7 +193,10 @@ class CollectionEventSubscriber implements EventSubscriberInterface
         $toDelete = array();
 
         foreach ($data as $name => $child) {
-            if (!$form->has($name)) {
+            if (null === $child || (
+                $form->get($name)->has('__to_remove') &&
+                true === $form->get($name)->get('__to_remove')->getData()
+            )) {
                 $toDelete[] = $name;
             }
         }
@@ -153,7 +205,11 @@ class CollectionEventSubscriber implements EventSubscriberInterface
             unset($data[$name]);
         }
 
-        $event->setData($data);
+        if ($data instanceof \Doctrine\Common\Collections\Collection) {
+            $event->setData($data->getValues());
+        } else {
+            $event->setData(array_values($data));
+        }
     }
 
     /**
@@ -173,12 +229,28 @@ class CollectionEventSubscriber implements EventSubscriberInterface
             return false;
         }
 
-        if (!is_array($data[$i])) {
+        $item = is_object($data[$i]) ? (array)$data[$i] : $data[$i];
+
+        if (!is_array($item)) {
             return true;
         }
 
-        foreach ($data[$i] as $k => $v) {
-            if ('hidden' !== $form->get($i)->get($k)->getConfig()->getType()->getName()) {
+        if (FormEvents::PRE_SUBMIT === $event->getName()) {
+            if (isset($item['__to_remove'])) {
+                return !(bool)$item['__to_remove'];
+            }
+        }
+
+        foreach ($item as $k => $v) {
+            if (
+                FormEvents::PRE_SUBMIT === $event->getName() &&
+                'hidden' === $form->get($i)->get($k)->getConfig()->getType()->getName()
+            ) {
+                continue;
+            }
+
+            // Value not null
+            if (null !== $v && '' !== $v) {
                 return true;
             }
         }

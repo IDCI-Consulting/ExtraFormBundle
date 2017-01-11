@@ -20,7 +20,7 @@ class ApiController extends FOSRestController
      * [GET] /extra-form-types
      * Retrieve extra form types.
      *
-     * @Get("/extra-form-types")
+     * @Get("/extra-form-types.{_format}")
      */
     public function getExtraFormTypesAction(Request $request, $_format)
     {
@@ -44,10 +44,10 @@ class ApiController extends FOSRestController
     }
 
     /**
-     * [GET] /extra-form-types/{type}/options
+     * [GET] /extra-form-types/{type}/options.{_format}
      * Retrieve extra form type options.
      *
-     * @Get("/extra-form-types/{type}/options", requirements={"type" = "^[a-zA-Z0-9_-]+$"})
+     * @Get("/extra-form-types/{type}/options.{_format}", requirements={"type" = "^[a-zA-Z0-9_-]+$"})
      *
      * @param string $type
      */
@@ -96,7 +96,7 @@ class ApiController extends FOSRestController
      * [GET] /extra-form-constraints
      * Retrieve extra form constraints.
      *
-     * @Get("/extra-form-constraints")
+     * @Get("/extra-form-constraints.{_format}")
      */
     public function getExtraFormConstraintsAction(Request $request, $_format)
     {

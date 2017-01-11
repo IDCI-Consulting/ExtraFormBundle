@@ -16,7 +16,7 @@ editorApp.controller('editorController', function($scope, $http, $compile) {
         return '_' + Math.random().toString(36).substr(2, 9);
     };
 
-    $http.get('/app_dev.php/_testsapi/extra-form-types.json')
+    $http.get('/app_dev.php/extra-form-types.json')
         .success(function(data, status, headers, config) {
             $scope.extraformTypes = data;
         })
@@ -25,7 +25,7 @@ editorApp.controller('editorController', function($scope, $http, $compile) {
         })
     ;
 
-    $http.get('/app_dev.php/_testsapi/extra-form-constraints.json')
+    $http.get('/app_dev.php/extra-form-constraints.json')
         .success(function(data, status, headers, config) {
             $scope.extraformConstraints = data;
         })
@@ -84,7 +84,7 @@ editorApp.controller('editorController', function($scope, $http, $compile) {
             if (typeChanged = $scope.getChangedType(newVal, oldVal)) {
                 // TODO: Keep same data or clean
                 //$scope.fields[typeChanged.key].options = {};
-                $http.get('/app_dev.php/_testsapi/extra-form-types/'+typeChanged.to+'/options.html')
+                $http.get('/app_dev.php/extra-form-types/'+typeChanged.to+'/options.html')
                     .success(function(data, status, headers, config) {
                         var fieldOptions = angular.element(document.querySelector('#extraform-field-'+typeChanged.key+' .extraform-field-options'));
                         var options = data.replace(/name\=\"/g, 'data-ng-model="fields['+typeChanged.key+'].options.');
