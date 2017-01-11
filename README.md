@@ -31,8 +31,18 @@ public function registerBundles()
         // ...
         new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
         new IDCI\Bundle\ExtraFormBundle\IDCIExtraFormBundle(),
+        new FOS\RestBundle\FOSRestBundle(),
     );
 }
+```
+
+Enable the serializer:
+
+```yml
+# app/config/config.yml
+framework
+    serializer:
+        enabled: true
 ```
 
 Import the bundle configuration:
@@ -43,6 +53,13 @@ imports:
     - { resource: @IDCIExtraFormBundle/Resources/config/config.yml }
 ```
 
+Finally import the routes if you need the api or the editor:
+```yml
+# app/config/routing.yml
+extra_form:
+    resource: "@IDCIExtraFormBundle/Controller/"
+    type:     annotation
+```
 
 Documentation
 -------------
