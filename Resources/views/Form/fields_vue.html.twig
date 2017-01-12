@@ -188,9 +188,11 @@
 {%- block extra_form_editor_widget -%}
     <div id="editorApp">
         {{- form_widget(form) -}}
+        <button v-on:click="generateForm($event)">Generate the form from the json</button>
+        <br><br>
         {% if not form.vars['disabled_editor'] %}
 
-            <div id="extraform-editor">
+            <div id="extra-form-editor">
                 <div v-bind:class="'extra-field-' + generateUniqueId()" v-for="(field, index) in fields">
                     <div>
                         <label>{% trans %}Name{% endtrans %}:</label>

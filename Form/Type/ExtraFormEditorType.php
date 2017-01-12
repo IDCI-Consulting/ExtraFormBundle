@@ -21,8 +21,8 @@ class ExtraFormEditorType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['attr']['data-ng-model'] = 'output';
-        $view->vars['attr']['data-ng-show'] = $options['display_raw'] ? 'true' : 'false';
+        $view->vars['attr']['v-model'] = 'output';
+        $view->vars['attr']['v-if'] = $options['display_raw'] ? 'true' : 'false';
         $view->vars['disabled_editor'] = $options['disabled_editor'];
 
         return $view->vars;
