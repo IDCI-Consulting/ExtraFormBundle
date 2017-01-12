@@ -186,56 +186,37 @@
 {%- endblock extra_form_html_widget -%}
 
 {%- block extra_form_editor_widget -%}
-    <div data-ng-app="editorApp" data-ng-controller="editorController">
+    <div id="editorApp">
         {{- form_widget(form) -}}
         {% if not form.vars['disabled_editor'] %}
-        <div id="extraform-editor">
-            <div class="extraform-field" id="extraform-field-{{ '{{ fieldIndex }}' }}" data-ng-repeat="(fieldIndex, field) in fields">
-                <div>
-                    <label>{% trans %}Name{% endtrans %}:</label>
-                    <input type="text" data-ng-model="field.name" />
 
-                    <label>{% trans %}Type{% endtrans %}:</label>
-                    <select data-ng-model="field.extra_form_type">
-                        <option data-ng-repeat="(name, item) in extraformTypes" data-ng-selected="name == field.extra_form_type" data-ng-if="item.abstract == false" value="{{ '{{ name }}' }}">{{ '{{ name }} [{{ item.description }}]' }}</option>
-                    </select>
-                </div>
+            <div id="extraform-editor">
+                <div v-bind:class="'extra-field-' + generateUniqueId()" v-for="(field, index) in fields">
+                    <div>
+                        <label>{% trans %}Name{% endtrans %}:</label>
+                        <input type="text" v-model="field.name" />
 
-                <div>
-                    <label data-ng-init="showOptions[fieldIndex] = false" data-ng-click="showOptions[fieldIndex] = !showOptions[fieldIndex]">{% trans %}Options{% endtrans %}:</label>
-                    <div class="extraform-field-options" data-ng-show="showOptions[fieldIndex]"></div>
-                </div>
-
-                <div>
-                    <label data-ng-init="showConstraints[fieldIndex] = false" data-ng-click="showConstraints[fieldIndex] = !showConstraints[fieldIndex]">{% trans %}Constraints{% endtrans %}:</label>
-                    <div class="extraform-field-constraints" data-ng-show="showConstraints[fieldIndex]">
-                        <div data-ng-repeat="(constraintIndex, constraint) in field.constraints">
-                            <div class="extraform-field-constraint">
-                                <select data-ng-model="constraint.extra_form_constraint">
-                                    <option data-ng-repeat="(name, item) in extraformConstraints" data-ng-selected="name == constraint.extra_form_constraint" value="{{ '{{ name }}' }}">{{ '{{ name }}' }}</option>
-                                </select>
-
-                                <button data-ng-click="removeConstraint($event, fieldIndex, constraintIndex)">x</button>
-                            </div>
-                        </div>
-                        <select data-ng-model="newExtraformConstraints[fieldIndex]" data-ng-init="newExtraformConstraints[fieldIndex] = defaults.extraformConstraint">
-                            <option data-ng-repeat="(name, constraint) in extraformConstraints" data-ng-selected="name == defaults.extraformConstraint" value="{{ '{{ name }}' }}">{{ '{{ name }}' }}</option>
+                        <label>{% trans %}Type{% endtrans %}:</label>
+                        <select v-model="field.extra_form_type">
+                            <option value="todo"></option>
                         </select>
-                        <button data-ng-click="addConstraint($event, fieldIndex)">Add constraint</button>
                     </div>
                 </div>
-
-                <button data-ng-click="removeField($event, fieldIndex)">x</button>
             </div>
-        </div>
-        <select data-ng-model="newExtraformField">
-            <option data-ng-repeat="(name, type) in extraformTypes" data-ng-selected="name == newExtraformField" data-ng-if="type.abstract == false" value="{{ '{{ name }}' }}">{{ '{{ name }} [{{ type.description }}]' }}</option>
-        </select>
-        <button data-ng-click="addField($event)">Add field</button>
+
+            <select id="newExtraformField" v-model="selectedExtraFormType">
+                <option v-for="(type, name) in extraFormTypes" v-bind:value="name">
+                    ${ type.description }
+                </option>
+            </select>
+
+            <button v-on:click="addField($event)">Add field</button>
+
         {% endif %}
     </div>
-    <script type="text/javascript" src="{{ asset('bundles/idciextraform/angular-1.3.16/angular.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/idciextraform/editor/editorApp.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
+    <script type="text/javascript" src="{{ asset('bundles/idciextraform/js/vue-dev.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/idciextraform/editor/editorAppVue.js') }}"></script>
 {%- endblock extra_form_editor_widget -%}
 
 {%- block extra_form_range_widget -%}

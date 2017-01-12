@@ -4,7 +4,7 @@ editorApp.controller('editorController', function($scope, $http, $compile) {
     $scope.defaults = {
         'extraformField': 'text',
         'extraformConstraint': 'not_blank'
-    }
+    };
     $scope.editor = angular.element(document.querySelector('#extraform-editor'));
     $scope.extraformTypes = {};
     $scope.extraformConstraints = {};
@@ -129,7 +129,7 @@ editorApp.controller('editorController', function($scope, $http, $compile) {
     $scope.getChangedConstraint = function(newVal, oldVal) {
         var constraintChanged = false;
 
-        console.log(newVal, oldVal);
+        //console.log(newVal, oldVal);
         /*
         angular.forEach(newVal, function(field, key) {
             if (undefined == oldVal[key]) {

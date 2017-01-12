@@ -156,11 +156,10 @@ class TestController extends Controller
     /**
      * Test Editor.
      *
-     * @Route("/editor", name="idci_extra_form_editor")
+     * @Route("/editor-angular", name="idci_extra_form_editor_angular")
      * @Method({"GET", "POST"})
-     * @Template()
      */
-    public function editorAction(Request $request)
+    public function editorAngularAction(Request $request)
     {
         $form = $this
             ->createFormBuilder()
@@ -178,8 +177,37 @@ class TestController extends Controller
             var_dump($form->getData()); die;
         }
 
-        return array(
+        return $this->render('IDCIExtraFormBundle:Test:editor-angular.html.twig', array(
             'form' => $form->createView()
-        );
+        ));
     }
+
+        /**
+         * Test Editor.
+         *
+         * @Route("/editor-vue", name="idci_extra_form_editor_vue")
+         * @Method({"GET", "POST"})
+         */
+        public function editorVueAction(Request $request)
+        {
+            $form = $this
+                ->createFormBuilder()
+                ->add('editor', 'extra_form_editor', array(
+                    'display_raw'     => true,
+                    //'disabled_editor' => true,
+                ))
+                ->add('send', 'submit')
+                ->getForm()
+            ;
+
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                var_dump($form->getData()); die;
+            }
+
+            return $this->render('IDCIExtraFormBundle:Test:editor-vue.html.twig', array(
+                'form' => $form->createView()
+            ));
+        }
 }
