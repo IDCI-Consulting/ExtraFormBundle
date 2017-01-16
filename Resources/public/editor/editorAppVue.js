@@ -4,6 +4,32 @@ function log(message) {
   console.log(JSON.stringify(message, null, 4));
 }
 
+Vue.component('form-type-options', {
+  delimiters: ['${', '}'],
+  props: ['type'],
+  data: function() {
+    return {
+      htmlOptions: '<div></div>'
+    }
+  },
+  template: '<div class="form-options" v-html="htmlOptions">${ htmlOptions }</div>',
+  created: function() {
+    this.$http.get('/extra-form-types/'+ this.type +'/options.html')
+      .then(
+        function(response) {
+          var options = response.body;
+          //console.log(options);
+          //options = options.replace(/name\=\"/g, 'v-model="fields['+this.type+'].options');
+          this.htmlOptions = options;
+        },
+        function (response) {
+          console.log(response.status + ' ' + response.statusText);
+        }
+      )
+    ;
+  }
+});
+
 var app = new Vue({
 
   el: '#editorApp',
@@ -11,6 +37,7 @@ var app = new Vue({
   data: {
     extraFormTypes: {},
     selectedExtraFormType: '',
+    htmlOptions: {},
     fields: [],
     output: {}
   },
@@ -104,8 +131,9 @@ var app = new Vue({
      */
     addField: function(event) {
       event.preventDefault();
+
       var field = {
-        'name': 'field_'+this.generateUniqueId(),
+        'name': 'field_' + this.selectedExtraFormType + '_' + this.generateUniqueId(),
         'extra_form_type': this.selectedExtraFormType,
         'options': {},
         'constraints': []

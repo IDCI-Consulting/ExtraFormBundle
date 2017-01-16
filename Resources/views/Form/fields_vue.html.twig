@@ -192,17 +192,13 @@
         <br><br>
 
         <div id="extra-form-editor">
-            <div v-bind:class="'extra-field-' + generateUniqueId()" v-for="(field, index) in fields">
-                <div>
-                    <label>{% trans %}Name ${fields[index].name} {% endtrans %}:</label>
+            <div v-for="(field, index) in fields">
+                <div class="type">
+                    <label>{% trans %} Name {% endtrans %}:</label>
                     <input type="text" v-model="fields[index].name" />
-
-                    <label>{% trans %}Type{% endtrans %}:</label>
-                    <select v-model="field.extra_form_type">
-                        <option value="todo"></option>
-                    </select>
                     <button v-on:click="removeField($event, index)">x</button>
                 </div>
+                <form-type-options v-bind:type="fields[index].extra_form_type"></form-type-options>
             </div>
         </div>
 

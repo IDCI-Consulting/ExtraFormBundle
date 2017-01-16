@@ -1,0 +1,7 @@
+.form-options {
+    margin-bottom: 25px;
+}
+.form-options label {
+    min-width: 120px;
+    display: inline-block;
+}

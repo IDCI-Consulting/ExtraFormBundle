@@ -4,3 +4,8 @@
     <h1>Extra Form Editor</h1>
     {{ form(form) }}
 {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/idciextraform/css/styles.css') }}" />
+{% endblock %}
