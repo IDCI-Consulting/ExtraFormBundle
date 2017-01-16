@@ -187,34 +187,32 @@
 
 {%- block extra_form_editor_widget -%}
     <div id="editorApp">
-        {{- form_widget(form) -}}
+        <textarea id="form_editor" v-model="output" name="form[editor]" style="width: 100%; height: 150px;"></textarea>
         <button v-on:click="generateForm($event)">Generate the form from the json</button>
         <br><br>
-        {% if not form.vars['disabled_editor'] %}
 
-            <div id="extra-form-editor">
-                <div v-bind:class="'extra-field-' + generateUniqueId()" v-for="(field, index) in fields">
-                    <div>
-                        <label>{% trans %}Name{% endtrans %}:</label>
-                        <input type="text" v-model="field.name" />
+        <div id="extra-form-editor">
+            <div v-bind:class="'extra-field-' + generateUniqueId()" v-for="(field, index) in fields">
+                <div>
+                    <label>{% trans %}Name ${fields[index].name} {% endtrans %}:</label>
+                    <input type="text" v-model="fields[index].name" />
 
-                        <label>{% trans %}Type{% endtrans %}:</label>
-                        <select v-model="field.extra_form_type">
-                            <option value="todo"></option>
-                        </select>
-                    </div>
+                    <label>{% trans %}Type{% endtrans %}:</label>
+                    <select v-model="field.extra_form_type">
+                        <option value="todo"></option>
+                    </select>
+                    <button v-on:click="removeField($event, index)">x</button>
                 </div>
             </div>
+        </div>
 
-            <select id="newExtraformField" v-model="selectedExtraFormType">
-                <option v-for="(type, name) in extraFormTypes" v-bind:value="name">
-                    ${ type.description }
-                </option>
-            </select>
+        <select id="newExtraformField" v-model="selectedExtraFormType">
+            <option v-for="(type, name) in extraFormTypes" v-bind:value="name">
+                ${ name } [${ type.description }]
+            </option>
+        </select>
 
-            <button v-on:click="addField($event)">Add field</button>
-
-        {% endif %}
+        <button v-on:click="addField($event)">Add field</button>
     </div>
     <script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
     <script type="text/javascript" src="{{ asset('bundles/idciextraform/js/vue-dev.js') }}"></script>

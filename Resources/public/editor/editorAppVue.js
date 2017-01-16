@@ -1,5 +1,9 @@
 Vue.use(VueResource);
 
+function log(message) {
+  console.log(JSON.stringify(message, null, 4));
+}
+
 var app = new Vue({
 
   el: '#editorApp',
@@ -7,14 +11,70 @@ var app = new Vue({
   data: {
     extraFormTypes: {},
     selectedExtraFormType: '',
-    fields: []
+    fields: [],
+    output: {}
   },
 
   mounted: function() {
     this.getExtraFormTypes();
   },
 
+  watch: {
+    fields: {
+      handler: function(newFields) { this.generateOutput(newFields) },
+      deep: true
+    }
+  },
+
   methods: {
+
+    /**
+     * Generate the output (the json for the textarea)
+     *
+     * @param fields
+     */
+    generateOutput: function(fields) {
+      var output = {};
+      for (var i = 0, len = fields.length; i < len; i++) {
+        var field = fields[i];
+        var name = field['name'];
+        output[name] = {};
+        output[name]['extra_form_type'] = field['extra_form_type'];
+        output[name]['options'] = field['options'];
+        output[name]['constraints'] = field['constraints'];
+      }
+
+      this.$set(this, 'output', JSON.stringify(output, null, 4));
+    },
+
+    /**
+     * Generate the form fields from the taxtarea output
+     * @param event
+     */
+    generateForm: function(event) {
+      event.preventDefault();
+      var newFields = [];
+
+      try {
+        var output = JSON.parse(this.output);
+        for (var field in output) {
+          if (output.hasOwnProperty(field)) {
+            var newField = {
+              'name': field,
+              'extra_form_type': output[field].extra_form_type,
+              'options':  output[field].options,
+              'constraints':  output[field].constraints
+            };
+
+            newFields.push(newField);
+          }
+        }
+
+        this.$set(this, 'fields', newFields);
+      } catch (e) {
+        console.error('Json parsing error');
+      }
+    },
 
     /**
      * Get the form types
@@ -51,7 +111,16 @@ var app = new Vue({
         'constraints': []
       };
       this.fields.push(field);
-      this.$set(this, 'fields', this.fields);
+    },
+
+    /**
+     * Remove a field
+     *
+     * @param event
+     */
+    removeField: function(event, index) {
+      event.preventDefault();
+      this.fields.splice(index, 1);
     },
 
     /**
@@ -62,7 +131,6 @@ var app = new Vue({
     generateUniqueId: function() {
       return Math.random().toString(36).substr(2, 9);
     }
-
   }
 
 });
