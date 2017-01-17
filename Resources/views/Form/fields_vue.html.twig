@@ -198,7 +198,7 @@
                     <input type="text" v-model="fields[index].name" />
                     <button v-on:click="removeField($event, index)">x</button>
                 </div>
-                <form-type-options v-bind:type="fields[index].extra_form_type"></form-type-options>
+                <div class="form-options" v-html="htmlOptions[fields[index].extra_form_type]"></div>
             </div>
         </div>
 

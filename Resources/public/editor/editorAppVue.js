@@ -4,32 +4,6 @@ function log(message) {
   console.log(JSON.stringify(message, null, 4));
 }
 
-Vue.component('form-type-options', {
-  delimiters: ['${', '}'],
-  props: ['type'],
-  data: function() {
-    return {
-      htmlOptions: '<div></div>'
-    }
-  },
-  template: '<div class="form-options" v-html="htmlOptions">${ htmlOptions }</div>',
-  created: function() {
-    this.$http.get('/extra-form-types/'+ this.type +'/options.html')
-      .then(
-        function(response) {
-          var options = response.body;
-          //console.log(options);
-          //options = options.replace(/name\=\"/g, 'v-model="fields['+this.type+'].options');
-          this.htmlOptions = options;
-        },
-        function (response) {
-          console.log(response.status + ' ' + response.statusText);
-        }
-      )
-    ;
-  }
-});
-
 var app = new Vue({
 
   el: '#editorApp',
@@ -104,6 +78,25 @@ var app = new Vue({
     },
 
     /**
+     * Get the form type options
+     * @param type
+     */
+    getExtraFormTypeOptions: function(type) {
+      this.$http.get('/extra-form-types/'+ type +'/options.html')
+        .then(
+          function(response) {
+            //console.log(options);
+            //options = options.replace(/name\=\"/g, 'v-model="fields['+this.type+'].options');
+            this.$set(this.htmlOptions, type, response.body);
+          },
+          function (response) {
+            console.log(response.status + ' ' + response.statusText);
+          }
+        )
+      ;
+    },
+
+    /**
      * Get the form types
      */
     getExtraFormTypes: function() {
@@ -131,6 +124,7 @@ var app = new Vue({
      */
     addField: function(event) {
       event.preventDefault();
+      this.getExtraFormTypeOptions(this.selectedExtraFormType);
 
       var field = {
         'name': 'field_' + this.selectedExtraFormType + '_' + this.generateUniqueId(),
