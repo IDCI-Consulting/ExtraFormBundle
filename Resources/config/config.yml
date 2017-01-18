@@ -5,4 +5,4 @@ imports:
 twig:
     form:
         resources:
-            - 'IDCIExtraFormBundle:Form:fields_vue.html.twig'
+            - 'IDCIExtraFormBundle:Form:fields.html.twig'
