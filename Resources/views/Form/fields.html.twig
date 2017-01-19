@@ -191,7 +191,7 @@
         <br>
 
         <div id='extra-form-fields'>
-            <field v-for='(field, index) in fields' :field='field' :index='index' @removed='removeField'></field>
+            <field @optionchanged='updateOption' @removed='removeField' v-for='(field, index) in fields' :field='field' :index='index'></field>
         </div>
         <br>
 

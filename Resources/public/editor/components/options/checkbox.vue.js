@@ -11,7 +11,10 @@ var checkboxOption = {
 
   methods: {
     updateOption: function(value) {
-      this.$set(this.field.options, this.option.name, value);
+      this.$emit('changed', {
+        'name': this.option.name,
+        'value': value
+      });
     }
   }
 };

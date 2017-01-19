@@ -21,6 +21,19 @@ var app = new Vue({
   methods: {
 
     /**
+     * Update a field option
+     *
+     * @param fieldOption
+     */
+    updateOption: function(option) {
+      this.$set(
+        this.fields[option.field_index]['options'],
+        option.name,
+        option.value
+      );
+    },
+
+    /**
      * Update the fields
      *
      * @param fields
@@ -35,7 +48,7 @@ var app = new Vue({
      * @param event
      */
     addField: function(field) {
-      //this.getExtraFormTypeOptions(this.selectedExtraFormType);
+      // this.getExtraFormTypeOptions(this.selectedExtraFormType);
       this.fields.push(field);
     },
 

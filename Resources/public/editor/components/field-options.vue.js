@@ -2,11 +2,11 @@ var fieldOptions = {
 
   template:
     '<div>' +
-      '<component :is="option.component_name" v-for="(option, index) in options" :option="option" :field="field"></component>' +
+      '<component :is="option.component_name" v-for="(option, index) in options" :option="option" :field="field" @changed="updateOption"></component>' +
     '</div>'
   ,
 
-  props: ['field'],
+  props: ['field', 'index'],
 
   data: function () {
     return {
@@ -26,6 +26,13 @@ var fieldOptions = {
   },
 
   methods: {
+
+    updateOption: function(option) {
+
+      option.field_index = this.index;
+      this.$emit('optionChanged', option);
+    },
+
     /**
     * Get the form type options
     * @param type
