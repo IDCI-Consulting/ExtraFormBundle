@@ -2,11 +2,11 @@ var fieldOptions = {
 
   template:
     '<div>' +
-      '<component :is="option.component_name" v-for=\'(option, index) in options\'>{{ option.extra_form_type }}</component>' +
+      '<component :is="option.component_name" v-for="(option, index) in options" :option="option" :field="field"></component>' +
     '</div>'
   ,
 
-  props: ['type'],
+  props: ['field'],
 
   data: function () {
     return {
@@ -14,8 +14,15 @@ var fieldOptions = {
     }
   },
 
+  components: {
+    'option-checkbox': checkboxOption,
+    'option-textarea': textareaOption,
+    'option-choice': choiceOption,
+    'option-text': textOption
+  },
+
   mounted: function() {
-    this.getExtraFormTypeOptions(this.type);
+    this.getExtraFormTypeOptions(this.field.extra_form_type);
   },
 
   methods: {

@@ -5,7 +5,7 @@ var field = {
         '<label>Name : </label>' +
         '<input type="text" v-model="field.name" /><br>' +
         '<label>Options : </label>' +
-        '<field-options :type="field.extra_form_type"></field-options>' +
+        '<field-options :field="field"></field-options>' +
         '<button v-on:click.prevent="removeField(index)">x</button>' +
       '</div>'
   ,

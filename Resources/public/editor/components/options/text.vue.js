@@ -1,9 +1,9 @@
-var textareaOption = {
+var textOption = {
 
   template:
     '<div>' +
       '<label :for="option.name">{{ option.name }}</label>' +
-      '<textarea :value="field.options[option.name]" @input="updateOption($event.target.value)" :name="option.name"></textarea>' +
+      '<input :value="field.options[option.name]" @input="updateOption($event.target.value)" type="text" :name="option.name">' +
     '</div>'
   ,
 

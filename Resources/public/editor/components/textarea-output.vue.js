@@ -17,7 +17,7 @@ var textareaOutput = {
 
   watch: {
     fields: {
-      handler: function(newFields) { this.output = this.generateOutput(newFields) },
+      handler: function(newFields) { this.output = this.generateOutput(newFields); },
       deep: true
     }
   },
@@ -29,10 +29,8 @@ var textareaOutput = {
      */
     generateFields: function() {
       var newFields = [];
-      log(this.output);
       try {
         var output = JSON.parse(this.output);
-        log(output);
         for (var field in output) {
           if (output.hasOwnProperty(field)) {
             var newField = {
