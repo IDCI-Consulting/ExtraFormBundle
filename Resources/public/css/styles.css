@@ -1,7 +1,27 @@
-.form-options {
-    margin-bottom: 25px;
+#extra-form-fields > div {
+    border: 1px solid rgb(169, 169, 169);
+    padding: 5px;
+    margin-bottom: 5px;
 }
-.form-options label {
-    min-width: 120px;
+
+.field-options, .field-constraints {
+    border-top: 1px solid rgb(169, 169, 169);
+    border-bottom: 1px solid rgb(169, 169, 169);
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.field-options > label, .field-constraints > label {
+    padding-bottom: 10px;
     display: inline-block;
+}
+
+.field-options > div > label {
+    min-width: 120px;
+    padding-bottom: 3px;
+    display: inline-block;
+}
+
+.field-options > div, .field-constraints > div {
+    padding-left: 20px;
 }

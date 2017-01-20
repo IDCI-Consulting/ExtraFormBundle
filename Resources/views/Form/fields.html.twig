@@ -191,7 +191,7 @@
         <br>
 
         <div id='extra-form-fields'>
-            <field @optionchanged='updateOption' @removed='removeField' v-for='(field, index) in fields' :field='field' :index='index'></field>
+            <field @optionchanged='updateOption' @constraintadded='addConstraint' @removed='removeField' v-for='(field, index) in fields' :field='field' :index='index'></field>
         </div>
         <br>
 
@@ -199,13 +199,16 @@
     </div>
 
     <script src='https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/new-field.vue.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/new-field-constraint.vue.js') }}'></script>
     <script type='text/javascript' src ='{{ asset('bundles/idciextraform/editor/components/options/textarea.vue.js') }}'></script>
     <script type='text/javascript' src ='{{ asset('bundles/idciextraform/editor/components/options/choice.vue.js') }}'></script>
     <script type='text/javascript' src ='{{ asset('bundles/idciextraform/editor/components/options/text.vue.js') }}'></script>
     <script type='text/javascript' src ='{{ asset('bundles/idciextraform/editor/components/options/checkbox.vue.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/field-options.vue.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/field-constraint-options.vue.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/field-constraints.vue.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/field.vue.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/new-field.vue.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/textarea-output.vue.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/vue-dev.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/editor.js') }}'></script>

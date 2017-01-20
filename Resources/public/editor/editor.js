@@ -53,6 +53,26 @@ var app = new Vue({
     },
 
     /**
+     * Add a new cosntraint to the field
+     */
+    addConstraint: function(newConstraint) {
+
+      var constraintIsAlreadySet = function(constraint) {
+        return constraint.extra_form_constraint == newConstraint.extra_form_constraint;
+      };
+
+
+      var index = newConstraint.field_index;
+      delete newConstraint.field_index;
+
+      if (this.fields[index]['constraints'].filter(constraintIsAlreadySet).length > 0) {
+        console.error('The constraint '+ newConstraint.extra_form_constraint +' is already set');
+      } else {
+        this.fields[index]['constraints'].push(newConstraint);
+      }
+    },
+
+    /**
      * Remove a field
      *
      * @param index

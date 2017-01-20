@@ -9,7 +9,7 @@ var newField = {
           '${ type.formType }' +
         '</option>' +
       '</select>' +
-      '<button @click="createField($event)">New field</button>' +
+      '<button @click.prevent="createField">New field</button>' +
     '</div>'
   ,
 
@@ -31,9 +31,7 @@ var newField = {
      *
      * @param event
      */
-    createField: function(event) {
-      event.preventDefault();
-
+    createField: function() {
       var field = {
         'name': 'field_' + this.selectedExtraFormType + '_' + this.generateUniqueId(),
         'extra_form_type': this.selectedExtraFormType,
@@ -59,8 +57,7 @@ var newField = {
         })
         .then(function (jsonTypes) {
           this.types = jsonTypes;
-          var firstFormTypeName = jsonTypes[0]['formType'];
-          this.selectedExtraFormType = firstFormTypeName;
+          this.selectedExtraFormType = Object.keys(this.types)[0];
         })
       ;
     },

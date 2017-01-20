@@ -2,8 +2,8 @@ var textareaOutput = {
 
   template:
     '<div>' +
-      '<textarea id="form-editor" v-model="output" name="form[editor]" style="width: 100%; height: 150px;"></textarea>' +
-      '<button @click.prevent="generateFields()">Generate the form from the json</button>' +
+      '<textarea id="form-editor" v-model="output" name="form[editor]" style="width: 100%; height: 300px;"></textarea>' +
+      '<button @click.prevent="generateFields">Generate the form from the json</button>' +
     '</div>'
   ,
 

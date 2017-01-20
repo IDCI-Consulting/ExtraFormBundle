@@ -2,14 +2,14 @@ var choiceOption = {
 
   template:
     '<div>' +
-      '<label :for="option.name">{{ option.name }}</label>' +
-      '<select v-model="selected" :name="option.name" @change="updateOption($event.target.value)">' +
+      '<label :for="name">{{ name }}</label>' +
+      '<select v-model="selected" :name="name" @change="updateOption($event.target.value)">' +
         '<option :value="key" v-for="(choice, key) in option.options.choices">{{ choice }}</option>' +
       '</select>' +
     '</div>'
   ,
 
-  props: ['option', 'value'],
+  props: ['option', 'name', 'value'],
 
   data: function() {
     return  {
@@ -39,7 +39,7 @@ var choiceOption = {
   methods: {
     updateOption: function(value) {
       this.$emit('changed', {
-        'name': this.option.name,
+        'name': this.name,
         'value': value
       });
     }

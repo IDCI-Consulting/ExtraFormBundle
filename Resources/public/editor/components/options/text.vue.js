@@ -2,17 +2,17 @@ var textOption = {
 
   template:
     '<div>' +
-      '<label :for="option.name">{{ option.name }}</label>' +
-      '<input :value="value" @input="updateOption($event.target.value)" type="text" :name="option.name">' +
+      '<label :for="name">{{ name }}</label>' +
+      '<input :value="value" @input="updateOption($event.target.value)" type="text" :name="name">' +
     '</div>'
   ,
 
-  props: ['option', 'value'],
+  props: ['option', 'value', 'name'],
 
   methods: {
     updateOption: function(value) {
       this.$emit('changed', {
-        'name': this.option.name,
+        'name': this.name,
         'value': value
       });
     }

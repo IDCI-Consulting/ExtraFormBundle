@@ -35,17 +35,10 @@ class ApiController extends FOSRestController
                 ->setTemplateVar('form')
             ;
         } else {
-
             $types = $this->get('idci_extra_form.type_registry')->getTypes();
             ksort($types);
 
-            $newTypes = array();
-
-            foreach ($types as $key => $type) {
-                $newTypes[] = $type;
-            }
-
-            $view->setData($newTypes);
+            $view->setData($types);
         }
 
         return $this->handleView($view);
@@ -94,15 +87,7 @@ class ApiController extends FOSRestController
                 ->setTemplateVar('form')
             ;
         } else {
-
-            $newOptions = array();
-
-            foreach ($options as $key => $option) {
-                $newOption = array('name' => $key);
-                $newOptions[] = array_merge($newOption, $option);
-            }
-
-            $view->setData($newOptions);
+            $view->setData($options);
         }
 
         return $this->handleView($view);

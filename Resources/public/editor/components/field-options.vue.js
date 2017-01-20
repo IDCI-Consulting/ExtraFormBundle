@@ -1,8 +1,9 @@
 var fieldOptions = {
 
   template:
-    '<div>' +
-      '<component :is="option.component_name" v-for="(option, index) in options" :option="option" :value="fieldOptions[option.name]" @changed="updateOption"></component>' +
+    '<div class="field-options">' +
+      '<label>Options : </label>' +
+      '<component :is="option.component_name" v-for="(option, key) in options" :option="option" :name="key" :value="fieldOptions[key]" @changed="updateOption"/>' +
     '</div>'
   ,
 
@@ -32,16 +33,19 @@ var fieldOptions = {
     },
 
     /**
-    * Get the form type options
-    * @param type
-    */
+     * Get the form type options
+     *
+     * @param type
+     */
     getExtraFormTypeOptions: function(type) {
       this.$http.get('/extra-form-types/'+ type +'/options.json')
         .then(
         function(response) {
           var options = response.body;
-          for (var i = 0, len = options.length; i < len; i++) {
-            options[i]['component_name'] = 'option-' + options[i]['extra_form_type'];
+          for (var option in options) {
+            if (options.hasOwnProperty(option)) {
+              options[option]['component_name'] = 'option-' + options[option].extra_form_type;
+            }
           }
           this.options = options;
         },
