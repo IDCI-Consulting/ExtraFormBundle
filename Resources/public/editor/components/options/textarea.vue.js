@@ -3,11 +3,11 @@ var textareaOption = {
   template:
     '<div>' +
       '<label :for="option.name">{{ option.name }}</label>' +
-      '<textarea :value="field.options[option.name]" @input="updateOption($event.target.value)" :name="option.name"></textarea>' +
+      '<textarea :value="value" @input="updateOption($event.target.value)" :name="option.name"></textarea>' +
     '</div>'
   ,
 
-  props: ['option', 'field'],
+  props: ['option', 'value'],
 
   methods: {
     updateOption: function(value) {

@@ -5,7 +5,7 @@ var field = {
         '<label>Name : </label>' +
         '<input type="text" v-model="field.name" /><br>' +
         '<label>Options : </label>' +
-        '<field-options :field="field" :index="index" @optionChanged="updateOption"></field-options>' +
+        '<field-options :fieldOptions="field.options" :type="field.extra_form_type" @optionChanged="updateOption"></field-options>' +
         '<button v-on:click.prevent="removeField(index)">x</button>' +
       '</div>'
   ,
@@ -23,8 +23,9 @@ var field = {
      *
      * @param fieldOption
      */
-    updateOption: function(fieldOption) {
-      this.$emit('optionchanged', fieldOption);
+    updateOption: function(option) {
+      option.field_index = this.index;
+      this.$emit('optionchanged', option);
     },
 
     /**

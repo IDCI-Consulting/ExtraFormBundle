@@ -2,11 +2,11 @@ var fieldOptions = {
 
   template:
     '<div>' +
-      '<component :is="option.component_name" v-for="(option, index) in options" :option="option" :field="field" @changed="updateOption"></component>' +
+      '<component :is="option.component_name" v-for="(option, index) in options" :option="option" :value="fieldOptions[option.name]" @changed="updateOption"></component>' +
     '</div>'
   ,
 
-  props: ['field', 'index'],
+  props: ['type', 'fieldOptions'],
 
   data: function () {
     return {
@@ -22,14 +22,12 @@ var fieldOptions = {
   },
 
   mounted: function() {
-    this.getExtraFormTypeOptions(this.field.extra_form_type);
+    this.getExtraFormTypeOptions(this.type);
   },
 
   methods: {
 
     updateOption: function(option) {
-
-      option.field_index = this.index;
       this.$emit('optionChanged', option);
     },
 
