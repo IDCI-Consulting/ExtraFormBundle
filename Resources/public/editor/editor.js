@@ -21,13 +21,26 @@ var app = new Vue({
   methods: {
 
     /**
-     * Update a field option
+     * Update an field option
      *
-     * @param fieldOption
+     * @param option
      */
     updateOption: function(option) {
       this.$set(
         this.fields[option.field_index]['options'],
+        option.name,
+        option.value
+      );
+    },
+
+    /**
+     * Update a field constraint option
+     *
+     * @param option
+     */
+    updateConstraintOption: function(option) {
+      this.$set(
+        this.fields[option.field_index]['constraints'][option.constraint_index]['options'],
         option.name,
         option.value
       );

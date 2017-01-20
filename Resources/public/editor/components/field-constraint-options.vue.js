@@ -3,10 +3,10 @@ var fieldConstraintOptions = {
   template:
     '<div class="field-constraint-options">' +
       '<label>Options :</label>' +
-      '<component :is="option.component_name" v-for="(option, key) in constraint.extraFormOptions" :option="option" :name="key" :value="fieldConstraint.options[key]"/>' +
+      '<component :is="option.component_name" v-for="(option, key) in constraint.extraFormOptions" :option="option" :name="key" :value="fieldConstraint.options[key]"  @changed="updateOption"/>' +
     '</div>'
   ,
-  props: ['fieldConstraint'],
+  props: ['fieldConstraint', 'index'],
 
   data: function () {
     return {
@@ -18,7 +18,8 @@ var fieldConstraintOptions = {
     'option-checkbox': checkboxOption,
     'option-textarea': textareaOption,
     'option-choice': choiceOption,
-    'option-text': textOption
+    'option-text': textOption,
+    'option-number': numberOption
   },
 
   mounted: function() {
@@ -27,11 +28,15 @@ var fieldConstraintOptions = {
 
   methods: {
 
+    updateOption: function(option) {
+      option.constraint_index = this.index;
+      this.$emit('optionChanged', option);
+    },
+
     /**
      * Get the extra form constraints
      */
     getExtraFormConstraintOption: function (fieldConstraint) {
-      log(fieldConstraint);
       this.$http.get('/extra-form-constraints.json')
         .then(
         function (response) {

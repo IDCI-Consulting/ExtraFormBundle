@@ -4,7 +4,7 @@ var field = {
       '<div>' +
         '<label>Name : </label><input type="text" v-model="field.name" /><br>' +
         '<field-options :fieldOptions="field.options" :type="field.extra_form_type" @optionChanged="updateOption"/>' +
-        '<field-constraints :fieldConstraints="field.constraints"/>' +
+        '<field-constraints :fieldConstraints="field.constraints" @constraintOptionChanged="updateConstraintOption"/>' +
         '<new-field-constraint @created="addConstraint"/>' +
         '<button v-on:click.prevent="removeField(index)">Delete this field</button>' +
       '</div>'
@@ -28,6 +28,16 @@ var field = {
     updateOption: function(option) {
       option.field_index = this.index;
       this.$emit('optionchanged', option);
+    },
+
+    /**
+     * Update the constraint option
+     *
+     * @param option
+     */
+    updateConstraintOption: function(option) {
+      option.field_index = this.index;
+      this.$emit('constraintoptionchanged', option);
     },
 
     /**

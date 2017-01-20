@@ -19,7 +19,8 @@ var fieldOptions = {
     'option-checkbox': checkboxOption,
     'option-textarea': textareaOption,
     'option-choice': choiceOption,
-    'option-text': textOption
+    'option-text': textOption,
+    'option-number': numberOption
   },
 
   mounted: function() {

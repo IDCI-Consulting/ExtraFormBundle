@@ -191,7 +191,12 @@
         <br>
 
         <div id='extra-form-fields'>
-            <field @optionchanged='updateOption' @constraintadded='addConstraint' @removed='removeField' v-for='(field, index) in fields' :field='field' :index='index'></field>
+            <field @optionchanged='updateOption'
+                   @constraintoptionchanged='updateConstraintOption'
+                   @constraintadded='addConstraint'
+                   @removed='removeField'
+                   v-for='(field, index) in fields' :field='field' :index='index'>
+            </field>
         </div>
         <br>
 
@@ -204,6 +209,7 @@
     <script type='text/javascript' src ='{{ asset('bundles/idciextraform/editor/components/options/textarea.vue.js') }}'></script>
     <script type='text/javascript' src ='{{ asset('bundles/idciextraform/editor/components/options/choice.vue.js') }}'></script>
     <script type='text/javascript' src ='{{ asset('bundles/idciextraform/editor/components/options/text.vue.js') }}'></script>
+    <script type='text/javascript' src ='{{ asset('bundles/idciextraform/editor/components/options/number.vue.js') }}'></script>
     <script type='text/javascript' src ='{{ asset('bundles/idciextraform/editor/components/options/checkbox.vue.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/field-options.vue.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/field-constraint-options.vue.js') }}'></script>

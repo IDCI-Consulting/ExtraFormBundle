@@ -5,7 +5,7 @@ var fieldConstraints = {
       '<label>Constraints : </label>' +
       '<div v-for="(constraint, index) in fieldConstraints">' +
         '{{ constraint.extra_form_constraint }}' +
-        '<field-constraint-options :fieldConstraint="constraint"/>' +
+        '<field-constraint-options :fieldConstraint="constraint" :index="index" @optionChanged="updateOption"/>' +
       '</div>' +
     '</div>'
   ,
@@ -14,5 +14,11 @@ var fieldConstraints = {
 
   components: {
     'field-constraint-options': fieldConstraintOptions
+  },
+
+  methods: {
+    updateOption: function(option) {
+      this.$emit('constraintOptionChanged', option);
+    }
   }
 };
