@@ -4,6 +4,27 @@
     margin-bottom: 5px;
 }
 
+.field-options > div,
+.field-constraint-options > div {
+    display: none;
+}
+
+.field-options.show > div,
+.field-constraint-options.show > div {
+    display: block;
+}
+
+.field-options > label:after,
+.field-constraint-options > label:after {
+    content: "+";
+}
+
+.field-options.show > label:after,
+.field-constraint-options.show > label:after {
+    content: "-";
+}
+
+
 .field-options, .field-constraints {
     border-top: 1px solid rgb(169, 169, 169);
     border-bottom: 1px solid rgb(169, 169, 169);
@@ -11,9 +32,10 @@
     padding: 10px;
 }
 
-.field-options > label, .field-constraints > label {
+.field-options > label, .field-constraint-options > label {
     padding-bottom: 10px;
     display: inline-block;
+    cursor: pointer;
 }
 
 .field-options > div > label {
