@@ -246,7 +246,6 @@ idci_extra_form:
                 interpolation:    { extra_form_type: "checkbox", options: {required: false} }
                 text_color:       { extra_form_type: "text",     options: {required: false} }
                 background_color: { extra_form_type: "text",     options: {required: false} }
-                disabled:         { extra_form_type: "checkbox", options: {required: false} }
 
         "extra_form_range":
             parent:      form
