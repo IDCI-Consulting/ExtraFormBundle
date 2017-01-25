@@ -19,19 +19,19 @@ idci_extra_form:
                 message: { extra_form_type: "text", options: {"required": false} }
 
         "null":
-            class: \Symfony\Component\Validator\Constraints\Null
+            class: \Symfony\Component\Validator\Constraints\IsNull
             description: "Null constraint"
             extra_form_options:
                 message: { extra_form_type: "text", options: {"required": false} }
 
         "true":
-            class: \Symfony\Component\Validator\Constraints\True
+            class: \Symfony\Component\Validator\Constraints\IsTrue
             description: "True constraint"
             extra_form_options:
                 message: { extra_form_type: "text", options: {"required": false} }
 
         "false":
-            class: \Symfony\Component\Validator\Constraints\False
+            class: \Symfony\Component\Validator\Constraints\IsFalse
             description: "False constraint"
             extra_form_options:
                 message: { extra_form_type: "text", options: {"required": false} }
