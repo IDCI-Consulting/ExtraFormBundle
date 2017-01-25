@@ -30,12 +30,22 @@ var field = {
   methods: {
 
     /**
+     * Generate a unique id for the fields default names
+     *
+     * @returns string
+     */
+    generateUniqueId: function() {
+      return Math.random().toString(36).substr(2, 9);
+    },
+
+    /**
      * Update the field type
      *
      * @param type
      */
     updateType: function(type) {
       this.$set(this.field, 'extra_form_type', type);
+      this.$set(this.field, 'name', 'field_' + type + '_' + this.generateUniqueId());
     },
 
     /**

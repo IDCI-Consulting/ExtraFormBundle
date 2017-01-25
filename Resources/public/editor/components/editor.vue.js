@@ -17,18 +17,9 @@ var editor = {
   methods: {
 
     /**
-     * Generate a unique id for the fields default names
-     *
-     * @returns string
-     */
-    generateUniqueId: function() {
-      return Math.random().toString(36).substr(2, 9);
-    },
-
-    /**
      * Add a new field
      *
-     * @param event
+     * @param field
      */
     addField: function(field) {
       this.fields.push(field);
