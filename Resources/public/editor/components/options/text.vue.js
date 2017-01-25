@@ -3,7 +3,7 @@ var textOption = {
   template:
     '<div>' +
       '<label :for="name">{{ name }}</label>' +
-      '<input :value="value" @input="updateOption($event.target.value)" type="text" :name="name">' +
+      '<input :required="option.options.required" :value="value" @input="updateOption($event.target.value)" type="text" :name="name">' +
     '</div>'
   ,
 

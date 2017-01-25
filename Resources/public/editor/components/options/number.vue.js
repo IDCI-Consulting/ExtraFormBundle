@@ -3,7 +3,7 @@ var numberOption = {
   template:
     '<div>' +
       '<label :for="name">{{ name }}</label>' +
-      '<input :value="value" @input="updateOption($event.target.value)" type="number" :name="name">' +
+      '<input :required="option.options.required" :value="value" @input="updateOption($event.target.value)" type="number" :name="name">' +
     '</div>'
   ,
 

@@ -3,7 +3,7 @@ var textareaOption = {
   template:
     '<div>' +
       '<label :for="name">{{ name }}</label>' +
-      '<textarea :value="value" @input="updateOption($event.target.value)" :name="name"></textarea>' +
+      '<textarea :required="option.options.required" :value="value" @input="updateOption($event.target.value)" :name="name"></textarea>' +
     '</div>'
   ,
 
