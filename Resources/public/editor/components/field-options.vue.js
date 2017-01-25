@@ -11,7 +11,7 @@ var fieldOptions = {
 
   data: function () {
     return {
-      options: []
+      options: {}
     }
   },
 
@@ -27,7 +27,31 @@ var fieldOptions = {
     this.getExtraFormTypeOptions(this.type);
   },
 
+
+  watch: {
+    type: {
+      handler: function(newType) { this.getExtraFormTypeOptions(newType); }
+    },
+    options: {
+      handler: function(newOptions) { this.deleteOldOptions(newOptions); }
+    }
+  },
+
   methods: {
+
+    /**
+     * Delete the old options from the fields when those options does not exist for a new type
+     */
+    deleteOldOptions: function(newOptions) {
+      if (Object.keys(newOptions).length > 0) {
+        for (fieldOption in this.fieldOptions) {
+          // if a previous option (which was setted on a field) is not in the options anymore, we remove this option
+          if (!(fieldOption in newOptions)) {
+            this.$delete(this.fieldOptions, fieldOption);
+          }
+        }
+      }
+    },
 
     updateOption: function(option) {
       this.$emit('optionChanged', option);

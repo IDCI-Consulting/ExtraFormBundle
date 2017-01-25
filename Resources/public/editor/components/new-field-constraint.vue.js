@@ -6,7 +6,7 @@ var newFieldConstraint = {
         '<option v-for="(constraint, key) in constraints" :value="key">' +
           '{{ constraint.description }}' +
         '</option>' +
-      '</select>' +
+      '</select> ' +
       '<button @click.prevent="createConstraint">New constraint</button>' +
     '</div>'
   ,

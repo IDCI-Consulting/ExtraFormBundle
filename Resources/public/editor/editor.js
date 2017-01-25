@@ -21,6 +21,15 @@ var app = new Vue({
   methods: {
 
     /**
+     * Generate a unique id for the fields default names
+     *
+     * @returns string
+     */
+    generateUniqueId: function() {
+      return Math.random().toString(36).substr(2, 9);
+    },
+
+    /**
      * Update an field option
      *
      * @param option
@@ -30,6 +39,19 @@ var app = new Vue({
         this.fields[option.field_index]['options'],
         option.name,
         option.value
+      );
+    },
+
+    /**
+     * Update a field type, and keep all similar options
+     *
+     * @param type
+     */
+    updateType: function(type) {
+      this.$set(
+        this.fields[type.field_index],
+        'extra_form_type',
+        type.value
       );
     },
 

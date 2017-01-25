@@ -4,24 +4,19 @@ var newField = {
 
   template:
     '<div>' +
-      '<select v-model="selectedExtraFormType" id="newExtraformField">' +
-        '<option v-for="type in types" :value="type.formType">' +
-          '${ type.formType }' +
-        '</option>' +
-      '</select>' +
+      '<types-selectbox v-model="selectedExtraFormType"/> ' +
       '<button @click.prevent="createField">New field</button>' +
     '</div>'
   ,
 
   data: function () {
     return {
-      selectedExtraFormType: 'initial',
-      types: []
+      selectedExtraFormType: 'initial'
     }
   },
 
-  mounted: function() {
-    this.getExtraFormTypes();
+  components: {
+    'types-selectbox': typesSelectbox
   },
 
   methods: {
@@ -40,26 +35,6 @@ var newField = {
       };
 
       this.$emit('created', field);
-    },
-
-    /**
-     * Get the form types
-     */
-    getExtraFormTypes: function() {
-      this.$http
-        .get('/extra-form-types.json')
-        .then(
-        function(response) {
-          return response.json();
-        },
-        function (response) {
-          console.log(response.status + ' ' + response.statusText);
-        })
-        .then(function (jsonTypes) {
-          this.types = jsonTypes;
-          this.selectedExtraFormType = Object.keys(this.types)[0];
-        })
-      ;
     },
 
     /**

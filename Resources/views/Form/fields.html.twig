@@ -191,7 +191,8 @@
         <br>
 
         <div id='extra-form-fields'>
-            <field @optionchanged='updateOption'
+            <field @typechanged='updateType'
+                   @optionchanged='updateOption'
                    @constraintoptionchanged='updateConstraintOption'
                    @constraintadded='addConstraint'
                    @removed='removeField'
@@ -206,6 +207,7 @@
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/jquery-1.11.3.min.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/ergonomics.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/vue-resource-1.0.3.min.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/types-selectbox.vue.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/new-field.vue.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/new-field-constraint.vue.js') }}'></script>
     <script type='text/javascript' src ='{{ asset('bundles/idciextraform/editor/components/options/textarea.vue.js') }}'></script>
