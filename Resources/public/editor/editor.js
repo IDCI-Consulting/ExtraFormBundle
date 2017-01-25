@@ -30,45 +30,6 @@ var app = new Vue({
     },
 
     /**
-     * Update an field option
-     *
-     * @param option
-     */
-    updateOption: function(option) {
-      this.$set(
-        this.fields[option.field_index]['options'],
-        option.name,
-        option.value
-      );
-    },
-
-    /**
-     * Update a field type, and keep all similar options
-     *
-     * @param type
-     */
-    updateType: function(type) {
-      this.$set(
-        this.fields[type.field_index],
-        'extra_form_type',
-        type.value
-      );
-    },
-
-    /**
-     * Update a field constraint option
-     *
-     * @param option
-     */
-    updateConstraintOption: function(option) {
-      this.$set(
-        this.fields[option.field_index]['constraints'][option.constraint_index]['options'],
-        option.name,
-        option.value
-      );
-    },
-
-    /**
      * Update the fields
      *
      * @param fields
@@ -83,28 +44,7 @@ var app = new Vue({
      * @param event
      */
     addField: function(field) {
-      // this.getExtraFormTypeOptions(this.selectedExtraFormType);
       this.fields.push(field);
-    },
-
-    /**
-     * Add a new cosntraint to the field
-     */
-    addConstraint: function(newConstraint) {
-
-      var constraintIsAlreadySet = function(constraint) {
-        return constraint.extra_form_constraint == newConstraint.extra_form_constraint;
-      };
-
-
-      var index = newConstraint.field_index;
-      delete newConstraint.field_index;
-
-      if (this.fields[index]['constraints'].filter(constraintIsAlreadySet).length > 0) {
-        console.error('The constraint '+ newConstraint.extra_form_constraint +' is already set');
-      } else {
-        this.fields[index]['constraints'].push(newConstraint);
-      }
     },
 
     /**

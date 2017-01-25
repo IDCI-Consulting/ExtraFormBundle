@@ -4,7 +4,7 @@ var newField = {
 
   template:
     '<div>' +
-      '<types-selectbox v-model="selectedExtraFormType"/> ' +
+      '<types-selectbox v-model="selectedExtraFormType"/>' +
       '<button @click.prevent="createField">New field</button>' +
     '</div>'
   ,

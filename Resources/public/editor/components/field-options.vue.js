@@ -30,10 +30,14 @@ var fieldOptions = {
 
   watch: {
     type: {
-      handler: function(newType) { this.getExtraFormTypeOptions(newType); }
+      handler: function(newType) {
+        this.getExtraFormTypeOptions(newType);
+      }
     },
     options: {
-      handler: function(newOptions) { this.deleteOldOptions(newOptions); }
+      handler: function (newOptions) {
+        this.deleteOldOptions(newOptions);
+      }
     }
   },
 
@@ -54,7 +58,7 @@ var fieldOptions = {
     },
 
     updateOption: function(option) {
-      this.$emit('optionChanged', option);
+      this.$set(this.fieldOptions, option.name, option.value);
     },
 
     /**

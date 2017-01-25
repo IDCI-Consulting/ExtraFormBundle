@@ -4,7 +4,8 @@ var fieldConstraints = {
     '<div class="field-constraints">' +
       '<label>Constraints : </label>' +
       '<div v-for="(constraint, index) in fieldConstraints">' +
-        '{{ constraint.extra_form_constraint }}' +
+        '<span>{{ constraint.extra_form_constraint }}</span> ' +
+        '<button v-on:click.prevent="removeConstraint(index)">Delete this constraint</button>' +
         '<field-constraint-options :fieldConstraint="constraint" :index="index" @optionChanged="updateOption"/>' +
       '</div>' +
     '</div>'
@@ -18,7 +19,11 @@ var fieldConstraints = {
 
   methods: {
     updateOption: function(option) {
-      this.$emit('constraintOptionChanged', option);
+      this.$set(this.fieldConstraints.options, option.name, option.value);
+    },
+
+    removeConstraint: function(index) {
+      this.fieldConstraints.splice(index, 1);
     }
   }
 };

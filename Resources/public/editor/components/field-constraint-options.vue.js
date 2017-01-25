@@ -28,9 +28,18 @@ var fieldConstraintOptions = {
 
   methods: {
 
+    /**
+     * Update an option on the constraint
+     *
+     * @param option
+     */
     updateOption: function(option) {
       option.constraint_index = this.index;
-      this.$emit('optionChanged', option);
+      this.$set(
+        this.fieldConstraint.options,
+        option.name,
+        option.value
+      );
     },
 
     /**

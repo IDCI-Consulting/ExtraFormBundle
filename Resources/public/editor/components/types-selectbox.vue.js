@@ -48,6 +48,7 @@ var typesSelectbox = {
           if (this.selected === 'initial') {
             this.selected = Object.keys(this.types)[0];
           }
+
           this.$emit('input', this.selected)
         })
       ;
