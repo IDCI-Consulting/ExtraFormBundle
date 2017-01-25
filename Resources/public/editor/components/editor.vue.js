@@ -1,20 +1,16 @@
-Vue.use(VueResource);
+var editor = {
 
-function log(message) {
-  console.log(JSON.stringify(message, null, 4));
-}
+  template:
+    '<div id="extra-form-fields">' +
+      '<field @removed="removeField" v-for="(field, index) in fields" :field="field" :index="index"/>' +
+      '<new-field @created="addField"></new-field>' +
+    '</div>'
+  ,
 
-var app = new Vue({
-
-  el: '#editorApp',
-  delimiters: ['${', '}'], // avoid conflicts with twig
-  data: {
-    fields: []
-  },
+  props: ['fields'],
 
   components: {
     'new-field': newField,
-    'textarea-output': textareaOutput,
     'field': field
   },
 
@@ -27,15 +23,6 @@ var app = new Vue({
      */
     generateUniqueId: function() {
       return Math.random().toString(36).substr(2, 9);
-    },
-
-    /**
-     * Update the fields
-     *
-     * @param fields
-     */
-    updateFields: function(fields) {
-      this.$set(this, 'fields', fields);
     },
 
     /**
@@ -56,4 +43,4 @@ var app = new Vue({
       this.fields.splice(index, 1);
     }
   }
-});
+};

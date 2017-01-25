@@ -20,7 +20,8 @@ var fieldOptions = {
     'option-textarea': textareaOption,
     'option-choice': choiceOption,
     'option-text': textOption,
-    'option-number': numberOption
+    'option-number': numberOption,
+    'option-integer': integerOption
   },
 
   mounted: function() {
