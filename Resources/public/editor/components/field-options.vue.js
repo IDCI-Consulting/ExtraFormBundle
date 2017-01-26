@@ -77,7 +77,10 @@ var fieldOptions = {
             if (options.hasOwnProperty(option)) {
               if (option === 'configuration') {
                 options[option]['component_name'] = 'editor';
-                this.$set(this.fieldOptions, option, []);
+                if (typeof this.fieldOptions[option] === 'undefined') {
+                  // initialize the configuration fields for the first time
+                  this.$set(this.fieldOptions, option, []);
+                }
               } else {
                 options[option]['component_name'] = 'option-' + options[option].extra_form_type;
               }
