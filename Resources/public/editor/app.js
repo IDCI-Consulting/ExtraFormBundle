@@ -1,29 +1,29 @@
-  Vue.use(VueResource);
+Vue.use(VueResource);
 
-  function log(message) {
-    console.log(JSON.stringify(message, null, 4));
-  }
+function log(message) {
+  console.log(JSON.stringify(message, null, 4));
+}
 
-  new Vue({
+new Vue({
 
-    el: '#editorApp',
-    data: {
-      fields: []
-    },
+  el: '#editorApp',
+  data: {
+    fields: []
+  },
 
-    components: {
-      'textarea-output': textareaOutput
-    },
+  components: {
+    'textarea-output': textareaOutput
+  },
 
-    methods: {
+  methods: {
 
-      /**
-       * Update the fields
-       *
-       * @param fields
-       */
-      updateFields: function (fields) {
-        this.$set(this, 'fields', fields);
-      }
+    /**
+     * Update the fields
+     *
+     * @param fields
+     */
+    updateFields: function (fields) {
+      this.$set(this, 'fields', fields);
     }
-  });
+  }
+});
