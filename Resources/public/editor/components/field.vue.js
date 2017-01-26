@@ -45,7 +45,6 @@ var field = {
      */
     updateType: function(type) {
       this.$set(this.field, 'extra_form_type', type);
-      this.$set(this.field, 'name', 'field_' + type + '_' + this.generateUniqueId());
     },
 
     /**
@@ -61,16 +60,7 @@ var field = {
      * Add a new constraint to the field
      */
     addConstraint: function(newConstraint) {
-
-      var constraintIsAlreadySet = function(constraint) {
-        return constraint.extra_form_constraint == newConstraint.extra_form_constraint;
-      };
-
-      if (this.field.constraints.filter(constraintIsAlreadySet).length > 0) {
-        console.error('The constraint '+ newConstraint.extra_form_constraint +' is already set');
-      } else {
         this.field.constraints.push(newConstraint);
-      }
     }
 
   }

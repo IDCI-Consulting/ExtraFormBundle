@@ -93,6 +93,7 @@ var textareaOutput = {
         var name = field.name;
         output[name] = {};
         output[name]['extra_form_type'] = field.extra_form_type;
+        output[name]['constraints'] = field.constraints;
         output[name]['options'] = field.options;
         if (typeof field.options.configuration !== 'undefined') {
           if (field.options.configuration.length === 0) {
