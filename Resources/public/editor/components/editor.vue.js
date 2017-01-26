@@ -1,4 +1,4 @@
-var editor = {
+Vue.component('editor', {
 
   template:
     '<div id="extra-form-fields">' +
@@ -34,4 +34,4 @@ var editor = {
       this.fields.splice(index, 1);
     }
   }
-};
+});

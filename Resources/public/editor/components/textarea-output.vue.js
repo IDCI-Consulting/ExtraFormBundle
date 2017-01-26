@@ -31,23 +31,40 @@ var textareaOutput = {
       var newFields = [];
       try {
         var output = JSON.parse(this.output);
-        for (var field in output) {
-          if (output.hasOwnProperty(field)) {
-            var newField = {
-              'name': field,
-              'extra_form_type': output[field].extra_form_type,
-              'options':  output[field].options,
-              'constraints':  output[field].constraints
-            };
-
-            newFields.push(newField);
-          }
-        }
-
+        newFields = this.createFieldsRecursively(output);
         this.$emit('generated', newFields);
       } catch (e) {
         console.error('Json parsing error');
       }
+    },
+
+    /**
+     * Create the fields recursively from the output
+     *
+     * @param output
+     */
+    createFieldsRecursively: function(output) {
+
+      var newFields = [];
+      for (var field in output) {
+        if (output.hasOwnProperty(field)) {
+
+          var newField = {
+            'name': field,
+            'extra_form_type': output[field].extra_form_type,
+            'options':  output[field].options,
+            'constraints':  output[field].constraints
+          };
+
+          if (typeof output[field].options.configuration !== 'undefined') {
+            newField.options.configuration = this.createFieldsRecursively(output[field].options.configuration);
+          }
+
+          newFields.push(newField);
+        }
+      }
+
+      return newFields;
     },
 
     /**
@@ -56,17 +73,41 @@ var textareaOutput = {
      * @param fields
      */
     generateOutput: function(fields) {
-      var output = {};
-      for (var i = 0, len = fields.length; i < len; i++) {
-        var field = fields[i];
-        var name = field['name'];
-        output[name] = {};
-        output[name]['extra_form_type'] = field['extra_form_type'];
-        output[name]['options'] = field['options'];
-        output[name]['constraints'] = field['constraints'];
-      }
+      var output = this.createOutputRecursively(fields);
 
       return JSON.stringify(output, null, 4);
+    },
+
+    /**
+     * Create the output recursively for each configuration option
+     *
+     * @param fields
+     */
+    createOutputRecursively: function(fields) {
+      // We need to clone the fields, else changes to the output are reflected on the fields
+      var cloneFields = JSON.parse(JSON.stringify(fields));
+
+      var output = {};
+      for (var i = 0, len = cloneFields.length; i < len; i++) {
+        var field = cloneFields[i];
+        var name = field.name;
+        output[name] = {};
+        output[name]['extra_form_type'] = field.extra_form_type;
+        output[name]['options'] = field.options;
+        if (typeof field.options.configuration !== 'undefined') {
+          if (field.options.configuration.length === 0) {
+            // Hide the configuration in the output key if it's empty
+            delete output[name]['options'].configuration;
+          } else {
+            // Each time a configuration option is found and if it's not empty, recursively create the output for this configuration
+            output[name]['options'].configuration = this.createOutputRecursively(output[name]['options'].configuration);
+          }
+          output[name]['constraints'] = field.constraints;
+        }
+      }
+
+      return output;
     }
+
   }
 };

@@ -3,7 +3,8 @@ var fieldOptions = {
   template:
     '<div class="field-options">' +
       '<label>Options : </label>' +
-      '<component :is="option.component_name" v-for="(option, key) in options" :option="option" :name="key" :value="fieldOptions[key]" @changed="updateOption"/>' +
+      '<component v-if="option.component_name !== \'editor\'" :is="option.component_name" v-for="(option, key) in options" :option="option" :name="key" :value="fieldOptions[key]" @changed="updateOption"></component>' +
+      '<editor v-for="(option, key) in options" v-if="option.component_name === \'editor\'" :fields="fieldOptions[key]"></editor>' +
     '</div>'
   ,
 
@@ -11,7 +12,8 @@ var fieldOptions = {
 
   data: function () {
     return {
-      options: {}
+      options: {},
+      fields: []
     }
   },
 
@@ -27,7 +29,6 @@ var fieldOptions = {
   mounted: function() {
     this.getExtraFormTypeOptions(this.type);
   },
-
 
   watch: {
     type: {
@@ -74,7 +75,12 @@ var fieldOptions = {
           var options = response.body;
           for (var option in options) {
             if (options.hasOwnProperty(option)) {
-              options[option]['component_name'] = 'option-' + options[option].extra_form_type;
+              if (option === 'configuration') {
+                options[option]['component_name'] = 'editor';
+                this.$set(this.fieldOptions, option, []);
+              } else {
+                options[option]['component_name'] = 'option-' + options[option].extra_form_type;
+              }
             }
           }
           this.options = options;

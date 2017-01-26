@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(window).on('load', function() {
   $('#extra-form-fields').on('click', '.field-options > label', function() {
     $(this).parent().toggleClass('show');
   });

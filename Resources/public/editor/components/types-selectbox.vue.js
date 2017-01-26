@@ -46,7 +46,7 @@ var typesSelectbox = {
         .then(function (jsonTypes) {
           this.types = jsonTypes;
           if (this.selected === 'initial') {
-            this.selected = Object.keys(this.types)[0];
+            this.selected = Object.keys(this.types)[8];
           }
 
           this.$emit('input', this.selected)

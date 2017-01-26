@@ -168,13 +168,11 @@
     </script>
 {%- endblock extra_form_collection_widget -%}
 
-
 {%- block extra_form_iban_text_row -%}
     <div style='display:inline-block'>
         {{- form_widget(form) -}}
     </div>
 {%- endblock extra_form_iban_text_row -%}
-
 
 {%- block extra_form_html_row -%}
     {{- form_widget(form) -}}
@@ -194,7 +192,6 @@
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/jquery-1.11.3.min.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/vue-dev.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/vue-resource-1.0.3.min.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/ergonomics.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/types-selectbox.vue.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/new-field.vue.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/new-field-constraint.vue.js') }}'></script>
@@ -211,6 +208,7 @@
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/textarea-output.vue.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/editor.vue.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/app.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/ergonomics.js') }}'></script>
 {%- endblock extra_form_editor_widget -%}
 
 {%- block extra_form_range_widget -%}
