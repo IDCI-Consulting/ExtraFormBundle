@@ -7,7 +7,7 @@ var field = {
         '<types-selectbox v-model="field.extra_form_type" @input="updateType"/><br>' +
         '<field-options :fieldOptions="field.options" :type="field.extra_form_type"/>' +
         '<field-constraints :fieldConstraints="field.constraints"/> ' +
-        '<new-field-constraint @created="addConstraint"/>' +
+        '<new-field-constraint @created="addConstraint"/><br>' +
         '<button v-on:click.prevent="removeField(index)">Delete this field</button>' +
       '</div>'
   ,
