@@ -8,7 +8,27 @@ new Vue({
 
   el: '#editorApp',
   data: {
-    fields: []
+    fields: [],
+    // default values
+    configuration: {
+      enableTextareaOutput: true
+    }
+  },
+
+  /**
+   * Override the configuration
+   */
+  created: function() {
+    var rootElement = document.querySelector('div#editorApp[data-configuration-variable]');
+    if (rootElement !== null) {
+      var configurationVariableName = rootElement.getAttribute('data-configuration-variable');
+      var extraFormEditorConfiguration = window[configurationVariableName];
+      if (typeof extraFormEditorConfiguration !== 'undefined') {
+        for (var parameter in extraFormEditorConfiguration) {
+          this.$set(this.configuration, parameter, extraFormEditorConfiguration[parameter]);
+        }
+      }
+    }
   },
 
   components: {

@@ -184,8 +184,13 @@
 {%- endblock extra_form_html_widget -%}
 
 {%- block extra_form_editor_widget -%}
-    <div id='editorApp'>
-        <textarea-output :fields='fields' @generated='updateFields'></textarea-output><br>
+    <script type='text/javascript'>
+        var extraFormEditorConfiguration = {
+            'enableTextareaOutput': true
+        }
+    </script>
+    <div id='editorApp' data-configuration-variable="extraFormEditorConfiguration" >
+        <textarea-output v-if="configuration.enableTextareaOutput" :fields='fields' @generated='updateFields'></textarea-output><br>
         <editor :fields="fields"></editor>
     </div>
 
