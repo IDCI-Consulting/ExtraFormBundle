@@ -1,4 +1,4 @@
-#extra-form-fields > div {
+.extra-form-fields > div {
     border: 1px solid rgb(169, 169, 169);
     padding: 5px;
     margin-bottom: 5px;
@@ -47,3 +47,9 @@
 .field-options > div, .field-constraints > div {
     padding-left: 20px;
 }
+
+/*#editorApp .extra-form-fields > div { background-color: #3F51B5; }*/
+/*#editorApp .extra-form-fields .extra-form-fields > div { background-color: #2196F3; }*/
+/*#editorApp .extra-form-fields .extra-form-fields .extra-form-fields > div { background-color: #03A9F4; }*/
+/*#editorApp .extra-form-fields .extra-form-fields .extra-form-fields .extra-form-fields > div { background-color: #00BCD4; }*/
+/*#editorApp .extra-form-fields .extra-form-fields .extra-form-fields .extra-form-fields .extra-form-fields > div { background-color: #009688; }*/
