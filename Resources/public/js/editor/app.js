@@ -2,9 +2,9 @@
  * The function that will trigger the editor
  *
  * @param element : string|Object the dom element to trigger the editor
- * @param initialOutput : string the inital textarea content
+ * @param textarea : object with textarea default values
  */
-function triggerEditor(element, initialOutput) {
+function triggerEditor(element, defaultTextarea) {
 
   Vue.use(VueResource);
 
@@ -13,7 +13,7 @@ function triggerEditor(element, initialOutput) {
     el: element,
     data: {
       fields: [],
-      initialOutput: initialOutput,
+      textarea: defaultTextarea,
       // default values
       configuration: {
         enableTextareaOutput: true

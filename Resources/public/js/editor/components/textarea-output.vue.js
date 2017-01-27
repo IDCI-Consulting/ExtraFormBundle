@@ -6,22 +6,29 @@ var textareaOutput = {
 
   template:
     '<div>' +
-      '<textarea id="form-editor" v-model="output" name="form[editor]" style="width: 100%; height: 300px;"></textarea>' +
-      '<button @click.prevent="generateFields">Generate the form from the json</button>' +
+      '<textarea :id="textarea.id" v-model="output" :name="textarea.name" style="width: 100%; height: 300px;"></textarea>' +
+      '<button class="generate-fields" @click.prevent="generateFields">Fill the visual mode form fields from this json</button>' +
     '</div>'
   ,
 
-  props: ['fields', 'initialoutput'],
+  props: ['fields', 'textarea'],
 
   data: function() {
     return {
-      output: {}
+      output: ''
     }
   },
 
   created: function() {
-    this.output = JSON.stringify(JSON.parse(this.initialoutput), null, 4);
-    this.generateFields();
+    try {
+      // If the textarea is empty, do not attempt to generate fields
+      if (!this.textarea.value === '') {
+        this.output = JSON.stringify(JSON.parse(this.textarea.value), null, 4);
+        this.generateFields();
+      }
+    } catch (e) {
+      console.error('Json parsing error');
+    }
   },
 
   watch: {

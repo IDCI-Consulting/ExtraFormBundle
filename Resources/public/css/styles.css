@@ -2,6 +2,10 @@
 /* EDITOR */
 /**********/
 
+button.close-visual-mode {
+    float: left;
+}
+
 .container {
     width: 80%;
     margin: 0 auto;

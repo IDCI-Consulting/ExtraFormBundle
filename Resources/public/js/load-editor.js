@@ -12,7 +12,11 @@ var extraFormEditorConfiguration = {
 $(window).on('load', function() {
 
   $('textarea.extra-form-editor').each(function(index) {
-    var textareaValue = $(this).val();
+    var textarea = {
+      value: $(this).val(),
+      id: $(this).attr('id'),
+      name: $(this).attr('name')
+    };
     var appId = 'editorApp' + index;
 
     $(this).replaceWith(
@@ -29,7 +33,13 @@ $(window).on('load', function() {
                 '<h4 class="modal-title">Editor in raw mode</h4>' +
               '</div>' +
             '<div class="modal-body">' +
-              '<textarea-output v-if="configuration.enableTextareaOutput" :fields="fields" :initialoutput="initialOutput" @generated="updateFields"></textarea-output><br>' +
+              '<textarea-output ' +
+                'v-if="configuration.enableTextareaOutput" ' +
+                ':fields="fields" ' +
+                ':textarea="textarea" ' +
+                '@generated="updateFields">' +
+              '</textarea-output>' +
+              '<br>' +
             '</div>' +
           '</div>' +
       '</div>' +
@@ -46,6 +56,10 @@ $(window).on('load', function() {
               '<div class="modal-body">' +
                 '<editor :fields="fields"></editor>' +
               '</div>' +
+              '<div class="modal-footer">' +
+                '<button class="close-visual-mode">Close the editor</button>' +
+                '<em>All your changes are automatically saved</em>' +
+              '</div>' +
             '</div>' +
           '</div>' +
         '</div>' +
@@ -54,32 +68,8 @@ $(window).on('load', function() {
 
     triggerEditor(
       '#' + appId,
-      textareaValue,
-      extraFormEditorConfiguration
+      textarea
     );
-  });
-
-  $fullScreenModal = $(".modal-fullscreen");
-  $(".modal-fullscreen").on('show.bs.modal', function () {
-    setTimeout( function() {
-      $(".modal-backdrop").addClass("modal-backdrop-fullscreen");
-    }, 0);
-  });
-
-  $(".modal-fullscreen").on('hidden.bs.modal', function () {
-    $(".modal-backdrop").addClass("modal-backdrop-fullscreen");
-  });
-
-  $('button.trigger-visual-mode-modal').on('click', function(event) {
-    event.preventDefault();
-    $modal = $(this).siblings('.visual-mode-modal').first();
-    $modal.modal('show');
-  });
-
-  $('button.trigger-raw-mode-modal').on('click', function(event) {
-    event.preventDefault();
-    $modal = $(this).siblings('.raw-mode-modal').first();
-    $modal.modal('show');
   });
 
 });
