@@ -184,36 +184,37 @@
 {%- endblock extra_form_html_widget -%}
 
 {%- block extra_form_editor_widget -%}
-    <script type='text/javascript'>
-        var extraFormEditorConfiguration = {
-            'enableTextareaOutput': true
-        }
-    </script>
-    <div id='editorApp' data-configuration-variable="extraFormEditorConfiguration" >
-        <textarea-output v-if="configuration.enableTextareaOutput" :fields='fields' @generated='updateFields'></textarea-output><br>
-        <editor :fields="fields"></editor>
-    </div>
+    <textarea class="editorable" style="width: 100%; height: 300px;">
+{
+    "initial_json": {
+        "extra_form_type": "birthday",
+        "constraints": [],
+        "options": {}
+    }
+}
+    </textarea>
 
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/jquery-1.11.3.min.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/vue-dev.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/vue-resource-1.0.3.min.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/types-selectbox.vue.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/new-field.vue.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/new-field-constraint.vue.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/options/textarea.vue.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/options/choice.vue.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/options/text.vue.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/options/number.vue.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/options/integer.vue.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/options/checkbox.vue.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/field-options.vue.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/field-constraint-options.vue.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/field-constraints.vue.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/field.vue.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/textarea-output.vue.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/components/editor.vue.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/app.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/editor/ergonomics.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/types-selectbox.vue.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/new-field.vue.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/new-field-constraint.vue.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/options/textarea.vue.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/options/choice.vue.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/options/text.vue.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/options/number.vue.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/options/integer.vue.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/options/checkbox.vue.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/field-options.vue.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/field-constraint-options.vue.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/field-constraints.vue.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/field.vue.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/textarea-output.vue.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/editor.vue.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/app.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/load-editor.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/ergonomics.js') }}'></script>
 {%- endblock extra_form_editor_widget -%}
 
 {%- block extra_form_range_widget -%}

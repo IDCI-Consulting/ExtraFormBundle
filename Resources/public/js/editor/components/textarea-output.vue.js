@@ -1,3 +1,7 @@
+function log(message) {
+  console.log(JSON.stringify(message, null, 4));
+}
+
 var textareaOutput = {
 
   template:
@@ -7,12 +11,17 @@ var textareaOutput = {
     '</div>'
   ,
 
-  props: ['fields'],
+  props: ['fields', 'initialoutput'],
 
   data: function() {
     return {
       output: {}
     }
+  },
+
+  created: function() {
+    this.output = JSON.stringify(JSON.parse(this.initialoutput), null, 4);
+    this.generateFields();
   },
 
   watch: {
