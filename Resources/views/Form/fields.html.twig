@@ -184,15 +184,7 @@
 {%- endblock extra_form_html_widget -%}
 
 {%- block extra_form_editor_widget -%}
-    <textarea class="extra-form-editor" style="width: 100%; height: 300px;">
-        {
-            "initial_json": {
-                "extra_form_type": "birthday",
-                "constraints": [],
-                "options": {}
-            }
-        }
-    </textarea>
+    {{- form_widget(form) -}}
 
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/jquery-1.11.3.min.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/bootstrap-modal.min.js') }}'></script>

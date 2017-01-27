@@ -21,9 +21,13 @@ class ExtraFormEditorType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['attr']['data-ng-model'] = 'output';
-        $view->vars['attr']['data-ng-show'] = $options['display_raw'] ? 'true' : 'false';
-        $view->vars['disabled_editor'] = $options['disabled_editor'];
+        $attrClass = 'extra-form-editor';
+
+        if (isset($options['attr']) && isset($options['attr']['class'])) {
+            $attrClass .= ' '.$options['attr']['class'];
+        }
+
+        $view->vars['attr']['class'] = $attrClass;
 
         return $view->vars;
     }
@@ -35,16 +39,7 @@ class ExtraFormEditorType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'required'        => false,
-                'display_raw'     => false,
-                'disabled_editor' => false,
-                'attr'            => array(
-                    'style' => 'display: block; width: 100%; height: 150px;'
-                ),
-            ))
-            ->setAllowedTypes(array(
-                'display_raw'     => array('bool'),
-                'disabled_editor' => array('bool'),
+                'required' => false,
             ))
         ;
     }
