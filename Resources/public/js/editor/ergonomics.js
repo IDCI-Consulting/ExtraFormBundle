@@ -1,9 +1,13 @@
 $(window).on('load', function() {
-  $('.extra-form-fields').on('click', '.field-options > label', function() {
+
+  var $extraFormFields = $('.extra-form-fields');
+
+  $extraFormFields.on('click', '.field-options > label', function() {
     $(this).parent().toggleClass('show');
   });
 
-  $('.extra-form-fields').on('click', '.field-constraint-options > label', function() {
+  $extraFormFields.on('click', '.field-constraint-options > label', function() {
     $(this).parent().toggleClass('show');
   });
+
 });
