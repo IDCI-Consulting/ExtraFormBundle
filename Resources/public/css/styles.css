@@ -1,3 +1,12 @@
+/**********/
+/* EDITOR */
+/**********/
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
 .extra-form-fields > div {
     border: 1px solid rgb(169, 169, 169);
     padding: 5px;
@@ -48,8 +57,53 @@
     padding-left: 20px;
 }
 
-/*#editorApp .extra-form-fields > div { background-color: #3F51B5; }*/
-/*#editorApp .extra-form-fields .extra-form-fields > div { background-color: #2196F3; }*/
-/*#editorApp .extra-form-fields .extra-form-fields .extra-form-fields > div { background-color: #03A9F4; }*/
-/*#editorApp .extra-form-fields .extra-form-fields .extra-form-fields .extra-form-fields > div { background-color: #00BCD4; }*/
-/*#editorApp .extra-form-fields .extra-form-fields .extra-form-fields .extra-form-fields .extra-form-fields > div { background-color: #009688; }*/
+/********************/
+/* FULLSCREEN MODAL */
+/********************/
+
+/* See http://www.minimit.com/demos/bootstrap-3-transparent-and-fullscreen-modals */
+
+.modal-fullscreen {
+    background: transparent;
+}
+
+.modal-fullscreen .modal-content {
+    background: transparent;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.modal-backdrop.modal-backdrop-fullscreen {
+    background: #ffffff;
+}
+
+.modal-backdrop.modal-backdrop-fullscreen.in {
+    opacity: .97;
+    filter: alpha(opacity=97);
+}
+
+.modal-fullscreen .modal-dialog {
+    margin: 0;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .modal-fullscreen .modal-dialog {
+        width: 750px;
+    }
+}
+
+@media (min-width: 992px) {
+    .modal-fullscreen .modal-dialog {
+        width: 970px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .modal-fullscreen .modal-dialog {
+        width: 1170px;
+    }
+}

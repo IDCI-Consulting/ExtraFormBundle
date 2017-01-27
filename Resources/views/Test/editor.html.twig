@@ -1,11 +1,15 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
-    <h1>Extra Form Editor</h1>
-    {{ form(form) }}
+    <div class="container">
+        <h1>Extra Form Editor</h1>
+        {{ form(form) }}
+    </div>
 {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/idciextraform/css/styles.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/idciextraform/css/bootstrap-modal.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/idciextraform/css/bootstrap-theme.min.css') }}" />
 {% endblock %}
