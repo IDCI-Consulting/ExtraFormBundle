@@ -4,13 +4,9 @@
  * @param element : string|Object the dom element to trigger the editor
  * @param initialOutput : string the inital textarea content
  */
-function triggerEditor(element, initialOutput, configuration) {
+function triggerEditor(element, initialOutput) {
 
   Vue.use(VueResource);
-
-  function log(message) {
-    console.log(JSON.stringify(message, null, 4));
-  }
 
   new Vue({
 
@@ -21,22 +17,6 @@ function triggerEditor(element, initialOutput, configuration) {
       // default values
       configuration: {
         enableTextareaOutput: true
-      }
-    },
-
-    /**
-     * Override the configuration
-     */
-    created: function() {
-      var rootElement = document.querySelector('div.editorApp[data-configuration-variable]');
-      if (rootElement !== null) {
-        var configurationVariableName = rootElement.getAttribute('data-configuration-variable');
-        var configuration = window[configurationVariableName];
-        if (typeof configuration !== 'undefined') {
-          for (var parameter in configuration) {
-            this.$set(this.configuration, parameter, configuration[parameter]);
-          }
-        }
       }
     },
 
@@ -55,5 +35,6 @@ function triggerEditor(element, initialOutput, configuration) {
         this.$set(this, 'fields', fields);
       }
     }
+
   });
-};
+}
