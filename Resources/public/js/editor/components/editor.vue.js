@@ -33,5 +33,7 @@ Vue.component('editor', {
     removeField: function(index) {
       this.fields.splice(index, 1);
     }
+
   }
+
 });
