@@ -12,8 +12,7 @@ var fieldOptions = {
 
   data: function () {
     return {
-      options: {},
-      fields: []
+      options: {}
     }
   },
 
