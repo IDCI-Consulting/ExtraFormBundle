@@ -2,7 +2,7 @@
  * The function that will trigger the editor
  *
  * @param element : string|Object the dom element to trigger the editor
- * @param textarea : object with textarea default values
+ * @param defaultTextarea : object with textarea default values
  */
 function triggerEditor(element, defaultTextarea) {
 

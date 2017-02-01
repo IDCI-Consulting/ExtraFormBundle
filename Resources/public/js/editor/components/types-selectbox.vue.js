@@ -24,6 +24,14 @@ var typesSelectbox = {
     this.getExtraFormTypes();
   },
 
+  watch: {
+    value: {
+      handler: function(value) {
+        this.selected = value;
+      }
+    }
+  },
+
   methods: {
 
     updateValue: function (selectedExtraFormType) {

@@ -4,7 +4,7 @@ var field = {
       '<div>' +
         '<label>Name : </label>' +
         '<input type="text" v-model="field.name" /> ' +
-        '<types-selectbox v-model="field.extra_form_type" @input="updateType"/><br>' +
+        '<types-selectbox v-model="field.extra_form_type" @input="updateType"/><i class="handle"></i><br>' +
         '<field-options :fieldOptions="field.options" :type="field.extra_form_type"/>' +
         '<field-constraints :fieldConstraints="field.constraints"/> ' +
         '<new-field-constraint @created="addConstraint"/><br>' +

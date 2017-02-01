@@ -184,12 +184,41 @@
 {%- endblock extra_form_html_widget -%}
 
 {%- block extra_form_editor_widget -%}
-    {{- form_widget(form) -}}
+    <textarea class="extra-form-editor">
+        {
+            "2ddd": {
+                "extra_form_type": "choice",
+                "constraints": [],
+                "options": {
+                    "label": "2222222222222"
+                }
+            },
+            "1ddd": {
+                "extra_form_type": "birthday",
+                "constraints": [],
+                "options": {
+                    "label": "11111111",
+                    "widget": "single_text"
+                }
+            },
+            "3ddd": {
+                "extra_form_type": "captcha",
+                "constraints": [],
+                "options": {
+                    "label": "33333333333333",
+                    "as_file": true
+                }
+            }
+        }
+    </textarea>
+    {#{{- form_widget(form) -}}#}
 
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/jquery-1.11.3.min.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/bootstrap-modal.min.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/vue-dev.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/vue-resource-1.0.3.min.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/vue-dev.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/sortable.min.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/vue-draggable.min.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/jquery-1.11.3.min.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/bootstrap-modal.min.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/vue-resource-1.0.3.min.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/types-selectbox.vue.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/new-field.vue.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/new-field-constraint.vue.js') }}'></script>

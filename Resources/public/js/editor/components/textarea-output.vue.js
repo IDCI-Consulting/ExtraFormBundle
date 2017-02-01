@@ -22,8 +22,8 @@ var textareaOutput = {
   created: function() {
     try {
       // If the textarea is empty, do not attempt to generate fields
-      if (!this.textarea.value === '') {
-        this.output = JSON.stringify(JSON.parse(this.textarea.value), null, 4);
+      if (this.textarea.value !== '') {
+        this.output = this.textarea.value;
         this.generateFields();
       }
     } catch (e) {
@@ -122,6 +122,8 @@ var textareaOutput = {
           output[name]['constraints'] = field.constraints;
         }
       }
+
+      // sort the keys
 
       return output;
     }
