@@ -2,7 +2,7 @@ $(window).on('load', function() {
 
   /** Display options related js **/
 
-  var $extraFormFields = $('.extra-form-fields');
+  var $extraFormFields = $('.editor-simple');
 
   $extraFormFields.on('click', '.field-options > label', function(event) {
     event.stopImmediatePropagation(); // prevent the click for being triggered multiple times
@@ -50,5 +50,9 @@ $(window).on('load', function() {
     event.preventDefault();
     $(this).closest('.modal').modal('hide');
   });
+
+  // FOR DEV - TO REMOVE
+  $modal = $('button.trigger-advanced-visual-mode-modal').siblings('.advanced-visual-mode-modal').first();
+  $modal.modal('show');
 
 });

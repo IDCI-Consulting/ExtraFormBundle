@@ -1,4 +1,4 @@
-var fieldConstraintOptions = {
+var editorSimpleFieldConstraintOptions = {
 
   template:
     '<div class="field-constraint-options">' +

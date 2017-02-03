@@ -1,12 +1,12 @@
-var field = {
+var editorSimpleField = {
 
   template:
       '<div>' +
         '<label>Name : </label>' +
         '<input type="text" v-model="field.name" /> ' +
         '<types-selectbox v-model="field.extra_form_type" @input="updateType"/><i class="handle"></i><br>' +
-        '<field-options :fieldOptions="field.options" :type="field.extra_form_type"/>' +
-        '<field-constraints :fieldConstraints="field.constraints"/> ' +
+        '<field-options class="field-options" :fieldOptions="field.options" :type="field.extra_form_type"/>' +
+        '<field-constraints class="field-constraints" :fieldConstraints="field.constraints"/> ' +
         '<new-field-constraint @created="addConstraint"/><br>' +
         '<button v-on:click.prevent="removeField(index)">Delete this field</button>' +
       '</div>'
@@ -21,9 +21,9 @@ var field = {
   props: ['field', 'index'],
 
   components: {
-    'field-options': fieldOptions,
-    'new-field-constraint': newFieldConstraint,
-    'field-constraints': fieldConstraints,
+    'field-options': editorSimpleFieldOptions,
+    'new-field-constraint': editorSimpleNewFieldConstraint,
+    'field-constraints': editorSimpleFieldConstraints,
     'types-selectbox': typesSelectbox
   },
 

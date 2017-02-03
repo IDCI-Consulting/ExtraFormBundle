@@ -58,15 +58,20 @@ Vue.component('editor-raw', {
     createFieldsRecursively: function(output) {
 
       var newFields = [];
-      for (var field in output) {
-        if (output.hasOwnProperty(field)) {
+      var index = 0;
 
+      for (var field in output) {
+        index = index + 1;
+        if (output.hasOwnProperty(field)) {
           var newField = {
             'name': field,
             'extra_form_type': output[field].extra_form_type,
             'options':  output[field].options,
             'constraints':  output[field].constraints
           };
+
+          // Set the first field as active
+          newField.active = (index === 1 ? true : false);
 
           if (typeof output[field].options.configuration !== 'undefined') {
             newField.options.configuration = this.createFieldsRecursively(output[field].options.configuration);

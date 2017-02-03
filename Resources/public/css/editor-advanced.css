@@ -1,0 +1,98 @@
+.editor-advanced > div {
+    max-height: 80vh;
+    overflow: auto;
+}
+
+/** EXTRA FORM TYPES **/
+
+.editor-advanced .extra-form-types button {
+    border: 1px solid #514D61;
+    background-color: white;
+    color: #514D61;
+    display: block;
+    min-width: 173px;
+    margin: 10px auto;
+}
+
+.editor-advanced .extra-form-fields .field {
+    cursor: pointer;
+    margin: 10px;
+    padding: 10px;
+    color: #FFFFFF;
+    background-color: #514D61;
+}
+
+.editor-advanced .extra-form-fields .field.active {
+    border: 1px solid #514D61;
+    background-color: white;
+    margin: 10px;
+    color: #514D61;
+}
+
+.editor-advanced .extra-form-fields .field button.close {
+    visibility: hidden;
+    color: #FFFFFF;
+    opacity: 1;
+}
+
+.editor-advanced .extra-form-fields .field.active button.close {
+    color: #514D61;
+}
+
+.editor-advanced .extra-form-fields .field button.close:hover {
+    opacity: 0.7;
+}
+
+.editor-advanced .extra-form-fields .field .icon-move {
+    float: right;
+    line-height: 1;
+    font-size: 20px;
+    position: relative;
+    right: 15px;
+    top: 10px;
+}
+
+.editor-advanced .extra-form-fields .field .icon-move:hover {
+    cursor: move;
+}
+
+.editor-advanced .extra-form-fields .field:hover button.close {
+    visibility: visible;
+}
+
+.editor-advanced .extra-form-types button:hover {
+    background: #514D61;
+    border-color: #514D61;
+    color: #FFF;
+}
+
+/** EXTRA FORM FIELDS CONFIGURATION : OPTIONS **/
+
+.editor-advanced .extra-form-fields-configuration > .inactive {
+    display: none;
+}
+
+.editor-advanced .extra-form-fields-configuration > .active {
+    display: block;
+}
+
+.editor-advanced .field-options div > label {
+    min-width: 130px;
+    padding-bottom: 3px;
+    display: inline-block;
+}
+
+.editor-advanced .extra-form-fields-configuration .nav-pills {
+    margin: 10px 0;
+}
+
+.editor-advanced .extra-form-fields-configuration ul.nav-pills > li > a {
+    color: #514D61;
+    border-radius: 0px;
+}
+
+.editor-advanced .extra-form-fields-configuration ul.nav-pills > li a:hover,
+.editor-advanced .extra-form-fields-configuration ul li.active a {
+    background-color: #514D61;
+    color: #FFFFFF;
+}

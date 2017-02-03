@@ -1,7 +1,7 @@
-var fieldConstraints = {
+var editorSimpleFieldConstraints = {
 
   template:
-    '<div class="field-constraints">' +
+    '<div>' +
       '<label>Constraints : </label>' +
       '<div v-for="(constraint, index) in fieldConstraints">' +
         '<span>{{ constraint.extra_form_constraint }}</span> ' +
@@ -14,7 +14,7 @@ var fieldConstraints = {
   props: ['fieldConstraints'],
 
   components: {
-    'field-constraint-options': fieldConstraintOptions
+    'field-constraint-options': editorSimpleFieldConstraintOptions
   },
 
   methods: {

@@ -1,10 +1,10 @@
-var fieldOptions = {
+var editorSimpleFieldOptions = {
 
   template:
-    '<div class="field-options">' +
+    '<div>' +
       '<label>Options : </label>' +
       '<component v-if="option.component_name !== \'editor\'" :is="option.component_name" v-for="(option, key) in options" :option="option" :name="key" :value="fieldOptions[key]" @changed="updateOption"></component>' +
-      '<editor v-for="(option, key) in options" v-if="option.component_name === \'editor\'" :fields="fieldOptions[key]"></editor>' +
+      '<editor-simple v-for="(option, key) in options" v-if="option.component_name === \'editor\'" :fields="fieldOptions[key]"></editor-simple>' +
     '</div>'
   ,
 

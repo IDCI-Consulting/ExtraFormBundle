@@ -1,4 +1,4 @@
-var newField = {
+var editorSimpleNewField = {
 
   delimiters: ['${', '}'],
 

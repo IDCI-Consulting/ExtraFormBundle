@@ -20,8 +20,8 @@ Vue.component('editor-simple', {
   },
 
   components: {
-    'new-field': newField,
-    'field': field
+    'new-field': editorSimpleNewField,
+    'field': editorSimpleField
   },
 
   methods: {

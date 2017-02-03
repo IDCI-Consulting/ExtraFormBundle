@@ -1,4 +1,4 @@
-var newFieldConstraint = {
+var editorSimpleNewFieldConstraint = {
 
   template:
     '<div>' +
