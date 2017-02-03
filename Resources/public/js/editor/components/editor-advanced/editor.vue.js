@@ -1,4 +1,4 @@
-Vue.component('editor', {
+Vue.component('editor-advanced', {
 
   template:
   '<div class="row">' +

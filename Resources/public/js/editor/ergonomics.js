@@ -28,15 +28,21 @@ $(window).on('load', function() {
     $(".modal-backdrop").addClass("modal-backdrop-fullscreen");
   });
 
-  $('button.trigger-visual-mode-modal').on('click', function(event) {
+  $('button.trigger-simple-visual-mode-modal').on('click', function(event) {
     event.preventDefault();
-    $modal = $(this).siblings('.visual-mode-modal').first();
+    $modal = $(this).siblings('.simple-visual-mode-modal').first();
     $modal.modal('show');
   });
 
   $('button.trigger-raw-mode-modal').on('click', function(event) {
     event.preventDefault();
     $modal = $(this).siblings('.raw-mode-modal').first();
+    $modal.modal('show');
+  });
+
+  $('button.trigger-advanced-visual-mode-modal').on('click', function(event) {
+    event.preventDefault();
+    $modal = $(this).siblings('.advanced-visual-mode-modal').first();
     $modal.modal('show');
   });
 
