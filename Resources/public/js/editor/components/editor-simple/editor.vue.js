@@ -1,7 +1,7 @@
-Vue.component('editor', {
+Vue.component('editor-simple', {
 
   template:
-    '<div class="extra-form-fields">' +
+    '<div class="editor-simple">' +
       '<draggable :list="fields" :options="sortableOptions">' +
         '<field class="field" @removed="removeField" v-for="(field, index) in fields" :field="field" :index="index"/>' +
       '</draggable>' +

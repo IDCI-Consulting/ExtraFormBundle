@@ -1,8 +1,4 @@
-function log(message) {
-  console.log(JSON.stringify(message, null, 4));
-}
-
-var textareaOutput = {
+Vue.component('editor-raw', {
 
   template:
     '<div>' +
@@ -129,4 +125,4 @@ var textareaOutput = {
     }
 
   }
-};
+});

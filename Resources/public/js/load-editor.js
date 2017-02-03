@@ -33,12 +33,12 @@ $(window).on('load', function() {
                 '<h4 class="modal-title">Editor in raw mode</h4>' +
               '</div>' +
             '<div class="modal-body">' +
-              '<textarea-output ' +
+              '<editor-raw ' +
                 'v-if="configuration.enableTextareaOutput" ' +
                 ':fields="fields" ' +
                 ':textarea="textarea" ' +
                 '@generated="updateFields">' +
-              '</textarea-output>' +
+              '</editor-raw>' +
               '<br>' +
             '</div>' +
           '</div>' +
@@ -51,10 +51,10 @@ $(window).on('load', function() {
             '<div class="modal-content">' +
               '<div class="modal-header">' +
                  '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
-                 '<h4 class="modal-title">Editor in visual mode</h4>' +
+                 '<h4 class="modal-title">Simple visual mode</h4>' +
               '</div>' +
               '<div class="modal-body">' +
-                '<editor :fields="fields"></editor>' +
+                '<editor-simple :fields="fields"></editor-simple>' +
               '</div>' +
               '<div class="modal-footer">' +
                 '<button class="close-visual-mode">Close the editor</button>' +

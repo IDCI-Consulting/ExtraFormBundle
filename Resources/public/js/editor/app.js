@@ -20,10 +20,6 @@ function triggerEditor(element, defaultTextarea) {
       }
     },
 
-    components: {
-      'textarea-output': textareaOutput
-    },
-
     methods: {
 
       /**

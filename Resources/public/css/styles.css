@@ -17,58 +17,58 @@ button.close-visual-mode {
     margin: 0 auto;
 }
 
-.extra-form-fields > div.new-field {
+.editor-simple > div.new-field {
     border: 1px solid rgb(169, 169, 169);
     padding: 5px;
     margin-bottom: 5px;
 }
 
-.extra-form-fields .field {
+.editor-simple .field {
     padding: 10px;
     border: 1px dashed black;
 }
 
-.field-options > div,
-.field-constraint-options > div {
+.editor-simple .field-options > div,
+.editor-simple .field-constraint-options > div {
     display: none;
 }
 
-.field-options.show > div,
-.field-constraint-options.show > div {
+.editor-simple .field-options.show > div,
+.editor-simple .field-constraint-options.show > div {
     display: block;
 }
 
-.field-options > label:after,
-.field-constraint-options > label:after {
+.editor-simple .field-options > label:after,
+.editor-simple .field-constraint-options > label:after {
     content: "+";
 }
 
-.field-options.show > label:after,
-.field-constraint-options.show > label:after {
+.editor-simple .field-options.show > label:after,
+.editor-simple .field-constraint-options.show > label:after {
     content: "-";
 }
 
 
-.field-options, .field-constraints {
+.editor-simple .field-options, .field-constraints {
     border-top: 1px solid rgb(169, 169, 169);
     border-bottom: 1px solid rgb(169, 169, 169);
     margin: 10px 0;
     padding: 10px;
 }
 
-.field-options > label, .field-constraint-options > label {
+.editor-simple .field-options > label, .field-constraint-options > label {
     padding-bottom: 10px;
     display: inline-block;
     cursor: pointer;
 }
 
-.field-options > div > label {
+.editor-simple .field-options > div > label {
     min-width: 120px;
     padding-bottom: 3px;
     display: inline-block;
 }
 
-.field-options > div, .field-constraints > div {
+.editor-simple .field-options > div, .field-constraints > div {
     padding-left: 20px;
 }
 
