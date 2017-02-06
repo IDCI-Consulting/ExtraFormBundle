@@ -19,7 +19,7 @@ var editorAdvancedFieldOptions = {
                               '<editor-advanced :fields="fieldOptions[key]"></editor-advanced>' +
                           '</div>' +
                           '<div class="modal-footer">' +
-                              '<button class="close-advanced-visual-mode">Close the editor</button>' +
+                              '<button class="close">Close the editor</button>' +
                               '<em>All your changes are automatically saved</em>' +
                           '</div>' +
                       '</div>' +

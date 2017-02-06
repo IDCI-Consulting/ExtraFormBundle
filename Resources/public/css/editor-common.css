@@ -2,9 +2,7 @@
 /* EDITOR */
 /**********/
 
-button.close-advanced-visual-mode-modal,
-button.close-raw-mode-modal,
-button.close-simple-visual-mode-modal {
+.modal-footer button.close-modal {
     float: left;
 }
 

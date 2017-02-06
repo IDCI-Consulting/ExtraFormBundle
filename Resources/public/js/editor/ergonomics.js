@@ -27,8 +27,15 @@ $(window).on('load', function() {
   });
 
   modals.forEach(function(modal) {
-    // close the modal on click on the upper right cross and on the close button on the left bottom
-    $(document).on('click', '.close-' + modal + ', .' + modal + ' .modal-header > button.close', function(event) {
+
+    // close the modal on click
+    var classes =
+      '.' + modal + ' .modal-body button.close-modal, ' +     // on the generate field button from the editor-raw
+      '.' + modal + ' .modal-footer > button.close-modal, ' + // on the upper right cross of the modal
+      '.' + modal + ' .modal-header > button.close'           // on the close button on the left bottom of the modal
+    ;
+
+    $(document).on('click', classes, function(event) {
       event.preventDefault();
       $(this).closest('.modal').modal('hide');
     });

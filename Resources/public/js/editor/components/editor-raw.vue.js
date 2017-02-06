@@ -3,7 +3,7 @@ Vue.component('editor-raw', {
   template:
     '<div>' +
       '<textarea :id="textarea.id" v-model="output" :name="textarea.name" style="width: 100%; height: 300px;"></textarea>' +
-      '<button class="close-raw-mode-modal" @click.prevent="generateFields">Fill the visual mode form fields from this json</button>' +
+      '<button class="close-modal" @click.prevent="generateFields">Fill the visual mode form fields from this json</button>' +
     '</div>'
   ,
 

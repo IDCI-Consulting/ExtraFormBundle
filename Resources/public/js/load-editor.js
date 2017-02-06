@@ -59,7 +59,7 @@ $(window).on('load', function() {
                           '<editor-simple :fields="fields"></editor-simple>' +
                       '</div>' +
                       '<div class="modal-footer">' +
-                          '<button class="close-simple-visual-mode-modal">Close the editor</button>' +
+                          '<button class="close-modal">Close the editor</button>' +
                           '<em>All your changes are automatically saved</em>' +
                       '</div>'+
                   '</div>' +
@@ -78,7 +78,7 @@ $(window).on('load', function() {
                           '<editor-advanced :fields="fields"></editor-advanced>' +
                       '</div>' +
                       '<div class="modal-footer">' +
-                          '<button class="close-advanced-visual-mode-modal">Close the editor</button>' +
+                          '<button class="close-modal">Close the editor</button>' +
                           '<em>All your changes are automatically saved</em>' +
                       '</div>' +
                   '</div>' +
@@ -88,10 +88,7 @@ $(window).on('load', function() {
       '</div>'
     );
 
-    triggerEditor(
-      '#' + appId,
-      textarea
-    );
+    triggerEditor('#' + appId, textarea);
   });
 
 });
