@@ -70,6 +70,12 @@
 
 /** EXTRA FORM FIELDS CONFIGURATION **/
 
+.editor-advanced .field-name-input {
+    width: 200px;
+    border: none;
+    padding-left: 5px;
+}
+
 .editor-advanced .extra-form-fields-configuration .nav-pills {
     margin: 10px 0;
 }

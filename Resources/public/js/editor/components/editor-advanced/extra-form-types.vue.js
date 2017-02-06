@@ -19,20 +19,11 @@ var extraFormTypes = {
   methods: {
 
     /**
-     * Generate a unique id for the fields default names
-     *
-     * @returns string
-     */
-    generateUniqueId: function() {
-      return Math.random().toString(36).substr(2, 9);
-    },
-
-    /**
      * Create a new field
      */
     createField: function(value) {
       var field = {
-        'name': 'field_' + value + '_' + this.generateUniqueId(),
+        'name': 'field_' + value + '_' + generateUniqueId(),
         'extra_form_type': value,
         'options': {},
         'constraints': []

@@ -28,7 +28,7 @@ var editorSimpleNewField = {
      */
     createField: function() {
       var field = {
-        'name': 'field_' + this.selectedExtraFormType + '_' + this.generateUniqueId(),
+        'name': 'field_' + this.selectedExtraFormType + '_' + generateUniqueId(),
         'extra_form_type': this.selectedExtraFormType,
         'options': {},
         'constraints': []

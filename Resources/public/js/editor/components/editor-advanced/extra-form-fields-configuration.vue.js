@@ -33,6 +33,15 @@ var extraFormFieldsConfiguration = {
   },
 
   methods: {
+
+    /**
+     * Create an anchor to hook on bootstrap pills feature
+     *
+     * @param prefix
+     * @param name
+     * @param type
+     * @returns {string}
+     */
     anchor: function(prefix, name, type) {
       return prefix + name + '_' + type;
     },

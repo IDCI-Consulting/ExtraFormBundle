@@ -30,15 +30,6 @@ var editorSimpleField = {
   methods: {
 
     /**
-     * Generate a unique id for the fields default names
-     *
-     * @returns string
-     */
-    generateUniqueId: function() {
-      return Math.random().toString(36).substr(2, 9);
-    },
-
-    /**
      * Update the field type
      *
      * @param type

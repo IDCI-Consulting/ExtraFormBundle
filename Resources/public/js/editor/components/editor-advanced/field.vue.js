@@ -5,7 +5,7 @@ var editorAdvancedField = {
       '<button @click.prevent="removeField(index)" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>' +
       '<i class="icon-move"></i>' +
       '<strong>{{ field.extra_form_type }}</strong><br>' +
-      '<span>Name: {{ field.name }}</span>' +
+      '<span>Name: <input class="field-name-input" type="text" v-model="field.name" /></span>' +
     '</div>'
   ,
 
@@ -41,7 +41,7 @@ var editorAdvancedField = {
     },
 
     /**
-     * Set active class
+     * Tell the parent component that this field has been activated
      *
      * @param index
      */

@@ -34,7 +34,7 @@ var extraFormFields = {
     },
 
     /**
-     * Remove a field
+     * Set the class active on the field
      *
      * @param index
      */
@@ -43,6 +43,9 @@ var extraFormFields = {
       this.$set(this.fields[index], 'active', true);
     },
 
+    /**
+     * Reset all active classes
+     */
     resetActiveClasses: function() {
       for (var i= 0, len = this.fields.length; i < len; i++) {
         this.$set(this.fields[i], 'active', false);

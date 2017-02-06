@@ -19,7 +19,7 @@ var editorAdvancedFieldConstraintOptions = {
 
   computed: {
     id: function() {
-      return 'constraint_' + this.generateUniqueId();
+      return 'constraint_' + generateUniqueId();
     }
   },
 
@@ -44,15 +44,6 @@ var editorAdvancedFieldConstraintOptions = {
   },
 
   methods: {
-
-    /**
-     * Generate a unique id for the fields default names
-     *
-     * @returns string
-     */
-    generateUniqueId: function() {
-      return Math.random().toString(36).substr(2, 9);
-    },
 
     /**
      * Update an option on the constraint

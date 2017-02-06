@@ -39,7 +39,7 @@ var editorAdvancedFieldOptions = {
 
   computed: {
     id: function() {
-      return this.generateUniqueId();
+      return generateUniqueId();
     }
   },
 
@@ -66,6 +66,11 @@ var editorAdvancedFieldOptions = {
 
   methods: {
 
+    /**
+     * Trigger a modal
+     *
+     * @param event
+     */
     triggerModal: function (event) {
       $modal = $(event.target).siblings('#modal_' + event.target.id).first();
       $modal.modal('show');
@@ -77,14 +82,10 @@ var editorAdvancedFieldOptions = {
     },
 
     /**
-     * Generate a unique id for the fields default names
+     * Update an option
      *
-     * @returns string
+     * @param option
      */
-    generateUniqueId: function() {
-      return Math.random().toString(36).substr(2, 9);
-    },
-
     updateOption: function(option) {
       this.$set(this.fieldOptions, option.name, option.value);
     },

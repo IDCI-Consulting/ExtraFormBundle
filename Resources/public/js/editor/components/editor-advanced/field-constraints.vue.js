@@ -18,10 +18,21 @@ var editorAdvancedFieldConstraints = {
   },
 
   methods: {
+
+    /**
+     * Update a field constraint option on a field constraint
+     *
+     * @param option
+     */
     updateOption: function(option) {
       this.$set(this.fieldConstraints.options, option.name, option.value);
     },
 
+    /**
+     * Remove a constraint on a field
+     *
+     * @param index
+     */
     removeConstraint: function(index) {
       this.fieldConstraints.splice(index, 1);
     }
