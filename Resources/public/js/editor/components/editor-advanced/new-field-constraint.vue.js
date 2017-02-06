@@ -1,14 +1,10 @@
-var editorSimpleNewFieldConstraint = {
+var editorAdvancedNewFieldConstraint = {
 
   template:
-    '<div>' +
-      '<select class="new-field-constraint" v-model="selectedConstraint">' +
-        '<option v-for="(constraint, key) in constraints" :value="key">' +
-          '{{ constraint.description }}' +
-        '</option>' +
-      '</select> ' +
-      '<button @click.prevent="createConstraint">New constraint</button>' +
-    '</div>'
+      '<div class="new-field-constraint">' +
+          '<multiselect v-model="selectedConstraint" :options="constraints" label="description" key="name" selectLabel="" placeholder="Select a constraint"></multiselect>' +
+          '<button class="extra-btn" @click.prevent="createConstraint">Add</button>' +
+      '</div>'
   ,
 
   data: function () {
@@ -29,7 +25,7 @@ var editorSimpleNewFieldConstraint = {
      */
     createConstraint: function() {
       var constraint = {
-        'extra_form_constraint': this.selectedConstraint,
+        'extra_form_constraint': this.selectedConstraint.name,
         'options': {}
       };
 
@@ -41,10 +37,15 @@ var editorSimpleNewFieldConstraint = {
      */
     getExtraFormConstraints: function() {
       this.$http.get('/extra-form-constraints.json')
+      this.$http.get('/extra-form-constraints.json')
         .then(
         function(response) {
-          this.constraints = response.body;
-          this.selectedConstraint = Object.keys(this.constraints)[0];
+          this.constraints = Object.keys(response.body).map(function (key) {
+            var element = response.body[key];
+            element.name = key;
+            return element;
+          });
+          this.selectedConstraint = this.constraints[0];
         },
         function (response) {
           console.log(response.status + ' ' + response.statusText);

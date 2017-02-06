@@ -1,11 +1,12 @@
 .editor-advanced > div {
     max-height: 80vh;
+    min-height: 60vh;
     overflow: auto;
 }
 
 /** EXTRA FORM TYPES **/
 
-.editor-advanced .extra-form-types button {
+.editor-advanced button.extra-btn {
     border: 1px solid #514D61;
     background-color: white;
     color: #514D61;
@@ -13,6 +14,13 @@
     min-width: 173px;
     margin: 10px auto;
 }
+
+.editor-advanced button.extra-btn:hover {
+    background: #514D61;
+    border-color: #514D61;
+    color: #FFF;
+}
+
 
 .editor-advanced .extra-form-fields .field {
     cursor: pointer;
@@ -60,13 +68,22 @@
     visibility: visible;
 }
 
-.editor-advanced .extra-form-types button:hover {
-    background: #514D61;
-    border-color: #514D61;
-    color: #FFF;
+/** EXTRA FORM FIELDS CONFIGURATION **/
+
+.editor-advanced .extra-form-fields-configuration .nav-pills {
+    margin: 10px 0;
 }
 
-/** EXTRA FORM FIELDS CONFIGURATION : OPTIONS **/
+.editor-advanced .extra-form-fields-configuration ul.nav-pills > li > a {
+    color: #514D61;
+    border-radius: 0;
+}
+
+.editor-advanced .extra-form-fields-configuration ul.nav-pills > li a:hover,
+.editor-advanced .extra-form-fields-configuration ul li.active a {
+    background-color: #514D61;
+    color: #FFFFFF;
+}
 
 .editor-advanced .extra-form-fields-configuration > .inactive {
     display: none;
@@ -76,23 +93,83 @@
     display: block;
 }
 
-.editor-advanced .field-options div > label {
+/* Do not display the label (used in the editor-simple component) */
+.editor-advanced .tab-content > .tab-pane > div > label {
+    display: none;
+}
+
+/** EXTRA FORM FIELDS CONFIGURATION : OPTIONS **/
+
+.editor-advanced .field-options div > label,
+.editor-advanced .field-constraint-options div > label{
     min-width: 130px;
     padding-bottom: 3px;
     display: inline-block;
 }
 
-.editor-advanced .extra-form-fields-configuration .nav-pills {
-    margin: 10px 0;
+/** EXTRA FORM FIELDS CONFIGURATION : CONSTRAINTS **/
+
+.editor-advanced .multiselect {
+    width: 80%;
+    display: inline-block;
+}
+.editor-advanced .multiselect__option--highlight,
+.editor-advanced .multiselect__option--selected.multiselect__option--highlight,
+.editor-advanced .multiselect__option--highlight:after {
+    background: #514D61;
 }
 
-.editor-advanced .extra-form-fields-configuration ul.nav-pills > li > a {
-    color: #514D61;
-    border-radius: 0px;
+.editor-advanced .new-field-constraint button {
+    min-width: inherit;
+    display: inline-block;
+    margin: 0 10px;
+    padding: 8px;
 }
 
-.editor-advanced .extra-form-fields-configuration ul.nav-pills > li a:hover,
-.editor-advanced .extra-form-fields-configuration ul li.active a {
+.editor-advanced .field-constraint {
+    border: 1px solid #514D61;
     background-color: #514D61;
+    margin: 10px 0;
+    color: #FFFFFF;
+    padding: 10px;
+}
+
+.editor-advanced .field-constraint button.close {
+    visibility: hidden;
+    color: #FFFFFF;
+    opacity: 1;
+}
+
+.editor-advanced .field-constraint:hover button.close {
+    visibility: visible;
+}
+
+.editor-advanced .field-constraint-options a {
+    width: 100%;
+    margin: 10px 0;
+    display: block;
     color: #FFFFFF;
 }
+
+.editor-advanced .field-constraint-options a {
+    text-decoration: none;
+}
+
+.editor-advanced .field-constraint-options a > span:after {
+    float: right;
+    content: " +";
+    display: inline-block;
+    background-color: #FFFFFF;
+    color: #514D61;
+    border-radius: 20px;
+    width: 20px;
+    padding-left: 6px;
+}
+
+.editor-advanced .field-constraint-options a[aria-expanded="true"] > span:after {
+    float: right;
+    content: "-";
+    padding-left: 8px;
+}
+
+

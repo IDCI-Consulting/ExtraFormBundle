@@ -2,8 +2,9 @@
 /* EDITOR */
 /**********/
 
-button.close-advanced-visual-mode,
-button.close-simple-visual-mode {
+button.close-advanced-visual-mode-modal,
+button.close-raw-mode-modal,
+button.close-simple-visual-mode-modal {
     float: left;
 }
 
@@ -20,6 +21,17 @@ button.close-simple-visual-mode {
 .checkbox {
     margin: 0;
 }
+
+label {
+    font-weight: normal;
+}
+
+select, input, textarea, button, optgroup {
+    color: #000000;
+}
+
+
+
 /********************/
 /* FULLSCREEN MODAL */
 /********************/
@@ -27,7 +39,7 @@ button.close-simple-visual-mode {
 /* See http://www.minimit.com/demos/bootstrap-3-transparent-and-fullscreen-modals */
 
 .modal-fullscreen {
-    background: transparent;
+    background: #FFFFFF;
 }
 
 .modal-fullscreen .modal-content {
@@ -35,15 +47,6 @@ button.close-simple-visual-mode {
     border: 0;
     -webkit-box-shadow: none;
     box-shadow: none;
-}
-
-.modal-backdrop.modal-backdrop-fullscreen {
-    background: #ffffff;
-}
-
-.modal-backdrop.modal-backdrop-fullscreen.in {
-    opacity: .97;
-    filter: alpha(opacity=97);
 }
 
 .modal-fullscreen .modal-dialog {

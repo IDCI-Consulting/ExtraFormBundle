@@ -16,43 +16,21 @@ $(window).on('load', function() {
 
   /** Modal related js **/
 
-  var $fullScreenModal = $(".modal-fullscreen");
+  var modals = ['simple-visual-mode-modal', 'advanced-visual-mode-modal', 'raw-mode-modal'];
 
-  $fullScreenModal.on('show.bs.modal', function () {
-    setTimeout( function() {
-      $(".modal-backdrop").addClass("modal-backdrop-fullscreen");
-    }, 0);
+  modals.forEach(function(modal) {
+    $(document).on('click', 'button.trigger-' + modal, function(event) {
+      event.preventDefault();
+      $modal = $(this).siblings('.' + modal).first();
+      $modal.modal('show');
+    });
   });
 
-  $fullScreenModal.on('hidden.bs.modal', function () {
-    $(".modal-backdrop").addClass("modal-backdrop-fullscreen");
+  modals.forEach(function(modal) {
+    // close the modal on click on the upper right cross and on the close button on the left bottom
+    $(document).on('click', '.close-' + modal + ', .' + modal + ' .modal-header > button.close', function(event) {
+      event.preventDefault();
+      $(this).closest('.modal').modal('hide');
+    });
   });
-
-  $('button.trigger-simple-visual-mode-modal').on('click', function(event) {
-    event.preventDefault();
-    $modal = $(this).siblings('.simple-visual-mode-modal').first();
-    $modal.modal('show');
-  });
-
-  $('button.trigger-raw-mode-modal').on('click', function(event) {
-    event.preventDefault();
-    $modal = $(this).siblings('.raw-mode-modal').first();
-    $modal.modal('show');
-  });
-
-  $('button.trigger-advanced-visual-mode-modal').on('click', function(event) {
-    event.preventDefault();
-    $modal = $(this).siblings('.advanced-visual-mode-modal').first();
-    $modal.modal('show');
-  });
-
-  $('.generate-fields, .close-visual-mode').on('click', function(event) {
-    event.preventDefault();
-    $(this).closest('.modal').modal('hide');
-  });
-
-  // FOR DEV - TO REMOVE
-  $modal = $('button.trigger-advanced-visual-mode-modal').siblings('.advanced-visual-mode-modal').first();
-  $modal.modal('show');
-
 });

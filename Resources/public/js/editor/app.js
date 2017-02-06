@@ -6,6 +6,7 @@
  */
 function triggerEditor(element, defaultTextarea) {
 
+  Vue.component('Multiselect', VueMultiselect.default);
   Vue.use(VueResource);
 
   new Vue({

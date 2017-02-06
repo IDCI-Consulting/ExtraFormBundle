@@ -184,37 +184,76 @@
 {%- endblock extra_form_html_widget -%}
 
 {%- block extra_form_editor_widget -%}
-    <textarea class="extra-form-editor">
-        {
-            "2ddd": {
-                "extra_form_type": "choice",
-                "constraints": [],
-                "options": {
-                    "label": "2222222222222"
-                }
-            },
-            "1ddd": {
-                "extra_form_type": "birthday",
-                "constraints": [],
-                "options": {
-                    "label": "11111111",
-                    "widget": "single_text"
-                }
-            },
-            "3ddd": {
-                "extra_form_type": "captcha",
-                "constraints": [],
-                "options": {
-                    "label": "33333333333333",
-                    "as_file": true
-                }
-            }
-        }
-    </textarea>
-    {#{{- form_widget(form) -}}#}
+    {#<textarea class="extra-form-editor">#}
+        {#{#}
+            {#"field_birthday_gqtiprwgy": {#}
+                {#"extra_form_type": "birthday",#}
+                {#"constraints": [],#}
+                {#"options": {}#}
+            {#},#}
+            {#"field_captcha_gglnhmtwp": {#}
+                {#"extra_form_type": "captcha",#}
+                {#"constraints": [],#}
+                {#"options": {}#}
+            {#},#}
+            {#"field_checkbox_3xm3mm3ds": {#}
+                {#"extra_form_type": "checkbox",#}
+                {#"constraints": [],#}
+                {#"options": {}#}
+            {#},#}
+            {#"field_extra_form_builder_3bb44yo88": {#}
+                {#"extra_form_type": "extra_form_builder",#}
+                {#"constraints": [],#}
+                {#"options": {#}
+                    {#"configuration": {#}
+                        {#"field_extra_form_builder_r0jcfjgw0": {#}
+                            {#"extra_form_type": "extra_form_builder",#}
+                            {#"constraints": [],#}
+                            {#"options": {#}
+                                {#"configuration": {#}
+                                    {#"field_checkbox_1nvzql7sd": {#}
+                                        {#"extra_form_type": "checkbox",#}
+                                        {#"constraints": [],#}
+                                        {#"options": {}#}
+                                    {#},#}
+                                    {#"field_country_6orugsizn": {#}
+                                        {#"extra_form_type": "country",#}
+                                        {#"constraints": [],#}
+                                        {#"options": {}#}
+                                    {#},#}
+                                    {#"field_date_9kztwse9x": {#}
+                                        {#"extra_form_type": "date",#}
+                                        {#"constraints": [],#}
+                                        {#"options": {}#}
+                                    {#},#}
+                                    {#"field_datetime_xzsmmha0g": {#}
+                                        {#"extra_form_type": "datetime",#}
+                                        {#"constraints": [],#}
+                                        {#"options": {#}
+                                            {#"label": "3333333333333333333333333333333",#}
+                                            {#"attr": "dsqdqs",#}
+                                            {#"data": "dsqdqsdqs",#}
+                                            {#"pattern": "dqsdqsqds",#}
+                                            {#"help": "dqsdqdqdqs",#}
+                                            {#"months": "dqqdqds",#}
+                                            {#"input": "array"#}
+                                        {#}#}
+                                    {#}#}
+                                {#},#}
+                                {#"label": "EXTRA FORM 222222222222222222222222222222222"#}
+                            {#}#}
+                        {#}#}
+                    {#},#}
+                    {#"label": "ETXRA FORM 11111111111"#}
+                {#}#}
+            {#}#}
+        {#}#}
+    {#</textarea>#}
+    {{- form_widget(form) -}}
 
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/vue-dev.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/sortable.min.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/vue-multiselect.min.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/vue-draggable.min.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/jquery-1.11.3.min.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/bootstrap.min.js') }}'></script>
@@ -232,6 +271,10 @@
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/editor-simple/field-constraint-options.vue.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/editor-simple/field-constraints.vue.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/editor-simple/field.vue.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/editor-advanced/new-field-constraint.vue.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/editor-advanced/field-constraint-options.vue.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/editor-advanced/field-constraints.vue.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/editor-advanced/field-options.vue.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/editor-advanced/field.vue.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/editor-advanced/extra-form-fields.vue.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/editor-advanced/extra-form-fields-configuration.vue.js') }}'></script>
