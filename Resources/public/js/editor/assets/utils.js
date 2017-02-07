@@ -14,7 +14,6 @@ function generateUniqueId() {
  * @param keyword
  */
 function getFontAwsomeIconClass(keyword) {
-
   var iconKeywordMap = {
     birthday: 'birthday-cake',
     captcha: 'unlock-alt',
@@ -44,4 +43,18 @@ function getFontAwsomeIconClass(keyword) {
   };
 
   return 'fa-icon fa fa-' + iconKeywordMap[keyword];
+}
+
+/**
+ * Create a javascript object to get the map all the attribute of the given element
+ *
+ */
+function createAttributeMapObject(element) {
+  var attributes = element.attributes, object = {};
+  for (var attribute, i = 0, length = attributes.length; i < length; i++) {
+    attribute = attributes[i];
+    object[attribute.nodeName] = attribute.nodeValue;
+  }
+
+  return object;
 }
