@@ -35,15 +35,6 @@ var editorSimpleNewField = {
       };
 
       this.$emit('created', field);
-    },
-
-    /**
-     * Generate a unique id for the fields default names
-     *
-     * @returns string
-     */
-    generateUniqueId: function() {
-      return Math.random().toString(36).substr(2, 9);
     }
   }
 };
