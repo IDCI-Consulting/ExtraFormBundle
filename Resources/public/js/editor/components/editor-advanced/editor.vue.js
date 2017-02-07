@@ -3,8 +3,8 @@ Vue.component('editor-advanced', {
   template:
   '<div class="editor-advanced row">' +
     '<extra-form-types @created="addField" class="extra-form-types col-md-3"></extra-form-types>' +
-    '<extra-form-fields :fields="fields" class="extra-form-fields col-md-4"></extra-form-fields>' +
-    '<extra-form-fields-configuration :fields="fields" class="extra-form-fields-configuration col-md-5"></extra-form-fields-configuration>' +
+    '<extra-form-fields :fields="fields" class="extra-form-fields col-md-5"></extra-form-fields>' +
+    '<extra-form-fields-configuration :fields="fields" class="extra-form-fields-configuration col-md-4"></extra-form-fields-configuration>' +
   '</div>'
   ,
 
