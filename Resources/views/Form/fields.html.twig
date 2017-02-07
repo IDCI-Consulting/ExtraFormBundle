@@ -184,80 +184,96 @@
 {%- endblock extra_form_html_widget -%}
 
 {%- block extra_form_editor_widget -%}
-    {#<textarea class="extra-form-editor">#}
-        {#{#}
-            {#"field_birthday_gqtiprwgy": {#}
-                {#"extra_form_type": "birthday",#}
-                {#"constraints": [],#}
-                {#"options": {}#}
-            {#},#}
-            {#"field_captcha_gglnhmtwp": {#}
-                {#"extra_form_type": "captcha",#}
-                {#"constraints": [],#}
-                {#"options": {}#}
-            {#},#}
-            {#"field_checkbox_3xm3mm3ds": {#}
-                {#"extra_form_type": "checkbox",#}
-                {#"constraints": [],#}
-                {#"options": {}#}
-            {#},#}
-            {#"field_extra_form_builder_3bb44yo88": {#}
-                {#"extra_form_type": "extra_form_builder",#}
-                {#"constraints": [],#}
-                {#"options": {#}
-                    {#"configuration": {#}
-                        {#"field_extra_form_builder_r0jcfjgw0": {#}
-                            {#"extra_form_type": "extra_form_builder",#}
-                            {#"constraints": [],#}
-                            {#"options": {#}
-                                {#"configuration": {#}
-                                    {#"field_checkbox_1nvzql7sd": {#}
-                                        {#"extra_form_type": "checkbox",#}
-                                        {#"constraints": [],#}
-                                        {#"options": {}#}
-                                    {#},#}
-                                    {#"field_country_6orugsizn": {#}
-                                        {#"extra_form_type": "country",#}
-                                        {#"constraints": [],#}
-                                        {#"options": {}#}
-                                    {#},#}
-                                    {#"field_date_9kztwse9x": {#}
-                                        {#"extra_form_type": "date",#}
-                                        {#"constraints": [],#}
-                                        {#"options": {}#}
-                                    {#},#}
-                                    {#"field_datetime_xzsmmha0g": {#}
-                                        {#"extra_form_type": "datetime",#}
-                                        {#"constraints": [],#}
-                                        {#"options": {#}
-                                            {#"label": "3333333333333333333333333333333",#}
-                                            {#"attr": "dsqdqs",#}
-                                            {#"data": "dsqdqsdqs",#}
-                                            {#"pattern": "dqsdqsqds",#}
-                                            {#"help": "dqsdqdqdqs",#}
-                                            {#"months": "dqqdqds",#}
-                                            {#"input": "array"#}
-                                        {#}#}
-                                    {#}#}
-                                {#},#}
-                                {#"label": "EXTRA FORM 222222222222222222222222222222222"#}
-                            {#}#}
-                        {#}#}
-                    {#},#}
-                    {#"label": "ETXRA FORM 11111111111"#}
-                {#}#}
-            {#}#}
-        {#}#}
-    {#</textarea>#}
+    <textarea class="extra-form-editor">
+         {
+            "countryyyyyeaaaahhhh": {
+                "extra_form_type": "country",
+                "constraints": [],
+                "options": {}
+            },
+            "test": {
+                "extra_form_type": "checkbox",
+                "constraints": [],
+                "options": {}
+            },
+            "checkmate": {
+                "extra_form_type": "checkbox",
+                "constraints": [
+                    {
+                        "extra_form_constraint": "not_blank",
+                        "options": {}
+                    }
+                ],
+                "options": {
+                    "label": "check that ass",
+                    "label_attr": "for me",
+                    "required": true,
+                    "data": "baby",
+                    "help": "olaaa"
+                }
+            },
+            "cogs": {
+                "extra_form_type": "extra_form_builder",
+                "constraints": [],
+                "options": {
+                    "configuration": {
+                        "thisisanadress": {
+                            "extra_form_type": "text",
+                            "constraints": [],
+                            "options": {
+                                "label": "address"
+                            }
+                        },
+                        "the street": {
+                            "extra_form_type": "text",
+                            "constraints": [],
+                            "options": {
+                                "label": "street"
+                            }
+                        },
+                        "street_number": {
+                            "extra_form_type": "integer",
+                            "constraints": [
+                                {
+                                    "extra_form_constraint": "greater_than",
+                                    "options": {
+                                        "value": "0",
+                                        "message": "A street number cannot be lowr than 0"
+                                    }
+                                }
+                            ],
+                            "options": {
+                                "label": "street number here"
+                            }
+                        }
+                    },
+                    "label": "cogs here below"
+                }
+            },
+            "hbbébé": {
+                "extra_form_type": "birthday",
+                "constraints": [],
+                "options": {
+                    "label": "HAPPY BIRTDAY!!!!"
+                }
+            },
+            "field_extra_form_builder_zmt0i02cc": {
+                "extra_form_type": "extra_form_builder",
+                "constraints": [],
+                "options": {}
+            }
+        }
+    </textarea>
     {{- form_widget(form) -}}
 
+    <script src="https://use.fontawesome.com/77fb7a2ee9.js"></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/vue-dev.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/sortable.min.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/vue-multiselect.min.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/vue-draggable.min.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/jquery-1.11.3.min.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/bootstrap.min.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/vue-resource-1.0.3.min.js') }}'></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.2.0/vue-resource.min.js"></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/utils.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/common/options/textarea.vue.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/components/common/options/choice.vue.js') }}'></script>
