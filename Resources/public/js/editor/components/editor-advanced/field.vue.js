@@ -1,10 +1,10 @@
 var editorAdvancedField = {
 
   template:
-    '<div :class="classes" @click="setActiveClass(index)">' +
+    '<div :class="activeClass" @click="setActiveClass(index)">' +
       '<button @click.prevent="removeField(index)" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>' +
-      '<i class="icon-move"></i>' +
-      '<strong>{{ field.extra_form_type }}</strong><br>' +
+      '<i class="fa fa-arrows-alt"></i>' +
+      '<strong>{{ field.extra_form_type }}</strong><i :class="getFontAwsomeIconClass(field.extra_form_type)" aria-hidden="true"></i><br>' +
       '<span>Name: <input class="field-name-input" type="text" v-model="field.name" /></span>' +
     '</div>'
   ,
@@ -12,7 +12,7 @@ var editorAdvancedField = {
   props: ['field', 'index'],
 
   computed: {
-    classes: function(){
+    activeClass: function(){
       var active = this.field.active ? 'active' : 'inactive';
 
       return 'field ' + active;
@@ -30,6 +30,16 @@ var editorAdvancedField = {
   },
 
   methods: {
+
+    /**
+     * Get thefont awesome icon class from the form type
+     *
+     * @param type
+     * @returns string
+     */
+    getFontAwsomeIconClass: function(type) {
+      return getFontAwsomeIconClass(type);
+    },
 
     /**
      * Remove a field

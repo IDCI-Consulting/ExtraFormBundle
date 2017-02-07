@@ -17,6 +17,7 @@ $(window).on('load', function() {
       id: $(this).attr('id'),
       name: $(this).attr('name')
     };
+
     var appId = 'editorApp' + index;
 
     $(this).replaceWith(
@@ -27,7 +28,7 @@ $(window).on('load', function() {
           '<button class="trigger-raw-mode-modal">Raw mode</button><br><br>' +
 
           // RAW MODAL
-          '<div class="modal fade modal-fullscreen raw-mode-modal">' +
+          '<div id="modal_raw" class="modal fade modal-fullscreen raw-mode-modal">' +
               '<div class="modal-dialog" role="document">' +
                   '<div class="modal-content">' +
                       '<div class="modal-header">' +
@@ -48,7 +49,7 @@ $(window).on('load', function() {
           '</div>' +
 
           // SIMPLE VISUAL MODAL
-          '<div class="modal fade modal-fullscreen simple-visual-mode-modal">' +
+          '<div id="modal_simple" class="modal fade modal-fullscreen simple-visual-mode-modal">' +
               '<div class="modal-dialog" role="document">' +
                   '<div class="modal-content">' +
                       '<div class="modal-header">' +
@@ -67,7 +68,7 @@ $(window).on('load', function() {
           '</div>' +
 
           // ADVANCED VISUAL MODAL
-          '<div class="modal fade modal-fullscreen advanced-visual-mode-modal">' +
+          '<div id="modal_advanced" class="modal fade modal-fullscreen advanced-visual-mode-modal">' +
               '<div class="modal-dialog" role="document">' +
                   '<div class="modal-content">' +
                       '<div class="modal-header">' +

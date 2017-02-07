@@ -40,4 +40,5 @@ $(window).on('load', function() {
       $(this).closest('.modal').modal('hide');
     });
   });
+
 });

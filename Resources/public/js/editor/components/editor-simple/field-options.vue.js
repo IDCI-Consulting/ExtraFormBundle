@@ -70,8 +70,15 @@ var editorSimpleFieldOptions = {
     getExtraFormTypeOptions: function(type) {
       this.$http.get('/extra-form-types/'+ type +'/options.json')
         .then(
-        function(response) {
-          var options = response.body;
+          function(response) {
+            return response.json();
+          },
+          function (response) {
+            console.log(response.status + ' ' + response.statusText);
+          }
+        )
+        .then(function (json) {
+          var options = json;
           for (var option in options) {
             if (options.hasOwnProperty(option)) {
               if (option === 'configuration') {
@@ -86,11 +93,7 @@ var editorSimpleFieldOptions = {
             }
           }
           this.options = options;
-        },
-        function (response) {
-          console.log(response.status + ' ' + response.statusText);
-        }
-      )
+        })
       ;
     }
   }

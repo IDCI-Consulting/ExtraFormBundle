@@ -45,12 +45,13 @@ var typesSelectbox = {
       this.$http
         .get('/extra-form-types.json')
         .then(
-        function(response) {
-          return response.json();
-        },
-        function (response) {
-          console.log(response.status + ' ' + response.statusText);
-        })
+          function(response) {
+            return response.json();
+          },
+          function (response) {
+            console.log(response.status + ' ' + response.statusText);
+          }
+        )
         .then(function (jsonTypes) {
           this.types = jsonTypes;
           if (this.selected === 'initial') {

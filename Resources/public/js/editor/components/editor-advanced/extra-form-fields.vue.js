@@ -13,7 +13,7 @@ var extraFormFields = {
   data: function() {
     return {
       'sortableOptions': {
-        handle: '.icon-move'
+        handle: '.fa-arrows-alt'
       }
     };
   },

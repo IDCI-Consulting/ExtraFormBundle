@@ -4,8 +4,6 @@
     overflow: auto;
 }
 
-/** EXTRA FORM TYPES **/
-
 .editor-advanced button.extra-btn {
     border: 1px solid #514D61;
     background-color: white;
@@ -21,37 +19,49 @@
     color: #FFF;
 }
 
+/** EXTRA FORM FIELDS **/
+
 
 .editor-advanced .extra-form-fields .field {
-    cursor: pointer;
-    margin: 10px;
-    padding: 10px;
-    color: #FFFFFF;
-    background-color: #514D61;
-}
-
-.editor-advanced .extra-form-fields .field.active {
     border: 1px solid #514D61;
     background-color: white;
     margin: 10px;
     color: #514D61;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.editor-advanced .extra-form-fields .field.active {
+    color: #FFFFFF;
+    background-color: #514D61;
 }
 
 .editor-advanced .extra-form-fields .field button.close {
     visibility: hidden;
-    color: #FFFFFF;
+    color: #514D61;
     opacity: 1;
 }
 
 .editor-advanced .extra-form-fields .field.active button.close {
-    color: #514D61;
+    color: #FFFFFF;
 }
 
 .editor-advanced .extra-form-fields .field button.close:hover {
     opacity: 0.7;
 }
 
-.editor-advanced .extra-form-fields .field .icon-move {
+.editor-advanced .extra-form-fields .field strong {
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.editor-advanced .extra-form-fields .field .fa-icon {
+    float: left;
+    font-size: 25px;
+    margin: 10px 10px 5px 5px;
+}
+
+.editor-advanced .extra-form-fields .field .fa-arrows-alt {
     float: right;
     line-height: 1;
     font-size: 20px;
@@ -60,7 +70,7 @@
     top: 10px;
 }
 
-.editor-advanced .extra-form-fields .field .icon-move:hover {
+.editor-advanced .extra-form-fields .field .fa-arrows-alt:hover {
     cursor: move;
 }
 
@@ -116,6 +126,11 @@
     min-width: 130px;
     padding-bottom: 3px;
     display: inline-block;
+}
+
+.editor-advanced .field-options > div > button.extra-btn {
+    margin: 0;
+    padding: 5px;
 }
 
 /** EXTRA FORM FIELDS CONFIGURATION : CONSTRAINTS **/

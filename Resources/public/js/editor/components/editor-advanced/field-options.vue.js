@@ -7,7 +7,7 @@ var editorAdvancedFieldOptions = {
           '<component v-if="option.component_name !== \'editor\'" :is="option.component_name" v-for="(option, key) in options" :option="option" :name="key" :value="fieldOptions[key]" @changed="updateOption"></component>' +
 
           '<div v-for="(option, key) in options" v-if="option.component_name === \'editor\'">' +
-              '<button :id="id" @click.prevent="triggerModal">Advanced visual mode</button> '+
+              '<button :id="id" class="extra-btn" @click.prevent="triggerModal">Add fields for this "sub" extra form</button> '+
               '<div class="modal fade modal-fullscreen" :id="\'modal_\' + id">' +
                   '<div class="modal-dialog" role="document">' +
                       '<div class="modal-content">' +
@@ -19,7 +19,7 @@ var editorAdvancedFieldOptions = {
                               '<editor-advanced :fields="fieldOptions[key]"></editor-advanced>' +
                           '</div>' +
                           '<div class="modal-footer">' +
-                              '<button class="close">Close the editor</button>' +
+                              '<button class="close-modal">Go back to the parent editor</button>' +
                               '<em>All your changes are automatically saved</em>' +
                           '</div>' +
                       '</div>' +
