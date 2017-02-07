@@ -70,10 +70,15 @@
 
 /** EXTRA FORM FIELDS CONFIGURATION **/
 
-.editor-advanced .field-name-input {
+.editor-advanced .field.inactive .field-name-input {
+    color: #FFFFFF;
+}
+
+.editor-advanced .field .field-name-input {
     width: 200px;
     border: none;
     padding-left: 5px;
+    background-color: transparent;
 }
 
 .editor-advanced .extra-form-fields-configuration .nav-pills {
