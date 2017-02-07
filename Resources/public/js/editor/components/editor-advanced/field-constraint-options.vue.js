@@ -64,22 +64,25 @@ var editorAdvancedFieldConstraintOptions = {
      */
     getExtraFormConstraintOption: function (fieldConstraint) {
       this.$http.get('/extra-form-constraints.json')
-        .then(
-        function (response) {
-          var constraints = response.body;
-          this.constraint = constraints[fieldConstraint.extra_form_constraint];
-
-          var options = this.constraint.extraFormOptions;
-          for (var option in options) {
-            if (options.hasOwnProperty(option)) {
-              options[option]['component_name'] = 'option-' + options[option].extra_form_type;
-            }
+          .then(
+          function (response) {
+            return response.json();
+          },
+          function (response) {
+            console.log(response.status + ' ' + response.statusText);
           }
-        },
-        function (response) {
-          console.log(response.status + ' ' + response.statusText);
-        }
       )
+          .then(function (json) {
+            var constraints = json;
+            this.constraint = constraints[fieldConstraint.extra_form_constraint];
+
+            var options = this.constraint.extraFormOptions;
+            for (var option in options) {
+              if (options.hasOwnProperty(option)) {
+                options[option]['component_name'] = 'option-' + options[option].extra_form_type;
+              }
+            }
+          })
       ;
     }
   }
