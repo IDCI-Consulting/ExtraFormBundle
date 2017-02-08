@@ -19,7 +19,6 @@ $(window).on('load', function() {
   var modals = ['simple-visual-mode-modal', 'advanced-visual-mode-modal', 'raw-mode-modal'];
 
   modals.forEach(function(modal) {
-    console.log('dede');
     $(document).on('click', 'button.trigger-' + modal, function(event) {
       event.preventDefault();
       $modal = $('.modals .' + modal).first();
