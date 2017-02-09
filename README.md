@@ -29,9 +29,10 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
+        new FOS\RestBundle\FOSRestBundle(),
         new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
         new IDCI\Bundle\ExtraFormBundle\IDCIExtraFormBundle(),
-        new FOS\RestBundle\FOSRestBundle(),
+        new JMS\SerializerBundle\JMSSerializerBundle(),
     );
 }
 ```
@@ -39,10 +40,9 @@ public function registerBundles()
 Enable the serializer:
 
 ```yml
-# app/config/config.yml
-framework
-    serializer:
-        enabled: true
+fos_rest:
+    service:
+        serializer: jms_serializer.serializer
 ```
 
 Import the bundle configuration:
