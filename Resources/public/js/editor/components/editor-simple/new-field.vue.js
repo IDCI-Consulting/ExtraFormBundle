@@ -1,7 +1,5 @@
 var editorSimpleNewField = {
 
-  delimiters: ['${', '}'],
-
   template:
     '<div>' +
       '<types-selectbox v-model="selectedExtraFormType"/> ' +
