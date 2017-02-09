@@ -6,11 +6,13 @@ $(window).on('load', function() {
 
   $('textarea.extra-form-editor').each(function(index) {
 
-    var textarea = createAttributeMapObject(this); // the textarea attributes will be used as the configuration
-    textarea.value = this.value;
+    var formProperties = createAttributeMapObject(this); // retrieve the textarea attributes
+    formProperties.value = this.value;
 
     var appId = 'editorApp' + index;
-    var availableModes = textarea['data-available-modes'].split('__');
+    var availableModes = formProperties['data-available-modes'].split('__');
+
+    var configuration = window[formProperties['data-configuration-variable']];
 
     var rawModal =
       '<div id="modal_raw" class="modal fade modal-fullscreen raw-mode-modal">' +
@@ -22,12 +24,7 @@ $(window).on('load', function() {
             '</div>' +
           '</div>' +
           '<div class="modal-body">' +
-            '<editor-raw ' +
-            'v-if="configuration.enableTextareaOutput" ' +
-            ':fields="fields" ' +
-            ':textarea="textarea" ' +
-            '@generated="updateFields">' +
-            '</editor-raw>' +
+            '<editor-raw :fields="fields" @generated="updateFields"></editor-raw>' +
             '<br>' +
           '</div>' +
         '</div>' +
@@ -99,7 +96,7 @@ $(window).on('load', function() {
       '</div>'
     );
 
-    triggerEditor('#' + appId, textarea);
+    triggerEditor('#' + appId, formProperties, configuration);
   });
 
 });

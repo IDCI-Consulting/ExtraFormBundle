@@ -96,7 +96,7 @@ var editorAdvancedFieldOptions = {
      * @param type
      */
     getExtraFormTypeOptions: function(type) {
-      this.$http.get('/extra-form-types/'+ type +'/options.json')
+      this.$http.get(this.$store.getters.extraFormTypeOptionsApiUrl(type))
         .then(
         function(response) {
           var options = response.body;

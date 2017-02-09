@@ -184,9 +184,21 @@
 {%- endblock extra_form_html_widget -%}
 
 {%- block extra_form_editor_widget -%}
+
+    <script type='text/javascript'>
+        var {{ form.vars.id }}_configuration = {
+            api_url: {
+                extra_form_type_options: '{{ path('idci_extraform_api_getextraformtypesoptions', { '_format': 'json', 'type': 'XTYPE'}) }}',
+                extra_form_types: '{{ path('idci_extraform_api_getextraformtypes', { '_format': 'json'}) }}',
+                extra_form_constraints: '{{ path('idci_extraform_api_getextraformconstraints', { '_format': 'json'}) }}'
+            }
+        };
+    </script>
+
     {{- form_widget(form) -}}
 
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/vue-dev.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/vuex-2.1.2.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/sortable.min.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/vue-multiselect.min.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/idciextraform/js/editor/assets/vue-draggable.min.js') }}'></script>

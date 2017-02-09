@@ -29,6 +29,7 @@ class ExtraFormEditorType extends AbstractType
 
         $view->vars['attr']['class'] = $attrClass;
         $view->vars['attr']['data-available-modes'] = implode($options['available_modes'], '__');
+        $view->vars['attr']['data-configuration-variable'] = $view->vars['id'] . '_configuration';
 
         return $view->vars;
     }

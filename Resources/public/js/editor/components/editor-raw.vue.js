@@ -7,11 +7,12 @@ Vue.component('editor-raw', {
     '</div>'
   ,
 
-  props: ['fields', 'textarea'],
+  props: ['fields'],
 
   data: function() {
     return {
-      output: ''
+      output: '',
+      textarea: this.$store.state.formProperties
     }
   },
 

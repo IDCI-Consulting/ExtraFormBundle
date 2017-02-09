@@ -46,7 +46,7 @@ var editorSimpleFieldConstraintOptions = {
      * Get the extra form constraints
      */
     getExtraFormConstraintOption: function (fieldConstraint) {
-      this.$http.get('/extra-form-constraints.json')
+      this.$http.get(this.$store.getters.extraFormConstraintsApiUrl)
         .then(
           function (response) {
             return response.json();

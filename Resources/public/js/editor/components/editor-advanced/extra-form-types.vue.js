@@ -35,8 +35,7 @@ var extraFormTypes = {
      * Get the form types
      */
     getExtraFormTypes: function() {
-      this.$http
-        .get('/extra-form-types.json')
+      this.$http.get(this.$store.getters.extraFormTypesApiUrl)
         .then(
         function(response) {
           return response.json();

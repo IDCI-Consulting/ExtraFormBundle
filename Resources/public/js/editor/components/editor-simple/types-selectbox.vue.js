@@ -43,7 +43,7 @@ var typesSelectbox = {
      */
     getExtraFormTypes: function() {
       this.$http
-        .get('/extra-form-types.json')
+        .get(this.$store.getters.extraFormTypesApiUrl)
         .then(
           function(response) {
             return response.json();
