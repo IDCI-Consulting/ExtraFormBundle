@@ -1,3 +1,19 @@
+/**
+ * Create and return an object which contains all elements for which the callback returns true
+ */
+function filterObject (object, callback) {
+  var filteredObject = {};
+
+  for (var property in object) {
+    if (object.hasOwnProperty(property)) {
+      if (callback(object[property])) {
+        filteredObject[property] = object[property];
+      }
+    }
+  }
+
+  return filteredObject;
+}
 
 /**
  * Generate a unique id for the fields default names

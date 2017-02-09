@@ -53,6 +53,10 @@ var typesSelectbox = {
           }
         )
         .then(function (jsonTypes) {
+          jsonTypes = filterObject(jsonTypes, function(element) {
+            return element.abstract === false;
+          });
+
           this.types = jsonTypes;
           if (this.selected === 'initial') {
             this.selected = Object.keys(this.types)[0];

@@ -31,6 +31,7 @@ var extraFormTypes = {
 
       this.$emit('created', field);
     },
+
     /**
      * Get the form types
      */
@@ -44,6 +45,9 @@ var extraFormTypes = {
           console.log(response.status + ' ' + response.statusText);
         })
         .then(function (jsonTypes) {
+          jsonTypes = filterObject(jsonTypes, function(element) {
+            return element.abstract === false;
+          });
           this.types = jsonTypes;
         })
       ;
