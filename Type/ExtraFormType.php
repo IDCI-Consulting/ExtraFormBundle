@@ -10,11 +10,34 @@ namespace IDCI\Bundle\ExtraFormBundle\Type;
 
 class ExtraFormType implements ExtraFormTypeInterface 
 {
+    /**
+     * @var string
+     */
     protected $formType;
+
+    /**
+     * @var ExtraFormType
+     */
     protected $parent;
+
+    /**
+     * @var string
+     */
     protected $description;
+
+    /**
+     * @var boolean
+     */
     protected $abstract;
+
+    /**
+     * @var array
+     */
     protected $extraFormOptions;
+
+    /**
+     * @var array<ExtraFormConstraint>
+     */
     protected $extraFormConstraints;
 
     /**
