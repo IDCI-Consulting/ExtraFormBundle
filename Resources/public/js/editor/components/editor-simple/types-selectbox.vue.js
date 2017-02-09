@@ -5,8 +5,8 @@ var typesSelectbox = {
 
   template:
     '<select v-bind:value="value" v-on:change="updateValue($event.target.value)" v-model="selected">' +
-      '<option v-for="type in types" :value="type.formType">' +
-        '{{ type.formType }}' +
+      '<option v-for="type in types" :value="type.form_type">' +
+        '{{ type.form_type }}' +
       '</option>' +
     '</select>'
   ,

@@ -4,7 +4,7 @@ var editorAdvancedFieldConstraintOptions = {
     '<div class="field-constraint-options">' +
       '<a role="button" data-toggle="collapse" :href="\'#\' + id">Options<span class="toggle"></span></a>' +
       '<div :id="id" class="panel-collapse collapse" role="tabpanel" aria-expanded="false" :aria-controls="id">' +
-          '<component :is="option.component_name" v-for="(option, key) in constraint.extraFormOptions" :option="option" :name="key" :value="fieldConstraint.options[key]"  @changed="updateOption"/>' +
+          '<component :is="option.component_name" v-for="(option, key) in constraint.extra_form_options" :option="option" :name="key" :value="fieldConstraint.options[key]"  @changed="updateOption"/>' +
       '</div>' +
     '</div>'
   ,
@@ -76,7 +76,7 @@ var editorAdvancedFieldConstraintOptions = {
           var constraints = json;
           this.constraint = constraints[fieldConstraint.extra_form_constraint];
 
-          var options = this.constraint.extraFormOptions;
+          var options = this.constraint.extra_form_options;
           for (var option in options) {
             if (options.hasOwnProperty(option)) {
               options[option]['component_name'] = 'option-' + options[option].extra_form_type;

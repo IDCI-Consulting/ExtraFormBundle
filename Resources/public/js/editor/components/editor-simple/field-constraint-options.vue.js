@@ -3,7 +3,7 @@ var editorSimpleFieldConstraintOptions = {
   template:
     '<div class="field-constraint-options">' +
       '<label>Options : </label>' +
-      '<component :is="option.component_name" v-for="(option, key) in constraint.extraFormOptions" :option="option" :name="key" :value="fieldConstraint.options[key]"  @changed="updateOption"/>' +
+      '<component :is="option.component_name" v-for="(option, key) in constraint.extra_form_options" :option="option" :name="key" :value="fieldConstraint.options[key]"  @changed="updateOption"/>' +
     '</div>'
   ,
   props: ['fieldConstraint', 'index'],
@@ -59,7 +59,7 @@ var editorSimpleFieldConstraintOptions = {
           var constraints = json;
           this.constraint = constraints[fieldConstraint.extra_form_constraint];
 
-          var options = this.constraint.extraFormOptions;
+          var options = this.constraint.extra_form_options;
           for (var option in options) {
             if (options.hasOwnProperty(option)) {
               options[option]['component_name'] = 'option-' + options[option].extra_form_type;
