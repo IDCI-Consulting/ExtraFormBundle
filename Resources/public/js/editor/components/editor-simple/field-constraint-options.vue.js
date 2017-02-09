@@ -22,8 +22,8 @@ var editorSimpleFieldConstraintOptions = {
     'option-number': numberOption
   },
 
-  mounted: function() {
-    this.getExtraFormConstraintOption(this.fieldConstraint);
+  created: function() {
+    this.getExtraFormConstraint(this.fieldConstraint);
   },
 
   methods: {
@@ -45,7 +45,7 @@ var editorSimpleFieldConstraintOptions = {
     /**
      * Get the extra form constraints
      */
-    getExtraFormConstraintOption: function (fieldConstraint) {
+    getExtraFormConstraint: function (fieldConstraint) {
       this.$http.get(this.$store.getters.extraFormConstraintsApiUrl)
         .then(
           function (response) {
@@ -57,7 +57,7 @@ var editorSimpleFieldConstraintOptions = {
         )
         .then(function (json) {
           var constraints = json;
-          this.constraint = constraints[fieldConstraint.extra_form_constraint];
+          this.constraint = json[fieldConstraint.extra_form_constraint];
 
           var options = this.constraint.extra_form_options;
           for (var option in options) {

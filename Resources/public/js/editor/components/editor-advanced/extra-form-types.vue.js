@@ -12,7 +12,7 @@ var extraFormTypes = {
     }
   },
 
-  mounted: function() {
+  created: function() {
     this.getExtraFormTypes();
   },
 

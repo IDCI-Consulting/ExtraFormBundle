@@ -26,7 +26,7 @@ var editorAdvancedFieldConstraintOptions = {
   watch: {
     fieldConstraint: {
       handler: function(fieldConstraint) {
-        this.getExtraFormConstraintOption(fieldConstraint);
+        this.getExtraFormConstraint(fieldConstraint);
       }
     }
   },
@@ -39,8 +39,8 @@ var editorAdvancedFieldConstraintOptions = {
     'option-number': numberOption
   },
 
-  mounted: function() {
-    this.getExtraFormConstraintOption(this.fieldConstraint);
+  created: function() {
+    this.getExtraFormConstraint(this.fieldConstraint);
   },
 
   methods: {
@@ -62,7 +62,7 @@ var editorAdvancedFieldConstraintOptions = {
     /**
      * Get the extra form constraints
      */
-    getExtraFormConstraintOption: function (fieldConstraint) {
+    getExtraFormConstraint: function (fieldConstraint) {
       this.$http.get(this.$store.getters.extraFormConstraintsApiUrl)
         .then(
           function (response) {

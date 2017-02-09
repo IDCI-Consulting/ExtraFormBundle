@@ -25,7 +25,7 @@ var editorSimpleFieldOptions = {
     'option-integer': integerOption
   },
 
-  mounted: function() {
+  created: function() {
     this.getExtraFormTypeOptions(this.type);
   },
 

@@ -14,7 +14,7 @@ var editorAdvancedNewFieldConstraint = {
     }
   },
 
-  mounted: function() {
+  created: function() {
     this.getExtraFormConstraints();
   },
 

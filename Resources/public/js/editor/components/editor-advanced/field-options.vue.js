@@ -52,7 +52,7 @@ var editorAdvancedFieldOptions = {
     'option-integer': integerOption
   },
 
-  beforeMount: function() {
+  created: function() {
     this.getExtraFormTypeOptions(this.type);
   },
 
