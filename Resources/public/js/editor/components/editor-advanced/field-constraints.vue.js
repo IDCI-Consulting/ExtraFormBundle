@@ -1,14 +1,14 @@
 var editorAdvancedFieldConstraints = {
 
   template:
-    '<div>' +
-      '<label>Constraints : </label>' +
-      '<div class="field-constraint" v-for="(constraint, index) in fieldConstraints">' +
-        '<button @click.prevent="removeConstraint(index)" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>' +
-        '<strong>{{ constraint.extra_form_constraint }}</strong> ' +
-        '<field-constraint-options :fieldConstraint="constraint" :index="index" @optionChanged="updateOption"/>' +
-      '</div>' +
-    '</div>'
+      '<div>' +
+          '<label>Constraints : </label>' +
+          '<div class="field-constraint" v-for="(constraint, index) in fieldConstraints">' +
+              '<button @click.prevent="removeConstraint(index)" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>' +
+              '<strong>{{ constraint.extra_form_constraint }}</strong> ' +
+              '<field-constraint-options :fieldConstraint="constraint" :index="index" @optionChanged="updateOption"/>' +
+          '</div>' +
+      '</div>'
   ,
 
   props: ['fieldConstraints'],

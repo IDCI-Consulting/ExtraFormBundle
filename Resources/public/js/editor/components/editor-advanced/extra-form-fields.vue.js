@@ -1,11 +1,11 @@
 var extraFormFields = {
 
   template:
-    '<div>' +
-      '<draggable :list="fields" :options="sortableOptions">' +
-        '<field @active-class="setActiveClass" @removed="removeField" v-for="(field, index) in fields" :field="field" :index="index"/>' +
-      '</draggable>' +
-    '</div>'
+      '<div>' +
+          '<draggable :list="fields" :options="sortableOptions">' +
+              '<field @active-class="setActiveClass" @removed="removeField" v-for="(field, index) in fields" :field="field" :index="index"/>' +
+          '</draggable>' +
+      '</div>'
   ,
 
   props: ['fields'],

@@ -1,10 +1,10 @@
 var editorSimpleNewField = {
 
   template:
-    '<div>' +
-      '<types-selectbox v-model="selectedExtraFormType"/> ' +
-      '<button @click.prevent="createField">New field</button>' +
-    '</div>'
+      '<div>' +
+          '<types-selectbox v-model="selectedExtraFormType"/> ' +
+          '<button @click.prevent="createField">New field</button>' +
+      '</div>'
   ,
 
   data: function () {

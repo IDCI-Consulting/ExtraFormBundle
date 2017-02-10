@@ -1,11 +1,11 @@
 var editorSimpleFieldOptions = {
 
   template:
-    '<div>' +
-      '<label>Options : </label>' +
-      '<component v-if="option.component_name !== \'editor\'" :is="option.component_name" v-for="(option, key) in options" :option="option" :name="key" :value="fieldOptions[key]" @changed="updateOption"></component>' +
-      '<editor-simple v-for="(option, key) in options" v-if="option.component_name === \'editor\'" :fields="fieldOptions[key]"></editor-simple>' +
-    '</div>'
+      '<div>' +
+          '<label>Options : </label>' +
+          '<component v-if="option.component_name !== \'editor\'" :is="option.component_name" v-for="(option, key) in options" :option="option" :name="key" :value="fieldOptions[key]" @changed="updateOption"></component>' +
+          '<editor-simple v-for="(option, key) in options" v-if="option.component_name === \'editor\'" :fields="fieldOptions[key]"></editor-simple>' +
+      '</div>'
   ,
 
   props: ['type', 'fieldOptions'],

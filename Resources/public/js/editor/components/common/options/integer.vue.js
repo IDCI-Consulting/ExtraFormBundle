@@ -1,10 +1,10 @@
 var integerOption = {
 
   template:
-    '<div>' +
-      '<label :for="name">{{ name }}</label>' +
-      '<input :required="option.options.required" :value="value" @input="updateOption($event.target.value)" type="number" :name="name">' +
-    '</div>'
+      '<div>' +
+          '<label :for="name">{{ name }}</label>' +
+          '<input :required="option.options.required" :value="value" @input="updateOption($event.target.value)" type="number" :name="name">' +
+      '</div>'
   ,
 
   props: ['option', 'value', 'name'],

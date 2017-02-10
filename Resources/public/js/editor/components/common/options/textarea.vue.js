@@ -1,10 +1,10 @@
 var textareaOption = {
 
   template:
-    '<div>' +
-      '<label :for="name">{{ name }}</label>' +
-      '<textarea :required="option.options.required" :value="value" @input="updateOption($event.target.value)" :name="name"></textarea>' +
-    '</div>'
+      '<div>' +
+          '<label :for="name">{{ name }}</label>' +
+          '<textarea :required="option.options.required" :value="value" @input="updateOption($event.target.value)" :name="name"></textarea>' +
+      '</div>'
   ,
 
   props: ['option', 'value', 'name'],
