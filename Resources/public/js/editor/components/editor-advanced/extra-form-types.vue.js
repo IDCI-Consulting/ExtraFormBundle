@@ -14,27 +14,13 @@ var extraFormTypes = {
     }
   },
 
-  mixins: [httpMixin],
+  mixins: [httpMixin, fontAwesomeIconMixin],
 
   created: function() {
     this.getExtraFormTypes();
   },
 
   methods: {
-
-    /**
-     * Get thefont awesome icon class from the form type
-     *
-     * @param icon
-     *
-     * @returns string
-     */
-    getFontAwsomeIconClass: function(icon) {
-      return typeof icon !== 'undefined' ?
-      'fa-icon fa fa-' + icon :
-        'fa-icon fa fa-circle-o'
-        ;
-    },
 
     /**
      * Create a new field
