@@ -2,10 +2,15 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Controller;
 
+use FOS\RestBundle\Request\ParamFetcher;
+use IDCI\Bundle\ExtraFormBundle\Entity\ConfiguredType;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\Annotations\RequestParam;
 use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Route;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\View\View;
@@ -21,6 +26,10 @@ class ApiController extends FOSRestController
      * Retrieve extra form types.
      *
      * @Get("/extra-form-types.{_format}")
+     *
+     * @param string $_format
+     *
+     * @return Response
      */
     public function getExtraFormTypesAction(Request $request, $_format)
     {
@@ -51,6 +60,9 @@ class ApiController extends FOSRestController
      * @Get("/extra-form-types/{type}/options.{_format}", requirements={"type" = "^[a-zA-Z0-9_-]+$"})
      *
      * @param string $type
+     * @param string $_format
+     *
+     * @return Response
      */
     public function getExtraFormTypesOptionsAction(Request $request, $_format, $type)
     {
@@ -98,6 +110,10 @@ class ApiController extends FOSRestController
      * Retrieve extra form constraints.
      *
      * @Get("/extra-form-constraints.{_format}")
+     *
+     * @param string $_format
+     *
+     * @return Response
      */
     public function getExtraFormConstraintsAction(Request $request, $_format)
     {
@@ -123,9 +139,12 @@ class ApiController extends FOSRestController
      * [GET] /extra-form-constraints/{constraint}/options
      * Retrieve extra form constraint options.
      *
-     * @Get("/extra-form-constraints/{constraint}/options", requirements={"constraint" = "^[a-zA-Z0-9_-]+$"})
+     * @Get("/extra-form-constraints/{constraint}/options.{_format}", requirements={"constraint" = "^[a-zA-Z0-9_-]+$"})
      *
      * @param string $constraint
+     * @param string $_format
+     *
+     * @return Response
      */
     public function getExtraFormConstraintsOptionsAction(Request $request, $_format, $constraint)
     {
@@ -168,4 +187,61 @@ class ApiController extends FOSRestController
 
         return $this->handleView($view);
     }
+
+    /**
+     * [GET] /configured-extra-form-types
+     * Retrieve extra form types.
+     *
+     * @Get("/configured-extra-form-types.{_format}")
+     *
+     * @param string $_format
+     *
+     * @return Response
+     */
+    public function getConfiguredExtraFormTypesAction($_format)
+    {
+        $view = View::create()->setFormat($_format);
+        $types = $this->getDoctrine()->getManager()->getRepository('IDCIExtraFormBundle:ConfiguredType')->findAll();
+        ksort($types);
+        $view->setData($types);
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * [POST] /configured-extra-form-types
+     * Retrieve extra form types.
+     *
+     * @RequestParam(
+     *   name="name",
+     *   description="The name of the configured type",
+     *   allowBlank=false
+     * ),
+     * @RequestParam(
+     *   name="configuration",
+     *   description="The configured type configuration",
+     *   allowBlank=false
+     * ),
+     *
+     * @Post("/configured-extra-form-types")
+     *
+     * @return Response
+     */
+    public function postConfiguredExtraFormTypesAction(ParamFetcher $paramFetcher)
+    {
+        // todo check if the configured type exists
+        $configuredType = new ConfiguredType(
+            $paramFetcher->get('name'),
+            $paramFetcher->get('configuration')
+        );
+
+        $em = $this->getDoctrine()->getManager();
+
+        $em->persist($configuredType);
+        $em->flush();
+
+        return new Response('Your type was successfully created', Response::HTTP_CREATED);
+    }
 }
+
+

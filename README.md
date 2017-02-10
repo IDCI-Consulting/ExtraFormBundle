@@ -41,6 +41,7 @@ Enable the serializer:
 
 ```yml
 fos_rest:
+    param_fetcher_listener: true # if you want to add configured types
     service:
         serializer: jms_serializer.serializer
 ```
