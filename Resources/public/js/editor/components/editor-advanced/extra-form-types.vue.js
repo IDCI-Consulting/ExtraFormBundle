@@ -77,6 +77,7 @@ var extraFormTypes = {
         'constraints': type.configuration.constraints
       };
 
+      // case where the fields contains an extra form builder with a configuration option that contains fields, and so on and so on
       if (typeof field.options.configuration === 'object') {
         field.options.configuration = this.createFieldsRecursively(field.options.configuration);
       }
