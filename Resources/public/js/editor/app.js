@@ -14,22 +14,27 @@ function triggerEditor(element, formProperties, configuration) {
    * The common state
    */
   const store = new Vuex.Store({
+
     state: {
       configuration: configuration,
       formProperties: formProperties,
       api_cache: {}
     },
+
     getters: {
+      configuredExtraFormTypesApiUrl: function(state) {
+        return state.configuration.api_url.get_configured_extra_form_types;
+      },
       extraFormTypesApiUrl: function(state) {
-        return state.configuration.api_url.extra_form_types;
+        return state.configuration.api_url.get_extra_form_types;
       },
       extraFormTypeOptionsApiUrl: function(state) {
         return function(type) {
-          return state.configuration.api_url.extra_form_type_options.replace('XTYPE', type);
+          return state.configuration.api_url.get_extra_form_type_options.replace('XTYPE', type);
         }
       },
       extraFormConstraintsApiUrl: function(state) {
-        return state.configuration.api_url.extra_form_constraints;
+        return state.configuration.api_url.get_extra_form_constraints;
       },
       getCachedResource: function(state) {
         return function(url) {
@@ -37,45 +42,20 @@ function triggerEditor(element, formProperties, configuration) {
         }
       }
     },
+
     mutations: {
       cache: function(state, payload) {
         state.api_cache[payload.api_url] = payload.api_response;
       }
     }
+
   });
-
-  /*Vue.http.interceptors.push(function (request, next) {
-    if (request.method.toLowerCase() === 'get') {
-      var cache = sessionStorage.getItem('cache_' + request.url);
-      if (cache) {
-        console.log('Cache hit', request.url);
-        next(request.respondWith(cache, { status: 200, statusText: 'Ok'} ));
-
-        return;
-      } else {
-        console.log('Cache miss', request.url);
-      }
-    }
-
-    next(function(response) {
-      if (typeof(response.headers.map['Content-Type']) !== 'undefined') {
-        if (response.status === 200 && request.method.toLowerCase() === 'get') {
-          console.log('Cache save', request.url);
-          sessionStorage.setItem('cache_' + request.url, JSON.stringify(response.body));
-        }
-      }
-
-      request.respondWith(response.body, {
-        status: response.status,
-        statusText: response.statusText
-      })
-    });
-  });*/
 
   /**
    * The app
    */
   new Vue({
+
     el: element,
 
     store: store,
@@ -97,5 +77,6 @@ function triggerEditor(element, formProperties, configuration) {
         this.$set(this, 'fields', fields);
       }
     }
+
   });
 }

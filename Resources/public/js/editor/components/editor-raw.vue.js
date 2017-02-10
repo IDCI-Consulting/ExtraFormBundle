@@ -16,6 +16,8 @@ Vue.component('editor-raw', {
     }
   },
 
+  mixins: [fieldsMixins],
+
   created: function() {
     try {
       // If the textarea is empty, do not attempt to generate fields
@@ -49,40 +51,6 @@ Vue.component('editor-raw', {
       } catch (e) {
         console.error('Json parsing error');
       }
-    },
-
-    /**
-     * Create the fields recursively from the output
-     *
-     * @param output
-     */
-    createFieldsRecursively: function(output) {
-
-      var newFields = [];
-      var index = 0;
-
-      for (var field in output) {
-        index = index + 1;
-        if (output.hasOwnProperty(field)) {
-          var newField = {
-            'name': field,
-            'extra_form_type': output[field].extra_form_type,
-            'options':  output[field].options,
-            'constraints':  output[field].constraints
-          };
-
-          // Set the first field as active
-          newField.active = (index === 1 ? true : false);
-
-          if (typeof output[field].options.configuration !== 'undefined') {
-            newField.options.configuration = this.createFieldsRecursively(output[field].options.configuration);
-          }
-
-          newFields.push(newField);
-        }
-      }
-
-      return newFields;
     },
 
     /**

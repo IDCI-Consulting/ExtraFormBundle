@@ -188,10 +188,13 @@
     <script type="text/javascript">
         var {{ form.vars.id }}_configuration = {
             api_url: {
-                extra_form_type_options: '{{ path('idci_extraform_api_getextraformtypesoptions', { '_format': 'json', 'type': 'XTYPE'}) }}',
-                extra_form_types: '{{ path('idci_extraform_api_getextraformtypes', { '_format': 'json'}) }}',
-                extra_form_constraints: '{{ path('idci_extraform_api_getextraformconstraints', { '_format': 'json'}) }}'
-            }
+                get_configured_extra_form_types: '{{ path('idci_extraform_api_getconfiguredextraformtypes', { '_format': 'json' }) }}',
+                post_configured_extra_form_types: '{{ path('idci_extraform_api_postconfiguredextraformtypes') }}',
+                get_extra_form_type_options: '{{ path('idci_extraform_api_getextraformtypesoptions', { '_format': 'json', 'type': 'XTYPE'}) }}',
+                get_extra_form_types: '{{ path('idci_extraform_api_getextraformtypes', { '_format': 'json'}) }}',
+                get_extra_form_constraints: '{{ path('idci_extraform_api_getextraformconstraints', { '_format': 'json'}) }}'
+            },
+            allow_configured_type_edition: {{ form.vars.allow_configured_type_edition }}
         };
     </script>
 
@@ -208,6 +211,7 @@
     <script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor/assets/utils.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor/mixins/http.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor/mixins/icon.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor/mixins/fields.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor/components/common/options/textarea.vue.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor/components/common/options/choice.vue.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor/components/common/options/text.vue.js') }}"></script>

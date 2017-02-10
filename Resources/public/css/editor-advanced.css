@@ -99,19 +99,29 @@
     background-color: transparent;
 }
 
-.editor-advanced .extra-form-fields-configuration .nav-pills {
+.editor-advanced .nav-pills {
     margin: 10px 0;
 }
 
-.editor-advanced .extra-form-fields-configuration ul.nav-pills > li > a {
+.editor-advanced ul.nav-pills > li > a {
     color: #514D61;
     border-radius: 0;
 }
 
-.editor-advanced .extra-form-fields-configuration ul.nav-pills > li a:hover,
-.editor-advanced .extra-form-fields-configuration ul li.active a {
+.editor-advanced ul.nav-pills > li a:hover,
+.editor-advanced ul.nav-pills > li a:focus,
+.editor-advanced ul li.active a {
     background-color: #514D61;
     color: #FFFFFF;
+}
+
+.editor-advanced .extra-form-types .nav-pills {
+    text-align: center;
+}
+
+.editor-advanced .extra-form-types ul.nav-pills > li {
+    float: none;
+    display: inline-block;
 }
 
 .editor-advanced .extra-form-fields-configuration > .inactive {

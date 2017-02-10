@@ -27,9 +27,10 @@ class ExtraFormEditorType extends AbstractType
             $attrClass .= ' '.$options['attr']['class'];
         }
 
-        $view->vars['attr']['class'] = $attrClass;
-        $view->vars['attr']['data-available-modes'] = implode($options['available_modes'], '__');
-        $view->vars['attr']['data-configuration-variable'] = $view->vars['id'] . '_configuration';
+        $view->vars['attr']['class']                        = $attrClass;
+        $view->vars['attr']['data-available-modes']         = implode($options['available_modes'], '__');
+        $view->vars['attr']['data-configuration-variable']  = $view->vars['id'] . '_configuration';
+        $view->vars['allow_configured_type_edition']        = $options['allow_configured_type_edition'];
 
         return $view->vars;
     }
@@ -41,8 +42,9 @@ class ExtraFormEditorType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'required'        => false,
-                'available_modes' => array('simple', 'advanced')
+                'required'                      => false,
+                'available_modes'               => array('simple', 'advanced'),
+                'allow_configured_type_edition' => false,
             ))
             ->setAllowedTypes(array(
                 'available_modes' => array('array')
