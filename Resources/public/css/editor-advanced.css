@@ -68,13 +68,22 @@
     margin: 10px 10px 5px 5px;
 }
 
-.editor-advanced .extra-form-fields .field .fa-arrows-alt {
+.editor-advanced .extra-form-fields .field .fa-arrows-alt,
+.editor-advanced .extra-form-fields .field .fa-bookmark {
     float: right;
     line-height: 1;
     font-size: 20px;
     position: relative;
     right: 15px;
     top: 10px;
+}
+
+.editor-advanced .extra-form-fields .field .fa-bookmark {
+    right: 30px;
+}
+
+.editor-advanced .extra-form-fields .field .fa-bookmark:hover {
+    color: #A0809D;
 }
 
 .editor-advanced .extra-form-fields .field .fa-arrows-alt:hover {
