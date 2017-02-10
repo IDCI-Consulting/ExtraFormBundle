@@ -8,13 +8,13 @@ IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType:
             serialized_name: form_type
         description:
             expose: true
-        icon:
-            expose: true
         abstract:
             expose: true
 
     virtual_properties:
+        getIcon:
+            serialized_name: icon
         getExtraFormOptions:
-             serialized_name: extra_form_options
+            serialized_name: extra_form_options
         getExtraFormConstraints:
             serialized_name: extra_form_constraints

@@ -8,7 +8,7 @@
 namespace IDCI\Bundle\ExtraFormBundle\Type;
 
 
-class ExtraFormType implements ExtraFormTypeInterface 
+class ExtraFormType implements ExtraFormTypeInterface
 {
     /**
      * @var string
@@ -90,6 +90,10 @@ class ExtraFormType implements ExtraFormTypeInterface
      */
     public function getIcon()
     {
+        if (null === $this->icon && null !== $this->getParent()) {
+            return $this->getParent()->getIcon();
+        }
+
         return $this->icon;
     }
 
