@@ -2,7 +2,7 @@ var extraFormTypes = {
 
   template:
     '<div>' +
-      '<button class="extra-btn" @click="createField(type.form_type)" :class="type.form_type" type="button" v-for="type in types">{{ type.form_type }}</button>' +
+      '<button class="extra-btn" @click="createField(typeName)" :class="typeName" type="button" v-for="(type, typeName) in types">{{ typeName }}</button>' +
     '</div>'
   ,
 
