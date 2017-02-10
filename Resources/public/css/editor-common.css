@@ -53,21 +53,3 @@ select, input, textarea, button, optgroup {
     margin-left: auto;
     width: 100%;
 }
-
-@media (min-width: 768px) {
-    .modal-fullscreen .modal-dialog {
-        width: 750px;
-    }
-}
-
-@media (min-width: 992px) {
-    .modal-fullscreen .modal-dialog {
-        width: 970px;
-    }
-}
-
-@media (min-width: 1200px) {
-    .modal-fullscreen .modal-dialog {
-        width: 1170px;
-    }
-}
