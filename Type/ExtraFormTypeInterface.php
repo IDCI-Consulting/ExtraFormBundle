@@ -32,6 +32,13 @@ interface ExtraFormTypeInterface
     public function getDescription();
 
     /**
+     * Returns the icon.
+     *
+     * @return string
+     */
+    public function getIcon();
+
+    /**
      * Is abstract.
      *
      * @return boolean

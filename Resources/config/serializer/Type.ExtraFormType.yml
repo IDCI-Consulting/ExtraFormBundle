@@ -8,6 +8,8 @@ IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType:
             serialized_name: form_type
         description:
             expose: true
+        icon:
+            expose: true
         abstract:
             expose: true
 

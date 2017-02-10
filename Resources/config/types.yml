@@ -22,6 +22,7 @@ idci_extra_form:
             parent:      form
             form_type:   extra_form_builder
             description: "Extra form"
+            icon: "cogs"
             extra_form_options:
                 configuration:  { extra_form_type: "textarea", options: {required: false} }
             extra_form_constraints: ~
@@ -30,6 +31,7 @@ idci_extra_form:
             parent:      form
             form_type:   extra_form_collection
             description: "Form collection"
+            icon:        "list"
             extra_form_options:
                 type:           { extra_form_type: "text", options: {required: false} }
                 options:        { extra_form_type: "textarea", options: {required: false} }
@@ -43,6 +45,7 @@ idci_extra_form:
             parent:      form
             form_type:   textarea
             description: "Textarea input field"
+            icon:        "comments-o"
             extra_form_options:
                 max_length: { extra_form_type: "number",   options: {required: false} }
                 trim:       { extra_form_type: "checkbox", options: {required: false} }
@@ -51,11 +54,13 @@ idci_extra_form:
             parent:      textarea
             form_type:   extra_form_json_textarea
             description: "Text input field in JSON format"
+            icon:        "jsfiddle"
 
         "checkbox":
             parent:      form
             form_type:   checkbox
             description: "Boolean input field"
+            icon:        "check-square"
             extra_form_options:
                 value: { extra_form_type: "text", options: {required: false} }
 
@@ -74,6 +79,7 @@ idci_extra_form:
             parent:      form
             form_type:   number
             description: "Decimal input field"
+            icon:        "sort-numeric-asc"
             extra_form_options:
                 precision:       { extra_form_type: "number", options: {required: false, data: 2} }
                 invalid_message: { extra_form_type: "text",   options: {required: false} }
@@ -82,6 +88,7 @@ idci_extra_form:
             parent:      form
             form_type:   integer
             description: "Integer input field"
+            icon:     "sort-numeric-asc"
             extra_form_options:
                 precision:       { extra_form_type: "number", options: {required: false, data: 2} }
                 invalid_message: { extra_form_type: "text",   options: {required: false} }
@@ -90,6 +97,7 @@ idci_extra_form:
             parent:      form
             form_type:   money
             description: "Monetary input field"
+            icon:        "money"
             extra_form_options:
                 currency:        { extra_form_type: "text",   options: {required: false, data: "EUR"} }
                 precision:       { extra_form_type: "number", options: {required: false, data: 2} }
@@ -99,6 +107,7 @@ idci_extra_form:
             parent:      form
             form_type:   percent
             description: "Percentage input field"
+            icon:        "percent"
             extra_form_options:
                 type:            { extra_form_type: "text",   options: {required: false} }
                 precision:       { extra_form_type: "number", options: {required: false, data: 0} }
@@ -108,6 +117,7 @@ idci_extra_form:
             parent:      form
             form_type:   text
             description: "Input text field"
+            icon:        "text-height"
             extra_form_options:
                 max_length: { extra_form_type: "number",   options: {required: false} }
                 trim:       { extra_form_type: "checkbox", options: {required: false} }
@@ -116,6 +126,7 @@ idci_extra_form:
             parent:      form
             form_type:   repeated
             description: "Repeated input field"
+            icon:        "repeat"
             extra_form_options:
                 type:            { extra_form_type: "text", options: {required: true} }
                 options:         { extra_form_type: "text", options: {required: false} }
@@ -132,11 +143,13 @@ idci_extra_form:
             parent:      text
             form_type:   email
             description: "Email input field"
+            icon:        "envelope"
 
         "url":
             parent:      text
             form_type:   url
             description: "URL input field"
+            icon:        "location-arrow"
             extra_form_options:
                 default_protocol: { extra_form_type: "choice", options: {choices: {http: "http", https: "https"}} }
 
@@ -144,6 +157,7 @@ idci_extra_form:
             parent:      text
             form_type:   password
             description: "Password input field"
+            icon:        "key"
             extra_form_options:
                 always_empty:   { extra_form_type: "checkbox", options: {required: false} }
 
@@ -151,6 +165,7 @@ idci_extra_form:
             parent:      form
             form_type:   time
             description: "Time input field"
+            icon:        "clock-o"
             extra_form_options:
                 widget:          { extra_form_type: "choice",   options: {choices: {choice: "Makes two (or three if with_seconds is true) dropdowns", text: "Makes two or three text input fields (hours, minutes, seconds)", single_text: "Makes a simple input text"}, data: "choice"} }
                 input:           { extra_form_type: "choice",   options: {choices: {string: "string", datetime: "datetime", array: "array", timestamp: "timestamp"}, data: "datetime"} }
@@ -165,6 +180,7 @@ idci_extra_form:
             parent:      form
             form_type:   datetime
             description: "Date and time input field"
+            icon:        "calendar"
             extra_form_options:
                 date_format:     { extra_form_type: "text",     options: {data: "dd-MM-yyyy"}}
                 date_widget:     { extra_form_type: "choice",   options: {choices: {choice: "Displays three drop-down lists. The order of the list is defined by the size option", text: "Displays three text fields (month, day, year)", single_text: "Displays a single text field. The user input is validated based on the format option"}, data: "choice"} }
@@ -184,6 +200,7 @@ idci_extra_form:
             parent:      form
             form_type:   date
             description: "Date input field"
+            icon:        "calendar-o"
             extra_form_options:
                 format:          { extra_form_type: "text",   options: {data: "dd-MM-yyyy"} }
                 widget:          { extra_form_type: "choice", options: {choices: {choice: "Displays three drop-down lists. The order of the list is defined by the size option", text: "Displays three text fields (month, day, year)", single_text: "Displays a single text field. The user input is validated based on the format option"}, data: "choice"} }
@@ -198,21 +215,25 @@ idci_extra_form:
             parent:      date
             form_type:   birthday
             description: "Birthday input field"
+            icon:        "birthday-cake"
 
         "country":
             parent:      choice
             form_type:   country
             description: "Country selection field"
+            icon:        "globe"
 
         "iban":
             parent:      form
             form_type:   extra_form_iban
             description: "Iban input field"
+            icon:        "credit-card"
 
         "html":
             parent:      form
             form_type:   extra_form_html
             description: "Html text field"
+            icon:        "code"
             extra_form_options:
                 content: { extra_form_type: "textarea", options: {required: false} }
                 mapped:  { extra_form_type: "checkbox", options: {required: false, data: false} }
@@ -221,6 +242,7 @@ idci_extra_form:
             parent:      text
             form_type:   captcha
             description: "Input captcha field"
+            icon:        "unlock-alt"
             extra_form_options:
                 length:           { extra_form_type: "number",   options: {required: false} }
                 width:            { extra_form_type: "number",   options: {required: false} }
@@ -251,6 +273,7 @@ idci_extra_form:
             parent:      form
             form_type:   extra_form_range
             description: "Range text field"
+            icon:        "arrows-v"
             extra_form_options:
                 min:  { extra_form_type: "integer", options: {required: false, data: 0} }
                 max:  { extra_form_type: "integer", options: {required: false, data: 100} }

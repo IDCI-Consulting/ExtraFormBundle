@@ -26,6 +26,11 @@ class ExtraFormType implements ExtraFormTypeInterface
     protected $description;
 
     /**
+     * @var string
+     */
+    protected $icon;
+
+    /**
      * @var boolean
      */
     protected $abstract;
@@ -50,6 +55,7 @@ class ExtraFormType implements ExtraFormTypeInterface
         $this->formType             = $configuration['form_type'];
         $this->parent               = $configuration['parent'];
         $this->description          = $configuration['description'];
+        $this->icon                 = $configuration['icon'];
         $this->abstract             = $configuration['abstract'];
         $this->extraFormOptions     = $configuration['extra_form_options'];
         $this->extraFormConstraints = $configuration['extra_form_constraints'];
@@ -77,6 +83,14 @@ class ExtraFormType implements ExtraFormTypeInterface
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getIcon()
+    {
+        return $this->icon;
     }
 
     /**

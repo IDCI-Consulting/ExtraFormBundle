@@ -2,7 +2,9 @@ var extraFormTypes = {
 
   template:
     '<div>' +
-      '<button class="extra-btn" @click="createField(typeName)" :class="typeName" type="button" v-for="(type, typeName) in types">{{ typeName }}</button>' +
+      '<button class="extra-btn" @click="createField(type, typeName)" :class="typeName" type="button" v-for="(type, typeName) in types">' +
+        '<i :class="getFontAwsomeIconClass(type.icon)" aria-hidden="true"></i> {{ typeName }}' +
+      '</button>' +
     '</div>'
   ,
 
@@ -21,12 +23,27 @@ var extraFormTypes = {
   methods: {
 
     /**
+     * Get thefont awesome icon class from the form type
+     *
+     * @param icon
+     *
+     * @returns string
+     */
+    getFontAwsomeIconClass: function(icon) {
+      return typeof icon !== 'undefined' ?
+      'fa-icon fa fa-' + icon :
+        'fa-icon fa fa-circle-o'
+        ;
+    },
+
+    /**
      * Create a new field
      */
-    createField: function(value) {
+    createField: function(type, typeName) {
       var field = {
-        'name': 'field_' + value + '_' + generateUniqueId(),
-        'extra_form_type': value,
+        'name': 'field_' + typeName + '_' + generateUniqueId(),
+        'icon': type.icon,
+        'extra_form_type': typeName,
         'options': {},
         'constraints': []
       };

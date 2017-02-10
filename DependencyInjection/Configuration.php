@@ -58,6 +58,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('form_type')->isRequired()->end()
                     ->booleanNode('abstract')->defaultFalse()->end()
                     ->scalarNode('description')->defaultNull()->end()
+                    ->scalarNode('icon')->defaultNull()->end()
                     ->arrayNode('extra_form_options')
                         ->defaultValue(array())
                         ->prototype('array')

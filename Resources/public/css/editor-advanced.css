@@ -9,8 +9,15 @@
     background-color: white;
     color: #514D61;
     display: block;
-    min-width: 173px;
+    min-width: 200px;
     margin: 10px auto;
+}
+
+.editor-advanced button.extra-btn .fa-icon {
+    float: left;
+    position: relative;
+    top: 3px;
+    padding-right: 5px;
 }
 
 .editor-advanced button.extra-btn:hover {
