@@ -20,6 +20,8 @@ var typesSelectbox = {
     }
   },
 
+  mixins: [httpMixin],
+
   mounted: function() {
     this.getExtraFormTypes();
   },
@@ -42,29 +44,21 @@ var typesSelectbox = {
      * Get the form types
      */
     getExtraFormTypes: function() {
-      this.$http
-        .get(this.$store.getters.extraFormTypesApiUrl)
-        .then(
-          function(response) {
-            return response.json();
-          },
-          function (response) {
-            console.log(response.status + ' ' + response.statusText);
-          }
-        )
-        .then(function (jsonTypes) {
-          jsonTypes = filterObject(jsonTypes, function(element) {
-            return element.abstract === false;
-          });
-
-          this.types = jsonTypes;
-          if (this.selected === 'initial') {
-            this.selected = Object.keys(this.types)[0];
-          }
-
-          this.$emit('input', this.selected)
-        })
+      var url = this.$store.getters.extraFormTypesApiUrl,
+          self = this
       ;
+
+      this.handleGetRequest(url, function (json) {
+        self.types = filterObject(json, function (element) {
+          return element.abstract === false;
+        });
+
+        if (self.selected === 'initial') {
+          self.selected = Object.keys(self.types)[0];
+        }
+
+        self.$emit('input', self.selected)
+      });
     }
 
   }

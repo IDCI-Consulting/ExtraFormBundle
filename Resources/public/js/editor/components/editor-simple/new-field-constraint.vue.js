@@ -22,6 +22,8 @@ var editorSimpleNewFieldConstraint = {
     this.getExtraFormConstraints();
   },
 
+  mixins: [httpMixin],
+
   methods: {
 
     /**
@@ -40,17 +42,14 @@ var editorSimpleNewFieldConstraint = {
      * Get the extra form constraints
      */
     getExtraFormConstraints: function() {
-      this.$http.get(this.$store.getters.extraFormConstraintsApiUrl)
-        .then(
-        function(response) {
-          this.constraints = response.body;
-          this.selectedConstraint = Object.keys(this.constraints)[0];
-        },
-        function (response) {
-          console.log(response.status + ' ' + response.statusText);
-        }
-      )
+      var url = this.$store.getters.extraFormConstraintsApiUrl,
+          self = this
       ;
+
+      this.handleGetRequest(url, function (json) {
+        self.constraints = json;
+        self.selectedConstraint = Object.keys(self.constraints)[0];
+      });
     }
   }
 };

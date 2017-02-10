@@ -21,8 +21,6 @@ var editorSimpleNewField = {
 
     /**
      * Create a new field
-     *
-     * @param event
      */
     createField: function() {
       var field = {

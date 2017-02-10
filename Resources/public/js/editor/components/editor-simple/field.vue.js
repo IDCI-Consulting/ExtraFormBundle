@@ -41,7 +41,7 @@ var editorSimpleField = {
     /**
      * Remove a field
      *
-     * @param event
+     * @param index
      */
     removeField: function(index) {
       this.$emit('removed', index);
@@ -55,4 +55,5 @@ var editorSimpleField = {
     }
 
   }
+
 };

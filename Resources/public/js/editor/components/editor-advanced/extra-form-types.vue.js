@@ -12,6 +12,8 @@ var extraFormTypes = {
     }
   },
 
+  mixins: [httpMixin],
+
   created: function() {
     this.getExtraFormTypes();
   },
@@ -36,21 +38,15 @@ var extraFormTypes = {
      * Get the form types
      */
     getExtraFormTypes: function() {
-      this.$http.get(this.$store.getters.extraFormTypesApiUrl)
-        .then(
-        function(response) {
-          return response.json();
-        },
-        function (response) {
-          console.log(response.status + ' ' + response.statusText);
-        })
-        .then(function (jsonTypes) {
-          jsonTypes = filterObject(jsonTypes, function(element) {
-            return element.abstract === false;
-          });
-          this.types = jsonTypes;
-        })
+      var url = this.$store.getters.extraFormTypesApiUrl,
+          self = this
       ;
+
+      this.handleGetRequest(url, function (json) {
+        self.types = filterObject(json, function (element) {
+          return element.abstract === false;
+        });
+      });
     }
   }
 

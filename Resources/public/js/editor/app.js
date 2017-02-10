@@ -16,7 +16,8 @@ function triggerEditor(element, formProperties, configuration) {
   const store = new Vuex.Store({
     state: {
       configuration: configuration,
-      formProperties: formProperties
+      formProperties: formProperties,
+      api_cache: {}
     },
     getters: {
       extraFormTypesApiUrl: function(state) {
@@ -29,6 +30,16 @@ function triggerEditor(element, formProperties, configuration) {
       },
       extraFormConstraintsApiUrl: function(state) {
         return state.configuration.api_url.extra_form_constraints;
+      },
+      getCachedResource: function(state) {
+        return function(url) {
+          return state.api_cache[url];
+        }
+      }
+    },
+    mutations: {
+      cache: function(state, payload) {
+        state.api_cache[payload.api_url] = payload.api_response;
       }
     }
   });
@@ -66,10 +77,15 @@ function triggerEditor(element, formProperties, configuration) {
    */
   new Vue({
     el: element,
+
     store: store,
+
     data: {
       fields: []
     },
+
+    mixins: [httpMixin],
+
     methods: {
 
       /**

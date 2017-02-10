@@ -7,6 +7,8 @@ var editorAdvancedNewFieldConstraint = {
       '</div>'
   ,
 
+  mixins: [httpMixin],
+
   data: function () {
     return {
       constraints: [],
@@ -36,21 +38,21 @@ var editorAdvancedNewFieldConstraint = {
      * Get the extra form constraints
      */
     getExtraFormConstraints: function() {
-      this.$http.get(this.$store.getters.extraFormConstraintsApiUrl)
-        .then(
-        function(response) {
-          this.constraints = Object.keys(response.body).map(function (key) {
-            var element = response.body[key];
-            element.name = key;
-            return element;
-          });
-          this.selectedConstraint = this.constraints[0];
-        },
-        function (response) {
-          console.log(response.status + ' ' + response.statusText);
-        }
-      )
+      var url = this.$store.getters.extraFormConstraintsApiUrl,
+          self = this
       ;
+
+      this.handleGetRequest(url, function (json) {
+        // set the key of the objects as the value of the name so we can use it over iteration
+        self.constraints = Object.keys(json).map(function (key) {
+          var element = json[key];
+          element.name = key;
+          return element;
+        });
+
+        self.selectedConstraint = self.constraints[0];
+      });
     }
+
   }
 };

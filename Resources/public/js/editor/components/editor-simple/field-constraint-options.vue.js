@@ -22,8 +22,10 @@ var editorSimpleFieldConstraintOptions = {
     'option-number': numberOption
   },
 
+  mixins: [httpMixin],
+
   created: function() {
-    this.getExtraFormConstraint(this.fieldConstraint);
+    this.setConstraintOptions(this.fieldConstraint);
   },
 
   methods: {
@@ -43,30 +45,24 @@ var editorSimpleFieldConstraintOptions = {
     },
 
     /**
-     * Get the extra form constraints
+     * Set the constraint options
      */
-    getExtraFormConstraint: function (fieldConstraint) {
-      this.$http.get(this.$store.getters.extraFormConstraintsApiUrl)
-        .then(
-          function (response) {
-            return response.json();
-          },
-          function (response) {
-            console.log(response.status + ' ' + response.statusText);
-          }
-        )
-        .then(function (json) {
-          var constraints = json;
-          this.constraint = json[fieldConstraint.extra_form_constraint];
+    setConstraintOptions: function(fieldConstraint) {
+      var url = this.$store.getters.extraFormConstraintsApiUrl,
+        self = this
+        ;
 
-          var options = this.constraint.extra_form_options;
-          for (var option in options) {
-            if (options.hasOwnProperty(option)) {
-              options[option]['component_name'] = 'option-' + options[option].extra_form_type;
-            }
+      this.handleGetRequest(url, function (response) {
+
+        self.constraint = response[fieldConstraint.extra_form_constraint];
+        var options = self.constraint.extra_form_options;
+        for (var option in options) {
+          if (options.hasOwnProperty(option)) {
+            options[option]['component_name'] = 'option-' + options[option].extra_form_type;
           }
-        })
-      ;
+        }
+      });
     }
+
   }
 };

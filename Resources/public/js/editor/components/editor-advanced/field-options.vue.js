@@ -52,6 +52,8 @@ var editorAdvancedFieldOptions = {
     'option-integer': integerOption
   },
 
+  mixins: [httpMixin],
+
   created: function() {
     this.getExtraFormTypeOptions(this.type);
   },
@@ -90,36 +92,34 @@ var editorAdvancedFieldOptions = {
       this.$set(this.fieldOptions, option.name, option.value);
     },
 
+
     /**
      * Get the form type options
      *
      * @param type
      */
     getExtraFormTypeOptions: function(type) {
-      this.$http.get(this.$store.getters.extraFormTypeOptionsApiUrl(type))
-        .then(
-        function(response) {
-          var options = response.body;
-          for (var option in options) {
-            if (options.hasOwnProperty(option)) {
-              if (option === 'configuration') {
-                options[option]['component_name'] = 'editor';
-                if (typeof this.fieldOptions[option] === 'undefined') {
-                  // initialize the configuration fields for the first time
-                  this.$set(this.fieldOptions, option, []);
-                }
-              } else {
-                options[option]['component_name'] = 'option-' + options[option].extra_form_type;
+      var url = this.$store.getters.extraFormTypeOptionsApiUrl(type),
+          self = this
+      ;
+
+      this.handleGetRequest(url, function (options) {
+        for (var option in options) {
+          if (options.hasOwnProperty(option)) {
+            if (option === 'configuration') {
+              options[option]['component_name'] = 'editor';
+              if (typeof self.fieldOptions[option] === 'undefined') {
+                // initialize the configuration fields for the first time
+                self.$set(self.fieldOptions, option, []);
               }
+            } else {
+              options[option]['component_name'] = 'option-' + options[option].extra_form_type;
             }
           }
-          this.options = options;
-        },
-        function (response) {
-          console.log(response.status + ' ' + response.statusText);
         }
-      )
-      ;
+
+        self.options = options;
+      });
     }
   }
 };
