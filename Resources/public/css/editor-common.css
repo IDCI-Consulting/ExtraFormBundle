@@ -53,3 +53,67 @@ select, input, textarea, button, optgroup {
     margin-left: auto;
     width: 100%;
 }
+
+/***********************/
+/* VUE MODAL COMPONENT */
+/***********************/
+
+.vue-modal-mask {
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    background-color: rgba(0, 0, 0, .5);
+    transition: opacity .3s ease;
+}
+
+.vue-modal-container {
+    width: 50%;
+    margin: 20% auto 0 auto;
+    padding: 20px 30px;
+    background-color: #fff;
+    border-radius: 2px;
+    border: 5px solid #514D61;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+    color: #000000;
+    transition: all .3s ease;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.vue-modal-header h3 {
+    margin-top: 0;
+    color: #514D61;
+}
+
+.vue-modal-body {
+    margin: 20px 0;
+}
+
+.vue-modal-default-button {
+    float: right;
+}
+
+/*
+ * The following styles are auto-applied to elements with
+ * transition=.vue-modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the.vue-modal transition by editing
+ * these styles.
+ */
+
+.modal-enter {
+    opacity: 0;
+}
+
+.modal-leave-active {
+    opacity: 0;
+}
+
+.modal-enter .vue-modal-container,
+.modal-leave-active .vue-modal-container {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
