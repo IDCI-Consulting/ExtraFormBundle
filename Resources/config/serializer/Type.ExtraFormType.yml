@@ -3,6 +3,8 @@ IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType:
     exclusion_policy: ALL
 
     properties:
+        name:
+            expose: true
         formType:
             expose: true
             serialized_name: form_type

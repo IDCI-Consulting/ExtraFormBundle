@@ -6,8 +6,16 @@ parameters:
     idci_extra_form.configuration.fetcher_registry.class: IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherRegistry
     idci_extra_form.configuration.fetcher.class:          IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcher
     idci_extra_form.builder.class:                        IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilder
+    idci_extra_form.event.subscriber.serializer.class:    IDCI\Bundle\ExtraFormBundle\Event\Subscriber\SerializerSubscriber
 
 services:
+
+    ## Events Subscriber ##
+    idci_extra_form.event.subscriber.serializer:
+        class: %idci_extra_form.event.subscriber.serializer.class%
+        arguments: [@idci_extra_form.type_registry]
+        tags:
+            - { name: jms_serializer.event_subscriber }
 
     # ExtraFormType
 

@@ -3,9 +3,19 @@ IDCI\Bundle\ExtraFormBundle\Entity\ConfiguredType:
     exclusion_policy: ALL
 
     properties:
-        id:
-            expose: false
         name:
             expose: true
-        configuration:
-            expose: true
+
+    virtual_properties:
+        getIcon:
+            serialized_name: icon
+        getExtraFormOptions:
+            serialized_name: extra_form_options
+        getExtraFormConstraints:
+            serialized_name: extra_form_constraints
+        getDescription:
+            serialized_name: description
+        isAbstract:
+            serialized_name: abstract
+        getFormType:
+            serialized_name: form_type

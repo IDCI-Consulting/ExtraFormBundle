@@ -46,8 +46,7 @@ class ApiController extends FOSRestController
         } else {
             $types = $this->get('idci_extra_form.type_registry')->getTypes();
             ksort($types);
-
-            $view->setData($types);
+            $view->setData(array_values($types));
         }
 
         return $this->handleView($view);

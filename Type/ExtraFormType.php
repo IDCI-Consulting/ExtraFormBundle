@@ -13,6 +13,11 @@ class ExtraFormType implements ExtraFormTypeInterface
     /**
      * @var string
      */
+    protected $name;
+
+    /**
+     * @var string
+     */
     protected $formType;
 
     /**
@@ -52,6 +57,7 @@ class ExtraFormType implements ExtraFormTypeInterface
      */
     public function __construct(array $configuration)
     {
+        $this->name                 = $configuration['name'];
         $this->formType             = $configuration['form_type'];
         $this->parent               = $configuration['parent'];
         $this->description          = $configuration['description'];
@@ -59,6 +65,14 @@ class ExtraFormType implements ExtraFormTypeInterface
         $this->abstract             = $configuration['abstract'];
         $this->extraFormOptions     = $configuration['extra_form_options'];
         $this->extraFormConstraints = $configuration['extra_form_constraints'];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
