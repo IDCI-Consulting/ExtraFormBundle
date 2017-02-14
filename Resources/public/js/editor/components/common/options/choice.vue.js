@@ -28,7 +28,7 @@ var choiceOption = {
   },
 
   /**
-   * Update the selected value at first
+   * Update the selected value on component creation
    */
   created: function() {
     if (typeof this.value !== 'undefined') {
