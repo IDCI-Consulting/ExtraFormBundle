@@ -13,19 +13,19 @@ var extraFormTypes = {
               '</ul>' +
               '<div class="tab-content">' +
                   '<div role="tabpanel" class="tab-pane in active" id="basic-types">' +
-                      '<button class="extra-btn" @click="createField(type, typeName)" :class="typeName" type="button" v-for="(type, typeName) in types">' +
-                          '<i :class="getFontAwsomeIconClass(type.icon)" aria-hidden="true"></i> {{ typeName }}' +
+                      '<button class="extra-btn" @click="createField(type)" :class="type.name" type="button" v-for="type in types">' +
+                          '<i :class="getFontAwsomeIconClass(type.icon)" aria-hidden="true"></i> {{ type.name }}' +
                       '</button>' +
                   '</div>' +
                   '<div role="tabpanel" class="tab-pane" id="configured-types">' +
                     '<button ' +
                         'class="extra-btn" ' +
                         '@click="createConfiguredField(configuredType)" ' +
-                        ':class="configuredType.configuration.extra_form_type" ' +
+                        ':class="configuredType.name" ' +
                         'type="button" ' +
                         'v-for="configuredType in configuredTypes"' +
                     '>' +
-                        '<i :class="getFontAwsomeIconClass()" aria-hidden="true"></i> {{ configuredType.name }}' +
+                        '<i :class="getFontAwsomeIconClass(configuredType.icon)" aria-hidden="true"></i> {{ configuredType.name }}' +
                     '</button>' +
                   '</div>' +
               '</div>' +
@@ -53,11 +53,11 @@ var extraFormTypes = {
     /**
      * Create a new field
      */
-    createField: function(type, typeName) {
+    createField: function(type) {
       var field = {
-        'name': 'field_' + typeName + '_' + generateUniqueId(),
+        'name': 'field_' + type.name + '_' + generateUniqueId(),
         'icon': type.icon,
-        'extra_form_type': typeName,
+        'extra_form_type': type.name,
         'options': {},
         'constraints': []
       };
@@ -72,9 +72,9 @@ var extraFormTypes = {
 
       var field = {
         'name': 'field_' + type.name + '_' + generateUniqueId(),
-        'extra_form_type': type.configuration.extra_form_type,
-        'options': type.configuration.options,
-        'constraints': type.configuration.constraints
+        'extra_form_type': type.form_type,
+        'options':  type.extra_form_options,
+        'constraints': type.extra_form_constraints
       };
 
       // case where the fields contains an extra form builder with a configuration option that contains fields, and so on and so on
@@ -94,7 +94,7 @@ var extraFormTypes = {
       ;
 
       this.handleGetRequest(url, function (json) {
-        self.types = filterObject(json, function (element) {
+        self.types = json.filter(function (element) {
           return element.abstract === false;
         });
       });

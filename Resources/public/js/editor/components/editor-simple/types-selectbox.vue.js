@@ -5,8 +5,8 @@ var typesSelectbox = {
 
   template:
     '<select v-bind:value="value" v-on:change="updateValue($event.target.value)" v-model="selected">' +
-        '<option v-for="(type, typeName) in types" :value="typeName">' +
-            '{{ typeName }}' +
+        '<option v-for="type in types" :value="type.name">' +
+            '{{ type.name }}' +
         '</option>' +
     '</select>'
   ,
@@ -49,12 +49,12 @@ var typesSelectbox = {
       ;
 
       this.handleGetRequest(url, function (json) {
-        self.types = filterObject(json, function (element) {
+        self.types = json.filter(function (element) {
           return element.abstract === false;
         });
 
         if (self.selected === 'initial') {
-          self.selected = Object.keys(self.types)[0];
+          self.selected = self.types[0].name;
         }
 
         self.$emit('input', self.selected)
