@@ -72,6 +72,7 @@ var extraFormTypes = {
 
       var field = {
         'name': 'field_' + type.name + '_' + generateUniqueId(),
+        'icon': type.icon,
         'extra_form_type': type.form_type,
         'options':  type.extra_form_options,
         'constraints': type.extra_form_constraints
