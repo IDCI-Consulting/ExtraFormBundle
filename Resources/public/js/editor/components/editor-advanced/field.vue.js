@@ -23,7 +23,6 @@ var editorAdvancedField = {
   data: function() {
     return {
       showModal: false,
-      icons: fontAwesomeIcons,
       selectedIcon: ''
     }
   },
