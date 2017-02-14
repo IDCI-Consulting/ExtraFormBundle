@@ -69,7 +69,7 @@
 }
 
 .editor-advanced .extra-form-fields .field .fa-arrows-alt,
-.editor-advanced .extra-form-fields .field .fa-bookmark {
+.editor-advanced .extra-form-fields .field .fa-floppy-o {
     float: right;
     line-height: 1;
     font-size: 20px;
@@ -78,11 +78,11 @@
     top: 10px;
 }
 
-.editor-advanced .extra-form-fields .field .fa-bookmark {
+.editor-advanced .extra-form-fields .field .fa-floppy-o {
     right: 30px;
 }
 
-.editor-advanced .extra-form-fields .field .fa-bookmark:hover {
+.editor-advanced .extra-form-fields .field .fa-floppy-o:hover {
     color: #A0809D;
 }
 
