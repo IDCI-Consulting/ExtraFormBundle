@@ -1,7 +1,7 @@
 /**
  * Create and return an object which contains all elements for which the callback returns true
  */
-function filterObject (object, callback) {
+function filterObject(object, callback) {
   var filteredObject = {};
 
   for (var property in object) {
