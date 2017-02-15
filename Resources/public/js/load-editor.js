@@ -30,6 +30,7 @@ $(window).on('load', function() {
         '</div>' +
       '</div>'
     ;
+
     var rawModalButton = '<button class="trigger-raw-mode-modal">Raw mode</button>';
 
     var simpleModal = '';
@@ -55,10 +56,12 @@ $(window).on('load', function() {
           '</div>' +
         '</div>'
       ;
+
       simpleModalButton = '<button class="trigger-simple-visual-mode-modal">Simple visual mode</button>';
     }
 
     var advancedModal = '';
+    var overviewModal = '';
     var advancedModalButton = '';
 
     if (availableModes.indexOf('advanced') > -1) {
@@ -75,19 +78,40 @@ $(window).on('load', function() {
               '</div>' +
               '<div class="modal-footer">' +
                 '<button class="close-modal">Close the editor</button>' +
+                '<button class="trigger-overview-modal">Display the overview</button>' +
                 '<em>All your changes are automatically saved</em>' +
               '</div>' +
             '</div>' +
           '</div>' +
         '</div>'
       ;
+
+      overviewModal =
+        '<div id="modal_overview" class="modal fade overview-modal">' +
+          '<div class="modal-dialog" role="document">' +
+            '<div class="modal-content">' +
+              '<div class="modal-header">' +
+                '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                '<h4 class="modal-title">Overview</h4>' +
+              '</div>' +
+              '<div class="modal-body">' +
+                  '<div style="text-align: center;"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i></div>' +
+              '</div>' +
+              '<div class="modal-footer">' +
+                '<button class="close-modal">Close the overview</button>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>'
+      ;
+
       advancedModalButton = '<button class="trigger-advanced-visual-mode-modal">Advanced visual mode</button>';
     }
 
     $(this).replaceWith(
       '<div id="' + appId + '" data-configuration-variable="extraFormEditorConfiguration">' +
         '<div class="modal-buttons">' +
-           simpleModalButton + ' ' + advancedModalButton + ' ' + rawModalButton +
+           simpleModalButton + ' ' + advancedModalButton + ' ' + rawModalButton + ' ' + overviewModal +
         '</div>' +
         '<br>' +
         '<div class="modals">' +

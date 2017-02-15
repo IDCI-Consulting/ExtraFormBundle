@@ -2,8 +2,9 @@
 /* EDITOR */
 /**********/
 
-.modal-footer button.close-modal {
+.modal-footer button {
     float: left;
+    margin-right: 15px;
 }
 
 .handle:before {
@@ -27,8 +28,6 @@ label {
 select, input, textarea, button, optgroup {
     color: #000000;
 }
-
-
 
 /********************/
 /* FULLSCREEN MODAL */

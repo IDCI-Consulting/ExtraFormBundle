@@ -16,18 +16,23 @@ $(window).on('load', function() {
 
   /** Modal related js **/
 
-  var modals = ['simple-visual-mode-modal', 'advanced-visual-mode-modal', 'raw-mode-modal'];
+  var modals = ['simple-visual-mode-modal', 'advanced-visual-mode-modal', 'raw-mode-modal', 'overview-modal'];
 
   modals.forEach(function(modal) {
     $(document).on('click', 'button.trigger-' + modal, function(event) {
       event.preventDefault();
-      $modal = $('.modals .' + modal).first();
+
+      if ('overview-modal' === modal) {
+        $modal = $('.' + modal);
+      } else {
+        $modal = $('.modals .' + modal).first();
+      }
+
       $modal.modal('show');
     });
   });
 
   modals.forEach(function(modal) {
-
     // close the modal on click
     var classes =
       '.' + modal + ' .modal-body button.close-modal, ' +     // on the generate field button from the editor-raw

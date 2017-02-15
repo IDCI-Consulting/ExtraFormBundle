@@ -1,3 +1,7 @@
+#modal_overview {
+    z-index: 99999;
+}
+
 .editor-advanced > div {
     max-height: 80vh;
     min-height: 60vh;
@@ -44,7 +48,6 @@
 }
 
 /** EXTRA FORM FIELDS **/
-
 
 .editor-advanced .extra-form-fields .field {
     border: 1px solid #514D61;
