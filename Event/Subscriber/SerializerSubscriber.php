@@ -51,7 +51,7 @@ class SerializerSubscriber implements EventSubscriberInterface
         if ($configuredType instanceof ConfiguredType) {
             try {
                 $configurationArray = json_decode($configuredType->getConfiguration(), true);
-                $extraFormType = $this->registry->getType($configurationArray['extra_form_type']);
+                $extraFormType = $this->registry->getType($configurationArray['form_type']);
                 $configuredType->setExtraFormType($extraFormType);
             } catch (\Exception $e) {
                 return;

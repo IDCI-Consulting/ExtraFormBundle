@@ -9,10 +9,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\RequestParam;
+use FOS\RestBundle\Controller\Annotations\Put;
+use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Route;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
+use JMS\Serializer\SerializerBuilder;
 use FOS\RestBundle\View\View;
 use IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormTypeChoiceType;
 
@@ -209,7 +212,8 @@ class ApiController extends FOSRestController
 
     /**
      * [POST] /configured-extra-form-types
-     * Retrieve extra form types.
+     *
+     * Save an extra form type.
      *
      * @RequestParam(
      *   name="name",
@@ -228,18 +232,92 @@ class ApiController extends FOSRestController
      */
     public function postConfiguredExtraFormTypesAction(ParamFetcher $paramFetcher)
     {
-        // todo check if the configured type exists
+        $em = $this->getDoctrine()->getManager();
+        $existingConfiguredType = $em
+            ->getRepository('IDCIExtraFormBundle:ConfiguredType')
+            ->findOneByName($paramFetcher->get('name'))
+        ;
+
+        if (null !== $existingConfiguredType) {
+            return new Response('A field with the name ' . $paramFetcher->get('name') . ' already exists', Response::HTTP_CONFLICT);
+        }
+
         $configuredType = new ConfiguredType(
             $paramFetcher->get('name'),
             $paramFetcher->get('configuration')
         );
 
+        $em->persist($configuredType);
+        $em->flush();
+
+        $view = View::create()->setFormat('json');
+        $type = $this->getDoctrine()->getManager()->getRepository('IDCIExtraFormBundle:ConfiguredType')->findOneByName($paramFetcher->get('name'));
+        $view->setData($type);
+        $view->setStatusCode(Response::HTTP_CREATED);
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * [PUT] /configured-extra-form-types/{name}
+     *
+     * Update an extra form type.
+     *
+     * @RequestParam(
+     *   name="configuration",
+     *   description="The configured type configuration",
+     *   allowBlank=false
+     * ),
+     *
+     * @Put("/configured-extra-form-types/{name}")
+     *
+     * @return Response
+     */
+    public function putConfiguredExtraFormTypesAction(ParamFetcher $paramFetcher, $name)
+    {
         $em = $this->getDoctrine()->getManager();
+        $configuredType = $em
+            ->getRepository('IDCIExtraFormBundle:ConfiguredType')
+            ->findOneByName($name)
+        ;
+
+        if (null === $configuredType) {
+            return new Response('No configured type found with name ' . $name, Response::HTTP_NOT_FOUND);
+        }
+
+        $configuredType->setConfiguration($paramFetcher->get('configuration'));
 
         $em->persist($configuredType);
         $em->flush();
 
-        return new Response('Your type was successfully created', Response::HTTP_CREATED);
+        return new Response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * [DELETE] /configured-extra-form-types/{name}
+     *
+     * Delete an extra form type.
+     *
+     * @Delete("/configured-extra-form-types/{name}")
+     *
+     * @return Response
+     */
+    public function deleteConfiguredExtraFormTypesAction(ParamFetcher $paramFetcher, $name)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $configuredType = $em
+            ->getRepository('IDCIExtraFormBundle:ConfiguredType')
+            ->findOneByName($name)
+        ;
+
+        if (null === $configuredType) {
+            return new Response('No configured type found with name ' . $name, Response::HTTP_NOT_FOUND);
+        }
+
+        $em->remove($configuredType);
+        $em->flush();
+
+        return new Response(null, Response::HTTP_NO_CONTENT);
     }
 }
 

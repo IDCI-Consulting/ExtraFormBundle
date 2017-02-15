@@ -190,6 +190,8 @@
             api_url: {
                 get_configured_extra_form_types: '{{ path('idci_extraform_api_getconfiguredextraformtypes', { '_format': 'json' }) }}',
                 post_configured_extra_form_types: '{{ path('idci_extraform_api_postconfiguredextraformtypes') }}',
+                put_configured_extra_form_types: '{{ path('idci_extraform_api_putconfiguredextraformtypes', { 'name': 'XNAME' }) }}',
+                delete_configured_extra_form_types: '{{ path('idci_extraform_api_deleteconfiguredextraformtypes', { 'name': 'XNAME' }) }}',
                 get_extra_form_type_options: '{{ path('idci_extraform_api_getextraformtypesoptions', { '_format': 'json', 'type': 'XTYPE'}) }}',
                 get_extra_form_types: '{{ path('idci_extraform_api_getextraformtypes', { '_format': 'json'}) }}',
                 get_extra_form_constraints: '{{ path('idci_extraform_api_getextraformconstraints', { '_format': 'json'}) }}'
@@ -234,6 +236,7 @@
     <script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor/components/editor-advanced/field.vue.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor/components/editor-advanced/extra-form-fields.vue.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor/components/editor-advanced/extra-form-fields-configuration.vue.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor/components/editor-advanced/configured-extra-form-type.vue.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor/components/editor-advanced/extra-form-types.vue.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor/components/editor-simple/editor.vue.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor/components/editor-advanced/editor.vue.js') }}"></script>

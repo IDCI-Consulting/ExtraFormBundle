@@ -41,4 +41,7 @@ $(window).on('load', function() {
     });
   });
 
+  // FOR DEV PURPOSE
+  $modal = $('.modals .advanced-visual-mode-modal').first();
+  $modal.modal('show');
 });

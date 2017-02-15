@@ -203,8 +203,13 @@ class ConfiguredType implements ExtraFormTypeInterface
         }
 
         $configurationArray = json_decode($this->configuration, true);
+        $options = $this->extraFormType->getExtraFormOptions();
 
-        return $configurationArray['options'];
+        foreach($configurationArray['extra_form_options'] as $optionName => $optionValue) {
+            $options[$optionName]['options']['data'] = $optionValue;
+        }
+
+        return $options;
     }
 
     /**
@@ -218,6 +223,6 @@ class ConfiguredType implements ExtraFormTypeInterface
 
         $configurationArray = json_decode($this->configuration, true);
 
-        return $configurationArray['constraints'];
+        return $configurationArray['extra_form_constraints'];
     }
 }

@@ -14,31 +14,41 @@ var extraFormTypes = {
               '<div class="tab-content">' +
                   '<div role="tabpanel" class="tab-pane in active" id="basic-types">' +
                       '<button class="extra-btn" @click="createField(type)" :class="type.name" type="button" v-for="type in types">' +
-                          '<i :class="getFontAwsomeIconClass(type.icon)" aria-hidden="true"></i> {{ type.name }}' +
+                          '<i :class="getFontAwsomeIconClass(type.icon)" aria-hidden="true"></i>{{ type.name }}' +
                       '</button>' +
                   '</div>' +
                   '<div role="tabpanel" class="tab-pane" id="configured-types">' +
-                    '<button ' +
-                        'class="extra-btn" ' +
-                        '@click="createConfiguredField(configuredType)" ' +
-                        ':class="configuredType.name" ' +
-                        'type="button" ' +
-                        'v-for="configuredType in configuredTypes"' +
-                    '>' +
-                        '<i :class="getFontAwsomeIconClass(configuredType.icon)" aria-hidden="true"></i> {{ configuredType.name }}' +
-                    '</button>' +
+                      '<configured-extra-form-type ' +
+                          '@delete="deleteConfiguredType" ' +
+                          '@created="createConfiguredField" ' +
+                          ':type="configuredType" ' +
+                          'v-for="configuredType in configuredTypes"> ' +
+                      '</configured-extra-form-type>' +
                   '</div>' +
               '</div>' +
           '</div>' +
       '</div>'
   ,
 
-
   data: function () {
     return {
-      types: [],
-      configuredTypes: []
+      modal: {
+        show: false
+      }
     }
+  },
+
+  computed: {
+    configuredTypes: function() {
+      return this.$store.getters.getConfiguredTypes;
+    },
+    types: function() {
+      return this.$store.getters.getTypes;
+    }
+  },
+
+  components: {
+    'configured-extra-form-type': configuredExtraFormType
   },
 
   mixins: [httpMixin, fontAwesomeIconMixin, fieldsMixins],
@@ -51,13 +61,33 @@ var extraFormTypes = {
   methods: {
 
     /**
+     * Open the modal to delete a configured field
+     */
+    openDeleteModal: function() {
+      this.modal.show = true;
+    },
+
+    /**
+     * Close the modal to delete a configured field
+     */
+    closeDeleteModal: function() {
+      this.modal = {
+        show: false,
+        type: 'delete',
+        content:
+          '<div>Type: <strong>' + this.field.extra_form_type + '</strong></div>' +
+          '<div>Name: <strong>' + this.field.name + '</strong></div>'
+      }
+    },
+
+    /**
      * Create a new field
      */
     createField: function(type) {
       var field = {
         'name': 'field_' + type.name + '_' + generateUniqueId(),
         'icon': type.icon,
-        'extra_form_type': type.name,
+        'extra_form_type': type.form_type,
         'options': {},
         'constraints': []
       };
@@ -66,15 +96,48 @@ var extraFormTypes = {
     },
 
     /**
+     * Delete a configured type
+     */
+    deleteConfiguredType: function(type) {
+      this
+        .$http.delete(this.$store.getters.deleteConfiguredExtraForTypesApiUrl(type.name))
+        .then(
+          function () {
+            // delete the type from the configured types
+            for (var i = 0, len = this.configuredTypes.length; i < len; i++) {
+              if (this.configuredTypes[i].name === type.name) {
+                this.$store.commit('removeConfiguredType', i);
+
+                return; // avoid too keep looping over a sliced array
+              }
+            }
+          },
+          function (response) {
+
+          }
+        )
+      ;
+    },
+
+    /**
      * Create a new configured field
      */
     createConfiguredField: function(type) {
+
+      var options = {};
+      for (var optionName in type.extra_form_options) {
+        if (type.extra_form_options.hasOwnProperty(optionName)) {
+          if (typeof (type.extra_form_options[optionName]['options']['data']) !== "undefined") {
+            options[optionName] = type.extra_form_options[optionName]['options']['data'];
+          }
+        }
+      }
 
       var field = {
         'name': 'field_' + type.name + '_' + generateUniqueId(),
         'icon': type.icon,
         'extra_form_type': type.form_type,
-        'options':  type.extra_form_options,
+        'options':  options,
         'constraints': type.extra_form_constraints
       };
 
@@ -95,9 +158,11 @@ var extraFormTypes = {
       ;
 
       this.handleGetRequest(url, function (json) {
-        self.types = json.filter(function (element) {
+        var types = json.filter(function (element) {
           return element.abstract === false;
         });
+
+        self.$store.commit('setTypes', types);
       });
     },
 
@@ -114,9 +179,13 @@ var extraFormTypes = {
           if (typeof configuredTypes[i].configuration === 'string') {
             configuredTypes[i].configuration = JSON.parse(configuredTypes[i].configuration);
           }
+          // Jms serialization issue: https://github.com/schmittjoh/JMSSerializerBundle/issues/271
+          if (configuredTypes[i].extra_form_options.length < 1) {
+            configuredTypes[i].extra_form_options = {}; // when the value is []
+          }
         }
 
-        self.configuredTypes = configuredTypes;
+        self.$store.commit('setConfiguredTypes', configuredTypes);
       });
     }
 

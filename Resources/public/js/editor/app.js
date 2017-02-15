@@ -18,7 +18,9 @@ function triggerEditor(element, formProperties, configuration) {
     state: {
       configuration: configuration,
       formProperties: formProperties,
-      api_cache: {}
+      configuredTypes: [],
+      types: [],
+      apiCache: {}
     },
 
     getters: {
@@ -27,6 +29,19 @@ function triggerEditor(element, formProperties, configuration) {
       },
       extraFormTypesApiUrl: function(state) {
         return state.configuration.api_url.get_extra_form_types;
+      },
+      postConfiguredExtraFormTypesApiUrl: function(state) {
+        return state.configuration.api_url.post_configured_extra_form_types;
+      },
+      putConfiguredExtraForTypesApiUrl: function(state) {
+        return function(name) {
+          return state.configuration.api_url.put_configured_extra_form_types.replace('XNAME', name);
+        }
+      },
+      deleteConfiguredExtraForTypesApiUrl: function(state) {
+        return function(name) {
+          return state.configuration.api_url.delete_configured_extra_form_types.replace('XNAME', name);
+        }
       },
       extraFormTypeOptionsApiUrl: function(state) {
         return function(type) {
@@ -38,14 +53,32 @@ function triggerEditor(element, formProperties, configuration) {
       },
       getCachedResource: function(state) {
         return function(url) {
-          return state.api_cache[url];
+          return state.apiCache[url];
         }
+      },
+      getConfiguredTypes: function(state) {
+        return state.configuredTypes;
+      },
+      getTypes: function(state) {
+        return state.types;
       }
     },
 
     mutations: {
       cache: function(state, payload) {
-        state.api_cache[payload.api_url] = payload.api_response;
+        state.apiCache[payload.api_url] = payload.api_response;
+      },
+      setConfiguredTypes: function(state, types) {
+        state.configuredTypes = types;
+      },
+      addConfiguredType: function(state, type) {
+        state.configuredTypes.push(type);
+      },
+      removeConfiguredType: function(state, index) {
+        state.configuredTypes.splice(index, 1);
+      },
+      setTypes: function(state, types) {
+        state.types = types;
       }
     }
 
