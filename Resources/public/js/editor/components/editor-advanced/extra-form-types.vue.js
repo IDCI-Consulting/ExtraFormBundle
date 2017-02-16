@@ -13,16 +13,20 @@ var extraFormTypes = {
               '</ul>' +
               '<div class="tab-content">' +
                   '<div role="tabpanel" class="tab-pane in active" id="basic-types">' +
-                      '<button class="extra-btn" @click="createField(type)" :class="type.name" type="button" v-for="type in types">' +
-                          '<i :class="getFontAwsomeIconClass(type.icon)" aria-hidden="true"></i>{{ type.name }}' +
-                      '</button>' +
+                      '<basic-extra-form-type ' +
+                          '@created="createField" ' +
+                          ':type="basicType" ' +
+                          'v-for="basicType in basicTypes"' +
+                      '>' +
+                      '</basic-extra-form-type>' +
                   '</div>' +
                   '<div role="tabpanel" class="tab-pane" id="configured-types">' +
                       '<configured-extra-form-type ' +
                           '@delete="deleteConfiguredType" ' +
                           '@created="createConfiguredField" ' +
                           ':type="configuredType" ' +
-                          'v-for="configuredType in configuredTypes"> ' +
+                          'v-for="configuredType in configuredTypes"' +
+                      '> ' +
                       '</configured-extra-form-type>' +
                   '</div>' +
               '</div>' +
@@ -42,13 +46,14 @@ var extraFormTypes = {
     configuredTypes: function() {
       return this.$store.getters.getConfiguredTypes;
     },
-    types: function() {
+    basicTypes: function() {
       return this.$store.getters.getTypes;
     }
   },
 
   components: {
-    'configured-extra-form-type': configuredExtraFormType
+    'configured-extra-form-type': configuredExtraFormType,
+    'basic-extra-form-type': basicExtraFormType
   },
 
   mixins: [httpMixin, fontAwesomeIconMixin, fieldsMixins],
@@ -59,26 +64,6 @@ var extraFormTypes = {
   },
 
   methods: {
-
-    /**
-     * Open the modal to delete a configured field
-     */
-    openDeleteModal: function() {
-      this.modal.show = true;
-    },
-
-    /**
-     * Close the modal to delete a configured field
-     */
-    closeDeleteModal: function() {
-      this.modal = {
-        show: false,
-        type: 'delete',
-        content:
-          '<div>Type: <strong>' + this.field.extra_form_type + '</strong></div>' +
-          '<div>Name: <strong>' + this.field.name + '</strong></div>'
-      }
-    },
 
     /**
      * Create a new field
@@ -112,9 +97,7 @@ var extraFormTypes = {
               }
             }
           },
-          function (response) {
-
-          }
+          function (response) {} // todo handle errors
         )
       ;
     },
