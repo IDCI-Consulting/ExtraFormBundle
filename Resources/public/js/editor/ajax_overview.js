@@ -9,11 +9,17 @@ var getOverview = function (callback) {
   });
 
   request.done(function (content) {
-    return callback(content);
+    return callback({
+      success: true,
+      data: content
+    });
   });
 
-  request.fail(function (xhr, textStatus) {
-    console.log("Request failed: " + textStatus);
+  request.fail(function (xhr, textStatus, errorThrown) {
+    return callback({
+      success: false,
+      data: xhr
+    });
   });
 };
 
@@ -22,10 +28,11 @@ $(window).on('load', function() {
   $(document).on('click', 'button.trigger-overview-modal', function() {
     setTimeout(function(){
       getOverview(function(content) {
-        try {
-          $('#modal_overview .modal-body div').replaceWith(content);
-        } catch(error) {
-          $('#modal_overview .modal-body div').replaceWith('<div>'+ error +'</div>');
+        if (content.success) {
+          $('#modal_overview .modal-body div').replaceWith(content.data);
+        } else {
+          console.log(content.data);
+          $('#modal_overview .modal-body div').replaceWith('<div>'+ content.data.responseText +'</div>');
         }
       })
     }, 800);

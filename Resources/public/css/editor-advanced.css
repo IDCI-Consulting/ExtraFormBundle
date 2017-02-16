@@ -1,5 +1,10 @@
 #modal_overview {
-    z-index: 99999;
+    z-index: 9999;
+}
+
+#modal_overview .modal-content {
+    overflow: auto;
+    max-height: 93vh;
 }
 
 .editor-advanced > div {
