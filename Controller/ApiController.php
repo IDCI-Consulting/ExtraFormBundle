@@ -290,7 +290,12 @@ class ApiController extends FOSRestController
         $em->persist($configuredType);
         $em->flush();
 
-        return new Response(null, Response::HTTP_NO_CONTENT);
+        $view = View::create()->setFormat('json');
+        $type = $this->getDoctrine()->getManager()->getRepository('IDCIExtraFormBundle:ConfiguredType')->findOneByName($name);
+        $view->setData($type);
+        $view->setStatusCode(Response::HTTP_OK);
+
+        return $this->handleView($view);
     }
 
     /**
