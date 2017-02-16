@@ -1,15 +1,13 @@
-ExtraFormBuilder
-================
+Usage
+=====
 
-ExtraFormBuilder is the main service that you will use in order to generate
-your forms.
-
-You can use it in two different way.
-
+This bundle provide an extra form builder to generate forms. You can use it in two different way.
 
 ## As service
 
-To use the `idci_extra_form.builder` as service :
+The `idci_extra_form.builder` service is the main service that you will use in order to generate your forms.
+
+To use it:
 ```php
 $builder = $this
     ->get('idci_extra_form.builder')
@@ -53,8 +51,7 @@ Finally you could display it in your twig :
 </form>
 ```
 
-You could use a [ConfigurationFetcher](configuration_fetcher.md) instead of declare
-all the configuration in the first argument of the build method as shown after :
+Instead of injecting a configuration array in the `build()` method, you may use a Configuration fetcher as shown after :
 ```php
 $form = $this
     ->get('idci_extra_form.builder')
@@ -62,7 +59,7 @@ $form = $this
     ->getForm()
 ;
 ```
-
+See the [ConfigurationFetcher](configuration_fetcher.md) documentation to learn how to create a configuration.
 
 ## As Symfony2 a FormType
 

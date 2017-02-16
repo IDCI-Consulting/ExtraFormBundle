@@ -1,8 +1,15 @@
 ExtraFormBundle
 ===============
 
-Symfony2 bundle that expand existing FormType feature to allow a dynamic form generation
+ExtraFormBundle is a Symfony2 bundle that expand existing FormType features to allow dynamic forms generation.
 
+This bundle provide:
+* A builder to generate forms from a configuration array. This allow you to configure your forms in any format convertible in an array (yaml, json, etc) and dynamically generate your forms.
+* A set of extra types (iban, captcha..) ready to use.
+* An api that exposes all symfony form types as 'extra form types'
+* An api that exposes all symfony validation constraints as 'extra form constraints'
+
+For a quick overview on what this bundle offer, you can [test the editor](http://extra-form.labs.idci-fr).
 
 Installation
 ------------
@@ -65,15 +72,18 @@ extra_form:
 Documentation
 -------------
 
-* [Introduction](Resources/doc/introduction.md)
-* [Architecture](Resources/doc/architecture.md)
-* [ExtraFormBuilder](Resources/doc/extra_form_builder.md)
-* [ExtraFormBuilderType](Resources/doc/extra_form_builder_type.md)
-* [ExtraFormType](Resources/doc/extra_form_type.md)
-* [ExtraFormConstraint](Resources/doc/extra_form_constraint.md)
-* [ConfigurationFetcher](Resources/doc/configuration_fetcher.md)
+* [Usage](Resources/doc/usage.md)
+* [Extra form types](Resources/doc/extra_form_type.md)
+* [Extra form constraints](Resources/doc/extra_form_constraint.md)
 * [Configuration reference](Resources/doc/configuration_reference.md)
 
+Going further
+-------------
+
+* [Api](Resources/doc/editor.md)
+* [Editor](Resources/doc/editor.md)
+* [ExtraFormBuilderType](Resources/doc/extra_form_builder_type.md)
+* [ConfigurationFetcher](Resources/doc/configuration_fetcher.md)
 
 Tests
 -----
