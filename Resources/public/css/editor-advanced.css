@@ -43,15 +43,6 @@
     color: #FFF;
 }
 
-#configured-types button {
-    cursor: default;
-}
-
-#configured-types button span,
-#configured-types button i {
-    cursor: pointer;
-}
-
 /** EXTRA FORM FIELDS **/
 
 .editor-advanced .extra-form-fields .field {

@@ -2,10 +2,10 @@ var configuredExtraFormType = {
 
   template:
       '<div>' +
-          '<button class="extra-btn" type="button" :class="type.name">' +
+          '<button @click="createConfiguredField(type)" class="extra-btn" type="button" :class="type.name">' +
               '<i :class="getFontAwsomeIconClass(type.icon)" aria-hidden="true"></i>' +
-              '<span @click="createConfiguredField(type)">{{ type.name }}</span>' +
-              '<i v-if="configuredFieldEditionAllowed" class="fa fa-trash delete" @click="openDeleteModal"></i>' +
+              '<span>{{ type.name }}</span>' +
+              '<i v-if="configuredFieldEditionAllowed" class="fa fa-trash delete" @click.stop="openDeleteModal"></i>' +
           '</button>' +
           '<modal v-if="modal.show">' +
               '<h3 slot="header">Delete this configured field' +
