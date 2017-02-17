@@ -3,11 +3,11 @@ ExtraFormType
 
 ExtraFormType are services that add extra information about existing symfony FormType.
 You can see an extra form type as an exhaustive description of an existing form type (information about the options, form type class, etc.).
-All informations about extra form types will be used by the extra form builder for generation.
+All information about extra form types will be used by the extra form builder for generation.
 
 ## Existing types
 
-Have a look at the [default ExtraFormTypes configuration](../config/types.yml). All these types are already configured and available
+Have a look at the [default ExtraFormTypes configuration](../config/types.yml). All these types are already configured and available.
 
 ## Adding a new type
 

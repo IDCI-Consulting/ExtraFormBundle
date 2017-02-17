@@ -43,7 +43,7 @@ class ExtraFormEditorType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'required'                      => false,
-                'available_modes'               => array('simple', 'advanced'),
+                'available_modes'               => array('advanced'),
                 'allow_configured_type_edition' => false,
             ))
             ->setAllowedTypes(array(
