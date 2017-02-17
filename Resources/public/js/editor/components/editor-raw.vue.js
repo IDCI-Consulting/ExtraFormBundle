@@ -80,7 +80,19 @@ Vue.component('editor-raw', {
         output[name] = {};
         output[name]['extra_form_type'] = field.extra_form_type;
         output[name]['constraints'] = field.constraints;
-        output[name]['options'] = field.options;
+
+        // Allow to set a json value in any form option
+        var options = field.options;
+        for (var option in options) {
+          if (options.hasOwnProperty(option)) {
+            try {
+              options[option] = JSON.parse(options[option]);
+            } catch(e) {}
+          }
+        }
+
+        output[name]['options'] = options;
+
         if (typeof field.options.configuration !== 'undefined') {
           if (field.options.configuration.length === 0) {
             // Hide the configuration in the output key if it's empty
