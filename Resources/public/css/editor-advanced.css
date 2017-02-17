@@ -226,10 +226,19 @@
 /** EXTRA FORM FIELDS CONFIGURATION : OPTIONS **/
 
 .editor-advanced .field-options div > label,
-.editor-advanced .field-constraint-options div > label{
-    min-width: 130px;
+.editor-advanced .field-constraint-options div > label {
+    width: 35%;
     padding-bottom: 3px;
     display: inline-block;
+}
+
+.editor-advanced .field-options div > .form-control {
+    width: 65%;
+    display: inline-block;
+}
+
+.editor-advanced .field-options div > input[type="checkbox"].form-control {
+    width: inherit;
 }
 
 .editor-advanced .field-options > div > button.extra-btn {

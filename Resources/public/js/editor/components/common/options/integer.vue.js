@@ -1,9 +1,9 @@
 var integerOption = {
 
   template:
-      '<div>' +
+      '<div class="form-group">' +
           '<label :for="name">{{ name }}</label>' +
-          '<input :required="option.options.required" :value="data" @input="updateOption($event.target.value)" type="number" :name="name">' +
+          '<input class="form-control" :required="option.options.required" :value="data" @input="updateOption($event.target.value)" type="number" :name="name">' +
       '</div>'
   ,
 
