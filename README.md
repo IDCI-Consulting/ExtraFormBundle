@@ -9,7 +9,7 @@ This bundle provide:
 * An api that exposes all symfony form types as 'extra form types'
 * An api that exposes all symfony validation constraints as 'extra form constraints'
 
-For a quick overview on what this bundle offer, you can [test the editor](http://extra-form.labs.idci-fr).
+For a quick overview on what this bundle offer, you can [test the form editor](http://extra-form.labs.idci.fr/extra-form/editor).
 
 Installation
 ------------
@@ -61,12 +61,24 @@ imports:
     - { resource: @IDCIExtraFormBundle/Resources/config/config.yml }
 ```
 
-Finally import the routes if you need the api or the editor:
+If you need the api or the editor:
+
+Import the routes:
 ```yml
 # app/config/routing.yml
 extra_form:
     resource: "@IDCIExtraFormBundle/Controller/"
     type:     annotation
+```
+
+Install the assets:
+```sh
+php app/console assets:install --symlink
+```
+
+If you want to use already configured types in the editor:
+```sh
+doctrine:schema:update --force
 ```
 
 Documentation
@@ -75,7 +87,6 @@ Documentation
 * [Usage](Resources/doc/usage.md)
 * [Extra form types](Resources/doc/extra_form_type.md)
 * [Extra form constraints](Resources/doc/extra_form_constraint.md)
-* [Configuration reference](Resources/doc/configuration_reference.md)
 
 Going further
 -------------
@@ -84,6 +95,7 @@ Going further
 * [Editor](Resources/doc/editor.md)
 * [ExtraFormBuilderType](Resources/doc/extra_form_builder_type.md)
 * [ConfigurationFetcher](Resources/doc/configuration_fetcher.md)
+* [Architecture](Resources/doc/architecture.md)
 
 Tests
 -----
