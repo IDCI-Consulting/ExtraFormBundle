@@ -48,6 +48,8 @@ class TypeCompilerPass implements CompilerPassInterface
                 );
             }
 
+            $configuration['name'] = $name;
+
             $serviceDefinition->isAbstract($configuration['abstract']);
             $serviceDefinition->replaceArgument(0, $configuration);
 

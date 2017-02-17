@@ -8,13 +8,46 @@
 namespace IDCI\Bundle\ExtraFormBundle\Type;
 
 
-class ExtraFormType implements ExtraFormTypeInterface 
+class ExtraFormType implements ExtraFormTypeInterface
 {
+    /**
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * @var string
+     */
     protected $formType;
+
+    /**
+     * @var ExtraFormType
+     */
     protected $parent;
+
+    /**
+     * @var string
+     */
     protected $description;
+
+    /**
+     * @var string
+     */
+    protected $icon;
+
+    /**
+     * @var boolean
+     */
     protected $abstract;
+
+    /**
+     * @var array
+     */
     protected $extraFormOptions;
+
+    /**
+     * @var array<ExtraFormConstraint>
+     */
     protected $extraFormConstraints;
 
     /**
@@ -24,12 +57,22 @@ class ExtraFormType implements ExtraFormTypeInterface
      */
     public function __construct(array $configuration)
     {
+        $this->name                 = $configuration['name'];
         $this->formType             = $configuration['form_type'];
         $this->parent               = $configuration['parent'];
         $this->description          = $configuration['description'];
+        $this->icon                 = $configuration['icon'];
         $this->abstract             = $configuration['abstract'];
         $this->extraFormOptions     = $configuration['extra_form_options'];
         $this->extraFormConstraints = $configuration['extra_form_constraints'];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -54,6 +97,18 @@ class ExtraFormType implements ExtraFormTypeInterface
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getIcon()
+    {
+        if (null === $this->icon && null !== $this->getParent()) {
+            return $this->getParent()->getIcon();
+        }
+
+        return $this->icon;
     }
 
     /**

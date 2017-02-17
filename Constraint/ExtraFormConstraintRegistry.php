@@ -55,10 +55,6 @@ class ExtraFormConstraintRegistry implements ExtraFormConstraintRegistryInterfac
      */
     public function hasConstraint($alias)
     {
-        if (!isset($this->constraints[$alias])) {
-            return true;
-        }
-
-        return false;
+        return isset($this->constraints[$alias]);
     }
 }

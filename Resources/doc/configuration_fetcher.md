@@ -38,7 +38,6 @@ idci_extra_form:
                         expanded: true
                 address:
                     extra_form_type: textarea
-            options: ~
 ```
 In this example, "identity_form" is the ConfigurationFetcher identifier.
 

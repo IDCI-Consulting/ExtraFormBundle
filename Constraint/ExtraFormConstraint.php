@@ -10,8 +10,19 @@ namespace IDCI\Bundle\ExtraFormBundle\Constraint;
 
 class ExtraFormConstraint implements ExtraFormConstraintInterface
 {
+    /**
+     * @var string
+     */
     protected $className;
+
+    /**
+     * @var string
+     */
     protected $description;
+
+    /**
+     * @var array
+     */
     protected $extraFormOptions;
 
     /**

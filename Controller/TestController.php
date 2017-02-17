@@ -4,6 +4,8 @@ namespace IDCI\Bundle\ExtraFormBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -157,19 +159,50 @@ class TestController extends Controller
      * Test Editor.
      *
      * @Route("/editor", name="idci_extra_form_editor")
-     * @Method({"GET"})
-     * @Template()
+     * @Method({"GET", "POST"})
      */
     public function editorAction(Request $request)
     {
         $form = $this
             ->createFormBuilder()
-            ->add('editor', 'extra_form_editor')
+            ->add('editor', 'extra_form_editor', array(
+                'available_modes'               => array('advanced'),
+                'allow_configured_type_edition' => true,
+            ))
+            ->add('send', 'submit')
             ->getForm()
         ;
 
-        return array(
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            var_dump($form->getData()); die;
+        }
+
+        return $this->render('IDCIExtraFormBundle:Test:editor.html.twig', array(
             'form' => $form->createView()
-        );
+        ));
+    }
+
+    /**
+     * Overview action
+     *
+     * @Route("/overview", name="idci_extra_form_editor_overview")
+     * @Method({"POST"})
+     */
+    public function overviewAction(Request $request)
+    {
+        $configuration = json_decode($request->request->get('configuration'), true);
+
+        $builder = $this
+            ->get('idci_extra_form.builder')
+            ->build($configuration)
+        ;
+
+        $form = $builder->getForm();
+
+        return $this->render('IDCIExtraFormBundle:Test:overview.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 }

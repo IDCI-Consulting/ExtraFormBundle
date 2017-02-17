@@ -11,6 +11,13 @@ namespace IDCI\Bundle\ExtraFormBundle\Type;
 interface ExtraFormTypeInterface
 {
     /**
+     * Get name.
+     *
+     * @return string
+     */
+    public function getName();
+
+    /**
      * Get form type.
      *
      * @return string
@@ -30,6 +37,13 @@ interface ExtraFormTypeInterface
      * @return string
      */
     public function getDescription();
+
+    /**
+     * Returns the icon.
+     *
+     * @return string
+     */
+    public function getIcon();
 
     /**
      * Is abstract.

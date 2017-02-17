@@ -1,0 +1,84 @@
+/**********/
+/* EDITOR */
+/**********/
+
+.modal-footer button {
+    float: left;
+    margin-right: 15px;
+}
+
+.handle:before {
+    float: right;
+    content: "\E2DC";
+    cursor: move;
+}
+
+/*******************/
+/* BOOTSTRAP RESET */
+/*******************/
+
+.checkbox {
+    margin: 0;
+}
+
+label {
+    font-weight: normal;
+}
+
+select, input, textarea, button, optgroup {
+    color: #000000;
+}
+
+/********************/
+/* FULLSCREEN MODAL */
+/********************/
+
+/* See http://www.minimit.com/demos/bootstrap-3-transparent-and-fullscreen-modals */
+
+.modal-fullscreen {
+    background: #FFFFFF;
+}
+
+.modal-fullscreen .modal-content {
+    background: transparent;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.modal-fullscreen .modal-dialog {
+    margin: 0;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    height: 100%;
+}
+
+.modal-fullscreen .modal-footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+/*
+ * The following styles are auto-applied to elements with
+ * transition=.vue-modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the.vue-modal transition by editing
+ * these styles.
+ */
+
+.modal-enter {
+    opacity: 0;
+}
+
+.modal-leave-active {
+    opacity: 0;
+}
+
+.modal-enter .vue-modal-container,
+.modal-leave-active .vue-modal-container {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}

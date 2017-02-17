@@ -1,0 +1,305 @@
+#modal_overview {
+    z-index: 9999;
+}
+
+#modal_overview .modal-content {
+    overflow: auto;
+    max-height: 93vh;
+}
+
+.editor-advanced > div {
+    max-height: 80vh;
+    min-height: 60vh;
+    overflow: auto;
+}
+
+.editor-advanced i.delete {
+    float: right;
+    position: relative;
+    top: 3px;
+    padding-left: 5px;
+}
+
+.editor-advanced button.extra-btn {
+    border: 1px solid #514D61;
+    background-color: white;
+    color: #514D61;
+    display: block;
+    min-width: 200px;
+    margin: 10px auto;
+}
+
+.editor-advanced button.extra-btn .fa-icon {
+    float: left;
+    position: relative;
+    top: 3px;
+    padding-right: 5px;
+    min-width: 20px;
+}
+
+.editor-advanced button.extra-btn:hover {
+    background: #514D61;
+    border-color: #514D61;
+    color: #FFF;
+}
+
+#configured-types button {
+    cursor: default;
+}
+
+#configured-types button span,
+#configured-types button i {
+    cursor: pointer;
+}
+
+/** EXTRA FORM FIELDS **/
+
+.editor-advanced .extra-form-fields .field {
+    border: 1px solid #514D61;
+    background-color: white;
+    margin: 10px;
+    color: #514D61;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.editor-advanced .extra-form-fields .field.active {
+    color: #FFFFFF;
+    background-color: #514D61;
+}
+
+.editor-advanced .extra-form-fields .field button.close {
+    visibility: hidden;
+    color: #514D61;
+    opacity: 1;
+}
+
+.editor-advanced .extra-form-fields .field.active button.close {
+    color: #FFFFFF;
+}
+
+.editor-advanced .extra-form-fields .field button.close:hover {
+    opacity: 0.7;
+}
+
+.editor-advanced .extra-form-fields .field strong {
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.editor-advanced .extra-form-fields .field .fa-icon,
+.editor-advanced .vue-modal-container .fa-icon {
+    float: left;
+    font-size: 25px;
+    margin: 10px 10px 5px 5px;
+}
+
+.editor-advanced .extra-form-fields .field .fa-arrows-alt,
+.editor-advanced .extra-form-fields .field .fa-floppy-o {
+    float: right;
+    line-height: 1;
+    font-size: 20px;
+    position: relative;
+    right: 15px;
+    top: 10px;
+}
+
+.editor-advanced .extra-form-fields .field .fa-floppy-o {
+    right: 30px;
+}
+
+.editor-advanced .extra-form-fields .field .fa-floppy-o:hover {
+    color: #A0809D;
+}
+
+.editor-advanced .extra-form-fields .field .fa-arrows-alt:hover {
+    cursor: move;
+}
+
+.editor-advanced .extra-form-fields .field:hover button.close {
+    visibility: visible;
+}
+
+/** VUE MODAL COMPONENT **/
+
+.editor-advanced .extra-form-fields .field .vue-modal-mask,
+.editor-advanced .extra-form-types .vue-modal-mask {
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    background-color: rgba(0, 0, 0, .5);
+    transition: opacity .3s ease;
+}
+
+.editor-advanced .extra-form-fields .field .vue-modal-mask .vue-modal-container,
+.editor-advanced .extra-form-types .vue-modal-mask .vue-modal-container {
+    width: 50%;
+    margin: 20% auto 0 auto;
+    padding: 20px 30px;
+    background-color: #fff;
+    border-radius: 2px;
+    border: 5px solid #514D61;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+    color: #000000;
+    transition: all .3s ease;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.editor-advanced .extra-form-fields .field .vue-modal-mask  button.close,
+.editor-advanced .extra-form-types .vue-modal-mask  button.close {
+    color: #000000;
+    visibility: inherit;
+}
+
+.editor-advanced .extra-form-fields .field .vue-modal-mask .vue-modal-header h3,
+.editor-advanced .extra-form-types .vue-modal-mask .vue-modal-header h3
+{
+    margin-top: 0;
+    color: #514D61;
+}
+
+.editor-advanced .extra-form-fields .field .vue-modal-mask .vue-modal-body,
+.editor-advanced .extra-form-types .vue-modal-mask .vue-modal-body {
+    margin: 20px 0;
+}
+
+.editor-advanced .extra-form-fields .field .vue-modal-mask .vue-modal-default-button,
+.editor-advanced .extra-form-types .vue-modal-mask .vue-modal-default-button {
+    float: right;
+}
+
+/** EXTRA FORM FIELDS CONFIGURATION **/
+
+.editor-advanced .field.active .field-name-input {
+    color: #FFFFFF;
+}
+
+.editor-advanced .field .field-name-input {
+    color: #514D61;
+    width: 200px;
+    border: none;
+    padding-left: 5px;
+    background-color: transparent;
+}
+
+.editor-advanced .nav-pills {
+    margin: 10px 0;
+}
+
+.editor-advanced ul.nav-pills > li > a {
+    color: #514D61;
+    border-radius: 0;
+}
+
+.editor-advanced ul.nav-pills > li a:hover,
+.editor-advanced ul.nav-pills > li a:focus,
+.editor-advanced ul li.active a {
+    background-color: #514D61;
+    color: #FFFFFF;
+}
+
+.editor-advanced .extra-form-types .nav-pills {
+    text-align: center;
+}
+
+.editor-advanced .extra-form-types ul.nav-pills > li {
+    float: none;
+    display: inline-block;
+}
+
+.editor-advanced .extra-form-fields-configuration > .inactive {
+    display: none;
+}
+
+.editor-advanced .extra-form-fields-configuration > .active {
+    display: block;
+}
+
+/* Do not display the label (used in the editor-simple component) */
+.editor-advanced .tab-content > .tab-pane > div > label {
+    display: none;
+}
+
+/** EXTRA FORM FIELDS CONFIGURATION : OPTIONS **/
+
+.editor-advanced .field-options div > label,
+.editor-advanced .field-constraint-options div > label{
+    min-width: 130px;
+    padding-bottom: 3px;
+    display: inline-block;
+}
+
+.editor-advanced .field-options > div > button.extra-btn {
+    margin: 0;
+    padding: 5px;
+}
+
+/** EXTRA FORM FIELDS CONFIGURATION : CONSTRAINTS **/
+
+.editor-advanced .multiselect {
+    width: 80%;
+    display: inline-block;
+}
+.editor-advanced .multiselect__option--highlight,
+.editor-advanced .multiselect__option--selected.multiselect__option--highlight,
+.editor-advanced .multiselect__option--highlight:after {
+    background: #514D61;
+}
+
+.editor-advanced .new-field-constraint button {
+    min-width: inherit;
+    display: inline-block;
+    margin: 0 10px;
+    padding: 8px;
+}
+
+.editor-advanced .field-constraint {
+    border: 1px solid #514D61;
+    background-color: #514D61;
+    margin: 10px 0;
+    color: #FFFFFF;
+    padding: 10px;
+}
+
+.editor-advanced .field-constraint button.close {
+    visibility: hidden;
+    color: #FFFFFF;
+    opacity: 1;
+}
+
+.editor-advanced .field-constraint:hover button.close {
+    visibility: visible;
+}
+
+.editor-advanced .field-constraint-options a {
+    width: 100%;
+    margin: 10px 0;
+    display: block;
+    color: #FFFFFF;
+}
+
+.editor-advanced .field-constraint-options a {
+    text-decoration: none;
+}
+
+.editor-advanced .field-constraint-options a > span:after {
+    float: right;
+    content: " +";
+    display: inline-block;
+    background-color: #FFFFFF;
+    color: #514D61;
+    border-radius: 20px;
+    width: 20px;
+    padding-left: 6px;
+}
+
+.editor-advanced .field-constraint-options a[aria-expanded="true"] > span:after {
+    float: right;
+    content: "-";
+    padding-left: 8px;
+}
+
+

@@ -1,0 +1,20 @@
+IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType:
+
+    exclusion_policy: ALL
+
+    properties:
+        className:
+            expose: true
+            serialized_name: form_type
+        description:
+            expose: true
+        parent:
+            expose: true
+        abstract:
+            expose: true
+        extraFormOptions:
+            expose: true
+            serialized_name: extra_form_options
+        extraFormConstraints:
+            expose: true
+            serialized_name: extra_form_constraints

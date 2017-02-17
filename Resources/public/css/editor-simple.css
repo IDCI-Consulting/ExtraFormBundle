@@ -1,0 +1,58 @@
+
+.editor-simple > div.new-field {
+    border: 1px solid rgb(169, 169, 169);
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.editor-simple .field {
+    padding: 10px;
+    border: 1px dashed black;
+}
+
+.editor-simple .field-options > div,
+.editor-simple .field-constraint-options > div {
+    display: none;
+}
+
+.editor-simple .field-options.show > div,
+.editor-simple .field-constraint-options.show > div {
+    display: block;
+}
+
+.editor-simple .field-options > label:after,
+.editor-simple .field-constraint-options > label:after {
+    content: "+";
+}
+
+.editor-simple .field-options.show > label:after,
+.editor-simple .field-constraint-options.show > label:after {
+    content: "-";
+}
+
+
+.editor-simple .field-options,
+.editor-simple .field-constraints {
+    border-top: 1px solid rgb(169, 169, 169);
+    border-bottom: 1px solid rgb(169, 169, 169);
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.editor-simple .field-options > label,
+.editor-simple .field-constraint-options > label {
+    padding-bottom: 10px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.editor-simple .field-options > div > label {
+    min-width: 120px;
+    padding-bottom: 3px;
+    display: inline-block;
+}
+
+.editor-simple .field-options > div,
+.editor-simple .field-constraints > div {
+    padding-left: 20px;
+}
