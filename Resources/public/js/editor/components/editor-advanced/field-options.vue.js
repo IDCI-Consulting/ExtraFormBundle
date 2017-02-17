@@ -19,7 +19,7 @@ var editorAdvancedFieldOptions = {
                               '<editor-advanced :fields="fieldOptions[key]"></editor-advanced>' +
                           '</div>' +
                           '<div class="modal-footer">' +
-                              '<button class="close-modal">Go back to the parent editor</button>' +
+                              '<button class="btn btn-default close-modal">Go back to the parent editor <i class="fa fa-times"></i></button>' +
                               '<em>All your changes are automatically saved</em>' +
                           '</div>' +
                       '</div>' +

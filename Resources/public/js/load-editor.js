@@ -27,7 +27,7 @@ $(window).on('load', function() {
             '<br>' +
           '</div>' +
           '<div class="modal-footer">' +
-            '<button class="btn btn-default close-modal">Close the editor</button>' +
+            '<button class="btn btn-default close-modal">Close the editor <i class="fa fa-times"></i></button>' +
           '</div>'+
         '</div>' +
       '</div>'
@@ -51,7 +51,7 @@ $(window).on('load', function() {
                 '<editor-simple :fields="fields"></editor-simple>' +
               '</div>' +
               '<div class="modal-footer">' +
-                '<button class="btn btn-default close-modal">Close the editor</button>' +
+                '<button class="btn btn-default close-modal">Close the editor <i class="fa fa-times"></i></button>' +
                 '<em>All your changes are automatically saved</em>' +
               '</div>'+
             '</div>' +
@@ -79,8 +79,8 @@ $(window).on('load', function() {
                 '<editor-advanced :fields="fields"></editor-advanced>' +
               '</div>' +
               '<div class="modal-footer">' +
-                '<button class="btn btn-default close-modal">Close the editor</button>' +
-                '<button class="btn btn-primary trigger-overview-modal">Display the overview</button>' +
+                '<button class="btn btn-default close-modal">Close the editor <i class="fa fa-times"></i></button>' +
+                '<button class="btn btn-primary trigger-overview-modal">Display the overview <i class="fa fa-eye"></i></button>' +
                 '<em>All your changes are automatically saved</em>' +
               '</div>' +
             '</div>' +
@@ -100,7 +100,7 @@ $(window).on('load', function() {
                   '<div style="text-align: center;"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i></div>' +
               '</div>' +
               '<div class="modal-footer">' +
-                '<button class="btn btn-default close-modal">Close the overview</button>' +
+                '<button class="btn btn-default close-modal">Close the overview <i class="fa fa-times"></i></button>' +
               '</div>' +
             '</div>' +
           '</div>' +
