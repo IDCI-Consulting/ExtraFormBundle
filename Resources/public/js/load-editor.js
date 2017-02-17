@@ -142,6 +142,18 @@ $(window).on('load', function() {
     $(this).parent().toggleClass('show');
   });
 
+  /********************************************/
+  /* Add some colors on empty required inputs */
+  /********************************************/
+
+  $(document).on('change', 'input[required="required"]', function() {
+    if (!$(this).val()) {
+      $(this).css({ 'border-color': '#c9302c', 'background-color': '#f3d9d9'});
+    } else {
+      $(this).css({ 'border-color': '#cccccc', 'background-color': '#ffffff'});
+    }
+  });
+
   /*****************************/
   /* Display / Hide the modals */
   /*****************************/

@@ -13,6 +13,11 @@
     cursor: move;
 }
 
+input[required="required"] {
+    border-color: #c9302c;
+    background-color: #f3d9d9;
+}
+
 /*******************/
 /* BOOTSTRAP RESET */
 /*******************/
