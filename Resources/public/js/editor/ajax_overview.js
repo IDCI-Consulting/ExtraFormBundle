@@ -8,17 +8,17 @@ var getOverview = function (callback) {
     data: { configuration: raw }
   });
 
-  request.done(function (content) {
+  request.done(function (response) {
     return callback({
       success: true,
-      data: content
+      data: response
     });
   });
 
-  request.fail(function (xhr, textStatus, errorThrown) {
+  request.fail(function (response) {
     return callback({
       success: false,
-      data: xhr
+      data: response
     });
   });
 };
@@ -31,7 +31,6 @@ $(window).on('load', function() {
         if (content.success) {
           $('#modal_overview .modal-body div').replaceWith(content.data);
         } else {
-          console.log(content.data);
           $('#modal_overview .modal-body div').replaceWith('<div>'+ content.data.responseText +'</div>');
         }
       })
