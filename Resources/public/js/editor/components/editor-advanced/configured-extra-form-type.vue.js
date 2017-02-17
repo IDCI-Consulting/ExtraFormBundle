@@ -5,7 +5,7 @@ var configuredExtraFormType = {
           '<button class="extra-btn" type="button" :class="type.name">' +
               '<i :class="getFontAwsomeIconClass(type.icon)" aria-hidden="true"></i>' +
               '<span @click="createConfiguredField(type)">{{ type.name }}</span>' +
-              '<i class="fa fa-trash delete" @click="openDeleteModal"></i>' +
+              '<i v-if="configuredFieldEditionAllowed" class="fa fa-trash delete" @click="openDeleteModal"></i>' +
           '</button>' +
           '<modal v-if="modal.show">' +
               '<h3 slot="header">Delete this configured field' +
@@ -30,6 +30,12 @@ var configuredExtraFormType = {
           '<div>Type: <strong>' + this.type.form_type + '</strong></div>' +
           '<div>Name: <strong>' + this.type.name + '</strong></div>'
       }
+    }
+  },
+
+  computed: {
+    configuredFieldEditionAllowed: function() {
+      return this.$store.getters.configuredFieldEditionAllowed;
     }
   },
 

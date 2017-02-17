@@ -4,7 +4,7 @@ var editorAdvancedField = {
       '<div :class="activeClass" @click="setActiveClass(index)">' +
           '<button @click.prevent="removeField(index)" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>' +
           '<i class="fa fa-arrows-alt"></i>' +
-          '<i title="Save this field as a configured type" @click="openSaveModal" class="fa fa-floppy-o"></i>' +
+          '<i v-if="configuredFieldEditionAllowed" title="Save this field as a configured type" @click="openSaveModal" class="fa fa-floppy-o"></i>' +
           '<strong>{{ field.extra_form_type }}</strong><i :class="getFontAwsomeIconClass(field.icon)" aria-hidden="true"></i><br>' +
           '<span>Name: <input class="field-name-input" type="text" v-model="field.name" pattern="/^([a-z][0-9])+$/" /></span>' +
           '<modal v-if="modal.show">' +
@@ -41,6 +41,9 @@ var editorAdvancedField = {
       var active = this.field.active ? 'active' : 'inactive';
 
       return 'field ' + active;
+    },
+    configuredFieldEditionAllowed: function() {
+      return this.$store.getters.configuredFieldEditionAllowed;
     }
   },
 

@@ -24,6 +24,9 @@ function triggerEditor(element, formProperties, configuration) {
     },
 
     getters: {
+      configuredFieldEditionAllowed: function(state) {
+        return state.configuration.allow_configured_type_edition;
+      },
       configuredExtraFormTypesApiUrl: function(state) {
         return state.configuration.api_url.get_configured_extra_form_types;
       },
