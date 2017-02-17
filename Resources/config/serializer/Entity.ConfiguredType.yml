@@ -19,3 +19,5 @@ IDCI\Bundle\ExtraFormBundle\Entity\ConfiguredType:
             serialized_name: abstract
         getFormType:
             serialized_name: form_type
+        getFormTypeName:
+            serialized_name: form_type_name

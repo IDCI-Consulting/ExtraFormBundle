@@ -196,6 +196,18 @@ class ConfiguredType implements ExtraFormTypeInterface
     /**
      * {@inheritDoc}
      */
+    public function getFormTypeName()
+    {
+        if (null === $this->extraFormType) {
+            return null;
+        }
+
+        return $this->extraFormType->getName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getExtraFormOptions()
     {
         if (null === $this->extraFormType) {
