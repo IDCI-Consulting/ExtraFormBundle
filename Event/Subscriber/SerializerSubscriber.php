@@ -42,7 +42,9 @@ class SerializerSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Method called on pre serialize event
+     *
+     * @param ObjectEvent $event
      */
     public function onPreSerialize(ObjectEvent $event)
     {
