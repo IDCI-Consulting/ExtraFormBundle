@@ -91,7 +91,7 @@ Documentation
 Going further
 -------------
 
-* [Api](Resources/doc/editor.md)
+* [Api](Resources/doc/api.md)
 * [Editor](Resources/doc/editor.md)
 * [ExtraFormBuilderType](Resources/doc/extra_form_builder_type.md)
 * [ConfigurationFetcher](Resources/doc/configuration_fetcher.md)
