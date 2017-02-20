@@ -11,6 +11,8 @@ This bundle provide:
 
 For a quick overview on what this bundle offer, you can [test the form editor](http://extra-form.labs.idci.fr/extra-form/editor).
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/6b163476-64da-450a-8c34-3b1e5225bde2/mini.png)](https://insight.sensiolabs.com/projects/6b163476-64da-450a-8c34-3b1e5225bde2)
+
 Installation
 ------------
 
