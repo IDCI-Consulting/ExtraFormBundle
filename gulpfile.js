@@ -7,7 +7,8 @@ src.styles = [
   'Resources/public/css/editor-advanced.css'
 ];
 src.scripts = [
-  'Resources/public/js/editor/assets/vue-dev.js',
+  //'Resources/public/js/editor/assets/vue-dev.js',
+  'Resources/public/js/editor/assets/vue-prod.js',
   'Resources/public/js/editor/assets/vuex-2.1.2.js',
   'Resources/public/js/editor/assets/sortable.min.js',
   'Resources/public/js/editor/assets/vue-multiselect.min.js',
