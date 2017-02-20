@@ -36,10 +36,7 @@ class TypeCompilerPass implements CompilerPassInterface
             $serviceDefinition = new DefinitionDecorator('idci_extra_form.type');
 
             if (null !== $configuration['parent']) {
-                if (!$this->isExtraFormTypeDefined(
-                    $container,
-                    $configuration['parent']
-                )) {
+                if (!$container->hasDefinition($this->getDefinitionName($configuration['parent']))) {
                     throw new UndefinedExtraFormTypeException($configuration['parent']);
                 }
 
@@ -69,10 +66,7 @@ class TypeCompilerPass implements CompilerPassInterface
         // Check extra_form_options
         foreach ($extraFormOptions as $name => $options) {
             foreach ($options as $optionName => $optionValue) {
-                if (!$this->isExtraFormTypeDefined(
-                    $container,
-                    $optionValue['extra_form_type']
-                )) {
+                if (!$container->hasDefinition($this->getDefinitionName($optionValue['extra_form_type']))) {
                     throw new WrongExtraFormTypeOptionException(
                         $name,
                         $optionName,
@@ -92,17 +86,5 @@ class TypeCompilerPass implements CompilerPassInterface
     protected function getDefinitionName($name)
     {
         return sprintf('idci_extra_form.type.%s', $name);
-    }
-
-    /**
-     * Get definition name
-     *
-     * @param  Container $container
-     * @param  string $name
-     * @return string
-     */
-    protected function isExtraFormTypeDefined(Container $container, $name)
-    {
-        return $container->hasDefinition($this->getDefinitionName($name));
     }
 }

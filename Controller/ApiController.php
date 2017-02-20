@@ -13,11 +13,7 @@ use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
-use FOS\RestBundle\Controller\Annotations\Route;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use JMS\Serializer\SerializerBuilder;
 use FOS\RestBundle\View\View;
-use IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormTypeChoiceType;
 
 /**
  * Api controller.

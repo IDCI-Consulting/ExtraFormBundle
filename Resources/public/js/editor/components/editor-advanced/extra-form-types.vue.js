@@ -97,7 +97,7 @@ var extraFormTypes = {
               }
             }
           },
-          function (response) {} // todo handle errors
+          function (response) {}
         )
       ;
     },

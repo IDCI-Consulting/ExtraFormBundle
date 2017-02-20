@@ -9,7 +9,6 @@ namespace IDCI\Bundle\ExtraFormBundle\Form\Event;
 
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException;
 
@@ -157,7 +156,6 @@ class CollectionEventSubscriber implements EventSubscriberInterface
      */
     public function changeData(FormEvent $event)
     {
-        $form = $event->getForm();
         $data = $event->getData();
 
         if (null === $data) {

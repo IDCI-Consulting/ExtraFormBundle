@@ -16,7 +16,7 @@ class FetchConfigurationException extends \Exception
      * @param array  $fetcherParameters
      * @param string $message
      */
-    public function __construct($fetcherName, array $fetcherParameters, $mesasge = null)
+    public function __construct($fetcherName, array $fetcherParameters, $message = null)
     {
         parent::__construct(sprintf(
             'Failed to fetch the configuration %s with parameters %s%s',

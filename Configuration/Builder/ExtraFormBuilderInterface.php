@@ -8,8 +8,6 @@
 namespace IDCI\Bundle\ExtraFormBundle\Configuration\Builder;
 
 use Symfony\Component\Form\FormBuilderInterface;
-use IDCI\Bundle\ExtraFormBundle\Configurator\ExtraFormConfiguratorInterface;
-use IDCI\Bundle\ExtraFormBundle\Exception\UndefinedExtraFormConfiguratorException;
 
 interface ExtraFormBuilderInterface
 {

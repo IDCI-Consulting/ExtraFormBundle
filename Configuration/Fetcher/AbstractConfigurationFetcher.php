@@ -9,7 +9,6 @@ namespace IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use IDCI\Bundle\ExtraFormBundle\Exception\FetchConfigurationException;
 
 abstract class AbstractConfigurationFetcher implements ConfigurationFetcherInterface
 {

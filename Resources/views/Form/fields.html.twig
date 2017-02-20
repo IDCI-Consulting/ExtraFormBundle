@@ -1,7 +1,6 @@
 {%- block extra_form_collection_widget -%}
     {{- form_widget(form) -}}
     <script type="text/javascript">
-
         function getJquery(callback) {
             if (!window.jQuery) {
                 if (!document.getElementById('idci_jquery')) {
@@ -26,7 +25,7 @@
             } else {
                 callback(window.jQuery);
             }
-        };
+        }
 
         getJquery(function($) {
             var collectionItemPrototype = '{{ form_row(prototype)|e('js') }}';
@@ -38,7 +37,6 @@
 
             var getItemContainer = function(item) {
                 var itemContainer;
-
                 $div.children().each(function() {
                     if ($(this).find(item).length !== 0) {
                         itemContainer = $(this);
@@ -50,41 +48,36 @@
 
             var showItem = function(item) {
                 item.attr('data-display', 'show');
-
                 // Uncheck remove input
                 item
                     .find('.idci_collection_item_remove')
                     .prop('checked', false)
                     .attr('checked', false)
                 ;
-
                 getItemContainer(item).show();
                 countActionable--;
             };
 
             var hideItem = function(item) {
                 item.attr('data-display', 'hide');
-
                 // Check remove input
                 item
                     .find('.idci_collection_item_remove')
                     .prop('checked', true)
                     .attr('checked', true)
                 ;
-
                 getItemContainer(item).hide().insertBefore($addButton);
                 countActionable++;
             };
 
             var hideRemoveCheckbox = function(item) {
                 var $removeCheckbox = item.find('.idci_collection_item_remove');
-
                 $removeCheckbox.attr('style', 'display:none;');
                 getItemContainer(item)
                     .find('label[for='+$removeCheckbox.attr('id')+']')
                     .attr('style', 'display:none;')
                 ;
-            }
+            };
 
             var addRemoveButtons = function() {
                 if (hasRemovedButtons) {
@@ -169,24 +162,19 @@
 {%- endblock extra_form_collection_widget -%}
 
 {%- block extra_form_iban_text_row -%}
-    <div style="display:inline-block">
-        {{- form_widget(form) -}}
-    </div>
+    <div style="display:inline-block">{{- form_widget(form) -}}</div>
 {%- endblock extra_form_iban_text_row -%}
 
 {%- block extra_form_html_row -%}
     {{- form_widget(form) -}}
 {%- endblock extra_form_html_row -%}
+
 {%- block extra_form_html_widget -%}
-    <div{% for attrname, attrvalue in attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
-        {{- content | raw -}}
-    </div>
+    <div{% for attrname, attrvalue in attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{- content | raw -}}</div>
 {%- endblock extra_form_html_widget -%}
 
 {%- block extra_form_editor_widget -%}
-
     {{- form_widget(form) -}}
-
     <script type="text/javascript">
         var {{ form.vars.id }}_configuration = {
             api_url: {
@@ -202,7 +190,6 @@
         };
     </script>
     <script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor.min.js') }}"></script>
-
 {%- endblock extra_form_editor_widget -%}
 
 {%- block extra_form_range_widget -%}

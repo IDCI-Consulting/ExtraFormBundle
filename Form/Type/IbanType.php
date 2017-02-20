@@ -9,8 +9,6 @@ namespace IDCI\Bundle\ExtraFormBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints\Iban;
 use IDCI\Bundle\ExtraFormBundle\Form\DataTransformer\IbanTransformer;
 
 class IbanType extends AbstractType

@@ -5,11 +5,10 @@
  * @license: MIT
  */
 
- namespace IDCI\Bundle\ExtraFormBundle\Form\Event;
+namespace IDCI\Bundle\ExtraFormBundle\Form\Event;
 
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class SerializeTransformEventSubscriber implements EventSubscriberInterface
@@ -30,7 +29,6 @@ class SerializeTransformEventSubscriber implements EventSubscriberInterface
      */
     public function preSetData(FormEvent $event)
     {
-        $form = $event->getForm();
         $data = $event->getData();
 
         if (empty($data)) {

@@ -1,9 +1,7 @@
 phpunit.xml
 
-# IDE specificities
-# Netbean
-nbproject/
 # Gedit
 *~
+
 # Node modules
 node_modules

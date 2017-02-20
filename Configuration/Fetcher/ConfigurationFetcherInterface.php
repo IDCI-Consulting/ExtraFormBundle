@@ -7,7 +7,6 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher;
 
-
 interface ConfigurationFetcherInterface
 {
     /**

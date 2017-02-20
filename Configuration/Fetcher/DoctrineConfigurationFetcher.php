@@ -5,7 +5,7 @@
  * @license: MIT
  */
 
-namespace IDCI\Bundle\ExtraFormBundle\Builder;
+namespace IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ORM\EntityManager;
