@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+
+  node:
+    image: idci/node:6.9.5
+    container_name: idci-extra-form-editor-node
+    build:
+      context: docker/build/node6.9.5
+    volumes:
+      - ./:/usr/src/app
