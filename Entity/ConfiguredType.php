@@ -218,7 +218,11 @@ class ConfiguredType implements ExtraFormTypeInterface
         $options = $this->extraFormType->getExtraFormOptions();
 
         foreach($configurationArray['extra_form_options'] as $optionName => $optionValue) {
-            $options[$optionName]['options']['data'] = $optionValue;
+            if ($optionName === 'configuration') {
+                $options[$optionName]['options']['data'] = json_encode($optionValue);
+            } else {
+                $options[$optionName]['options']['data'] = $optionValue;
+            }
         }
 
         return $options;
