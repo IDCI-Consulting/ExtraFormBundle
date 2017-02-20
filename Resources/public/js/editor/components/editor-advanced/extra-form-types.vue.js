@@ -125,8 +125,8 @@ var extraFormTypes = {
       };
 
       // case where the fields contains an extra form builder with a configuration option that contains fields, and so on and so on
-      if (typeof field.options.configuration === 'object') {
-        field.options.configuration = this.createFieldsRecursively(field.options.configuration);
+      if (typeof field.options.configuration !== 'undefined') {
+        field.options.configuration = this.createFieldsRecursively(JSON.parse(field.options.configuration));
       }
 
       this.$emit('created', field);

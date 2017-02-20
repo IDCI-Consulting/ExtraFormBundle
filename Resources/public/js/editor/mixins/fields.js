@@ -19,7 +19,7 @@ var fieldsMixins = {
         index = index + 1;
         if (object.hasOwnProperty(field)) {
           var newField = {
-            'name': field,
+            'name': object[field].name,
             'extra_form_type': object[field].extra_form_type,
             'options':  object[field].options,
             'constraints':  object[field].constraints
