@@ -3,10 +3,30 @@ var textOption = {
   template:
       '<div class="form-group">' +
           '<label :for="name">{{ name }}</label>' +
-          '<input class="form-control" :required="option.options.required" :value="data" @input="updateOption($event.target.value)" type="text" :name="name">' +
+          '<input class="form-control" ' +
+              ':required="option.options.required" ' +
+              ':value="data" ' +
+              '@input="onOptionValueChanged($event.target.value)" ' +
+              'type="text" ' +
+              ':name="name"' +
+          '>' +
+          '<i :class="classes" aria-hidden="true"></i>' +
       '</div>'
   ,
 
-  mixins: [optionMixin]
+  data: function() {
+    return {
+      classes: ''
+    }
+  },
+
+  mixins: [optionMixin],
+
+  methods: {
+    onOptionValueChanged: function(value) {
+      this.updateOption(value);
+      this.setJsonAttemptClass(value);
+    }
+  }
 
 };
