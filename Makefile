@@ -10,4 +10,4 @@ composer-update:
 	docker-compose run --rm php bash -c "composer update"
 
 test:
-	docker-compose run --rm php ./vendor/bin/phpunit --coverage-php
+	docker-compose run --rm php ./vendor/bin/phpunit --coverage-text

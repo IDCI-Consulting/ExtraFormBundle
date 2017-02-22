@@ -102,12 +102,14 @@ Going further
 Tests
 -----
 
-Install bundle dependencies:
+We use [docker](https://docs.docker.com/engine/installation/) and [docker-compose](https://docs.docker.com/compose/install/) to run the tests, along with a Makefile.
+
+Install the bundle dev dependencies:
 ```sh
-$ php composer.phar update
+$ make composer-update
 ```
 
 To execute unit tests:
 ```sh
-$ phpunit --coverage-text
+$ make tests
 ```

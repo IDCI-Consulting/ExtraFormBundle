@@ -3,9 +3,15 @@ version: '2'
 services:
 
   node:
-    image: idci/node:6.9.5
-    container_name: idci-extra-form-editor-node
+    image: idci-extra-form-editor/node:6.9.5
     build:
       context: docker/build/node6.9.5
     volumes:
       - ./:/usr/src/app
+
+  php:
+    image: idci-extra-form-editor/php:5.6-fpm
+    build:
+      context: docker/build/php5.6
+    volumes:
+      - ./:/var/www/html

@@ -5,3 +5,10 @@ phpunit.xml
 
 # Node modules
 node_modules
+
+# Tests
+/Tests/cache
+/Tests/logs
+
+# vendor
+/vendor

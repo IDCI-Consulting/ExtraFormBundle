@@ -1,0 +1,13 @@
+imports:
+    - { resource: "@IDCIExtraFormBundle/Resources/config/config.yml" }
+
+framework:
+    secret: test
+    form: ~
+    session:
+        storage_id: session.storage.mock_file
+    router:
+        resource: routing.yml
+        strict_requirements: ~
+    templating:
+        engines: ['twig']

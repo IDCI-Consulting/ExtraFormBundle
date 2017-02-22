@@ -27,7 +27,7 @@ class RangeType extends AbstractType
             ))
             ->setNormalizers(array(
                 'value' => function(Options $options, $value) {
-                    if (null !== $options['data']) {
+                    if (isset($options['data']) && null !== $options['data']) {
                         return $options['data'];
                     }
 
@@ -49,7 +49,7 @@ class RangeType extends AbstractType
                 'min'   => array('integer'),
                 'max'   => array('integer'),
                 'step'  => array('integer'),
-                'value' => array('integer'),
+                'value' => array('null', 'integer'),
             ))
         ;
     }
