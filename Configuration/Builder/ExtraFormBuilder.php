@@ -92,7 +92,7 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
 
             $formBuilder->add(
                 $name,
-                $this->builFormType($resolvedField),
+                $this->buildFormType($resolvedField),
                 $this->buildFormOptions($name, $resolvedField, $data)
             );
         }
@@ -107,7 +107,7 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
      *
      * @return string
      */
-    protected function builFormType(array $field)
+    protected function buildFormType(array $field)
     {
         $extraFormType = $this
             ->typeRegistry
