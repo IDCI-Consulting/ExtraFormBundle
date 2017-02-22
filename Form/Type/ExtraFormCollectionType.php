@@ -78,7 +78,9 @@ class ExtraFormCollectionType extends AbstractType
                 'type'          => 'text',
                 'add_button'    => array(),
                 'remove_button' => array(),
-                'options'       => array(),
+                'options'       => array(
+                    'compound' => true
+                ),
                 'collection_id' => 'default'
             ))
             ->setNormalizers(array(
