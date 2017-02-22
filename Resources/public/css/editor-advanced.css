@@ -29,6 +29,19 @@
     margin: 10px auto;
 }
 
+.field-options .form-group {
+    position: relative;
+}
+
+.editor-advanced .field-options i.feedback {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.editor-advanced .field-options i.warning.feedback { color: #d43f3a; }
+.editor-advanced .field-options i.success.feedback { color: #4cae4c; }
+
 .editor-advanced button.extra-btn .fa-icon {
     float: left;
     position: relative;

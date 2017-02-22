@@ -13,7 +13,7 @@ services:
     # Events Subscriber
     idci_extra_form.event.subscriber.serializer:
         class: %idci_extra_form.event.subscriber.serializer.class%
-        arguments: [@idci_extra_form.type_registry]
+        arguments: ["@idci_extra_form.type_registry"]
         tags:
             - { name: jms_serializer.event_subscriber }
 
@@ -51,7 +51,7 @@ services:
 
     #idci_extra_form.configuration.fetcher.doctrine:
     #    class: IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\DoctrineConfigurationFetcher
-    #    arguments: [@doctrine.orm.entity_manager]
+    #    arguments: ["@doctrine.orm.entity_manager"]
     #    tags:
     #        - { name: idci_extra_form.configuration.fetcher, alias: doctrine }
 
@@ -61,10 +61,10 @@ services:
     idci_extra_form.builder:
         class: %idci_extra_form.builder.class%
         arguments:
-            - @form.factory
-            - @idci_extra_form.configuration.fetcher_registry
-            - @idci_extra_form.type_registry
-            - @idci_extra_form.constraint_registry
+            - "@form.factory"
+            - "@idci_extra_form.configuration.fetcher_registry"
+            - "@idci_extra_form.type_registry"
+            - "@idci_extra_form.constraint_registry"
 
 
     # Form type extensions
@@ -79,7 +79,7 @@ services:
 
     form.type.idci_extra_form.extra_form_builder:
         class: IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormBuilderType
-        arguments: [@idci_extra_form.builder]
+        arguments: ["@idci_extra_form.builder"]
         tags:
             - { name: form.type, alias: extra_form_builder }
 
@@ -115,13 +115,13 @@ services:
 
     form.type.idci_extra_form.extra_form_type_choice:
         class: IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormTypeChoiceType
-        arguments: [@idci_extra_form.type_registry]
+        arguments: ["@idci_extra_form.type_registry"]
         tags:
             - { name: form.type, alias: extra_form_type_choice }
 
     form.type.idci_extra_form.extra_form_constraint_choice:
             class: IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormConstraintChoiceType
-            arguments: [@idci_extra_form.constraint_registry]
+            arguments: ["@idci_extra_form.constraint_registry"]
             tags:
                 - { name: form.type, alias: extra_form_constraint_choice }
 
