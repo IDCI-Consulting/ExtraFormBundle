@@ -45,16 +45,19 @@ class IbanTransformer implements DataTransformerInterface
     public function reverseTransform($out)
     {
         if (null !== $out && is_array($out)) {
-            return strtoupper(sprintf('%s%s%s%s%s%s%s%s',
-                $out['c1'],
-                $out['c2'],
-                $out['c3'],
-                $out['c4'],
-                $out['c5'],
-                $out['c6'],
-                $out['c7'],
-                $out['c8']
-            ));
+            return strtoupper(
+                sprintf(
+                    '%s%s%s%s%s%s%s%s',
+                    $out['c1'],
+                    $out['c2'],
+                    $out['c3'],
+                    $out['c4'],
+                    $out['c5'],
+                    $out['c6'],
+                    $out['c7'],
+                    $out['c8']
+                )
+            );
         }
 
         return $out;

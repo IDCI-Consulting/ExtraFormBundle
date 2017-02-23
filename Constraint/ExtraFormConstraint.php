@@ -7,7 +7,6 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Constraint;
 
-
 class ExtraFormConstraint implements ExtraFormConstraintInterface
 {
     /**

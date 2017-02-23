@@ -48,7 +48,7 @@ class ConfigurationFetcherCompilerPass implements CompilerPassInterface
             foreach ($tags as $attributes) {
                 $registryDefinition->addMethodCall(
                     'setFetcher',
-                     array($attributes['alias'], new Reference($id))
+                    array($attributes['alias'], new Reference($id))
                 );
             }
         }

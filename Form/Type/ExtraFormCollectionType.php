@@ -84,7 +84,7 @@ class ExtraFormCollectionType extends AbstractType
                 'collection_id' => 'default'
             ))
             ->setNormalizers(array(
-                'add_button' => function(Options $options, $value) {
+                'add_button' => function (Options $options, $value) {
                     $attr = ($options['min_items'] == $options['max_items']) ?
                         array('style' => 'display:none;') :
                         array()
@@ -95,7 +95,7 @@ class ExtraFormCollectionType extends AbstractType
                         $value
                     );
                 },
-                'remove_button' => function(Options $options, $value) {
+                'remove_button' => function (Options $options, $value) {
                     $attr = ($options['min_items'] == $options['max_items']) ?
                         array('style' => 'display:none;') :
                         array()
@@ -106,7 +106,7 @@ class ExtraFormCollectionType extends AbstractType
                         $value
                     );
                 },
-                'options' => function(Options $options, $value) {
+                'options' => function (Options $options, $value) {
                     return array_merge(
                         array(
                             'label' => ' ',

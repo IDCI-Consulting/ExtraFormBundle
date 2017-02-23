@@ -36,8 +36,7 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
         ConfigurationFetcherRegistry         $configurationFetcherRegistry,
         ExtraFormTypeRegistryInterface       $typeRegistry,
         ExtraFormConstraintRegistryInterface $constraintRegistry
-    )
-    {
+    ) {
         $this->formFactory                  = $formFactory;
         $this->configurationFetcherRegistry = $configurationFetcherRegistry;
         $this->typeRegistry                 = $typeRegistry;
@@ -68,8 +67,7 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
         array $parameters = array(),
         $data = null,
         FormBuilderInterface $formBuilder = null
-    )
-    {
+    ) {
         if (null === $formBuilder) {
             $formBuilder = $this->formFactory->createBuilder();
         }

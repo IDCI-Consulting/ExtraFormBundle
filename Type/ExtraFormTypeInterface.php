@@ -7,7 +7,6 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Type;
 
-
 interface ExtraFormTypeInterface
 {
     /**

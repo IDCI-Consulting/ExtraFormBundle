@@ -71,7 +71,8 @@ class DoctrineConfigurationFetcher extends AbstractConfigurationFetcher
             throw new FetchConfigurationException(
                 'doctrine',
                 $parameters,
-                sprintf('Undefined method \'%s\' in \'%s\' class',
+                sprintf(
+                    'Undefined method \'%s\' in \'%s\' class',
                     $getter,
                     get_class($entity)
                 )

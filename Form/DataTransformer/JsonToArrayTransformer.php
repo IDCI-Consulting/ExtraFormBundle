@@ -22,7 +22,7 @@ class JsonToArrayTransformer implements DataTransformerInterface
         }
 
         if (is_array($value)) {
-           return json_encode($value);
+            return json_encode($value);
         }
 
         return $value;
@@ -38,5 +38,3 @@ class JsonToArrayTransformer implements DataTransformerInterface
         return null === $decoded ? $value : $decoded;
     }
 }
-
-

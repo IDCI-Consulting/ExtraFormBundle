@@ -78,7 +78,8 @@ class ApiController extends FOSRestController
         if ('html' === $_format) {
             $form = $this
                 ->get('idci_extra_form.builder')
-                ->build($options,
+                ->build(
+                    $options,
                     array(),
                     null,
                     $this->container->get('form.factory')->createNamedBuilder(
@@ -235,7 +236,10 @@ class ApiController extends FOSRestController
         ;
 
         if (null !== $existingConfiguredType) {
-            return new Response('A field with the name ' . $paramFetcher->get('name') . ' already exists', Response::HTTP_CONFLICT);
+            return new Response(sprintf(
+                'A field with the name %s already exists',
+                $paramFetcher->get('name')
+            ), Response::HTTP_CONFLICT);
         }
 
         $configuredType = new ConfiguredType(
@@ -247,7 +251,12 @@ class ApiController extends FOSRestController
         $em->flush();
 
         $view = View::create()->setFormat('json');
-        $type = $this->getDoctrine()->getManager()->getRepository('IDCIExtraFormBundle:ConfiguredType')->findOneByName($paramFetcher->get('name'));
+        $type = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('IDCIExtraFormBundle:ConfiguredType')
+            ->findOneByName($paramFetcher->get('name'))
+        ;
         $view->setData($type);
         $view->setStatusCode(Response::HTTP_CREATED);
 
@@ -287,7 +296,12 @@ class ApiController extends FOSRestController
         $em->flush();
 
         $view = View::create()->setFormat('json');
-        $type = $this->getDoctrine()->getManager()->getRepository('IDCIExtraFormBundle:ConfiguredType')->findOneByName($name);
+        $type = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('IDCIExtraFormBundle:ConfiguredType')
+            ->findOneByName($name)
+        ;
         $view->setData($type);
         $view->setStatusCode(Response::HTTP_OK);
 
@@ -321,5 +335,3 @@ class ApiController extends FOSRestController
         return new Response(null, Response::HTTP_NO_CONTENT);
     }
 }
-
-

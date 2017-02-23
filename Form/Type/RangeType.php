@@ -26,14 +26,14 @@ class RangeType extends AbstractType
                 'value' => null
             ))
             ->setNormalizers(array(
-                'value' => function(Options $options, $value) {
+                'value' => function (Options $options, $value) {
                     if (isset($options['data']) && null !== $options['data']) {
                         return $options['data'];
                     }
 
                     return $options['min'];
                 },
-                'attr'  => function(Options $options, $value) {
+                'attr'  => function (Options $options, $value) {
                     return array_merge(
                         array(
                             'min'   => $options['min'],

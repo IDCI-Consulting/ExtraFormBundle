@@ -16,7 +16,7 @@ class SerializerSubscriber implements EventSubscriberInterface
     /**
      * @var ExtraFormTypeRegistryInterface
      */
-     private $registry;
+    private $registry;
 
     /**
      * Constructor

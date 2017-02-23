@@ -240,8 +240,7 @@ class CollectionEventSubscriber implements EventSubscriberInterface
         }
 
         foreach ($item as $k => $v) {
-            if (
-                FormEvents::PRE_SUBMIT === $event->getName() &&
+            if (FormEvents::PRE_SUBMIT === $event->getName() &&
                 'hidden' === $form->get($i)->get($k)->getConfig()->getType()->getName()
             ) {
                 continue;

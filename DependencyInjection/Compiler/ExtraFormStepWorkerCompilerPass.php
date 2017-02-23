@@ -25,7 +25,9 @@ class ExtraFormStepWorkerCompilerPass implements CompilerPassInterface
         }
 
         $registryDefinition = $container->getDefinition('idci_step.configuration.worker_registry');
-        $workerDefinition = new Definition('IDCI\\Bundle\\ExtraFormBundle\\Configuration\\StepWorker\\ExtraFormBuilderWorker');
+        $workerDefinition = new Definition(
+            'IDCI\\Bundle\\ExtraFormBundle\\Configuration\\StepWorker\\ExtraFormBuilderWorker'
+        );
         $workerServiceId = 'idci_extra_form.configuration.step_worker.extra_form_builder';
 
         $workerDefinition->addArgument(new Reference('idci_extra_form.builder'));
