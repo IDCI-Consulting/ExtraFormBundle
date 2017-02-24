@@ -75,7 +75,7 @@ class ExtraFormCollectionType extends AbstractType
             ->setDefaults(array(
                 'min_items'     => 1,
                 'max_items'     => 10,
-                'type'          => 'text',
+                'type'          => 'textarea',
                 'add_button'    => array(),
                 'remove_button' => array(),
                 'options'       => array(
