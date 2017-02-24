@@ -18,11 +18,14 @@ var fieldsMixins = {
       for (var field in object) {
         index = index + 1;
         if (object.hasOwnProperty(field)) {
+          // if created form the raw, the name is the key
+          // if created form the configured type, the name is in the name property
+          var name = typeof object[field].name === 'undefined'? field : object[field].name;
           var newField = {
-            'name': object[field].name,
-            'extra_form_type': object[field].extra_form_type,
-            'options':  object[field].options,
-            'constraints':  object[field].constraints
+            name: name,
+            extra_form_type: object[field].extra_form_type,
+            options:  object[field].options,
+            constraints:  object[field].constraints
           };
 
           // Set the first field as active
