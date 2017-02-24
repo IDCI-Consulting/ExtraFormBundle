@@ -9,11 +9,30 @@ var optionMixin = {
   },
 
   /**
-   * Update the selected value on component creation
+   * Update the value on component creation
    */
   created: function() {
     if (typeof this.value !== 'undefined') {
-      this.data = this.value;
+      if (typeof this.value !== 'string') {
+        this.data = JSON.stringify(this.value);
+      } else {
+        this.data = this.value;
+      }
+    }
+  },
+
+  /**
+   * Update the value on component update
+   */
+  watch: {
+    value: {
+      handler: function(value) {
+        if (typeof value !== 'string') {
+          this.data = JSON.stringify(value);
+        } else {
+          this.data = value;
+        }
+      }
     }
   },
 
