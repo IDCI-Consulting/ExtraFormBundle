@@ -22,7 +22,7 @@ class ExtraFormEditorType extends AbstractType
         $attrClass = 'extra-form-editor';
 
         if (isset($options['attr']) && isset($options['attr']['class'])) {
-            $attrClass .= ' '.$options['attr']['class'];
+            $attrClass .= ' ' . $options['attr']['class'];
         }
 
         $view->vars['attr']['class']                        = $attrClass;
