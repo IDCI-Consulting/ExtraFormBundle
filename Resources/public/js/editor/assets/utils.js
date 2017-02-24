@@ -1,5 +1,10 @@
 /**
  * Create and return an object which contains all elements for which the callback returns true
+ *
+ * @param object
+ * @param callback
+ *
+ * @return object
  */
 function filterObject(object, callback) {
   var filteredObject = {};
@@ -27,6 +32,9 @@ function generateUniqueId() {
 /**
  * Create a javascript object to get the map all the attribute of the given element
  *
+ * @param element
+ *
+ * @return object
  */
 function createAttributeMapObject(element) {
   var attributes = element.attributes, object = {};
@@ -36,4 +44,32 @@ function createAttributeMapObject(element) {
   }
 
   return object;
+}
+
+/**
+ * Submit a form in ajax
+ *
+ * @param $form
+ * @param callback
+ */
+function submitForm($form, callback) {
+  var request = $.ajax({
+    url: $form.attr('action'),
+    method: $form.attr('method'),
+    data: $form.serialize()
+  });
+
+  request.done(function (response) {
+    return callback({
+      success: true,
+      data: response
+    });
+  });
+
+  request.fail(function (response) {
+    return callback({
+      success: false,
+      data: response
+    });
+  });
 }

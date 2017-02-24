@@ -187,6 +187,7 @@
                 get_extra_form_types: '{{ path('idci_extraform_api_getextraformtypes', { '_format': 'json'}) }}',
                 get_extra_form_constraints: '{{ path('idci_extraform_api_getextraformconstraints', { '_format': 'json'}) }}'
             },
+            extra_form_editor_overview_url: '{{ path('idci_extra_form_editor_overview') }}',
             allow_configured_type_edition: {{ form.vars.allow_configured_type_edition ? 'true' : 'false' }}
         };
     </script>
