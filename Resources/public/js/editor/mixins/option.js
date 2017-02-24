@@ -34,12 +34,12 @@ var optionMixin = {
 
     /**
      * Set a class on the input or textarea to add an icon indicating if the json is valid
-     * A json attempt is considered as soon as '{' or '[' are typed
+     * A json attempt is considered id '{' or '[' are typed first
      *
      * @param value
      */
     setJsonAttemptClass: function(value) {
-      if (value.indexOf('{') !== -1 || value.indexOf('[') !== -1) {
+      if (value.indexOf('{') === 0 || value.indexOf('[') === 0) {
         try {
           JSON.parse(value);
           this.classes = 'fa fa-check success feedback';
