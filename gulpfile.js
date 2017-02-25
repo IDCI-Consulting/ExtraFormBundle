@@ -7,16 +7,16 @@ src.styles = [
   'Resources/public/css/editor-advanced.css'
 ];
 src.scripts = [
-  //'Resources/public/js/editor/assets/vue-dev.js',
-  'Resources/public/js/editor/assets/vue-prod.min.js',
-  'Resources/public/js/editor/assets/vuex-2.1.2.js',
-  'Resources/public/js/editor/assets/sortable.min.js',
-  'Resources/public/js/editor/assets/vue-multiselect.min.js',
-  'Resources/public/js/editor/assets/vue-draggable.min.js',
-  'Resources/public/js/editor/assets/jquery-1.11.3.min.js',
-  'Resources/public/js/editor/assets/bootstrap.min.js',
-  'Resources/public/js/editor/assets/vue-resource-1.2.0.min.js',
-  'Resources/public/js/editor/assets/utils.js',
+  //'Resources/public/js/assets/vue-dev.js',
+  'Resources/public/js/assets/vue-prod.min.js',
+  'Resources/public/js/assets/vuex-2.1.2.js',
+  'Resources/public/js/assets/sortable.min.js',
+  'Resources/public/js/assets/vue-multiselect.min.js',
+  'Resources/public/js/assets/vue-draggable.min.js',
+  'Resources/public/js/assets/jquery-1.11.3.min.js',
+  'Resources/public/js/assets/bootstrap.min.js',
+  'Resources/public/js/assets/vue-resource-1.2.0.min.js',
+  'Resources/public/js/assets/utils.js',
   'Resources/public/js/editor/mixins/option.js',
   'Resources/public/js/editor/mixins/http.js',
   'Resources/public/js/editor/mixins/icon.js',
@@ -49,8 +49,7 @@ src.scripts = [
   'Resources/public/js/editor/components/editor-advanced/editor.vue.js',
   'Resources/public/js/editor/components/editor-raw.vue.js',
   'Resources/public/js/editor/app.js',
-  'Resources/public/js/load-editor.js',
-  'Resources/public/js/editor/ajax_overview.js'
+  'Resources/public/js/editor/load-editor.js'
 ];
 
 var dist = {};

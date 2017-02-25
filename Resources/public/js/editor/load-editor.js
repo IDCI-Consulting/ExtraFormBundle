@@ -72,7 +72,7 @@ $(window).on('load', function() {
     resetFormOverviewModalOnClose(index);
     submitFormOverviewOnClick(index);
 
-    triggerEditor('#' + editorComponentId, formProperties, configuration);
+    triggerExtraFormBundleEditor('#' + editorComponentId, formProperties, configuration);
 
   });
 
