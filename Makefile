@@ -19,6 +19,10 @@ npm-install:
 gulp:
 	docker-compose run --rm node gulp $(task)
 
+.PHONY: eslint
+eslint:
+	docker-compose run --rm node ./node_modules/.bin/eslint Resources/public/js/editor
+
 # PHP commands
 
 .PHONY: composer-update

@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "del": "^1.1.1",
+    "eslint": "^3.16.1",
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.1.0",
     "gulp-chmod": "^1.2.0",
