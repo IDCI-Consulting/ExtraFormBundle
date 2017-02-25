@@ -1,12 +1,13 @@
+/* global Vue */
 Vue.component('editor-simple', {
 
   template:
-      '<div class="editor-simple">' +
-          '<draggable :list="fields" :options="sortableOptions">' +
-              '<field class="field" @removed="removeField" v-for="(field, index) in fields" :field="field" :index="index"/>' +
-          '</draggable>' +
-          '<new-field class="new-field" @created="addField"></new-field>' +
-      '</div>'
+    '<div class="editor-simple">' +
+      '<draggable :list="fields" :options="sortableOptions">' +
+        '<field class="field" @removed="removeField" v-for="(field, index) in fields" :field="field" :index="index"/>' +
+      '</draggable>' +
+      '<new-field class="new-field" @created="addField"></new-field>' +
+    '</div>'
   ,
 
   props: ['fields'],

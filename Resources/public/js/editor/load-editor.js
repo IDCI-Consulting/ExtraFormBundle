@@ -1,3 +1,4 @@
+/* global $ */
 $(window).on('load', function() {
 
   /*************************************************************************/
@@ -6,6 +7,7 @@ $(window).on('load', function() {
 
   $('textarea.extra-form-editor').each(function(index) {
 
+    /* global createAttributeMapObject */
     var formProperties = createAttributeMapObject(this); // retrieve the textarea attributes
     formProperties.value = this.value;
     var editorComponentId = 'editorComponent' + index;
@@ -72,6 +74,7 @@ $(window).on('load', function() {
     resetFormOverviewModalOnClose(index);
     submitFormOverviewOnClick(index);
 
+    /* global triggerExtraFormBundleEditor */
     triggerExtraFormBundleEditor('#' + editorComponentId, formProperties, configuration);
 
   });
@@ -116,10 +119,9 @@ function showModalOnClick(modalType, modalIdentifier) {
   $(document).on('click', 'button.trigger-' + modalType + '-' + modalIdentifier, function(event) {
     event.preventDefault();
 
-    if ('overview-modal' === modalType) {
-      $modal = $('#' + modalType + '-' + modalIdentifier);
-    } else {
-      $modal = $('#' + modalType + '-' + modalIdentifier).first();
+    var $modal = $('#' + modalType + '-' + modalIdentifier);
+    if ('overview-modal' !== modalType) {
+      $modal = $modal.first();
     }
 
     $modal.modal('show');
@@ -208,9 +210,9 @@ function submitFormOverviewOnClick(index) {
     resetFormOverviewModal(index);
     var $form = $(this).closest('form');
     setTimeout(function() {
+      /* global submitForm */
       submitForm($form, function(content) {
         if (content.success) {
-          console.log(content.data);
           if (content.data) {
             $('#overview-modal-' + index + ' .modal-body').replaceWith('<div class="modal-body">' + content.data + '</div>');
           }

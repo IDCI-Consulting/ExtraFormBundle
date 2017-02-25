@@ -1,13 +1,14 @@
 /**
  * @see https://vuejs.org/v2/guide/components.html#Form-Input-Components-using-Custom-Events
  */
+/* exported typesSelectbox */
 var typesSelectbox = {
 
   template:
     '<select v-bind:value="value" v-on:change="updateValue($event.target.value)" v-model="selected">' +
-        '<option v-for="type in types" :value="type.name">' +
-            '{{ type.name }}' +
-        '</option>' +
+      '<option v-for="type in types" :value="type.name">' +
+        '{{ type.name }}' +
+      '</option>' +
     '</select>'
   ,
 
@@ -20,6 +21,7 @@ var typesSelectbox = {
     }
   },
 
+  /* global httpMixin */
   mixins: [httpMixin],
 
   mounted: function() {

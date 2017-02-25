@@ -1,7 +1,8 @@
 /**
  * Global methods used to get icons
  */
-var fieldsMixins = {
+/* exported fieldsMixin */
+var fieldsMixin = {
 
   methods: {
 

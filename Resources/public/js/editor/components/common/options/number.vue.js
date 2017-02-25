@@ -1,3 +1,4 @@
+/* exported numberOption */
 var numberOption = {
 
   template:

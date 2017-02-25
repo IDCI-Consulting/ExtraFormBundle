@@ -1,3 +1,4 @@
+/* global Vue */
 Vue.component('modal', {
 
   template:

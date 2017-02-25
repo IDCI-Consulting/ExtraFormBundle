@@ -1,3 +1,4 @@
+/* exported choiceOption */
 var choiceOption = {
 
   template:

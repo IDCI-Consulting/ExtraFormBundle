@@ -1,10 +1,11 @@
+/* exported editorAdvancedNewFieldConstraint */
 var editorAdvancedNewFieldConstraint = {
 
   template:
-      '<div class="new-field-constraint">' +
-          '<multiselect v-model="selectedConstraint" :options="constraints" label="description" key="name" selectLabel="" placeholder="Select a constraint"></multiselect>' +
-          '<button class="extra-btn" @click.prevent="createConstraint">Add</button>' +
-      '</div>'
+    '<div class="new-field-constraint">' +
+      '<multiselect v-model="selectedConstraint" :options="constraints" label="description" key="name" selectLabel="" placeholder="Select a constraint"></multiselect>' +
+      '<button class="extra-btn" @click.prevent="createConstraint">Add</button>' +
+    '</div>'
   ,
 
   mixins: [httpMixin],

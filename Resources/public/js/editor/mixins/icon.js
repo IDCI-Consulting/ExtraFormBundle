@@ -1,6 +1,7 @@
 /**
  * Global methods used to get icons
  */
+/* exported fontAwesomeIconMixin */
 var fontAwesomeIconMixin = {
 
   methods: {

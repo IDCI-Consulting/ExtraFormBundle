@@ -1,14 +1,15 @@
+/* exported editorSimpleFieldConstraints */
 var editorSimpleFieldConstraints = {
 
   template:
-      '<div>' +
-          '<label>Constraints : </label>' +
-          '<div v-for="(constraint, index) in fieldConstraints">' +
-              '<span>{{ constraint.extra_form_constraint }}</span> ' +
-              '<button v-on:click.prevent="removeConstraint(index)">Delete this constraint</button>' +
-              '<field-constraint-options :fieldConstraint="constraint" :index="index" @optionChanged="updateOption"/>' +
-          '</div>' +
-      '</div>'
+    '<div>' +
+      '<label>Constraints : </label>' +
+      '<div v-for="(constraint, index) in fieldConstraints">' +
+        '<span>{{ constraint.extra_form_constraint }}</span> ' +
+        '<button v-on:click.prevent="removeConstraint(index)">Delete this constraint</button>' +
+        '<field-constraint-options :fieldConstraint="constraint" :index="index" @optionChanged="updateOption"/>' +
+      '</div>' +
+    '</div>'
   ,
 
   props: ['fieldConstraints'],

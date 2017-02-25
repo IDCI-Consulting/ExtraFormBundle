@@ -1,12 +1,13 @@
+/* exported editorAdvancedFieldConstraintOptions */
 var editorAdvancedFieldConstraintOptions = {
 
   template:
-      '<div class="field-constraint-options">' +
-          '<a role="button" data-toggle="collapse" :href="\'#\' + id">Options<span class="toggle"></span></a>' +
-          '<div :id="id" class="panel-collapse collapse" role="tabpanel" aria-expanded="false" :aria-controls="id">' +
-                '<component :is="option.component_name" v-for="(option, key) in constraint.extra_form_options" :option="option" :name="key" :value="fieldConstraint.options[key]"  @changed="updateOption"/>' +
-          '</div>' +
-      '</div>'
+    '<div class="field-constraint-options">' +
+      '<a role="button" data-toggle="collapse" :href="\'#\' + id">Options<span class="toggle"></span></a>' +
+      '<div :id="id" class="panel-collapse collapse" role="tabpanel" aria-expanded="false" :aria-controls="id">' +
+        '<component :is="option.component_name" v-for="(option, key) in constraint.extra_form_options" :option="option" :name="key" :value="fieldConstraint.options[key]"  @changed="updateOption"/>' +
+      '</div>' +
+    '</div>'
   ,
 
   props: ['fieldConstraint', 'index'],

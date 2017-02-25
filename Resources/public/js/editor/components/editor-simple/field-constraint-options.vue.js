@@ -1,10 +1,11 @@
+/* exported editorSimpleFieldConstraintOptions */
 var editorSimpleFieldConstraintOptions = {
 
   template:
-      '<div class="field-constraint-options">' +
-          '<label>Options : </label>' +
-          '<component :is="option.component_name" v-for="(option, key) in constraint.extra_form_options" :option="option" :name="key" :value="fieldConstraint.options[key]"  @changed="updateOption"/>' +
-      '</div>'
+    '<div class="field-constraint-options">' +
+      '<label>Options : </label>' +
+      '<component :is="option.component_name" v-for="(option, key) in constraint.extra_form_options" :option="option" :name="key" :value="fieldConstraint.options[key]"  @changed="updateOption"/>' +
+    '</div>'
   ,
   props: ['fieldConstraint', 'index'],
 

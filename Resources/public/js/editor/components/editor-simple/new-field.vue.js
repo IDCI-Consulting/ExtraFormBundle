@@ -1,10 +1,11 @@
+/* exported editorSimpleNewField */
 var editorSimpleNewField = {
 
   template:
-      '<div>' +
-          '<types-selectbox v-model="selectedExtraFormType"/> ' +
-          '<button @click.prevent="createField">New field</button>' +
-      '</div>'
+    '<div>' +
+        '<types-selectbox v-model="selectedExtraFormType"/> ' +
+        '<button @click.prevent="createField">New field</button>' +
+    '</div>'
   ,
 
   data: function () {
@@ -13,6 +14,7 @@ var editorSimpleNewField = {
     }
   },
 
+  /* global typesSelectbox */
   components: {
     'types-selectbox': typesSelectbox
   },
@@ -22,6 +24,7 @@ var editorSimpleNewField = {
     /**
      * Create a new field
      */
+    /* global generateUniqueId */
     createField: function() {
       var field = {
         'name': 'field_' + this.selectedExtraFormType + '_' + generateUniqueId(),

@@ -1,3 +1,4 @@
+/* exported textOption */
 var textOption = {
 
   template:

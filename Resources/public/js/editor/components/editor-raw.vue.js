@@ -1,3 +1,4 @@
+/* global Vue */
 Vue.component('editor-raw', {
 
   template:
@@ -16,7 +17,7 @@ Vue.component('editor-raw', {
     }
   },
 
-  mixins: [fieldsMixins],
+  mixins: [fieldsMixin],
 
   created: function() {
     try {

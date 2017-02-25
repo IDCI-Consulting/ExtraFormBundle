@@ -7,13 +7,15 @@
  */
 function triggerExtraFormBundleEditor(element, formProperties, configuration) {
 
+  /* global Vue VueMultiselect VueResource Vuex */
+
   Vue.component('Multiselect', VueMultiselect.default);
   Vue.use(VueResource);
 
   /**
    * The common state
    */
-  const store = new Vuex.Store({
+  var store = new Vuex.Store({
 
     state: {
       configuration: configuration,

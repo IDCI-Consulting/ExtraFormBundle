@@ -1,3 +1,7 @@
+/**
+ * Base component for a field option
+ */
+/* exported optionMixin */
 var optionMixin = {
 
   props: ['option', 'name', 'value'],

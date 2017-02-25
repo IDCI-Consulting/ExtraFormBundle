@@ -1,37 +1,38 @@
+/* exported extraFormTypes */
 var extraFormTypes = {
 
   template:
+    '<div>' +
       '<div>' +
-          '<div>' +
-              '<ul class="nav nav-pills" role="tablist">' +
-                  '<li role="presentation" class="active">' +
-                      '<a role="tab" data-toggle="tab" :href="anchor(\'#\', \'basic_types\')">Basic types</a>' +
-                  '</li>' +
-                  '<li role="presentation">'+
-                      '<a role="tab" data-toggle="tab" :href="anchor(\'#\', \'configured_types\')">Configured types</a>' +
-                  '</li>' +
-              '</ul>' +
-              '<div class="tab-content">' +
-                  '<div role="tabpanel" class="tab-pane in active" :id="anchor(\'\', \'basic_types\')">' +
-                      '<basic-extra-form-type ' +
-                          '@created="createField" ' +
-                          ':type="basicType" ' +
-                          'v-for="basicType in basicTypes"' +
-                      '>' +
-                      '</basic-extra-form-type>' +
-                  '</div>' +
-                  '<div role="tabpanel" class="tab-pane" :id="anchor(\'\', \'configured_types\')">' +
-                      '<configured-extra-form-type ' +
-                          '@delete="deleteConfiguredType" ' +
-                          '@created="createConfiguredField" ' +
-                          ':type="configuredType" ' +
-                          'v-for="configuredType in configuredTypes"' +
-                      '> ' +
-                      '</configured-extra-form-type>' +
-                  '</div>' +
-              '</div>' +
+        '<ul class="nav nav-pills" role="tablist">' +
+          '<li role="presentation" class="active">' +
+            '<a role="tab" data-toggle="tab" :href="anchor(\'#\', \'basic_types\')">Basic types</a>' +
+          '</li>' +
+          '<li role="presentation">'+
+            '<a role="tab" data-toggle="tab" :href="anchor(\'#\', \'configured_types\')">Configured types</a>' +
+          '</li>' +
+        '</ul>' +
+        '<div class="tab-content">' +
+          '<div role="tabpanel" class="tab-pane in active" :id="anchor(\'\', \'basic_types\')">' +
+            '<basic-extra-form-type ' +
+              '@created="createField" ' +
+              ':type="basicType" ' +
+              'v-for="basicType in basicTypes"' +
+            '>' +
+            '</basic-extra-form-type>' +
           '</div>' +
-      '</div>'
+          '<div role="tabpanel" class="tab-pane" :id="anchor(\'\', \'configured_types\')">' +
+            '<configured-extra-form-type ' +
+              '@delete="deleteConfiguredType" ' +
+              '@created="createConfiguredField" ' +
+              ':type="configuredType" ' +
+              'v-for="configuredType in configuredTypes"' +
+            '> ' +
+            '</configured-extra-form-type>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>'
   ,
 
   data: function () {
@@ -57,7 +58,7 @@ var extraFormTypes = {
     'basic-extra-form-type': basicExtraFormType
   },
 
-  mixins: [httpMixin, fontAwesomeIconMixin, fieldsMixins],
+  mixins: [httpMixin, fontAwesomeIconMixin, fieldsMixin],
 
   created: function() {
     this.getExtraFormTypes();

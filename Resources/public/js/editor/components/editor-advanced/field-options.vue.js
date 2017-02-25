@@ -1,32 +1,31 @@
+/* exported editorAdvancedField */
 var editorAdvancedFieldOptions = {
 
   template:
-      '<div>' +
-          '<label>Options : </label>' +
-
-          '<component v-if="option.component_name !== \'editor\'" :is="option.component_name" v-for="(option, key) in options" :option="option" :name="key" :value="fieldOptions[key]" @changed="updateOption"></component>' +
-
-          '<div v-for="(option, key) in options" v-if="option.component_name === \'editor\'">' +
-              '<button :id="id" class="extra-btn" @click.prevent="triggerModal">Add fields for this "sub" extra form</button> '+
-              '<div class="modal fade modal-fullscreen" :id="\'modal_\' + id">' +
-                  '<div class="modal-dialog" role="document">' +
-                      '<div class="modal-content">' +
-                          '<div class="modal-header">' +
-                              '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
-                              '<h4 class="modal-title">Advanced visual mode</h4>' +
-                          '</div>' +
-                          '<div class="modal-body">' +
-                              '<editor-advanced :fields="fieldOptions[key]"></editor-advanced>' +
-                          '</div>' +
-                          '<div class="modal-footer">' +
-                              '<button class="btn btn-default close-modal">Go back to the parent editor <i class="fa fa-times"></i></button>' +
-                              '<em>All your changes are automatically saved</em>' +
-                          '</div>' +
-                      '</div>' +
-                  '</div>' +
+    '<div>' +
+      '<label>Options : </label>' +
+        '<component v-if="option.component_name !== \'editor\'" :is="option.component_name" v-for="(option, key) in options" :option="option" :name="key" :value="fieldOptions[key]" @changed="updateOption"></component>' +
+        '<div v-for="(option, key) in options" v-if="option.component_name === \'editor\'">' +
+          '<button :id="id" class="extra-btn" @click.prevent="triggerModal">Add fields for this "sub" extra form</button> '+
+          '<div class="modal fade modal-fullscreen" :id="\'modal_\' + id">' +
+            '<div class="modal-dialog" role="document">' +
+              '<div class="modal-content">' +
+                '<div class="modal-header">' +
+                  '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                  '<h4 class="modal-title">Advanced visual mode</h4>' +
+                '</div>' +
+                '<div class="modal-body">' +
+                  '<editor-advanced :fields="fieldOptions[key]"></editor-advanced>' +
+                '</div>' +
+                '<div class="modal-footer">' +
+                  '<button class="btn btn-default close-modal">Go back to the parent editor <i class="fa fa-times"></i></button>' +
+                  '<em>All your changes are automatically saved</em>' +
+                '</div>' +
               '</div>' +
+            '</div>' +
           '</div>' +
-      '</div>'
+      '</div>' +
+    '</div>'
   ,
 
   props: ['type', 'fieldOptions'],

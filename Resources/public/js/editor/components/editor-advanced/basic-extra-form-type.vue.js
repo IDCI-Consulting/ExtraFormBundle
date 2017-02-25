@@ -1,3 +1,4 @@
+/* exported basicExtraFormType */
 var basicExtraFormType = {
 
   template:

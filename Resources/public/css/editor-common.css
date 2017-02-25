@@ -7,6 +7,10 @@
     margin-right: 15px;
 }
 
+.fa-cog.fa-spin {
+    color: #265a88;
+}
+
 .handle:before {
     float: right;
     content: "\E2DC";

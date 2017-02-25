@@ -1,14 +1,15 @@
+/* exported editorSimpleNewFieldConstraint */
 var editorSimpleNewFieldConstraint = {
 
   template:
-      '<div>' +
-          '<select class="new-field-constraint" v-model="selectedConstraint">' +
-              '<option v-for="(constraint, key) in constraints" :value="key">' +
-                  '{{ constraint.description }}' +
-              '</option>' +
-          '</select> ' +
-          '<button @click.prevent="createConstraint">New constraint</button>' +
-      '</div>'
+    '<div>' +
+      '<select class="new-field-constraint" v-model="selectedConstraint">' +
+        '<option v-for="(constraint, key) in constraints" :value="key">' +
+          '{{ constraint.description }}' +
+        '</option>' +
+      '</select> ' +
+      '<button @click.prevent="createConstraint">New constraint</button>' +
+    '</div>'
   ,
 
   data: function () {
@@ -22,6 +23,7 @@ var editorSimpleNewFieldConstraint = {
     this.getExtraFormConstraints();
   },
 
+  /* global httpMixin */
   mixins: [httpMixin],
 
   methods: {

@@ -1,11 +1,12 @@
+/* exported editorSimpleFieldOptions */
 var editorSimpleFieldOptions = {
 
   template:
-      '<div>' +
-          '<label>Options : </label>' +
-          '<component v-if="option.component_name !== \'editor\'" :is="option.component_name" v-for="(option, key) in options" :option="option" :name="key" :value="fieldOptions[key]" @changed="updateOption"></component>' +
-          '<editor-simple v-for="(option, key) in options" v-if="option.component_name === \'editor\'" :fields="fieldOptions[key]"></editor-simple>' +
-      '</div>'
+    '<div>' +
+        '<label>Options : </label>' +
+        '<component v-if="option.component_name !== \'editor\'" :is="option.component_name" v-for="(option, key) in options" :option="option" :name="key" :value="fieldOptions[key]" @changed="updateOption"></component>' +
+        '<editor-simple v-for="(option, key) in options" v-if="option.component_name === \'editor\'" :fields="fieldOptions[key]"></editor-simple>' +
+    '</div>'
   ,
 
   props: ['type', 'fieldOptions'],
@@ -17,14 +18,21 @@ var editorSimpleFieldOptions = {
   },
 
   components: {
+    /* global checkboxOption */
     'option-checkbox': checkboxOption,
+    /* global textareaOption */
     'option-textarea': textareaOption,
+    /* global choiceOption   */
     'option-choice': choiceOption,
+    /* global textOption     */
     'option-text': textOption,
+    /* global numberOption   */
     'option-number': numberOption,
+    /* global integerOption  */
     'option-integer': integerOption
   },
 
+  /* global httpMixin  */
   mixins: [httpMixin],
 
   created: function() {
@@ -51,8 +59,8 @@ var editorSimpleFieldOptions = {
      */
     deleteOldOptions: function(newOptions) {
       if (Object.keys(newOptions).length > 0) {
-        for (fieldOption in this.fieldOptions) {
-          // if a previous option (which was setted on a field) is not in the options anymore, we remove this option
+        for (var fieldOption in this.fieldOptions) {
+          // if a previous option (which was set on a field) is not in the options anymore, we remove this option
           if (!(fieldOption in newOptions)) {
             this.$delete(this.fieldOptions, fieldOption);
           }

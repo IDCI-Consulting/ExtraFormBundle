@@ -1,3 +1,4 @@
+/* exported textareaOption */
 var textareaOption = {
 
   template:

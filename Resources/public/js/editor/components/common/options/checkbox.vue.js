@@ -1,3 +1,4 @@
+/* exported checkboxOption */
 var checkboxOption = {
 
   template:

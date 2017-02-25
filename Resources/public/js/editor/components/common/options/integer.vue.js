@@ -1,3 +1,4 @@
+/* exported integerOption */
 var integerOption = {
 
   template:

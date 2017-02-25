@@ -1,6 +1,7 @@
 /**
  * Global methods used to perform http requests in components
  */
+/* exported httpMixin */
 var httpMixin = {
 
   methods: {
@@ -23,9 +24,6 @@ var httpMixin = {
           .then(
             function (response) {
               return response.json();
-            },
-            function (response) {
-              console.log(response.status + ' ' + response.statusText);
             }
           )
           .then(function (json) {
