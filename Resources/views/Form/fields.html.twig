@@ -195,8 +195,17 @@
             extra_form_editor_overview_url: '{{ path('idci_extra_form_editor_overview') }}',
             allow_configured_type_edition: {{ form.vars.allow_configured_type_edition ? 'true' : 'false' }}
         };
+
+        // We must load the scripts and styles only once, even if many widgets are on the page
+        if (typeof window.triggerExtraFormBundleEditor !== 'function') {
+          document.write(
+            '<script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor.min.js') }}"></scri'+'pt>' +
+            '<link rel="stylesheet" type="text/css" href="{{ asset('bundles/idciextraform/css/font-awesome-4.7.0/css/font-awesome.min.css') }}" />' +
+            '<link rel="stylesheet" type="text/css" href="{{ asset('bundles/idciextraform/css/extra-form-editor.min.css') }}" />'
+          );
+        }
     </script>
-    <script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor.min.js') }}"></script>
+
 {%- endblock extra_form_editor_widget -%}
 
 {%- block extra_form_range_widget -%}

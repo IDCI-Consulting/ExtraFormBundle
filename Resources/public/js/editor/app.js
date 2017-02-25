@@ -5,7 +5,7 @@
  * @param formProperties : Object containing the properties of the default form
  * @param configuration : Object containing the editor configuration (api url, etc)
  */
-function triggerEditor(element, formProperties, configuration) {
+function triggerExtraFormBundleEditor(element, formProperties, configuration) {
 
   Vue.component('Multiselect', VueMultiselect.default);
   Vue.use(VueResource);
