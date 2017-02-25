@@ -24,6 +24,9 @@ function triggerExtraFormBundleEditor(element, formProperties, configuration) {
     },
 
     getters: {
+      editorId: function(state) {
+        return state.configuration.editorId;
+      },
       configuredFieldEditionAllowed: function(state) {
         return state.configuration.allow_configured_type_edition;
       },

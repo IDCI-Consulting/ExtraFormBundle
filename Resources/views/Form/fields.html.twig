@@ -183,6 +183,9 @@
     {{- form_widget(form) -}}
     <script type="text/javascript">
         var {{ form.vars.id }}_configuration = {
+            editorId: '{{ form.vars.id }}',
+            allow_configured_type_edition: {{ form.vars.allow_configured_type_edition ? 'true' : 'false' }},
+            extra_form_editor_overview_url: '{{ path('idci_extra_form_editor_overview') }}',
             api_url: {
                 get_configured_extra_form_types: '{{ path('idci_extraform_api_getconfiguredextraformtypes', { '_format': 'json' }) }}',
                 post_configured_extra_form_types: '{{ path('idci_extraform_api_postconfiguredextraformtypes') }}',
@@ -191,9 +194,7 @@
                 get_extra_form_type_options: '{{ path('idci_extraform_api_getextraformtypesoptions', { '_format': 'json', 'type': 'XTYPE'}) }}',
                 get_extra_form_types: '{{ path('idci_extraform_api_getextraformtypes', { '_format': 'json'}) }}',
                 get_extra_form_constraints: '{{ path('idci_extraform_api_getextraformconstraints', { '_format': 'json'}) }}'
-            },
-            extra_form_editor_overview_url: '{{ path('idci_extra_form_editor_overview') }}',
-            allow_configured_type_edition: {{ form.vars.allow_configured_type_edition ? 'true' : 'false' }}
+            }
         };
 
         // We must load the scripts and styles only once, even if many widgets are on the page

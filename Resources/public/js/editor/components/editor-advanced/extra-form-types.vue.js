@@ -5,14 +5,14 @@ var extraFormTypes = {
           '<div>' +
               '<ul class="nav nav-pills" role="tablist">' +
                   '<li role="presentation" class="active">' +
-                      '<a role="tab" data-toggle="tab" href="#basic-types">Basic types</a>' +
+                      '<a role="tab" data-toggle="tab" :href="anchor(\'#\', \'basic_types\')">Basic types</a>' +
                   '</li>' +
                   '<li role="presentation">'+
-                      '<a role="tab" data-toggle="tab" href="#configured-types">Configured types</a>' +
+                      '<a role="tab" data-toggle="tab" :href="anchor(\'#\', \'configured_types\')">Configured types</a>' +
                   '</li>' +
               '</ul>' +
               '<div class="tab-content">' +
-                  '<div role="tabpanel" class="tab-pane in active" id="basic-types">' +
+                  '<div role="tabpanel" class="tab-pane in active" :id="anchor(\'\', \'basic_types\')">' +
                       '<basic-extra-form-type ' +
                           '@created="createField" ' +
                           ':type="basicType" ' +
@@ -20,7 +20,7 @@ var extraFormTypes = {
                       '>' +
                       '</basic-extra-form-type>' +
                   '</div>' +
-                  '<div role="tabpanel" class="tab-pane" id="configured-types">' +
+                  '<div role="tabpanel" class="tab-pane" :id="anchor(\'\', \'configured_types\')">' +
                       '<configured-extra-form-type ' +
                           '@delete="deleteConfiguredType" ' +
                           '@created="createConfiguredField" ' +
@@ -38,7 +38,8 @@ var extraFormTypes = {
     return {
       modal: {
         show: false
-      }
+      },
+      editorId: this.$store.getters.editorId
     }
   },
 
@@ -64,6 +65,18 @@ var extraFormTypes = {
   },
 
   methods: {
+
+    /**
+     * Create an anchor to hook on bootstrap tab feature
+     *
+     * @param prefix
+     * @param name
+     *
+     * @returns {string}
+     */
+    anchor: function(prefix, name) {
+        return prefix + name + '_' + this.editorId;
+    },
 
     /**
      * Create a new field
