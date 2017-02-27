@@ -15,28 +15,29 @@ var httpMixin = {
      * @returns Object : the json response
      */
     handleGetRequest: function (url, callback) {
-      var response = this.$store.getters.getCachedResource(url);
-      if (response) {
-        return callback(response);
-      } else {
-        this.$http
-          .get(url)
-          .then(
-            function (response) {
-              return response.json();
-            }
-          )
-          .then(function (json) {
-            this.$store.commit({
-              type: 'cache',
-              api_url: url,
-              api_response: json
-            });
+      var cachedResource = this.$store.getters.getCachedResource(url);
 
-            return callback(json);
-          })
-        ;
+      if (cachedResource) {
+        return callback(cachedResource);
       }
+
+      this.$http
+        .get(url)
+        .then(
+          function (response) {
+            return response.json();
+          }
+        )
+        .then(function (json) {
+          this.$store.commit({
+            type: 'cache',
+            api_url: url,
+            api_response: json
+          });
+
+          return callback(json);
+        })
+      ;
     }
   }
 

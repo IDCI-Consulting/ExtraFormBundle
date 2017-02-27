@@ -1,7 +1,8 @@
+/* exported fontAwesomeIconMixin */
+
 /**
  * Global methods used to get icons
  */
-/* exported fontAwesomeIconMixin */
 var fontAwesomeIconMixin = {
 
   methods: {
@@ -13,11 +14,12 @@ var fontAwesomeIconMixin = {
      *
      * @returns string
      */
-    getFontAwsomeIconClass: function(icon) {
-      return typeof icon !== 'undefined' ?
-        'fa-icon fa fa-' + icon :
-        'fa-icon fa fa-circle-o'
-      ;
+    getFontAwsomeIconClass: function (icon) {
+      if (typeof icon !== 'undefined') {
+        return 'fa-icon fa fa-' + icon;
+      }
+
+      return 'fa-icon fa fa-circle-o';
     }
   }
 

@@ -1,17 +1,18 @@
 /* exported editorSimpleNewField */
+/* global generateUniqueId */
+
 var editorSimpleNewField = {
 
   template:
     '<div>' +
         '<types-selectbox v-model="selectedExtraFormType"/> ' +
         '<button @click.prevent="createField">New field</button>' +
-    '</div>'
-  ,
+    '</div>',
 
   data: function () {
     return {
       selectedExtraFormType: 'initial'
-    }
+    };
   },
 
   /* global typesSelectbox */
@@ -24,13 +25,12 @@ var editorSimpleNewField = {
     /**
      * Create a new field
      */
-    /* global generateUniqueId */
-    createField: function() {
+    createField: function () {
       var field = {
-        'name': 'field_' + this.selectedExtraFormType + '_' + generateUniqueId(),
-        'extra_form_type': this.selectedExtraFormType,
-        'options': {},
-        'constraints': []
+        name: 'field_' + this.selectedExtraFormType + '_' + generateUniqueId(),
+        extra_form_type: this.selectedExtraFormType,
+        options: {},
+        constraints: []
       };
 
       this.$emit('created', field);

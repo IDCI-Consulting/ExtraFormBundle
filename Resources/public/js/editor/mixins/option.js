@@ -2,25 +2,26 @@
  * Base component for a field option
  */
 /* exported optionMixin */
+
 var optionMixin = {
 
   props: ['option', 'name', 'value'],
 
-  data: function() {
-    return  {
-      data: this.option.options.data // default value
-    }
+  data: function () {
+    return {
+      // Default value from the api
+      data: this.option.options.data
+    };
   },
 
   /**
    * Update the value on component creation
    */
-  created: function() {
+  created: function () {
     if (typeof this.value !== 'undefined') {
+      this.data = this.value;
       if (typeof this.value !== 'string') {
         this.data = JSON.stringify(this.value);
-      } else {
-        this.data = this.value;
       }
     }
   },
@@ -30,11 +31,10 @@ var optionMixin = {
    */
   watch: {
     value: {
-      handler: function(value) {
+      handler: function (value) {
+        this.data = value;
         if (typeof value !== 'string') {
           this.data = JSON.stringify(value);
-        } else {
-          this.data = value;
         }
       }
     }
@@ -47,11 +47,11 @@ var optionMixin = {
      *
      * @param value
      */
-    updateOption: function(value) {
+    updateOption: function (value) {
       this.data = value;
       this.$emit('changed', {
-        'name': this.name,
-        'value': value
+        name: this.name,
+        value: value
       });
     },
 
@@ -61,8 +61,8 @@ var optionMixin = {
      *
      * @param value
      */
-    setJsonAttemptClass: function(value) {
-      if (value.indexOf('{') === 0 || value.indexOf('[') === 0) {
+    setJsonAttemptClass: function (value) {
+      if (0 === value.indexOf('{') || 0 === value.indexOf('[')) {
         try {
           JSON.parse(value);
           this.classes = 'fa fa-check success feedback';

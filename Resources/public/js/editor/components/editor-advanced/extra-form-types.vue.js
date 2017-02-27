@@ -1,4 +1,6 @@
 /* exported extraFormTypes */
+/* global generateUniqueId */
+
 var extraFormTypes = {
 
   template:
@@ -8,7 +10,7 @@ var extraFormTypes = {
           '<li role="presentation" class="active">' +
             '<a role="tab" data-toggle="tab" :href="anchor(\'#\', \'basic_types\')">Basic types</a>' +
           '</li>' +
-          '<li role="presentation">'+
+          '<li role="presentation">' +
             '<a role="tab" data-toggle="tab" :href="anchor(\'#\', \'configured_types\')">Configured types</a>' +
           '</li>' +
         '</ul>' +
@@ -32,8 +34,7 @@ var extraFormTypes = {
           '</div>' +
         '</div>' +
       '</div>' +
-    '</div>'
-  ,
+    '</div>',
 
   data: function () {
     return {
@@ -41,26 +42,31 @@ var extraFormTypes = {
         show: false
       },
       editorId: this.$store.getters.editorId
-    }
+    };
   },
 
   computed: {
-    configuredTypes: function() {
+    configuredTypes: function () {
       return this.$store.getters.getConfiguredTypes;
     },
-    basicTypes: function() {
+    basicTypes: function () {
       return this.$store.getters.getTypes;
     }
   },
 
   components: {
+
+    /* global configuredExtraFormType */
     'configured-extra-form-type': configuredExtraFormType,
+
+    /* global basicExtraFormType */
     'basic-extra-form-type': basicExtraFormType
   },
 
+  /* global httpMixin fontAwesomeIconMixin fieldsMixin */
   mixins: [httpMixin, fontAwesomeIconMixin, fieldsMixin],
 
-  created: function() {
+  created: function () {
     this.getExtraFormTypes();
     this.getConfiguredExtraFormTypes();
   },
@@ -75,20 +81,20 @@ var extraFormTypes = {
      *
      * @returns {string}
      */
-    anchor: function(prefix, name) {
-        return prefix + name + '_' + this.editorId;
+    anchor: function (prefix, name) {
+      return prefix + name + '_' + this.editorId;
     },
 
     /**
      * Create a new field
      */
-    createField: function(type) {
+    createField: function (type) {
       var field = {
-        'name': 'field_' + type.name + '_' + generateUniqueId(),
-        'icon': type.icon,
-        'extra_form_type': type.name,
-        'options': {},
-        'constraints': []
+        name: 'field_' + type.name + '_' + generateUniqueId(),
+        icon: type.icon,
+        extra_form_type: type.name,
+        options: {},
+        constraints: []
       };
 
       this.$emit('created', field);
@@ -97,21 +103,21 @@ var extraFormTypes = {
     /**
      * Delete a configured type
      */
-    deleteConfiguredType: function(type) {
+    deleteConfiguredType: function (type) {
       this
         .$http.delete(this.$store.getters.deleteConfiguredExtraForTypesApiUrl(type.name))
         .then(
           function () {
-            // delete the type from the configured types
+            // Delete the type from the configured types
             for (var i = 0, len = this.configuredTypes.length; i < len; i++) {
               if (this.configuredTypes[i].name === type.name) {
                 this.$store.commit('removeConfiguredType', i);
 
-                return; // avoid too keep looping over a sliced array
+                // Avoid too keep looping over a sliced array
+                return;
               }
             }
-          },
-          function (response) {}
+          }
         )
       ;
     },
@@ -119,27 +125,28 @@ var extraFormTypes = {
     /**
      * Create a new configured field
      */
-    createConfiguredField: function(type) {
-
+    createConfiguredField: function (type) {
       var options = {};
+
       for (var optionName in type.extra_form_options) {
         if (type.extra_form_options.hasOwnProperty(optionName)) {
-          if (typeof (type.extra_form_options[optionName]['options']['data']) !== "undefined") {
-            options[optionName] = type.extra_form_options[optionName]['options']['data'];
+          if ('undefined' !== typeof type.extra_form_options[optionName].options.data) {
+            options[optionName] = type.extra_form_options[optionName].options.data;
           }
         }
       }
 
       var field = {
-        'name': 'field_' + type.name + '_' + generateUniqueId(),
-        'icon': type.icon,
-        'extra_form_type': type.form_type_name,
-        'options':  options,
-        'constraints': type.extra_form_constraints
+        name: 'field_' + type.name + '_' + generateUniqueId(),
+        icon: type.icon,
+        extra_form_type: type.form_type_name,
+        options: options,
+        constraints: type.extra_form_constraints
       };
 
-      // case where the fields contains an extra form builder with a configuration option that contains fields, and so on and so on
-      if (typeof field.options.configuration !== 'undefined') {
+      /* Case where the fields contains an extra form builder
+      with a configuration option that contains fields, and so on and so on */
+      if ('undefined' !== typeof field.options.configuration) {
         field.options.configuration = this.createFieldsRecursively(JSON.parse(field.options.configuration));
       }
 
@@ -149,14 +156,13 @@ var extraFormTypes = {
     /**
      * Get the form types
      */
-    getExtraFormTypes: function() {
-      var url = this.$store.getters.extraFormTypesApiUrl,
-          self = this
-      ;
+    getExtraFormTypes: function () {
+      var url = this.$store.getters.extraFormTypesApiUrl;
+      var self = this;
 
       this.handleGetRequest(url, function (json) {
         var types = json.filter(function (element) {
-          return element.abstract === false;
+          return false === element.abstract;
         });
 
         self.$store.commit('setTypes', types);
@@ -166,19 +172,19 @@ var extraFormTypes = {
     /**
      * Get the configured form types
      */
-    getConfiguredExtraFormTypes: function() {
-      var url = this.$store.getters.configuredExtraFormTypesApiUrl,
-          self = this
-      ;
+    getConfiguredExtraFormTypes: function () {
+      var url = this.$store.getters.configuredExtraFormTypesApiUrl;
+      var self = this;
 
       this.handleGetRequest(url, function (configuredTypes) {
         for (var i = 0, len = configuredTypes.length; i < len; i++) {
-          if (typeof configuredTypes[i].configuration === 'string') {
+          if ('string' === typeof configuredTypes[i].configuration) {
             configuredTypes[i].configuration = JSON.parse(configuredTypes[i].configuration);
           }
           // Jms serialization issue: https://github.com/schmittjoh/JMSSerializerBundle/issues/271
           if (configuredTypes[i].extra_form_options.length < 1) {
-            configuredTypes[i].extra_form_options = {}; // when the value is []
+            // When the value is []
+            configuredTypes[i].extra_form_options = {};
           }
         }
 

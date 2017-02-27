@@ -8,14 +8,14 @@ idci_extra_form:
             extra_form_options:
                 label:          { extra_form_type: "text",     options: {required: false} }
                 label_attr:     { extra_form_type: "text",     options: {required: false} }
-                required:       { extra_form_type: "checkbox", options: {required: false} }
+                required:       { extra_form_type: "checkbox", options: {required: false, data: true} }
                 disabled:       { extra_form_type: "checkbox", options: {required: false} }
                 read_only:      { extra_form_type: "checkbox", options: {required: false} }
                 error_bubbling: { extra_form_type: "checkbox", options: {required: false} }
                 data:           { extra_form_type: "text",     options: {required: false} }
                 attr:           { extra_form_type: "text",     options: {required: false} }
-                pattern:        { extra_form_type: "text",     options: {required: false} }
                 help:           { extra_form_type: "textarea", options: {required: false} }
+                trim:           { extra_form_type: "checkbox", options: {required: false, data: true} }
             extra_form_constraints: ~
 
         "extra_form_builder":
@@ -47,7 +47,6 @@ idci_extra_form:
             description: "Textarea input field"
             icon:        "comments-o"
             extra_form_options:
-                max_length: { extra_form_type: "number",   options: {required: false} }
                 trim:       { extra_form_type: "checkbox", options: {required: false} }
 
         "extra_form_json_textarea":
@@ -118,9 +117,6 @@ idci_extra_form:
             form_type:   text
             description: "Input text field"
             icon:        "text-height"
-            extra_form_options:
-                max_length: { extra_form_type: "number",   options: {required: false} }
-                trim:       { extra_form_type: "checkbox", options: {required: false} }
 
         "repeated":
             parent:      form

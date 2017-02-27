@@ -7,21 +7,24 @@ Vue.component('editor-simple', {
         '<field class="field" @removed="removeField" v-for="(field, index) in fields" :field="field" :index="index"/>' +
       '</draggable>' +
       '<new-field class="new-field" @created="addField"></new-field>' +
-    '</div>'
-  ,
+    '</div>',
 
   props: ['fields'],
 
-  data: function() {
+  data: function () {
     return {
-      'sortableOptions': {
+      sortableOptions: {
         handle: '.handle'
       }
     };
   },
 
   components: {
+
+    /* global editorSimpleNewField */
     'new-field': editorSimpleNewField,
+
+    /* global editorSimpleField */
     'field': editorSimpleField
   },
 
@@ -32,7 +35,7 @@ Vue.component('editor-simple', {
      *
      * @param field
      */
-    addField: function(field) {
+    addField: function (field) {
       this.fields.push(field);
     },
 
@@ -41,7 +44,7 @@ Vue.component('editor-simple', {
      *
      * @param index
      */
-    removeField: function(index) {
+    removeField: function (index) {
       this.fields.splice(index, 1);
     }
 

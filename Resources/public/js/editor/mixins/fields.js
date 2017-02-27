@@ -11,26 +11,26 @@ var fieldsMixin = {
      *
      * @param object
      */
-    createFieldsRecursively: function(object) {
+    createFieldsRecursively: function (object) {
 
       var newFields = [];
       var index = 0;
 
       for (var field in object) {
-        index = index + 1;
         if (object.hasOwnProperty(field)) {
-          // if created form the raw, the name is the key
-          // if created form the configured type, the name is in the name property
-          var name = typeof object[field].name === 'undefined'? field : object[field].name;
+          index += 1;
+          // If created form the raw, the name is the key
+          // If created form the configured type, the name is in the name property
+          var name = 'undefined' === typeof object[field].name ? field : object[field].name;
           var newField = {
             name: name,
             extra_form_type: object[field].extra_form_type,
-            options:  object[field].options,
-            constraints:  object[field].constraints
+            options: object[field].options,
+            constraints: object[field].constraints
           };
 
           // Set the first field as active
-          newField.active = (index === 1 ? true : false);
+          newField.active = 1 === index;
 
           if (typeof object[field].options.configuration !== 'undefined') {
             newField.options.configuration = this.createFieldsRecursively(object[field].options.configuration);

@@ -9,17 +9,16 @@ var editorSimpleNewFieldConstraint = {
         '</option>' +
       '</select> ' +
       '<button @click.prevent="createConstraint">New constraint</button>' +
-    '</div>'
-  ,
+    '</div>',
 
   data: function () {
     return {
       constraints: [],
       selectedConstraint: 'initial'
-    }
+    };
   },
 
-  created: function() {
+  created: function () {
     this.getExtraFormConstraints();
   },
 
@@ -31,10 +30,10 @@ var editorSimpleNewFieldConstraint = {
     /**
      * Create a new constraint
      */
-    createConstraint: function() {
+    createConstraint: function () {
       var constraint = {
-        'extra_form_constraint': this.selectedConstraint,
-        'options': {}
+        extra_form_constraint: this.selectedConstraint,
+        options: {}
       };
 
       this.$emit('created', constraint);
@@ -43,10 +42,9 @@ var editorSimpleNewFieldConstraint = {
     /**
      * Get the extra form constraints
      */
-    getExtraFormConstraints: function() {
-      var url = this.$store.getters.extraFormConstraintsApiUrl,
-          self = this
-      ;
+    getExtraFormConstraints: function () {
+      var url = this.$store.getters.extraFormConstraintsApiUrl;
+      var self = this;
 
       this.handleGetRequest(url, function (json) {
         self.constraints = json;

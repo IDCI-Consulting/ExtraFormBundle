@@ -10,21 +10,28 @@ var editorSimpleField = {
       '<field-constraints class="field-constraints" :fieldConstraints="field.constraints"/> ' +
       '<new-field-constraint @created="addConstraint"/><br>' +
       '<button v-on:click.prevent="removeField(index)">Delete this field</button>' +
-    '</div>'
-  ,
+    '</div>',
 
   data: function () {
     return {
       selectedExtraFormType: this.field.extra_form_type
-    }
+    };
   },
 
   props: ['field', 'index'],
 
   components: {
+
+    /* global editorSimpleFieldOptions */
     'field-options': editorSimpleFieldOptions,
+
+    /* global editorSimpleNewFieldConstraint */
     'new-field-constraint': editorSimpleNewFieldConstraint,
+
+    /* global editorSimpleFieldConstraints */
     'field-constraints': editorSimpleFieldConstraints,
+
+    /* global typesSelectbox */
     'types-selectbox': typesSelectbox
   },
 
@@ -35,7 +42,7 @@ var editorSimpleField = {
      *
      * @param type
      */
-    updateType: function(type) {
+    updateType: function (type) {
       this.$set(this.field, 'extra_form_type', type);
     },
 
@@ -44,15 +51,15 @@ var editorSimpleField = {
      *
      * @param index
      */
-    removeField: function(index) {
+    removeField: function (index) {
       this.$emit('removed', index);
     },
 
     /**
      * Add a new constraint to the field
      */
-    addConstraint: function(newConstraint) {
-        this.field.constraints.push(newConstraint);
+    addConstraint: function (newConstraint) {
+      this.field.constraints.push(newConstraint);
     }
 
   }

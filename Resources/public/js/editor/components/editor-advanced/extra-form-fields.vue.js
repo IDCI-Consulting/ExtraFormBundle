@@ -4,23 +4,28 @@ var extraFormFields = {
   template:
     '<div>' +
       '<draggable :list="fields" :options="sortableOptions">' +
-        '<field @active-class="setActiveClass" @removed="removeField" v-for="(field, index) in fields" :field="field" :index="index"/>' +
+        '<field ' +
+          '@active-class="setActiveClass" ' +
+          '@removed="removeField" ' +
+          'v-for="(field, index) in fields" :field="field" :index="index"' +
+        '/>' +
       '</draggable>' +
-    '</div>'
-  ,
+    '</div>',
 
   props: ['fields'],
 
-  data: function() {
+  data: function () {
     return {
-      'sortableOptions': {
+      sortableOptions: {
         handle: '.fa-arrows-alt'
       }
     };
   },
 
   components: {
-    'field': editorAdvancedField
+
+    /* global editorAdvancedField */
+    field: editorAdvancedField
   },
 
   methods: {
@@ -30,7 +35,7 @@ var extraFormFields = {
      *
      * @param index
      */
-    removeField: function(index) {
+    removeField: function (index) {
       this.fields.splice(index, 1);
     },
 
@@ -39,7 +44,7 @@ var extraFormFields = {
      *
      * @param index
      */
-    setActiveClass: function(index) {
+    setActiveClass: function (index) {
       this.resetActiveClasses();
       this.$set(this.fields[index], 'active', true);
     },
@@ -47,8 +52,8 @@ var extraFormFields = {
     /**
      * Reset all active classes
      */
-    resetActiveClasses: function() {
-      for (var i= 0, len = this.fields.length; i < len; i++) {
+    resetActiveClasses: function () {
+      for (var i = 0, len = this.fields.length; i < len; i++) {
         this.$set(this.fields[i], 'active', false);
       }
     }

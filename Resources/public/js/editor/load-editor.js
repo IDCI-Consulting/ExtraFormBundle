@@ -1,35 +1,43 @@
 /* global $ */
-$(window).on('load', function() {
+$(window).on('load', function () {
 
-  /*************************************************************************/
-  /* Create the editor for each textareas with the class extra form editor */
-  /*************************************************************************/
-
-  $('textarea.extra-form-editor').each(function(index) {
+  /**
+   * Create the editor for each textareas with the class extra form editor
+   */
+  $('textarea.extra-form-editor').each(function (index) {
 
     /* global createAttributeMapObject */
-    var formProperties = createAttributeMapObject(this); // retrieve the textarea attributes
-    formProperties.value = this.value;
+
+    // Retrieve the textarea attributes and value
+    var formProperties = createAttributeMapObject(this);
     var editorComponentId = 'editorComponent' + index;
     var availableModes = formProperties['data-available-modes'].split('__');
     var configuration = window[formProperties['data-configuration-variable']];
-
     var rawModal = createRawModal(index);
     var rawModalButton = '<button class="trigger-raw-mode-modal-' + index + '">Raw mode</button>';
-
-    var simpleModal = '', simpleModalButton = '';
-    if (availableModes.indexOf('simple') > -1) {
-      simpleModal = createSimpleModal(index);
-      simpleModalButton = '<button class="trigger-simple-visual-mode-modal-' + index + '">Simple visual mode</button>';
-    }
-
+    var simpleModal = '';
+    var simpleModalButton = '';
     var advancedModal = '';
     var overviewModal = '';
     var advancedModalButton = '';
+
+    if (availableModes.indexOf('simple') > -1) {
+      simpleModal = createSimpleModal(index);
+      simpleModalButton =
+        '<button class="trigger-simple-visual-mode-modal-' +
+        index +
+        '">Simple visual mode</button>'
+      ;
+    }
+
     if (availableModes.indexOf('advanced') > -1) {
       advancedModal = createAdvancedModal(index);
       overviewModal = createOverviewModal(index);
-      advancedModalButton = '<button class="trigger-advanced-visual-mode-modal-' + index + '">Advanced visual mode</button>';
+      advancedModalButton =
+        '<button class="trigger-advanced-visual-mode-modal-' +
+        index +
+        '">Advanced visual mode</button>'
+      ;
     }
 
     /**
@@ -44,9 +52,12 @@ $(window).on('load', function() {
     /**
      * Insert the modals editor at the end of the body
      */
-    (function() {
+    (function () {
       var $body = $('body');
-      $body.append('<div id="' + editorComponentId + '">' + rawModal + simpleModal + advancedModal + overviewModal + '</div>');
+
+      $body.append(
+        '<div id="' + editorComponentId + '">' + rawModal + simpleModal + advancedModal + overviewModal + '</div>'
+      );
     }());
 
     // Hide the initial textarea
@@ -56,13 +67,18 @@ $(window).on('load', function() {
     /* Display / Hide the modals */
     /*****************************/
 
-    var modalTypes = ['simple-visual-mode-modal', 'advanced-visual-mode-modal', 'raw-mode-modal', 'overview-modal'];
+    var modalTypes = [
+      'simple-visual-mode-modal',
+      'advanced-visual-mode-modal',
+      'raw-mode-modal',
+      'overview-modal'
+    ];
 
-    modalTypes.forEach(function(modalType) {
-      showModalOnClick(modalType, index)
+    modalTypes.forEach(function (modalType) {
+      showModalOnClick(modalType, index);
     });
 
-    modalTypes.forEach(function(modalType) {
+    modalTypes.forEach(function (modalType) {
       hideModalOnClick(modalType);
     });
 
@@ -85,25 +101,38 @@ $(window).on('load', function() {
 
   var $simpleEditor = $('.editor-simple');
 
-  $simpleEditor.on('click', '.field-options > label', function(event) {
-    event.stopImmediatePropagation(); // prevent the click for being triggered multiple times
-    $(this).parent().toggleClass('show');
+  $simpleEditor.on('click', '.field-options > label', function (event) {
+    // Prevent the click for being triggered multiple times
+    event.stopImmediatePropagation();
+    $(this)
+      .parent()
+      .toggleClass('show')
+    ;
   });
 
-  $simpleEditor.on('click', '.field-constraint-options > label', function(event) {
+  $simpleEditor.on('click', '.field-constraint-options > label', function (event) {
     event.stopImmediatePropagation();
-    $(this).parent().toggleClass('show');
+    $(this)
+      .parent()
+      .toggleClass('show')
+    ;
   });
 
   /********************************************/
   /* Add some colors on empty required inputs */
   /********************************************/
 
-  $(document).on('change', 'input[required="required"]', function() {
-    if (!$(this).val()) {
-      $(this).css({ 'border-color': '#c9302c', 'background-color': '#f3d9d9'});
+  $(document).on('change', 'input[required="required"]', function () {
+    if ($(this).val()) {
+      $(this).css({
+        'border-color': '#cccccc',
+        'background-color': '#ffffff'
+      });
     } else {
-      $(this).css({ 'border-color': '#cccccc', 'background-color': '#ffffff'});
+      $(this).css({
+        'border-color': '#c9302c',
+        'background-color': '#f3d9d9'
+      });
     }
   });
 
@@ -115,11 +144,11 @@ $(window).on('load', function() {
  * @param modalType
  * @param modalIdentifier
  */
-function showModalOnClick(modalType, modalIdentifier) {
-  $(document).on('click', 'button.trigger-' + modalType + '-' + modalIdentifier, function(event) {
+function showModalOnClick (modalType, modalIdentifier) {
+  $(document).on('click', 'button.trigger-' + modalType + '-' + modalIdentifier, function (event) {
     event.preventDefault();
-
     var $modal = $('#' + modalType + '-' + modalIdentifier);
+
     if ('overview-modal' !== modalType) {
       $modal = $modal.first();
     }
@@ -133,36 +162,53 @@ function showModalOnClick(modalType, modalIdentifier) {
  *
  * @param modalType
  */
-function hideModalOnClick(modalType) {
-  // close the modal on click
+function hideModalOnClick (modalType) {
   var classes =
-      '.' + modalType + ' .modal-body button.close-modal, ' +     // on the generate field button from the editor-raw
-      '.' + modalType + ' .modal-footer > button.close-modal, ' + // on the upper right cross of the modal
-      '.' + modalType + ' .modal-header > button.close'           // on the close button on the left bottom of the modal
-    ;
+    // On the generate field button from the editor-raw
+    '.' + modalType + ' .modal-body button.close-modal, ' +
 
-  $(document).on('click', classes, function(event) {
+    // On the upper right cross of the modal
+    '.' + modalType + ' .modal-footer > button.close-modal, ' +
+
+    // On the close button on the left bottom of the modal
+    '.' + modalType + ' .modal-header > button.close';
+
+  $(document).on('click', classes, function (event) {
     event.preventDefault();
-    $(this).closest('.modal').modal('hide');
+    $(this)
+      .closest('.modal')
+      .modal('hide')
+    ;
   });
 }
 
 /**
  * Get the form overview on click on the trigger button
  *
+ * @param url
  * @param index
  */
-function getFormOverviewOnClick(url, index) {
+function getFormOverviewOnClick (url, index) {
 
-  function getFormOverview(url, callback) {
+  /**
+   * Get the form overview
+   *
+   * @param callback
+   */
+  function getFormOverview (callback) {
 
-    var raw = $('#raw-mode-modal-' + index + ' textarea').first().val();
+    var raw =
+      $('#raw-mode-modal-' + index + ' textarea')
+      .first()
+      .val();
 
     var request = $.ajax({
       url: url,
       method: 'POST',
       data: {
-        overview: {'configuration': raw}
+        overview: {
+          configuration: raw
+        }
       }
     });
 
@@ -181,19 +227,21 @@ function getFormOverviewOnClick(url, index) {
     });
   }
 
-  $(document).on('click', 'button.trigger-overview-modal-' + index, function() {
-    setTimeout(function() {
-      getFormOverview(url, function(content) {
+  $(document).on('click', 'button.trigger-overview-modal-' + index, function () {
+    setTimeout(function () {
+      getFormOverview(function (content) {
         if (content.success) {
-          $('#overview-modal-' + index + ' .modal-body').replaceWith('<div class="modal-body">' + content.data + '</div>');
+          $('#overview-modal-' + index + ' .modal-body').replaceWith(
+            '<div class="modal-body">' + content.data + '</div>'
+          );
         } else {
           $('#overview-modal-' + index + ' .modal-body').replaceWith(
             '<div class="modal-body">' +
-              '<div>' + content.data.responseText +'</div>' +
+              '<div>' + content.data.responseText + '</div>' +
             '</div>'
           );
         }
-      })
+      });
     }, 800);
   });
 }
@@ -203,27 +251,31 @@ function getFormOverviewOnClick(url, index) {
  *
  * @param index
  */
-function submitFormOverviewOnClick(index) {
+function submitFormOverviewOnClick (index) {
 
-  $(document).on('click', '#overview-modal-' + index + ' form button', function(event) {
+  $(document).on('click', '#overview-modal-' + index + ' form button', function (event) {
     event.preventDefault();
     resetFormOverviewModal(index);
     var $form = $(this).closest('form');
-    setTimeout(function() {
+
+    setTimeout(function () {
+
       /* global submitForm */
-      submitForm($form, function(content) {
+      submitForm($form, function (content) {
         if (content.success) {
           if (content.data) {
-            $('#overview-modal-' + index + ' .modal-body').replaceWith('<div class="modal-body">' + content.data + '</div>');
+            $('#overview-modal-' + index + ' .modal-body').replaceWith(
+              '<div class="modal-body">' + content.data + '</div>'
+            );
           }
         } else {
           $('#overview-modal-' + index + ' .modal-body').replaceWith(
             '<div class="modal-body">' +
-              '<div>' + content.data.responseText +'</div>' +
+              '<div>' + content.data.responseText + '</div>' +
             '</div>'
           );
         }
-      })
+      });
     }, 800);
   });
 }
@@ -233,8 +285,8 @@ function submitFormOverviewOnClick(index) {
  *
  * @param index
  */
-function resetFormOverviewModalOnClose(index) {
-  $(document).on('hidden.bs.modal', '#overview-modal-' + index, function() {
+function resetFormOverviewModalOnClose (index) {
+  $(document).on('hidden.bs.modal', '#overview-modal-' + index, function () {
     resetFormOverviewModal(index);
   });
 }
@@ -244,7 +296,7 @@ function resetFormOverviewModalOnClose(index) {
  *
  * @param index
  */
-function resetFormOverviewModal(index) {
+function resetFormOverviewModal (index) {
   $('#overview-modal-' + index + ' .modal-body').replaceWith(
     '<div class="modal-body">' +
       '<div style="text-align: center;"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i></div>' +
@@ -264,18 +316,19 @@ function resetFormOverviewModal(index) {
  *
  * @returns {string}
  */
-function createModal(
+function createModal (
   identifier,
   className,
-  fullscreen,
+  modalFullscreen,
   title,
   body,
-  footer
+  modalFooter
 ) {
-  fullscreen = fullscreen ? 'modal-fullscreen' : '';
-  footer = footer ? footer : '';
 
-  return '<div id="'+ className + '-' + identifier + '" class="modal fade ' + fullscreen + ' ' + className + '">' +
+  var fullscreen = modalFullscreen ? 'modal-fullscreen' : '';
+  var footer = modalFooter ? modalFooter : '';
+
+  return '<div id="' + className + '-' + identifier + '" class="modal fade ' + fullscreen + ' ' + className + '">' +
       '<div class="modal-dialog" role="document">' +
         '<div class="modal-content">' +
           '<div class="modal-header">' +
@@ -285,7 +338,7 @@ function createModal(
           '<div class="modal-body">' + body + '</div>' +
           '<div class="modal-footer">' +
             footer +
-          '</div>'+
+          '</div>' +
         '</div>' +
       '</div>' +
     '</div>'
@@ -299,7 +352,7 @@ function createModal(
  *
  * @returns {string}
  */
-function createRawModal(identifier) {
+function createRawModal (identifier) {
   return createModal(
     identifier,
     'raw-mode-modal',
@@ -316,7 +369,7 @@ function createRawModal(identifier) {
  *
  * @returns {string}
  */
-function createSimpleModal(identifier) {
+function createSimpleModal (identifier) {
   return createModal(
     identifier,
     'simple-visual-mode-modal',
@@ -334,7 +387,7 @@ function createSimpleModal(identifier) {
  *
  * @returns {string}
  */
-function createAdvancedModal(identifier) {
+function createAdvancedModal (identifier) {
   return createModal(
     identifier,
     'advanced-visual-mode-modal',
@@ -345,7 +398,7 @@ function createAdvancedModal(identifier) {
     'Display the overview <i class="fa fa-eye"></i>' +
     '</button>' +
     '<em>All your changes are automatically saved</em>'
-  )
+  );
 }
 
 /**
@@ -355,12 +408,12 @@ function createAdvancedModal(identifier) {
  *
  * @returns {string}
  */
-function createOverviewModal(identifier) {
+function createOverviewModal (identifier) {
   return createModal(
     identifier,
     'overview-modal',
     false,
     'Overview',
     '<div style="text-align: center;"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i></div>'
-  )
+  );
 }

@@ -9,8 +9,7 @@ var typesSelectbox = {
       '<option v-for="type in types" :value="type.name">' +
         '{{ type.name }}' +
       '</option>' +
-    '</select>'
-  ,
+    '</select>',
 
   props: ['value'],
 
@@ -18,19 +17,19 @@ var typesSelectbox = {
     return {
       selected: this.value,
       types: []
-    }
+    };
   },
 
   /* global httpMixin */
   mixins: [httpMixin],
 
-  mounted: function() {
+  mounted: function () {
     this.getExtraFormTypes();
   },
 
   watch: {
     value: {
-      handler: function(value) {
+      handler: function (value) {
         this.selected = value;
       }
     }
@@ -45,21 +44,20 @@ var typesSelectbox = {
     /**
      * Get the form types
      */
-    getExtraFormTypes: function() {
-      var url = this.$store.getters.extraFormTypesApiUrl,
-          self = this
-      ;
+    getExtraFormTypes: function () {
+      var url = this.$store.getters.extraFormTypesApiUrl;
+      var self = this;
 
       this.handleGetRequest(url, function (json) {
         self.types = json.filter(function (element) {
-          return element.abstract === false;
+          return false === element.abstract;
         });
 
-        if (self.selected === 'initial') {
+        if ('initial' === self.selected) {
           self.selected = self.types[0].name;
         }
 
-        self.$emit('input', self.selected)
+        self.$emit('input', self.selected);
       });
     }
 

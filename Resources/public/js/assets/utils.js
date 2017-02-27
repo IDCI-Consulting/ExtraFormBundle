@@ -30,7 +30,7 @@ function generateUniqueId() {
 }
 
 /**
- * Create a javascript object to get the map all the attribute of the given element
+ * Create a javascript object to get the map all the attribute of the given element, as well as the value
  *
  * @param element
  *
@@ -42,6 +42,8 @@ function createAttributeMapObject(element) {
     attribute = attributes[i];
     object[attribute.nodeName] = attribute.nodeValue;
   }
+
+  object.value = this.value;
 
   return object;
 }

@@ -3,21 +3,28 @@ var editorAdvancedNewFieldConstraint = {
 
   template:
     '<div class="new-field-constraint">' +
-      '<multiselect v-model="selectedConstraint" :options="constraints" label="description" key="name" selectLabel="" placeholder="Select a constraint"></multiselect>' +
+      '<multiselect ' +
+        'v-model="selectedConstraint" ' +
+        ':options="constraints" ' +
+        'label="description" ' +
+        'key="name" ' +
+        'selectLabel="" ' +
+        'placeholder="Select a constraint">' +
+      '</multiselect>' +
       '<button class="extra-btn" @click.prevent="createConstraint">Add</button>' +
-    '</div>'
-  ,
+    '</div>',
 
+  /* global httpMixin */
   mixins: [httpMixin],
 
   data: function () {
     return {
       constraints: [],
       selectedConstraint: 'initial'
-    }
+    };
   },
 
-  created: function() {
+  created: function () {
     this.getExtraFormConstraints();
   },
 
@@ -26,10 +33,10 @@ var editorAdvancedNewFieldConstraint = {
     /**
      * Create a new constraint
      */
-    createConstraint: function() {
+    createConstraint: function () {
       var constraint = {
-        'extra_form_constraint': this.selectedConstraint.name,
-        'options': {}
+        extra_form_constraint: this.selectedConstraint.name,
+        options: {}
       };
 
       this.$emit('created', constraint);
@@ -38,17 +45,16 @@ var editorAdvancedNewFieldConstraint = {
     /**
      * Get the extra form constraints
      */
-    getExtraFormConstraints: function() {
-      var url = this.$store.getters.extraFormConstraintsApiUrl,
-          self = this
-      ;
+    getExtraFormConstraints: function () {
+      var url = this.$store.getters.extraFormConstraintsApiUrl;
+      var self = this;
 
       this.handleGetRequest(url, function (json) {
-        // set the key of the objects as the value of the name so we can use it over iteration
+        // Set the key of the objects as the value of the name so we can use it over iteration
         self.constraints = Object.keys(json).map(function (key) {
-          var element = json[key];
-          element.name = key;
-          return element;
+          json[key].name = key;
+
+          return json[key];
         });
 
         self.selectedConstraint = self.constraints[0];

@@ -9,21 +9,22 @@ var editorSimpleFieldConstraints = {
         '<button v-on:click.prevent="removeConstraint(index)">Delete this constraint</button>' +
         '<field-constraint-options :fieldConstraint="constraint" :index="index" @optionChanged="updateOption"/>' +
       '</div>' +
-    '</div>'
-  ,
+    '</div>',
 
   props: ['fieldConstraints'],
 
   components: {
+
+    /* global editorSimpleFieldConstraintOptions */
     'field-constraint-options': editorSimpleFieldConstraintOptions
   },
 
   methods: {
-    updateOption: function(option) {
+    updateOption: function (option) {
       this.$set(this.fieldConstraints.options, option.name, option.value);
     },
 
-    removeConstraint: function(index) {
+    removeConstraint: function (index) {
       this.fieldConstraints.splice(index, 1);
     }
   }
