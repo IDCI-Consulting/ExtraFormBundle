@@ -1,7 +1,7 @@
 # Variables
 
 target_container ?= php
-php_sources ?= Configuration Constraint Controller DependencyInjection Entity Event Exception Form Type Validator
+php_sources ?= .
 js_sources ?= Resources/public/js/editor
 
 # Bash Commands
@@ -42,7 +42,7 @@ phploc:
 
 .PHONY: phpcs
 phpcs:
-	docker run -i -v `pwd`:/project jolicode/phaudit bash -c "phpcs $(php_sources) --standard=PSR2; exit $$?"
+	docker run -i -v `pwd`:/project jolicode/phaudit bash -c "phpcs $(php_sources) --extensions=php --ignore=vendor,app/cache,Tests/cache    --standard=PSR2; exit $$?"
 
 .PHONY: phpcpd
 phpcpd:
