@@ -83,16 +83,18 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
             $configuration = $configuration->fetch($parameters);
         }
 
-        foreach ($configuration as $name => $field) {
-            $resolver = new OptionsResolver();
-            $this->configureField($resolver);
-            $resolvedField = $resolver->resolve($field);
+        if (is_array($configuration)) {
+            foreach ($configuration as $name => $field) {
+                $resolver = new OptionsResolver();
+                $this->configureField($resolver);
+                $resolvedField = $resolver->resolve($field);
 
-            $formBuilder->add(
-                $name,
-                $this->buildFormType($resolvedField),
-                $this->buildFormOptions($name, $resolvedField, $data)
-            );
+                $formBuilder->add(
+                    $name,
+                    $this->buildFormType($resolvedField),
+                    $this->buildFormOptions($name, $resolvedField, $data)
+                );
+            }
         }
 
         return $formBuilder;
