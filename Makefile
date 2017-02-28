@@ -1,13 +1,15 @@
 # Variables
 
 target_container ?= php
-sources ?= Configuration Constraint Controller DependencyInjection Entity Event Exception Form Type Validator
+php_sources ?= Configuration Constraint Controller DependencyInjection Entity Event Exception Form Type Validator
+js_sources ?= Resources/public/js/editor
 
 # Bash Commands
 
 .PHONY: command
 command:
 	docker-compose run --rm $(target_container) $(cmd)
+
 
 # NodeJs commands
 
@@ -21,7 +23,8 @@ gulp:
 
 .PHONY: eslint
 eslint:
-	docker-compose run --rm node ./node_modules/.bin/eslint Resources/public/js/editor
+	docker-compose run --rm node eslint $(js_sources)
+
 
 # PHP commands
 
@@ -48,6 +51,7 @@ phpcpd:
 .PHONY: phpdcd
 phpdcd:
 	docker run -i -v `pwd`:/project jolicode/phaudit bash -c "phpdcd $(sources); exit $$?"
+
 
 # Symfony bundle commands
 
