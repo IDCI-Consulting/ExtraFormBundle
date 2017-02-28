@@ -30,7 +30,7 @@ class ApiController extends FOSRestController
      *
      * @return Response
      */
-    public function getExtraFormTypesAction(Request $request, $_format)
+    public function getExtraFormTypesAction($_format)
     {
         $view = View::create()->setFormat($_format);
 
@@ -62,7 +62,7 @@ class ApiController extends FOSRestController
      *
      * @return Response
      */
-    public function getExtraFormTypesOptionsAction(Request $request, $_format, $type)
+    public function getExtraFormTypesOptionsAction($_format, $type)
     {
         $registry = $this->get('idci_extra_form.type_registry');
         if (!($registry->hasType($type))) {
@@ -114,7 +114,7 @@ class ApiController extends FOSRestController
      *
      * @return Response
      */
-    public function getExtraFormConstraintsAction(Request $request, $_format)
+    public function getExtraFormConstraintsAction($_format)
     {
         $view = View::create()->setFormat($_format);
 
@@ -145,7 +145,7 @@ class ApiController extends FOSRestController
      *
      * @return Response
      */
-    public function getExtraFormConstraintsOptionsAction(Request $request, $_format, $constraint)
+    public function getExtraFormConstraintsOptionsAction($_format, $constraint)
     {
         $registry = $this->get('idci_extra_form.constraint_registry');
         if (!($registry->hasConstraint($constraint))) {

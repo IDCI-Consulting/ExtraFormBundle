@@ -17,7 +17,7 @@ class ConfigurationFetcherRegistry
      * Set configuration.
      *
      * @param string                        $alias   The alias.
-     * @param ConfigurationBuilderInterface $builder The configuration fetcher.
+     * @param ConfigurationFetcherInterface $fetcher The configuration fetcher.
      */
     public function setFetcher($alias, ConfigurationFetcherInterface $fetcher)
     {

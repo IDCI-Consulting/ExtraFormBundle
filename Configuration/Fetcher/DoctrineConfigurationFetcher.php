@@ -31,7 +31,7 @@ class DoctrineConfigurationFetcher extends AbstractConfigurationFetcher
      */
     protected function setDefaultParameters(OptionsResolverInterface $resolver)
     {
-        parent::configureParameters($resolver);
+        parent::setDefaultParameters($resolver);
 
         $resolver
             ->setRequired(array('class', 'criteria', 'property'))
