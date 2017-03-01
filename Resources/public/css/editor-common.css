@@ -55,12 +55,16 @@ select, input, textarea, button, optgroup {
     box-shadow: none;
 }
 
-.modal-fullscreen .modal-dialog {
+.modal-fullscreen .modal-dialog, .overview-modal .modal-dialog {
     margin: 0;
     margin-right: auto;
     margin-left: auto;
+    height: auto;
+    left: 0;
+}
+
+.modal-fullscreen .modal-dialog {
     width: 100%;
-    height: 100%;
 }
 
 .modal-fullscreen .modal-footer {
