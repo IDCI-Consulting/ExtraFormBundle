@@ -43,7 +43,7 @@ function createAttributeMapObject(element) {
     object[attribute.nodeName] = attribute.nodeValue;
   }
 
-  object.value = this.value;
+  object.value = element.value;
 
   return object;
 }
