@@ -59,7 +59,7 @@ select, input, textarea, button, optgroup {
     margin: 0;
     margin-right: auto;
     margin-left: auto;
-    height: auto;
+    height: 100%;
     left: 0;
 }
 
