@@ -1,5 +1,8 @@
 IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType:
 
+    accessor_order: custom
+    custom_accessor_order: [name, description, abstract, formType]
+
     exclusion_policy: ALL
 
     properties:
@@ -9,8 +12,6 @@ IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType:
         description:
             expose: true
         parent:
-            expose: true
-        abstract:
             expose: true
         extraFormOptions:
             expose: true

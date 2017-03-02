@@ -1,5 +1,8 @@
 IDCI\Bundle\ExtraFormBundle\Entity\ConfiguredType:
 
+    accessor_order: custom
+    custom_accessor_order: [name]
+
     exclusion_policy: ALL
 
     properties:
@@ -9,15 +12,13 @@ IDCI\Bundle\ExtraFormBundle\Entity\ConfiguredType:
     virtual_properties:
         getIcon:
             serialized_name: icon
-        getExtraFormOptions:
-            serialized_name: extra_form_options
-        getExtraFormConstraints:
-            serialized_name: extra_form_constraints
         getDescription:
             serialized_name: description
-        isAbstract:
-            serialized_name: abstract
         getFormType:
             serialized_name: form_type
         getFormTypeName:
             serialized_name: form_type_name
+        getExtraFormOptions:
+            serialized_name: extra_form_options
+        getExtraFormConstraints:
+            serialized_name: extra_form_constraints
