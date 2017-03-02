@@ -48,6 +48,7 @@ class TypeCompilerPass implements CompilerPassInterface
             $configuration['name'] = $name;
 
             $serviceDefinition->setAbstract(false);
+            $serviceDefinition->setPublic(!$configuration['abstract']);
             $serviceDefinition->replaceArgument(0, $configuration);
 
             $container->setDefinition(
