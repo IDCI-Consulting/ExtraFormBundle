@@ -78,9 +78,7 @@ class ExtraFormCollectionType extends AbstractType
                 'type'          => 'text',
                 'add_button'    => array(),
                 'remove_button' => array(),
-                'options'       => array(
-                    'compound' => true
-                ),
+                'options'       => array(),
                 'collection_id' => 'default'
             ))
             ->setNormalizers(array(
@@ -109,8 +107,9 @@ class ExtraFormCollectionType extends AbstractType
                 'options' => function(Options $options, $value) {
                     return array_merge(
                         array(
-                            'label' => ' ',
-                            'attr'  => array()
+                            'label'    => ' ',
+                            'attr'     => array(),
+                            'compound' => true
                         ),
                         $value
                     );
