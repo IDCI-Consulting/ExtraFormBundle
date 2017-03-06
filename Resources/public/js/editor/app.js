@@ -1,4 +1,4 @@
-/* exported triggerExtraFormBundleEditor */
+/* exported triggerVueEditor */
 
 /**
  * The function that will trigger the editor
@@ -7,7 +7,7 @@
  * @param formProperties : Object containing the properties of the default form
  * @param configuration : Object containing the editor configuration (api url, etc)
  */
-function triggerExtraFormBundleEditor (element, formProperties, configuration) {
+function triggerVueEditor (element, formProperties, configuration) {
 
   /* global Vue VueMultiselect VueResource Vuex */
   Vue.component('Multiselect', VueMultiselect.default);

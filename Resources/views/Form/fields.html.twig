@@ -182,6 +182,11 @@
 {%- block extra_form_editor_widget -%}
     {{- form_widget(form) -}}
     <script type="text/javascript">
+
+        window.onload = function () {
+            loadExtraFormEditor();
+        };
+
         var {{ form.vars.id }}_configuration = {
             editorId: '{{ form.vars.id }}',
             allow_configured_type_edition: {{ form.vars.allow_configured_type_edition ? 'true' : 'false' }},
@@ -198,7 +203,7 @@
         };
 
         // We must load the scripts and styles only once, even if many widgets are on the page
-        if (typeof window.triggerExtraFormBundleEditor !== 'function') {
+        if (typeof window.loadExtraFormEditor !== 'function') {
           document.write(
             '<script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor.min.js') }}"></scri'+'pt>' +
             '<link rel="stylesheet" type="text/css" href="{{ asset('bundles/idciextraform/css/font-awesome-4.7.0/css/font-awesome.min.css') }}" />' +
