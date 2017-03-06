@@ -16,7 +16,6 @@ idci_extra_form:
                 attr:           { extra_form_type: "text",     options: {required: false} }
                 help:           { extra_form_type: "textarea", options: {required: false} }
                 trim:           { extra_form_type: "checkbox", options: {required: false, data: true} }
-            extra_form_constraints: ~
 
         "extra_form_builder":
             parent:      form
@@ -25,7 +24,6 @@ idci_extra_form:
             icon: "cogs"
             extra_form_options:
                 configuration:  { extra_form_type: "textarea", options: {required: false} }
-            extra_form_constraints: ~
 
         "extra_form_collection":
             parent:      form
@@ -39,7 +37,6 @@ idci_extra_form:
                 max_items:      { extra_form_type: "number", options: {required: false, data: 10} }
                 add_button:     { extra_form_type: "textarea", options: {required: false} }
                 remove_button:  { extra_form_type: "textarea", options: {required: false} }
-            extra_form_constraints: ~
 
         "textarea":
             parent:      form
