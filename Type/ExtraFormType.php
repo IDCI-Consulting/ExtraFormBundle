@@ -45,11 +45,6 @@ class ExtraFormType implements ExtraFormTypeInterface
     protected $extraFormOptions;
 
     /**
-     * @var array<ExtraFormConstraint>
-     */
-    protected $extraFormConstraints;
-
-    /**
      * Constructor
      *
      * @param array $configuration
@@ -63,7 +58,6 @@ class ExtraFormType implements ExtraFormTypeInterface
         $this->icon                 = $configuration['icon'];
         $this->abstract             = $configuration['abstract'];
         $this->extraFormOptions     = $configuration['extra_form_options'];
-        $this->extraFormConstraints = $configuration['extra_form_constraints'];
     }
 
     /**
@@ -130,21 +124,6 @@ class ExtraFormType implements ExtraFormTypeInterface
         return array_merge_recursive(
             $this->getParent()->getExtraFormOptions(),
             $this->extraFormOptions
-        );
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getExtraFormConstraints()
-    {
-        if (null === $this->getParent()) {
-            return $this->extraFormConstraints;
-        }
-
-        return array_merge_recursive(
-            $this->getParent()->getExtraFormConstraints(),
-            $this->extraFormConstraints
         );
     }
 }

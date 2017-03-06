@@ -16,6 +16,3 @@ IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType:
         extraFormOptions:
             expose: true
             serialized_name: extra_form_options
-        extraFormConstraints:
-            expose: true
-            serialized_name: extra_form_constraints
