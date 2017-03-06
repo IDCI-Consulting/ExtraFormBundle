@@ -57,11 +57,4 @@ interface ExtraFormTypeInterface
      * @return array
      */
     public function getExtraFormOptions();
-
-    /**
-     * Returns extra form constraints
-     *
-     * @return array
-     */
-    public function getExtraFormConstraints();
 }

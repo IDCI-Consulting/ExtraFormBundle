@@ -21,5 +21,3 @@ IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType:
             serialized_name: icon
         getExtraFormOptions:
             serialized_name: extra_form_options
-        getExtraFormConstraints:
-            serialized_name: extra_form_constraints

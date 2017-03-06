@@ -229,7 +229,7 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Get extra form constraints
      */
     public function getExtraFormConstraints()
     {
