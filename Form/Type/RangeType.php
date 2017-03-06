@@ -8,6 +8,7 @@
 namespace IDCI\Bundle\ExtraFormBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\OptionsResolver\Options;
 
@@ -16,7 +17,7 @@ class RangeType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(
@@ -56,10 +57,12 @@ class RangeType extends AbstractType
 
     /**
      * {@inheritdoc}
+     *
+     * @deprecated
      */
-    public function getName()
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return 'extra_form_range';
+        $this->configureOptions($resolver);
     }
 
     /**
@@ -68,5 +71,23 @@ class RangeType extends AbstractType
     public function getParent()
     {
         return 'text';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'extra_form_range';
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @deprecated
+     */
+    public function getName()
+    {
+        return $this->getBlockPrefix();
     }
 }

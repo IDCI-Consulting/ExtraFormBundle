@@ -11,6 +11,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\OptionsResolver\Options;
 use IDCI\Bundle\ExtraFormBundle\Form\Event\CollectionEventSubscriber;
@@ -69,7 +70,7 @@ class ExtraFormCollectionType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(
@@ -126,9 +127,29 @@ class ExtraFormCollectionType extends AbstractType
 
     /**
      * {@inheritdoc}
+     *
+     * @deprecated
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $this->configureOptions($resolver);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'extra_form_collection';
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @deprecated
      */
     public function getName()
     {
-        return 'extra_form_collection';
+        return $this->getBlockPrefix();
     }
 }

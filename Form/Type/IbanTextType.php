@@ -13,17 +13,27 @@ class IbanTextType extends AbstractType
 {
     /**
      * {@inheritdoc}
-    */
-    public function getName()
+     */
+    public function getParent()
+    {
+        return 'text';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'extra_form_iban_text';
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @deprecated
      */
-    public function getParent()
+    public function getName()
     {
-        return 'text';
+        return $this->getBlockPrefix();
     }
 }

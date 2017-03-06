@@ -8,6 +8,7 @@
 namespace IDCI\Bundle\ExtraFormBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistryInterface;
 
@@ -31,7 +32,7 @@ class ExtraFormTypeChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $choices = array();
 
@@ -48,6 +49,16 @@ class ExtraFormTypeChoiceType extends AbstractType
 
     /**
      * {@inheritdoc}
+     *
+     * @deprecated
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $this->configureOptions($resolver);
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getParent()
     {
@@ -57,8 +68,18 @@ class ExtraFormTypeChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'extra_form_type_choice';
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @deprecated
+     */
+    public function getName()
+    {
+        return $this->getBlockPrefix();
     }
 }
