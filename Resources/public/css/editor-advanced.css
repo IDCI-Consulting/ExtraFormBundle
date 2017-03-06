@@ -20,15 +20,6 @@
     padding-left: 5px;
 }
 
-.editor-advanced button.extra-btn {
-    border: 1px solid #514D61;
-    background-color: white;
-    color: #514D61;
-    display: block;
-    min-width: 200px;
-    margin: 10px auto;
-}
-
 .field-options .form-group {
     position: relative;
 }
@@ -41,20 +32,6 @@
 
 .editor-advanced .field-options i.warning.feedback { color: #d43f3a; }
 .editor-advanced .field-options i.success.feedback { color: #4cae4c; }
-
-.editor-advanced button.extra-btn .fa-icon {
-    float: left;
-    position: relative;
-    top: 3px;
-    padding-right: 5px;
-    min-width: 20px;
-}
-
-.editor-advanced button.extra-btn:hover {
-    background: #514D61;
-    border-color: #514D61;
-    color: #FFF;
-}
 
 /** EXTRA FORM FIELDS **/
 
@@ -122,57 +99,6 @@
 
 .editor-advanced .extra-form-fields .field:hover button.close {
     visibility: visible;
-}
-
-/** VUE MODAL COMPONENT **/
-
-.editor-advanced .extra-form-fields .field .vue-modal-mask,
-.editor-advanced .extra-form-types .vue-modal-mask {
-    position: fixed;
-    z-index: 9998;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 200%;
-    background-color: rgba(0, 0, 0, .5);
-    transition: opacity .3s ease;
-}
-
-.editor-advanced .extra-form-fields .field .vue-modal-mask .vue-modal-container,
-.editor-advanced .extra-form-types .vue-modal-mask .vue-modal-container {
-    width: 50%;
-    margin: 20% auto 0 auto;
-    padding: 20px 30px;
-    background-color: #fff;
-    border-radius: 2px;
-    border: 5px solid #514D61;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-    color: #000000;
-    transition: all .3s ease;
-    font-family: Helvetica, Arial, sans-serif;
-}
-
-.editor-advanced .extra-form-fields .field .vue-modal-mask  button.close,
-.editor-advanced .extra-form-types .vue-modal-mask  button.close {
-    color: #000000;
-    visibility: inherit;
-}
-
-.editor-advanced .extra-form-fields .field .vue-modal-mask .vue-modal-header h3,
-.editor-advanced .extra-form-types .vue-modal-mask .vue-modal-header h3
-{
-    margin-top: 0;
-    color: #514D61;
-}
-
-.editor-advanced .extra-form-fields .field .vue-modal-mask .vue-modal-body,
-.editor-advanced .extra-form-types .vue-modal-mask .vue-modal-body {
-    margin: 20px 0;
-}
-
-.editor-advanced .extra-form-fields .field .vue-modal-mask .vue-modal-default-button,
-.editor-advanced .extra-form-types .vue-modal-mask .vue-modal-default-button {
-    float: right;
 }
 
 /** EXTRA FORM FIELDS CONFIGURATION **/
