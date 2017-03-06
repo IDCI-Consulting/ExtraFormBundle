@@ -2,7 +2,7 @@
 Vue.component('editor-advanced', {
 
   template:
-    '<div class="editor-advanced row">' +
+    '<div class="editor-advanced editor row">' +
       '<extra-form-types @created="addField" class="extra-form-types col-md-3 col-lg-3"></extra-form-types>' +
       '<extra-form-fields :fields="fields" class="extra-form-fields col-md-4 col-lg-3"></extra-form-fields>' +
       '<extra-form-fields-configuration ' +
