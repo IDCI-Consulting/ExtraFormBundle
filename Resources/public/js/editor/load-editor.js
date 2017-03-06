@@ -240,7 +240,7 @@ window.loadExtraFormEditor = function () {
      */
     function submitFormOverviewOnClick () {
 
-      $(document).on('click', '#overview-modal-' + index + ' form button', function (event) {
+      $(document).on('click', '#overview-modal-' + index + ' form button[type=\'submit\']', function (event) {
         event.preventDefault();
         resetFormOverviewModal(index);
         var $form = $(this).closest('form');
