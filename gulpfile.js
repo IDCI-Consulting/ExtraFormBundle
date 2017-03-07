@@ -22,6 +22,7 @@ src.scripts = [
   'Resources/public/js/vendor/utils.js',
   'Resources/public/js/editor/mixins/option.vue.js',
   'Resources/public/js/editor/mixins/http.vue.js',
+  'Resources/public/js/editor/mixins/raw.vue.js',
   'Resources/public/js/editor/mixins/icon.vue.js',
   'Resources/public/js/editor/mixins/fields.vue.js',
   'Resources/public/js/editor/store/getters.vue.js',

@@ -24,8 +24,8 @@ Vue.component('editor-raw', {
     };
   },
 
-  /* global fieldsMixin */
-  mixins: [fieldsMixin],
+  /* global rawMixin */
+  mixins: [rawMixin],
 
   created: function () {
     try {
@@ -117,32 +117,6 @@ Vue.component('editor-raw', {
       }
 
       return raw;
-    },
-
-    /**
-     * Format the options
-     * - Remove the empty options
-     * - Try to parse the option if it's an object
-     *
-     * @param options
-     *
-     * @return options
-     */
-    formatOptions: function (options) {
-      for (var option in options) {
-        if (options.hasOwnProperty(option)) {
-          try {
-            // Remove empty options
-            if (0 === options[option].length) {
-              delete options[option];
-            } else {
-              options[option] = JSON.parse(options[option]);
-            }
-          } catch (e) {}
-        }
-      }
-
-      return options;
     }
 
   }

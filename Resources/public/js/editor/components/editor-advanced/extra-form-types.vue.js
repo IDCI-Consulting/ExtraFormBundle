@@ -63,8 +63,8 @@ var extraFormTypes = {
     'basic-extra-form-type': basicExtraFormType
   },
 
-  /* global httpMixin fontAwesomeIconMixin fieldsMixin */
-  mixins: [httpMixin, fontAwesomeIconMixin, fieldsMixin],
+  /* global httpMixin fontAwesomeIconMixin rawMixin */
+  mixins: [httpMixin, fontAwesomeIconMixin, rawMixin],
 
   created: function () {
     this.getExtraFormTypes();
