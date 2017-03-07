@@ -6,7 +6,6 @@ use FOS\RestBundle\Request\ParamFetcher;
 use IDCI\Bundle\ExtraFormBundle\Entity\ConfiguredType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\RequestParam;
 use FOS\RestBundle\Controller\Annotations\Put;
