@@ -10,6 +10,7 @@ namespace IDCI\Bundle\ExtraFormBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class HtmlType extends AbstractType
@@ -30,7 +31,7 @@ class HtmlType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'content' => null,
@@ -40,9 +41,29 @@ class HtmlType extends AbstractType
 
     /**
      * {@inheritdoc}
+     *
+     * @deprecated
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $this->configureOptions($resolver);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'extra_form_html';
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @deprecated
      */
     public function getName()
     {
-        return 'extra_form_html';
+        return $this->getBlockPrefix();
     }
 }
