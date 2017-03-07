@@ -12,14 +12,14 @@
 }
 
 .handle:before {
-    float: right;
     content: "\E2DC";
     cursor: move;
+    float: right;
 }
 
 input[required="required"] {
-    border-color: #c9302c;
     background-color: #f3d9d9;
+    border-color: #c9302c;
 }
 
 /*******************/
@@ -38,6 +38,39 @@ select, input, textarea, button, optgroup {
     color: #000000;
 }
 
+/**********************/
+/* EDITOR FORM GROUPS */
+/**********************/
+
+.editor .form-group {
+    position: relative;
+}
+
+.editor .form-group > label {
+    display: inline-block;
+    font-weight: bold;
+    padding-bottom: 3px;
+    width: 35%;
+}
+
+.editor .form-group > .form-control {
+    display: inline-block;
+    width: 65%;
+}
+
+.editor .form-group > input[type="checkbox"].form-control {
+    width: inherit;
+}
+
+.editor .form-group > i.feedback {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.editor .form-group > i.warning.feedback { color: #d43f3a; }
+.editor .form-group > i.success.feedback { color: #4cae4c; }
+
 /********************/
 /* FULLSCREEN MODAL */
 /********************/
@@ -51,16 +84,16 @@ select, input, textarea, button, optgroup {
 .modal-fullscreen .modal-content {
     background: transparent;
     border: 0;
-    -webkit-box-shadow: none;
     box-shadow: none;
+    -webkit-box-shadow: none;
 }
 
 .modal-fullscreen .modal-dialog, .overview-modal .modal-dialog {
-    margin: 0;
-    margin-right: auto;
-    margin-left: auto;
     height: 100%;
     left: 0;
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .modal-fullscreen .modal-dialog {
@@ -68,9 +101,9 @@ select, input, textarea, button, optgroup {
 }
 
 .modal-fullscreen .modal-footer {
-    width: 100%;
-    position: fixed;
     bottom: 0;
+    position: fixed;
+    width: 100%;
 }
 
 /***********************/
@@ -78,37 +111,37 @@ select, input, textarea, button, optgroup {
 /***********************/
 
 .editor .vue-modal-mask {
-    position: fixed;
-    z-index: 9998;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 200%;
     background-color: rgba(0, 0, 0, .5);
+    height: 200%;
+    left: 0;
+    position: fixed;
+    top: 0;
     transition: opacity .3s ease;
+    width: 100%;
+    z-index: 9998;
 }
 
 .editor .vue-modal-mask .vue-modal-container {
-    width: 50%;
-    margin: 20% auto 0 auto;
-    padding: 20px 30px;
     background-color: #fff;
-    border-radius: 2px;
     border: 5px solid #514D61;
+    border-radius: 2px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
     color: #000000;
-    transition: all .3s ease;
     font-family: Helvetica, Arial, sans-serif;
+    margin: 20% auto 0 auto;
+    padding: 20px 30px;
+    transition: all .3s ease;
+    width: 50%;
 }
 
-.editor .vue-modal-mask > .vue-modal-container > .vue-modal-header > h3 > button.close {
+.editor .vue-modal-mask > .vue-modal-container > .vue-modal-header > h3 > .close {
     color: #000000;
     visibility: inherit;
 }
 
 .editor .vue-modal-mask .vue-modal-header h3 {
-    margin-top: 0;
     color: #514D61;
+    margin-top: 0;
 }
 
 .editor .vue-modal-mask .vue-modal-body {
@@ -130,6 +163,7 @@ select, input, textarea, button, optgroup {
 .modal-enter .vue-modal-container,
 .modal-leave-active .vue-modal-container {
     -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
     transform: scale(1.1);
 }
 
@@ -138,20 +172,20 @@ select, input, textarea, button, optgroup {
 /***********/
 
 .editor button.extra-btn {
-    border: 1px solid #514D61;
     background-color: white;
+    border: 1px solid #514D61;
     color: #514D61;
     display: block;
-    min-width: 200px;
     margin: 10px auto;
+    min-width: 200px;
 }
 
 .editor button.extra-btn .fa-icon {
     float: left;
+    min-width: 20px;
+    padding-right: 5px;
     position: relative;
     top: 3px;
-    padding-right: 5px;
-    min-width: 20px;
 }
 
 .editor button.extra-btn:hover {

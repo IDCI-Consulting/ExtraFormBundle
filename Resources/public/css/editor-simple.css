@@ -5,15 +5,15 @@
   overflow: auto;
 }
 
-.editor-simple > div.new-field {
+.editor-simple > .new-field {
     border: 1px solid rgb(169, 169, 169);
-    padding: 5px;
     margin-bottom: 5px;
+    padding: 5px;
 }
 
 .editor-simple .field {
-    padding: 10px;
     border: 1px dashed black;
+    padding: 10px;
 }
 
 .editor-simple .field-options > div,
@@ -39,23 +39,23 @@
 
 .editor-simple .field-options,
 .editor-simple .field-constraints {
-    border-top: 1px solid rgb(169, 169, 169);
     border-bottom: 1px solid rgb(169, 169, 169);
+    border-top: 1px solid rgb(169, 169, 169);
     margin: 10px 0;
     padding: 10px;
 }
 
 .editor-simple .field-options > label,
 .editor-simple .field-constraint-options > label {
-    padding-bottom: 10px;
-    display: inline-block;
     cursor: pointer;
+    display: inline-block;
+    padding-bottom: 10px;
 }
 
 .editor-simple .field-options > div > label {
+    display: inline-block;
     min-width: 120px;
     padding-bottom: 3px;
-    display: inline-block;
 }
 
 .editor-simple .field-options > div,
