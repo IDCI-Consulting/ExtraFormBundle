@@ -3,6 +3,7 @@
 target_container ?= php
 php_sources ?= .
 js_sources ?= Resources/public/js/editor
+css_sources ?= Resources/public/css/editor-*.css
 
 # Bash Commands
 
@@ -25,6 +26,9 @@ gulp:
 eslint:
 	docker-compose run --rm node eslint $(js_sources)
 
+.PHONY: eslint
+csslint:
+	docker-compose run --rm node csslint $(css_sources)
 
 # PHP commands
 
