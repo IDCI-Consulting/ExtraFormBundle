@@ -43,8 +43,7 @@ class ExtraFormTypeRegistryTest extends \PHPUnit_Framework_TestCase
                         'data'     => false
                     )
                 )
-            ),
-            'extra_form_constraints' => array()
+            )
         );
 
         $this->extraFormType = new ExtraFormType($configuration);

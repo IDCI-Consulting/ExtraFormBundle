@@ -42,8 +42,7 @@ class ExtraFormTypeTest extends \PHPUnit_Framework_TestCase
                         'data'     => false
                     )
                 )
-            ),
-            'extra_form_constraints' => array()
+            )
         );
 
         $this->extraFormType = new ExtraFormType($configuration);
@@ -131,15 +130,5 @@ class ExtraFormTypeTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals($options, $this->extraFormType->getExtraFormOptions());
-    }
-
-    /**
-     * Test getExtraFormConstraints
-     */
-    public function testGetExtraFormConstraints()
-    {
-        $constraints = array();
-
-        $this->assertEquals($constraints, $this->extraFormType->getExtraFormConstraints());
     }
 }
