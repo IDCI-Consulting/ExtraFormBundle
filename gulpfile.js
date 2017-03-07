@@ -17,6 +17,7 @@ src.scripts = [
   'Resources/public/js/vendor/vue-draggable.min.js',
   'Resources/public/js/vendor/jquery-1.11.3.min.js',
   'Resources/public/js/vendor/bootstrap.min.js',
+  'Resources/public/js/vendor/jquery-no-conflict.js',
   'Resources/public/js/vendor/vue-resource-1.2.0.min.js',
   'Resources/public/js/vendor/utils.js',
   'Resources/public/js/editor/mixins/option.vue.js',
