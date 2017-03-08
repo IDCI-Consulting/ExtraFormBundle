@@ -183,9 +183,9 @@
     {{- form_widget(form) -}}
     <script type="text/javascript">
 
-        window.onload = function () {
+        window.addEventListener('load', function () {
             loadExtraFormEditor();
-        };
+        });
 
         var {{ form.vars.id }}_configuration = {
             editorId: '{{ form.vars.id }}',
