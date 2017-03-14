@@ -20,7 +20,7 @@ class ExtraFormType implements ExtraFormTypeInterface
     protected $formType;
 
     /**
-     * @var ExtraFormType
+     * @var ExtraFormTypeInterface
      */
     protected $parent;
 
