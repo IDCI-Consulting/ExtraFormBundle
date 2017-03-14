@@ -5,7 +5,7 @@
 var editorAdvancedFieldOptions = {
 
   template:
-    '<div>' +
+    '<div class="extra-form-inputs-required">' +
       '<label>Options : </label>' +
         '<component ' +
           'v-if="option.component_name !== \'editor\'" ' +
@@ -132,7 +132,7 @@ var editorAdvancedFieldOptions = {
      * @param type
      */
     getExtraFormTypeOptions: function (type) {
-      var url = this.$store.getters.extraFormTypeOptionsApiUrl(type);
+      var url = this.$store.getters.getExtraFormTypeOptionsApiUrl(type);
       var self = this;
 
       this.handleGetRequest(url, function (options) {

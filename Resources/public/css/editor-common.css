@@ -17,7 +17,7 @@
     float: right;
 }
 
-input[required="required"] {
+.extra-form-inputs-required input[required="required"] {
     background-color: #f3d9d9;
     border-color: #c9302c;
 }

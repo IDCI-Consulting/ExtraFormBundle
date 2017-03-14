@@ -113,7 +113,7 @@ window.loadExtraFormEditor = function () {
      * Add some colors on empty required inputs
      */
     function colorEmptyRequiredInputs () {
-      extraQuery(document).on('change', 'input[required="required"]', function () {
+      extraQuery(document).on('change', '.extra-form-inputs-required input[required="required"]', function () {
         if (extraQuery(this).val()) {
           extraQuery(this).css({
             'border-color': '#cccccc',
@@ -380,7 +380,7 @@ window.loadExtraFormEditor = function () {
     function createOverviewModal () {
       return createModal(
         index,
-        'overview-modal',
+        'extra-form-inputs-required overview-modal',
         false,
         'Overview',
         '<div style="text-align: center;"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i></div>'

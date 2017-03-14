@@ -4,7 +4,7 @@
 var editorAdvancedFieldConstraintOptions = {
 
   template:
-    '<div class="field-constraint-options">' +
+    '<div class="field-constraint-options extra-form-inputs-required">' +
       '<a role="button" data-toggle="collapse" :href="\'#\' + id">Options<span class="toggle"></span></a>' +
       '<div :id="id" class="panel-collapse collapse" role="tabpanel" aria-expanded="false" :aria-controls="id">' +
         '<component ' +
@@ -85,7 +85,7 @@ var editorAdvancedFieldConstraintOptions = {
      * Set the constraint options
      */
     setConstraintOptions: function (fieldConstraint) {
-      var url = this.$store.getters.extraFormConstraintsApiUrl;
+      var url = this.$store.getters.getExtraFormConstraintsApiUrl;
       var self = this;
 
       this.handleGetRequest(url, function (response) {
