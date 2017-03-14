@@ -32,9 +32,11 @@ var optionMixin = {
   watch: {
     value: {
       handler: function (value) {
-        this.data = value;
-        if (typeof value !== 'string') {
-          this.data = JSON.stringify(value);
+        if (typeof value !== 'undefined') {
+          this.data = value;
+          if (typeof value !== 'string') {
+            this.data = JSON.stringify(value);
+          }
         }
       }
     }
@@ -48,11 +50,13 @@ var optionMixin = {
      * @param value
      */
     updateOption: function (value) {
-      this.data = value;
-      this.$emit('changed', {
-        name: this.name,
-        value: value
-      });
+      if (typeof value !== 'undefined') {
+        this.data = value;
+        this.$emit('changed', {
+          name: this.name,
+          value: value
+        });
+      }
     },
 
     /**
