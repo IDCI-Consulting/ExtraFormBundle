@@ -45,7 +45,7 @@ var typesSelectbox = {
      * Get the form types
      */
     getExtraFormTypes: function () {
-      var url = this.$store.getters.extraFormTypesApiUrl;
+      var url = this.$store.getters.getExtraFormTypesApiUrl;
       var self = this;
 
       this.handleGetRequest(url, function (json) {

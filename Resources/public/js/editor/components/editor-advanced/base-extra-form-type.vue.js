@@ -1,5 +1,5 @@
-/* exported basicExtraFormType */
-var basicExtraFormType = {
+/* exported baseExtraFormType */
+var baseExtraFormType = {
 
   template:
     '<div>' +

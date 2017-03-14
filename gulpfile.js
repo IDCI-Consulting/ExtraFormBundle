@@ -2,11 +2,11 @@
 
 var src = {};
 src.styles = [
-  'Resources/public/css/editor-common.css',
+  'Resources/public/css/bootstrap.min.css',
+  'Resources/public/css/bootstrap-theme.min.css',
   'Resources/public/css/editor-simple.css',
   'Resources/public/css/editor-advanced.css',
-  'Resources/public/css/bootstrap.min.css',
-  'Resources/public/css/bootstrap-theme.min.css'
+  'Resources/public/css/editor-common.css'
 ];
 src.scripts = [
   //'Resources/public/js/vendor/vue-dev.js',
@@ -26,6 +26,7 @@ src.scripts = [
   'Resources/public/js/editor/mixins/icon.vue.js',
   'Resources/public/js/editor/mixins/fields.vue.js',
   'Resources/public/js/editor/store/getters.vue.js',
+  'Resources/public/js/editor/store/actions.vue.js',
   'Resources/public/js/editor/store/mutations.vue.js',
   'Resources/public/js/editor/components/common/modal.vue.js',
   'Resources/public/js/editor/components/common/options/textarea.vue.js',
@@ -49,7 +50,7 @@ src.scripts = [
   'Resources/public/js/editor/components/editor-advanced/extra-form-fields.vue.js',
   'Resources/public/js/editor/components/editor-advanced/extra-form-fields-configuration.vue.js',
   'Resources/public/js/editor/components/editor-advanced/configured-extra-form-type.vue.js',
-  'Resources/public/js/editor/components/editor-advanced/basic-extra-form-type.vue.js',
+  'Resources/public/js/editor/components/editor-advanced/base-extra-form-type.vue.js',
   'Resources/public/js/editor/components/editor-advanced/extra-form-types.vue.js',
   'Resources/public/js/editor/components/editor-simple/editor.vue.js',
   'Resources/public/js/editor/components/editor-advanced/editor.vue.js',

@@ -10,11 +10,11 @@ var extraFormEditorGetters = {
     return state.configuration.allow_configured_type_edition;
   },
 
-  configuredExtraFormTypesApiUrl: function (state) {
+  getConfiguredExtraFormTypesApiUrl: function (state) {
     return state.configuration.api_url.get_configured_extra_form_types;
   },
 
-  extraFormTypesApiUrl: function (state) {
+  getBaseExtraFormTypesApiUrl: function (state) {
     return state.configuration.api_url.get_extra_form_types;
   },
 
@@ -34,13 +34,13 @@ var extraFormEditorGetters = {
     };
   },
 
-  extraFormTypeOptionsApiUrl: function (state) {
+  getExtraFormTypeOptionsApiUrl: function (state) {
     return function (type) {
       return state.configuration.api_url.get_extra_form_type_options.replace('XTYPE', type);
     };
   },
 
-  extraFormConstraintsApiUrl: function (state) {
+  getExtraFormConstraintsApiUrl: function (state) {
     return state.configuration.api_url.get_extra_form_constraints;
   },
 
@@ -50,12 +50,12 @@ var extraFormEditorGetters = {
     };
   },
 
-  getConfiguredTypes: function (state) {
+  getConfiguredExtraFormTypes: function (state) {
     return state.configuredTypes;
   },
 
-  getTypes: function (state) {
-    return state.types;
+  getBaseExtraFormTypes: function (state) {
+    return state.baseTypes;
   }
 
 };

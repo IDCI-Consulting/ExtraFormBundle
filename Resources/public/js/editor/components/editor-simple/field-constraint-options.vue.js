@@ -67,7 +67,7 @@ var editorSimpleFieldConstraintOptions = {
      * Set the constraint options
      */
     setConstraintOptions: function (fieldConstraint) {
-      var url = this.$store.getters.extraFormConstraintsApiUrl;
+      var url = this.$store.getters.getExtraFormConstraintsApiUrl;
       var self = this;
 
       this.handleGetRequest(url, function (response) {

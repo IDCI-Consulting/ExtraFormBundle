@@ -29,8 +29,12 @@ var extraFormEditorMutations = {
     }
   },
 
-  setTypes: function (state, types) {
-    state.types = types;
+  setBaseExtraFormTypes: function (state, types) {
+    state.baseTypes = types;
+  },
+
+  setConfiguredExtraFormTypes: function (state, types) {
+    state.configuredTypes = types;
   }
 
 };

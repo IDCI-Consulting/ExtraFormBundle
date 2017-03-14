@@ -16,13 +16,13 @@ function triggerVueEditor (element, formProperties, configuration) {
   /**
    * The common state
    */
-  var store = new Vuex.Store({
+  var extraFormEditorStore = new Vuex.Store({
 
     state: {
       configuration: configuration,
       formProperties: formProperties,
       configuredTypes: [],
-      types: [],
+      baseTypes: [],
       apiCache: {}
     },
 
@@ -30,7 +30,10 @@ function triggerVueEditor (element, formProperties, configuration) {
     getters: extraFormEditorGetters,
 
     /* global extraFormEditorMutations */
-    mutations: extraFormEditorMutations
+    mutations: extraFormEditorMutations,
+
+    /* global extraFormEditorActions */
+    actions: extraFormEditorActions
 
   });
 
@@ -41,14 +44,19 @@ function triggerVueEditor (element, formProperties, configuration) {
 
     el: element,
 
-    store: store,
+    store: extraFormEditorStore,
 
     data: {
       fields: []
     },
 
-    /* global httpMixin */
-    mixins: [httpMixin],
+    /**
+     * Call the APIs before creating the app
+     */
+    beforeCreate: function () {
+      extraFormEditorStore.dispatch('setBaseExtraFormTypes', this.$http);
+      extraFormEditorStore.dispatch('setConfiguredExtraFormTypes', this.$http);
+    },
 
     methods: {
 

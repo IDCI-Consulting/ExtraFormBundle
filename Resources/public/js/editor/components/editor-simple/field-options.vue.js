@@ -94,7 +94,7 @@ var editorSimpleFieldOptions = {
      * @param type
      */
     getExtraFormTypeOptions: function (type) {
-      var url = this.$store.getters.extraFormTypeOptionsApiUrl(type);
+      var url = this.$store.getters.getExtraFormTypeOptionsApiUrl(type);
       var self = this;
 
       this.handleGetRequest(url, function (options) {

@@ -46,7 +46,7 @@ var editorAdvancedNewFieldConstraint = {
      * Get the extra form constraints
      */
     getExtraFormConstraints: function () {
-      var url = this.$store.getters.extraFormConstraintsApiUrl;
+      var url = this.$store.getters.getExtraFormConstraintsApiUrl;
       var self = this;
 
       this.handleGetRequest(url, function (json) {

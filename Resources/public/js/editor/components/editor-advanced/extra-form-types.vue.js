@@ -8,7 +8,7 @@ var extraFormTypes = {
       '<div>' +
         '<ul class="nav nav-pills" role="tablist">' +
           '<li role="presentation" class="active">' +
-            '<a role="tab" data-toggle="tab" :href="anchor(\'#\', \'basic_types\')">Basic types</a>' +
+            '<a role="tab" data-toggle="tab" :href="anchor(\'#\', \'basic_types\')">Base types</a>' +
           '</li>' +
           '<li role="presentation">' +
             '<a role="tab" data-toggle="tab" :href="anchor(\'#\', \'configured_types\')">Configured types</a>' +
@@ -16,12 +16,12 @@ var extraFormTypes = {
         '</ul>' +
         '<div class="tab-content">' +
           '<div role="tabpanel" class="tab-pane in active" :id="anchor(\'\', \'basic_types\')">' +
-            '<basic-extra-form-type ' +
+            '<base-extra-form-type ' +
               '@created="createField" ' +
-              ':type="basicType" ' +
-              'v-for="basicType in basicTypes"' +
+              ':type="baseType" ' +
+              'v-for="baseType in baseTypes"' +
             '>' +
-            '</basic-extra-form-type>' +
+            '</base-extra-form-type>' +
           '</div>' +
           '<div role="tabpanel" class="tab-pane" :id="anchor(\'\', \'configured_types\')">' +
             '<configured-extra-form-type ' +
@@ -47,10 +47,10 @@ var extraFormTypes = {
 
   computed: {
     configuredTypes: function () {
-      return this.$store.getters.getConfiguredTypes;
+      return this.$store.getters.getConfiguredExtraFormTypes;
     },
-    basicTypes: function () {
-      return this.$store.getters.getTypes;
+    baseTypes: function () {
+      return this.$store.getters.getBaseExtraFormTypes;
     }
   },
 
@@ -59,17 +59,12 @@ var extraFormTypes = {
     /* global configuredExtraFormType */
     'configured-extra-form-type': configuredExtraFormType,
 
-    /* global basicExtraFormType */
-    'basic-extra-form-type': basicExtraFormType
+    /* global baseExtraFormType */
+    'base-extra-form-type': baseExtraFormType
   },
 
-  /* global httpMixin fontAwesomeIconMixin rawMixin */
-  mixins: [httpMixin, fontAwesomeIconMixin, rawMixin],
-
-  created: function () {
-    this.getExtraFormTypes();
-    this.getConfiguredExtraFormTypes();
-  },
+  /* global fontAwesomeIconMixin rawMixin */
+  mixins: [fontAwesomeIconMixin, rawMixin],
 
   methods: {
 
@@ -151,45 +146,6 @@ var extraFormTypes = {
       }
 
       this.$emit('created', field);
-    },
-
-    /**
-     * Get the form types
-     */
-    getExtraFormTypes: function () {
-      var url = this.$store.getters.extraFormTypesApiUrl;
-      var self = this;
-
-      this.handleGetRequest(url, function (json) {
-        var types = json.filter(function (element) {
-          return false === element.abstract;
-        });
-
-        self.$store.commit('setTypes', types);
-      });
-    },
-
-    /**
-     * Get the configured form types
-     */
-    getConfiguredExtraFormTypes: function () {
-      var url = this.$store.getters.configuredExtraFormTypesApiUrl;
-      var self = this;
-
-      this.handleGetRequest(url, function (configuredTypes) {
-        for (var i = 0, len = configuredTypes.length; i < len; i++) {
-          if ('string' === typeof configuredTypes[i].configuration) {
-            configuredTypes[i].configuration = JSON.parse(configuredTypes[i].configuration);
-          }
-          // Jms serialization issue: https://github.com/schmittjoh/JMSSerializerBundle/issues/271
-          if (configuredTypes[i].extra_form_options.length < 1) {
-            // When the value is []
-            configuredTypes[i].extra_form_options = {};
-          }
-        }
-
-        self.$store.commit('setConfiguredTypes', configuredTypes);
-      });
     }
 
   }
