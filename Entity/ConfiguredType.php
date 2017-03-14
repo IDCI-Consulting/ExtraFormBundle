@@ -30,9 +30,24 @@ class ConfiguredType implements ExtraFormTypeInterface
     /**
      * @var string
      *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $tags;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="text")
      */
     protected $configuration;
+
 
     /**
      *  @var ExtraFormTypeInterface
@@ -42,8 +57,8 @@ class ConfiguredType implements ExtraFormTypeInterface
     /**
      * Constructor
      *
-     * @param $name
-     * @param $configuration
+     * @param string $name
+     * @param string $configuration
      */
     public function __construct($name = null, $configuration = null)
     {
@@ -83,6 +98,60 @@ class ConfiguredType implements ExtraFormTypeInterface
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return ConfiguredType
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDescription()
+    {
+        if (null !== $this->description) {
+            return $this->description;
+        }
+
+        if (null !== $this->extraFormType) {
+            return $this->extraFormType->getDescription();
+        }
+
+        return null;
+    }
+
+    /**
+     * Set tags
+     *
+     * @param string $tags
+     *
+     * @return ConfiguredType
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Get tags
+     *
+     * @return string
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 
     /**
@@ -155,18 +224,6 @@ class ConfiguredType implements ExtraFormTypeInterface
         }
 
         return $this->extraFormType->getParent();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getDescription()
-    {
-        if (null === $this->extraFormType) {
-            return null;
-        }
-
-        return $this->extraFormType->getDescription();
     }
 
     /**
