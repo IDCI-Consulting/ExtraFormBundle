@@ -18,9 +18,24 @@ use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistryInterface;
 
 class ExtraFormBuilder implements ExtraFormBuilderInterface
 {
+    /**
+     * @var FormFactoryInterface
+     */
     protected $formFactory;
+
+    /**
+     * @var ConfigurationFetcherRegistry
+     */
     protected $configurationFetcherRegistry;
+
+    /**
+     * @var ExtraFormTypeRegistryInterface
+     */
     protected $typeRegistry;
+
+    /**
+     * @var ExtraFormConstraintRegistryInterface
+     */
     protected $constraintRegistry;
 
     /**
