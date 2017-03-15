@@ -71,6 +71,14 @@ class ExtraFormType implements ExtraFormTypeInterface
     /**
      * {@inheritDoc}
      */
+    public function getFormTypeName()
+    {
+        return $this->getName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getFormType()
     {
         return $this->formType;

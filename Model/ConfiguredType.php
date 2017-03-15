@@ -1,53 +1,35 @@
 <?php
 
-namespace IDCI\Bundle\ExtraFormBundle\Entity;
+namespace IDCI\Bundle\ExtraFormBundle\Model;
 
-use Doctrine\ORM\Mapping as ORM;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeInterface;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="configured_type")
- */
 class ConfiguredType implements ExtraFormTypeInterface
 {
     /**
-     * @var integer
-     *
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var mixed
      */
     protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", unique=true)
      */
     protected $name;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
     protected $description;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
     protected $tags;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="text")
      */
     protected $configuration;
-
 
     /**
      *  @var ExtraFormTypeInterface
@@ -67,9 +49,9 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * Get id
+     * Returns the id.
      *
-     * @return integer
+     * @return mixed
      */
     public function getId()
     {
@@ -91,13 +73,47 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * Get name
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getFormTypeName()
+    {
+        if (null === $this->extraFormType) {
+            return null;
+        }
+
+        return $this->extraFormType->getName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getFormType()
+    {
+        if (null === $this->extraFormType) {
+            return null;
+        }
+
+        return $this->extraFormType->getFormType();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getParent()
+    {
+        if (null === $this->extraFormType) {
+            return null;
+        }
+
+        return $this->extraFormType->getParent();
     }
 
     /**
@@ -128,6 +144,53 @@ class ConfiguredType implements ExtraFormTypeInterface
         }
 
         return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getIcon()
+    {
+        if (null === $this->extraFormType) {
+            return null;
+        }
+
+        return $this->extraFormType->getIcon();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isAbstract()
+    {
+        if (null === $this->extraFormType) {
+            return null;
+        }
+
+        return $this->extraFormType->isAbstract();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getExtraFormOptions()
+    {
+        if (null === $this->extraFormType) {
+            return null;
+        }
+
+        $configurationArray = json_decode($this->configuration, true);
+        $options = $this->extraFormType->getExtraFormOptions();
+
+        foreach ($configurationArray['extra_form_options'] as $optionName => $optionValue) {
+            if ($optionName === 'configuration') {
+                $options[$optionName]['options']['data'] = json_encode($optionValue);
+            } else {
+                $options[$optionName]['options']['data'] = $optionValue;
+            }
+        }
+
+        return $options;
     }
 
     /**
@@ -203,90 +266,9 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * {@inheritDoc}
-     */
-    public function getFormType()
-    {
-        if (null === $this->extraFormType) {
-            return null;
-        }
-
-        return $this->extraFormType->getFormType();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getParent()
-    {
-        if (null === $this->extraFormType) {
-            return null;
-        }
-
-        return $this->extraFormType->getParent();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getIcon()
-    {
-        if (null === $this->extraFormType) {
-            return null;
-        }
-
-        return $this->extraFormType->getIcon();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function isAbstract()
-    {
-        if (null === $this->extraFormType) {
-            return null;
-        }
-
-        return $this->extraFormType->isAbstract();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getFormTypeName()
-    {
-        if (null === $this->extraFormType) {
-            return null;
-        }
-
-        return $this->extraFormType->getName();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getExtraFormOptions()
-    {
-        if (null === $this->extraFormType) {
-            return null;
-        }
-
-        $configurationArray = json_decode($this->configuration, true);
-        $options = $this->extraFormType->getExtraFormOptions();
-
-        foreach ($configurationArray['extra_form_options'] as $optionName => $optionValue) {
-            if ($optionName === 'configuration') {
-                $options[$optionName]['options']['data'] = json_encode($optionValue);
-            } else {
-                $options[$optionName]['options']['data'] = $optionValue;
-            }
-        }
-
-        return $options;
-    }
-
-    /**
      * Get extra form constraints
+     *
+     * @return array
      */
     public function getExtraFormConstraints()
     {

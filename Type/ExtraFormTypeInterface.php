@@ -17,6 +17,15 @@ interface ExtraFormTypeInterface
     public function getName();
 
     /**
+     * Get form type service name.
+     *
+     * @deprecated To be replace with a 'getFormTypeClass' with symfony 2.8 and upper.
+     *
+     * @return string
+     */
+    public function getFormTypeName();
+
+    /**
      * Get form type.
      *
      * @return string
