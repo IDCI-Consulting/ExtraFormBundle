@@ -17,7 +17,7 @@ IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType:
             serialized_name: form_type
 
     virtual_properties:
-        formTypeName:
+        getFormTypeName:
             serialized_name: form_type_name
         getIcon:
             serialized_name: icon

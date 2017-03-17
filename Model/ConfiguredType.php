@@ -49,6 +49,16 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
+     * To string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+    /**
      * Returns the id.
      *
      * @return mixed

@@ -3,7 +3,7 @@
 namespace IDCI\Bundle\ExtraFormBundle\Controller;
 
 use FOS\RestBundle\Request\ParamFetcher;
-use IDCI\Bundle\ExtraFormBundle\Entity\ConfiguredType;
+use IDCI\Bundle\ExtraFormBundle\Model\ConfiguredType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use FOS\RestBundle\Controller\FOSRestController;
