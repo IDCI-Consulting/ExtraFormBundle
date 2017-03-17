@@ -22,7 +22,7 @@ class JsonToArrayTransformer implements DataTransformerInterface
         }
 
         if (is_array($value)) {
-            return json_encode($value);
+            return json_encode($value, JSON_PRETTY_PRINT);
         }
 
         return $value;
@@ -33,7 +33,7 @@ class JsonToArrayTransformer implements DataTransformerInterface
      */
     public function reverseTransform($value)
     {
-        $decoded = json_decode($value, true);
+        $decoded = json_decode($value, true, 512, JSON_PRETTY_PRINT);
 
         return null === $decoded ? $value : $decoded;
     }
