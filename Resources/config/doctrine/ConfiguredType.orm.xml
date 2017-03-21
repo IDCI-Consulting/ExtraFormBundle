@@ -16,7 +16,7 @@
 
         <field name="tags" column="tags" type="array" />
 
-        <field name="configuration" column="configuration" type="string" length="255" />
+        <field name="configuration" column="configuration" type="text"/>
 
     </entity>
 
