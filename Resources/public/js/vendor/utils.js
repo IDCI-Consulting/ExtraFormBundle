@@ -30,6 +30,19 @@ function generateUniqueId() {
 }
 
 /**
+ * Get the last key of an object
+ *
+ * @param object
+ * @returns string
+ */
+function getLastKey(object) {
+  var keys = Object.keys(object);
+  var lastElementPosition = Object.keys(object).length - 1;
+
+  return keys[lastElementPosition];
+}
+
+/**
  * Create a javascript object to get the map all the attribute of the given element, as well as the value
  *
  * @param element
