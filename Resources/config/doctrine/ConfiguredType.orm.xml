@@ -14,7 +14,7 @@
 
         <field name="description" column="description" type="string" length="255" nullable="true" />
 
-        <field name="tags" column="tags" type="array" />
+        <field name="tags" column="tags" type="text" nullable="true" />
 
         <field name="configuration" column="configuration" type="text"/>
 
