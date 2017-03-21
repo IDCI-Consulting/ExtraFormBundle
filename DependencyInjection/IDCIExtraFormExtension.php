@@ -8,17 +8,42 @@
 namespace IDCI\Bundle\ExtraFormBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\Loader;
 
 /**
  * This is the class that loads and manages your bundle configuration
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class IDCIExtraFormExtension extends Extension
+class IDCIExtraFormExtension extends Extension implements PrependExtensionInterface
 {
+    public function prepend(ContainerBuilder $container)
+    {
+        $bundles = $container->getParameter('kernel.bundles');
+
+        // Attempt to prepend the doctrine configuration only if the bundle is registered in the kernel
+        // This make doctrine an optional dependency
+        if (isset($bundles['DoctrineBundle'])) {
+            $config = array(
+                'orm' => array(
+                    'mappings' => array(
+                        'IDCIExtraFormBundle' => array(
+                            'type' => 'xml',
+                            'dir' => 'Resources/config/doctrine/',
+                            'prefix' => 'IDCI\Bundle\ExtraFormBundle\Model',
+                            'is_bundle' => true
+                        )
+                    )
+                )
+            );
+
+            $container->prependExtensionConfig('doctrine', $config);
+        }
+    }
+
     /**
      * {@inheritDoc}
      */

@@ -49,6 +49,8 @@ public function registerBundles()
 Enable the serializer:
 
 ```yml
+# app/config/config.yml
+
 fos_rest:
     param_fetcher_listener: true # if you want to add configured types
     service:
@@ -62,6 +64,11 @@ Import the bundle configuration:
 imports:
     - { resource: @IDCIExtraFormBundle/Resources/config/config.yml }
 ```
+
+That's it, you are ready to use the [extra form builder](Resources/doc/usage.md).
+
+Use the editor
+--------------
 
 If you need the api or the editor:
 
@@ -78,7 +85,26 @@ Install the assets:
 php app/console assets:install --symlink
 ```
 
-If you want to use already configured types in the editor:
+Use the configured types
+------------------------
+
+You can register configured types via the editor. It allows you to access types with pre-configured fields.
+
+Register doctrine bundle in your application kernel:
+```php
+<?php
+// app/AppKernel.php
+
+public function registerBundles()
+{
+    $bundles = array(
+        // ...
+        new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+    );
+}
+```
+
+Then update the doctrine schema. It will create a table to register the configured types in database.
 ```sh
 doctrine:schema:update --force
 ```

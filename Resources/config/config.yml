@@ -2,15 +2,6 @@ imports:
     - { resource: types.yml }
     - { resource: constraints.yml }
 
-doctrine:
-    orm:
-        mappings:
-            IDCIExtraFormBundle:
-                type: xml
-                dir: Resources/config/doctrine/
-                prefix: IDCI\Bundle\ExtraFormBundle\Model
-                is_bundle: true
-
 twig:
     form:
         resources:
