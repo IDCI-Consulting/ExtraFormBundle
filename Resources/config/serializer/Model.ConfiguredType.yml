@@ -1,4 +1,4 @@
-IDCI\Bundle\ExtraFormBundle\Entity\ConfiguredType:
+IDCI\Bundle\ExtraFormBundle\Model\ConfiguredType:
 
     accessor_order: custom
     custom_accessor_order: [name]

@@ -2,7 +2,7 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Event\Subscriber;
 
-use IDCI\Bundle\ExtraFormBundle\Entity\ConfiguredType;
+use IDCI\Bundle\ExtraFormBundle\Model\ConfiguredType;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistryInterface;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
