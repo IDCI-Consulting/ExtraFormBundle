@@ -10,6 +10,7 @@ namespace IDCI\Bundle\ExtraFormBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -29,7 +30,8 @@ class ExtraFormEditorType extends AbstractType
         $view->vars['attr']['class']                        = $attrClass;
         $view->vars['attr']['data-available-modes']         = implode($options['available_modes'], '__');
         $view->vars['attr']['data-configuration-variable']  = $view->vars['id'] . '_configuration';
-        $view->vars['allow_configured_type_edition']        = $options['allow_configured_type_edition'];
+        $view->vars['allow_configured_types_edition']       = $options['allow_configured_types_edition'];
+        $view->vars['show_configured_types']                = $options['show_configured_types'];
 
         return $view->vars;
     }
@@ -41,13 +43,24 @@ class ExtraFormEditorType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'required'                      => false,
-                'available_modes'               => array('advanced'),
-                'allow_configured_type_edition' => false,
+                'required'                       => false,
+                'available_modes'                => array('advanced'),
+                'allow_configured_types_edition' => false,
+                'show_configured_types'          => false
             ))
             ->setAllowedTypes(array(
                 'available_modes' => array('array')
             ))
+            ->setNormalizer('allow_configured_types_edition', function (Options $options, $value) {
+                if ($value && !$options['show_configured_types']) {
+                    throw new \Exception(
+                        'The option `allow_configured_types_edition` for the extra_form_editor form type' .
+                        ' is set to true, therefore the option `show_configured_types` should not be set to false'
+                    );
+                }
+
+                return $value;
+            })
         ;
     }
 

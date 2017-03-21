@@ -189,7 +189,8 @@
 
         var {{ form.vars.id }}_configuration = {
             editorId: '{{ form.vars.id }}',
-            allow_configured_type_edition: {{ form.vars.allow_configured_type_edition ? 'true' : 'false' }},
+            allow_configured_types_edition: {{ form.vars.allow_configured_types_edition ? 'true' : 'false' }},
+            show_configured_types: {{ form.vars.show_configured_types ? 'true' : 'false' }},
             extra_form_editor_overview_url: '{{ path('idci_extra_form_editor_overview') }}',
             api_url: {
                 get_configured_extra_form_types: '{{ path('idci_extraform_api_getconfiguredextraformtypes', { '_format': 'json' }) }}',
@@ -204,11 +205,11 @@
 
         // We must load the scripts and styles only once, even if many widgets are on the page
         if (typeof window.loadExtraFormEditor !== 'function') {
-          document.write(
-            '<script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor.min.js') }}"></scri'+'pt>' +
-            '<link rel="stylesheet" type="text/css" href="{{ asset('bundles/idciextraform/css/font-awesome-4.7.0/css/font-awesome.min.css') }}" />' +
-            '<link rel="stylesheet" type="text/css" href="{{ asset('bundles/idciextraform/css/extra-form-editor.min.css') }}" />'
-          );
+            document.write(
+                '<script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor.min.js') }}"></scri'+'pt>' +
+                '<link rel="stylesheet" type="text/css" href="{{ asset('bundles/idciextraform/css/font-awesome-4.7.0/css/font-awesome.min.css') }}" />' +
+                '<link rel="stylesheet" type="text/css" href="{{ asset('bundles/idciextraform/css/extra-form-editor.min.css') }}" />'
+            );
         }
     </script>
 

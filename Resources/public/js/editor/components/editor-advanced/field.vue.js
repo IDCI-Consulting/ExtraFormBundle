@@ -8,7 +8,7 @@ var editorAdvancedField = {
       '</button>' +
       '<i class="fa fa-arrows-alt"></i>' +
       '<i ' +
-        'v-if="configuredFieldEditionAllowed" ' +
+        'v-if="configuredTypesEditionAllowed" ' +
         'title="Save this field as a configured type" ' +
         '@click="openSaveModal" class="fa fa-floppy-o">' +
       '</i>' +
@@ -56,8 +56,8 @@ var editorAdvancedField = {
 
       return 'field ' + active;
     },
-    configuredFieldEditionAllowed: function () {
-      return this.$store.getters.configuredFieldEditionAllowed;
+    configuredTypesEditionAllowed: function () {
+      return this.$store.getters.configuredTypesEditionAllowed;
     }
   },
 

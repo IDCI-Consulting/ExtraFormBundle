@@ -247,7 +247,6 @@ window.loadExtraFormEditor = function () {
 
         setTimeout(function () {
 
-          /* global submitForm */
           submitForm($form, function (content) {
             if (content.success) {
               if (content.data) {
@@ -288,22 +287,49 @@ window.loadExtraFormEditor = function () {
     }
 
     /**
+     * Submit a form in ajax
+     *
+     * @param $form
+     * @param callback
+     */
+    function submitForm ($form, callback) {
+      var request = extraQuery.ajax({
+        url: $form.attr('action'),
+        method: $form.attr('method'),
+        data: $form.serialize()
+      });
+
+      request.done(function (response) {
+        return callback({
+          success: true,
+          data: response
+        });
+      });
+
+      request.fail(function (response) {
+        return callback({
+          success: false,
+          data: response
+        });
+      });
+    }
+
+    /**
      * Create a modal
      *
-     * @param identifier
-     * @param className
-     * @param modalFullscreen
+     * @param id
+     * @param name
+     * @param extraClasses
      * @param title
      * @param body
-     * @param modalFooter
+     * @param [modalFooter]
      *
      * @returns {string}
      */
-    function createModal (identifier, className, modalFullscreen, title, body, modalFooter) {
-      var fullscreen = modalFullscreen ? 'modal-fullscreen' : '';
+    function createModal (id, name, extraClasses, title, body, modalFooter) {
       var footer = modalFooter ? modalFooter : '';
 
-      return '<div id="' + className + '-' + identifier + '" class="modal fade ' + fullscreen + ' ' + className + '">' +
+      return '<div id="' + name + '-' + id + '" class="editor-modal modal fade ' + extraClasses + ' ' + name + '">' +
           '<div class="modal-dialog" role="document">' +
             '<div class="modal-content">' +
               '<div class="modal-header">' +
@@ -331,7 +357,7 @@ window.loadExtraFormEditor = function () {
       return createModal(
         index,
         'raw-mode-modal',
-        true,
+        'modal-fullscreen',
         'Editor in raw mode',
         '<editor-raw :fields="fields" @generated="updateFields"></editor-raw><br>'
       );
@@ -346,7 +372,7 @@ window.loadExtraFormEditor = function () {
       return createModal(
         index,
         'simple-visual-mode-modal',
-        true,
+        'modal-fullscreen',
         'Simple visual mode',
         '<editor-simple :fields="fields"></editor-simple>',
         '<em>All your changes are automatically saved</em>'
@@ -362,7 +388,7 @@ window.loadExtraFormEditor = function () {
       return createModal(
         index,
         'advanced-visual-mode-modal',
-        true,
+        'modal-fullscreen',
         'Advanced visual mode',
         '<editor-advanced :fields="fields"></editor-advanced>',
         '<button class="btn btn-primary trigger-overview-modal-' + index + '">' +
@@ -380,8 +406,8 @@ window.loadExtraFormEditor = function () {
     function createOverviewModal () {
       return createModal(
         index,
-        'extra-form-inputs-required overview-modal',
-        false,
+        'overview-modal',
+        'extra-form-inputs-required',
         'Overview',
         '<div style="text-align: center;"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i></div>'
       );

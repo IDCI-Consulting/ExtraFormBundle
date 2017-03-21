@@ -6,7 +6,7 @@ var extraFormTypes = {
   template:
     '<div>' +
       '<div>' +
-        '<ul class="nav nav-pills" role="tablist">' +
+        '<ul v-if="showConfiguredTypes" class="nav nav-pills" role="tablist">' +
           '<li role="presentation" class="active">' +
             '<a role="tab" data-toggle="tab" :href="anchor(\'#\', \'basic_types\')">Base types</a>' +
           '</li>' +
@@ -48,6 +48,9 @@ var extraFormTypes = {
   computed: {
     configuredTypes: function () {
       return this.$store.getters.getConfiguredExtraFormTypes;
+    },
+    showConfiguredTypes: function () {
+      return this.$store.getters.showConfiguredTypes;
     },
     baseTypes: function () {
       return this.$store.getters.getBaseExtraFormTypes;

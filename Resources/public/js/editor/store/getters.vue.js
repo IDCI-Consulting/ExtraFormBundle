@@ -6,8 +6,12 @@ var extraFormEditorGetters = {
     return state.configuration.editorId;
   },
 
-  configuredFieldEditionAllowed: function (state) {
-    return state.configuration.allow_configured_type_edition;
+  configuredTypesEditionAllowed: function (state) {
+    return state.configuration.allow_configured_types_edition;
+  },
+
+  showConfiguredTypes: function (state) {
+    return state.configuration.show_configured_types;
   },
 
   getConfiguredExtraFormTypesApiUrl: function (state) {

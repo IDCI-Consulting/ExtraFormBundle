@@ -60,31 +60,3 @@ function createAttributeMapObject(element) {
 
   return object;
 }
-
-/**
- * Submit a form in ajax
- *
- * @param $form
- * @param callback
- */
-function submitForm($form, callback) {
-  var request = $.ajax({
-    url: $form.attr('action'),
-    method: $form.attr('method'),
-    data: $form.serialize()
-  });
-
-  request.done(function (response) {
-    return callback({
-      success: true,
-      data: response
-    });
-  });
-
-  request.fail(function (response) {
-    return callback({
-      success: false,
-      data: response
-    });
-  });
-}
