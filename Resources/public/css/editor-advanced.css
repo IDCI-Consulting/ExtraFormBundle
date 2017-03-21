@@ -1,9 +1,10 @@
-#modal_overview {
+.editor-modal.overview-modal {
     z-index: 9999;
 }
 
-#modal_overview .modal-content {
+.editor-modal.overview-modal .modal-content {
     max-height: 93vh;
+    top: 20%;
     overflow: auto;
 }
 

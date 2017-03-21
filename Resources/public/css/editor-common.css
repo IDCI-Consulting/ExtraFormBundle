@@ -2,12 +2,12 @@
 /* EDITOR */
 /**********/
 
-.modal-footer button {
+.editor-modal .modal-footer button {
     float: left;
     margin-right: 15px;
 }
 
-.fa-cog.fa-spin {
+.editor-modal .fa-cog.fa-spin {
     color: #265a88;
 }
 
@@ -20,6 +20,10 @@
 .extra-form-inputs-required input[required="required"] {
     background-color: #f3d9d9;
     border-color: #c9302c;
+}
+
+.editor-modal.modal.in .modal-dialog {
+    padding: 0;
 }
 
 /*******************/
