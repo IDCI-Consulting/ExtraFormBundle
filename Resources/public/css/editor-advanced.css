@@ -160,7 +160,7 @@
     background: #514D61;
 }
 
-.editor-advanced .new-field-constraint button {
+.editor-advanced .extra-form-fields-configuration .new-field-constraint button {
     display: inline-block;
     margin: 0 10px;
     min-width: inherit;
