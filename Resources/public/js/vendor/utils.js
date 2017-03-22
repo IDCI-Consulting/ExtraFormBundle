@@ -37,7 +37,7 @@ function generateUniqueId() {
  */
 function getLastKey(object) {
   var keys = Object.keys(object);
-  var lastElementPosition = Object.keys(object).length - 1;
+  var lastElementPosition = keys.length - 1;
 
   return keys[lastElementPosition];
 }
@@ -61,4 +61,41 @@ function createAttributeMapObject(element) {
   object.value = element.value;
 
   return object;
+}
+
+/**
+ * Create the html for a bootstrap modal
+ *
+ * @param id
+ * @param name
+ * @param extraClasses
+ * @param title
+ * @param body
+ * @param [modalFooter]
+ *
+ * @returns {string}
+ */
+function createBootstrapModal (id, name, extraClasses, title, body, modalFooter) {
+  var footer = modalFooter ? modalFooter : '';
+
+  return '' +
+    '<div id="' + name + '-' + id + '" class="editor-modal modal fade ' + extraClasses + ' ' + name + '">' +
+      '<div class="modal-dialog" role="document">' +
+        '<div class="modal-content">' +
+          '<div class="modal-header">' +
+            '<button type="button" class="close" aria-label="Close">' +
+              '<span aria-hidden="true">&times;</span>' +
+            '</button>' +
+            '<h4 class="modal-title">' + title + '</h4>' +
+          '</div>' +
+          '<div class="modal-body">' +
+            body +
+          '</div>' +
+          '<div class="modal-footer">' +
+            footer +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>'
+  ;
 }

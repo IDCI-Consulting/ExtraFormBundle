@@ -1,4 +1,4 @@
-/* global extraQuery, createAttributeMapObject */
+/* global extraQuery, createAttributeMapObject, createBootstrapModal */
 
 window.loadExtraFormEditors = function () {
 
@@ -319,46 +319,12 @@ window.loadExtraFormEditors = function () {
     }
 
     /**
-     * Create a modal
-     *
-     * @param id
-     * @param name
-     * @param extraClasses
-     * @param title
-     * @param body
-     * @param [modalFooter]
-     *
-     * @returns {string}
-     */
-    function createModal (id, name, extraClasses, title, body, modalFooter) {
-      var footer = modalFooter ? modalFooter : '';
-
-      return '<div id="' + name + '-' + id + '" class="editor-modal modal fade ' + extraClasses + ' ' + name + '">' +
-          '<div class="modal-dialog" role="document">' +
-            '<div class="modal-content">' +
-              '<div class="modal-header">' +
-                '<button type="button" class="close" aria-label="Close">' +
-                  '<span aria-hidden="true">&times;</span>' +
-                '</button>' +
-                '<h4 class="modal-title">' + title + '</h4>' +
-              '</div>' +
-              '<div class="modal-body">' + body + '</div>' +
-              '<div class="modal-footer">' +
-                  footer +
-              '</div>' +
-            '</div>' +
-          '</div>' +
-        '</div>'
-      ;
-    }
-
-    /**
      * Create the raw modal
      *
      * @returns {string}
      */
     function createRawModal () {
-      return createModal(
+      return createBootstrapModal(
         index,
         'raw-mode-modal',
         'modal-fullscreen',
@@ -373,7 +339,7 @@ window.loadExtraFormEditors = function () {
      * @returns {string}
      */
     function createSimpleModal () {
-      return createModal(
+      return createBootstrapModal(
         index,
         'simple-visual-mode-modal',
         'modal-fullscreen',
@@ -389,7 +355,7 @@ window.loadExtraFormEditors = function () {
      * @returns {string}
      */
     function createAdvancedModal () {
-      return createModal(
+      return createBootstrapModal(
         index,
         'advanced-visual-mode-modal',
         'modal-fullscreen',
@@ -408,7 +374,7 @@ window.loadExtraFormEditors = function () {
      * @returns {string}
      */
     function createOverviewModal () {
-      return createModal(
+      return createBootstrapModal(
         index,
         'overview-modal',
         'extra-form-inputs-required',
