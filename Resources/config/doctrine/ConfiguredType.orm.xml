@@ -16,7 +16,7 @@
 
         <field name="tags" column="tags" type="text" nullable="true" />
 
-        <field name="configuration" column="configuration" type="text"/>
+        <field name="configuration" column="configuration" type="text" nullable="true" />
 
     </entity>
 
