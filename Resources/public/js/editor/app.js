@@ -55,7 +55,9 @@ function triggerVueEditor (element, formProperties, configuration) {
      */
     beforeCreate: function () {
       extraFormEditorStore.dispatch('setBaseExtraFormTypes', this.$http);
-      extraFormEditorStore.dispatch('setConfiguredExtraFormTypes', this.$http);
+      if (this.$store.getters.showConfiguredTypes) {
+        extraFormEditorStore.dispatch('setConfiguredExtraFormTypes', this.$http);
+      }
     },
 
     methods: {
