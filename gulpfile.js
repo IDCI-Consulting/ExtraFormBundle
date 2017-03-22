@@ -2,8 +2,6 @@
 
 var src = {};
 src.styles = [
-  'Resources/public/css/bootstrap.min.css',
-  'Resources/public/css/bootstrap-theme.min.css',
   'Resources/public/css/editor-simple.css',
   'Resources/public/css/editor-advanced.css',
   'Resources/public/css/editor-common.css'
