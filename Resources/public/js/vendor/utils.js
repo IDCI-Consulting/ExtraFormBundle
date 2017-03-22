@@ -50,7 +50,9 @@ function getLastKey(object) {
  * @return object
  */
 function createAttributeMapObject(element) {
-  var attributes = element.attributes, object = {};
+  var attributes = element.attributes;
+  var object = {};
+
   for (var attribute, i = 0, length = attributes.length; i < length; i++) {
     attribute = attributes[i];
     object[attribute.nodeName] = attribute.nodeValue;

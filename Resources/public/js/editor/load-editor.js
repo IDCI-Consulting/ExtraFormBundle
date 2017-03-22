@@ -1,17 +1,21 @@
-/* global extraQuery */
+/* global extraQuery, createAttributeMapObject */
 
-window.loadExtraFormEditor = function () {
+window.loadExtraFormEditors = function () {
 
   /**
    * Create the editor for each textareas with the class extra form editor
    */
   extraQuery('textarea.extra-form-editor').each(function (index) {
 
-    /* global createAttributeMapObject */
+    var editorComponentId = 'editorComponent' + index;
+
+    // Do not load the editor if it was already loaded
+    if (document.getElementById(editorComponentId)) {
+      return;
+    }
 
     // Retrieve the textarea attributes and value
     var formProperties = createAttributeMapObject(this);
-    var editorComponentId = 'editorComponent' + index;
     var availableModes = formProperties['data-available-modes'].split('__');
     var configuration = window[formProperties['data-configuration-variable']];
     var rawModal = createRawModal(index);

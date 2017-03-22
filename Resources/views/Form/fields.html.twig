@@ -184,7 +184,7 @@
     <script type="text/javascript">
 
         window.addEventListener('load', function () {
-            loadExtraFormEditor();
+            loadExtraFormEditors();
         });
 
         var {{ form.vars.id }}_configuration = {
@@ -204,7 +204,7 @@
         };
 
         // We must load the scripts and styles only once, even if many widgets are on the page
-        if (typeof window.loadExtraFormEditor !== 'function') {
+        if (typeof window.loadExtraFormEditors !== 'function') {
             document.write(
                 '<script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor.min.js') }}"></scri'+'pt>' +
                 '<link rel="stylesheet" type="text/css" href="{{ asset('bundles/idciextraform/css/font-awesome-4.7.0/css/font-awesome.min.css') }}" />' +
