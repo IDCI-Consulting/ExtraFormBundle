@@ -3,8 +3,9 @@ var baseExtraFormType = {
 
   template:
     '<div>' +
-      '<button class="extra-btn" @click="createField(type)" :class="type.name" type="button">' +
-        '<i :class="getFontAwsomeIconClass(type.icon)" aria-hidden="true"></i>{{ type.name }}' +
+      '<button class="extra-btn" @click="createField(type)" type="button">' +
+        '<i :class="getFontAwsomeIconClass(type.icon)" aria-hidden="true"></i>' +
+        '{{ type.name }}' +
       '</button>' +
     '</div>',
 
