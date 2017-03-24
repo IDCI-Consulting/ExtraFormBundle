@@ -102,7 +102,7 @@ var editorAdvancedFieldOptions = {
      * @param event
      */
     triggerModal: function (event) {
-      var $button = $(event.target);
+      var $button = extraQuery(event.target);
       var $modal = $button
         .siblings('#modal_' + event.target.id)
         .first();
@@ -110,7 +110,7 @@ var editorAdvancedFieldOptions = {
       $modal.modal('show');
       $modal.find('.close').on('click', function (e) {
         e.preventDefault();
-        $(this)
+        extraQuery(this)
           .closest('.modal')
           .modal('hide')
         ;
