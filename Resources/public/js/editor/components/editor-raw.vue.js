@@ -54,7 +54,9 @@ Vue.component('editor-raw', {
      * Set the new value of the initial textarea
      */
     updateInitialTextareaValue: function () {
-      document.getElementById(this.textarea.id).value = this.raw;
+      if (this.textarea.id) {
+        document.getElementById(this.textarea.id).value = this.raw;
+      }
     },
 
     /**
