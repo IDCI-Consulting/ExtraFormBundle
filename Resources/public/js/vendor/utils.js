@@ -43,6 +43,29 @@ function getLastKey(object) {
 }
 
 /**
+ * Hash a string to a 32 bit integer
+ *
+ * @param string
+ * @returns {number}
+ */
+function hashCode(string) {
+  var hash = 0;
+  var chr;
+
+  if (string.length === 0) {
+    return hash;
+  }
+
+  for (var i = 0; i < string.length; i++) {
+    chr   = string.charCodeAt(i);
+    hash  = ((hash << 5) - hash) + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+
+  return hash;
+}
+
+/**
  * Create a javascript object to get the map all the attribute of the given element, as well as the value
  *
  * @param element
