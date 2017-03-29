@@ -103,31 +103,6 @@
     width: 200px;
 }
 
-.editor-advanced .nav-pills {
-    margin: 10px 0;
-}
-
-.editor-advanced ul.nav-pills > li > a {
-    border-radius: 0;
-    color: #514D61;
-}
-
-.editor-advanced ul.nav-pills > li a:hover,
-.editor-advanced ul.nav-pills > li a:focus,
-.editor-advanced ul li.active a {
-    background-color: #514D61;
-    color: #FFFFFF;
-}
-
-.editor-advanced .extra-form-types .nav-pills {
-    text-align: center;
-}
-
-.editor-advanced .extra-form-types ul.nav-pills > li {
-    display: inline-block;
-    float: none;
-}
-
 .editor-advanced .extra-form-fields-configuration > .inactive {
     display: none;
 }
@@ -150,65 +125,9 @@
 
 /** EXTRA FORM FIELDS CONFIGURATION : CONSTRAINTS **/
 
-.editor-advanced .multiselect {
-    display: inline-block;
-    width: 80%;
-}
-.editor-advanced .multiselect__option--highlight,
-.editor-advanced .multiselect__option--selected.multiselect__option--highlight,
-.editor-advanced .multiselect__option--highlight:after {
-    background: #514D61;
-}
-
 .editor-advanced .extra-form-fields-configuration .new-field-constraint button {
     display: inline-block;
     margin: 0 10px;
     min-width: inherit;
     padding: 8px;
-}
-
-.editor-advanced .field-constraint {
-    background-color: #514D61;
-    border: 1px solid #514D61;
-    color: #FFFFFF;
-    margin: 10px 0;
-    padding: 10px;
-}
-
-.editor-advanced .field-constraint button.close {
-    color: #FFFFFF;
-    opacity: 1;
-    visibility: hidden;
-}
-
-.editor-advanced .field-constraint:hover button.close {
-    visibility: visible;
-}
-
-.editor-advanced .field-constraint-options a {
-    color: #FFFFFF;
-    display: block;
-    margin: 10px 0;
-    width: 100%;
-}
-
-.editor-advanced .field-constraint-options a {
-    text-decoration: none;
-}
-
-.editor-advanced .field-constraint-options a > span:after {
-    background-color: #FFFFFF;
-    border-radius: 20px;
-    color: #514D61;
-    content: " +";
-    display: inline-block;
-    float: right;
-    padding-left: 6px;
-    width: 20px;
-}
-
-.editor-advanced .field-constraint-options a[aria-expanded="true"] > span:after {
-    content: "-";
-    float: right;
-    padding-left: 8px;
 }

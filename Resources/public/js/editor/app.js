@@ -70,6 +70,7 @@ function triggerVueEditor (element, formProperties, configuration) {
       updateFields: function (fields) {
         this.$set(this, 'fields', fields);
       }
+
     }
 
   });

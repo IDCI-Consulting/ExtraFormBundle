@@ -1,6 +1,5 @@
 /* exported editorAdvancedFieldOptions */
-/* global generateUniqueId */
-/* global $ */
+/* global generateUniqueId, extraQuery */
 
 var editorAdvancedFieldOptions = {
 

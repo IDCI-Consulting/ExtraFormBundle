@@ -56,6 +56,8 @@ select, input, textarea, button, optgroup {
 .editor .form-group > .form-control {
     display: inline-block;
     width: 65%;
+    /* hack: https://css-tricks.com/fighting-the-space-between-inline-block-elements/ */
+    margin-right: -30px;
 }
 
 .editor .form-group > input[type="checkbox"].form-control {
@@ -192,4 +194,93 @@ select, input, textarea, button, optgroup {
     background: #514D61;
     border-color: #514D61;
     color: #FFF;
+}
+
+/* Bootstrap Pills */
+
+.editor .nav-pills {
+    margin: 10px 0;
+}
+
+.editor ul.nav-pills > li > a {
+    border-radius: 0;
+    color: #514D61;
+}
+
+.editor ul.nav-pills > li a:hover,
+.editor ul.nav-pills > li a:focus,
+.editor ul li.active a {
+    background-color: #514D61;
+    color: #FFFFFF;
+}
+
+.editor ul.nav-pills {
+    text-align: center;
+}
+
+.editor .extra-form-types ul.nav-pills > li {
+    display: inline-block;
+    float: none;
+}
+
+/* Collapsed block */
+
+.editor .collapsed-block {
+    background-color: #514D61;
+    border: 1px solid #514D61;
+    color: #FFFFFF;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.editor .collapsed-block button.close {
+    color: #FFFFFF;
+    opacity: 1;
+    visibility: hidden;
+}
+
+.editor .collapsed-block:hover button.close {
+    visibility: visible;
+}
+
+.editor .collapsed-block .options a {
+    color: #FFFFFF;
+    display: block;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.editor .collapsed-block .options a {
+    text-decoration: none;
+}
+
+.editor .collapsed-block .options a > span:after {
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    color: #514D61;
+    content: " +";
+    display: inline-block;
+    float: right;
+    padding-left: 6px;
+    width: 20px;
+}
+
+.editor .collapsed-block .options a[aria-expanded="true"] > span:after {
+    content: "-";
+    float: right;
+    padding-left: 8px;
+}
+
+/****************/
+/* MULTI SELECT */
+/****************/
+
+.editor .multiselect {
+    display: inline-block;
+    width: 80%;
+}
+.editor .multiselect__option--highlight,
+.editor .multiselect__option--selected.multiselect__option--highlight,
+.editor .multiselect__option--highlight:after {
+    background: #514D61;
 }

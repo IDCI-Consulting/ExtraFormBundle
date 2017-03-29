@@ -4,7 +4,7 @@ var editorAdvancedFieldConstraints = {
   template:
     '<div>' +
       '<label>Constraints : </label>' +
-      '<div class="field-constraint" v-for="(constraint, index) in fieldConstraints">' +
+      '<div class="field-constraint collapsed-block" v-for="(constraint, index) in fieldConstraints">' +
         '<button @click.prevent="removeConstraint(index)" aria-label="Close" class="close">' +
           '<span aria-hidden="true">×</span>' +
         '</button>' +
