@@ -21,6 +21,51 @@ function filterObject(object, callback) {
 }
 
 /**
+ * Sort an object by keys
+ *
+ *
+ * @param object
+ * @param {[]} [firstKeys] : if the firstKeys param is set, set them at the beginning of the object
+ * @param {boolean} [sortAll] : if false, only sort by first keys
+ *
+ * @returns {{}}
+ */
+function sortObject(object, firstKeys, sortAll) {
+  const ordered = {};
+
+  if (typeof sortAll === 'undefined') {
+    sortAll = true;
+  }
+
+  if (typeof firstKeys === 'undefined') {
+    firstKeys = [];
+  }
+
+  for (var i = 0, len = firstKeys.length;  i < len; i++) {
+    var key = firstKeys[i];
+    ordered[key] = object[key];
+  }
+
+  if (sortAll) {
+    Object.keys(object).sort().forEach(function(key) {
+      if (firstKeys.indexOf(key) === -1) {
+        ordered[key] = object[key];
+      }
+    });
+  } else {
+    for (var key in object) {
+      if (object.hasOwnProperty(key)) {
+        if (firstKeys.indexOf(key) === -1) {
+          ordered[key] = object[key];
+        }
+      }
+    }
+  }
+
+  return ordered;
+}
+
+/**
  * Generate a unique id for the fields default names
  *
  * @returns string

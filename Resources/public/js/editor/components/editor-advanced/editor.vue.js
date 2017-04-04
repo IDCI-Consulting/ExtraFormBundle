@@ -1,5 +1,5 @@
 /* global Vue */
-Vue.component('editor-advanced', {
+Vue.component('form-editor-advanced', {
 
   template:
     '<div class="editor-advanced editor row">' +

@@ -29,7 +29,7 @@ var editorAdvancedFieldOptions = {
                   '<h4 class="modal-title">Advanced visual mode</h4>' +
                 '</div>' +
                 '<div class="modal-body">' +
-                  '<editor-advanced :fields="fieldOptions[key]"></editor-advanced>' +
+                  '<form-editor-advanced :fields="fieldOptions[key]"></form-editor-advanced>' +
                 '</div>' +
                 '<div class="modal-footer">' +
                   '<button class="btn btn-default close-modal">' +

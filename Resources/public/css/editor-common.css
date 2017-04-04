@@ -44,6 +44,7 @@ select, input, textarea, button, optgroup {
 
 .editor .form-group {
     position: relative;
+    clear: right;
 }
 
 .editor .form-group > label {
@@ -283,4 +284,10 @@ select, input, textarea, button, optgroup {
 .editor .multiselect__option--selected.multiselect__option--highlight,
 .editor .multiselect__option--highlight:after {
     background: #514D61;
+}
+
+.editor .multiselect.multiselect-form-control {
+    display: inline-block;
+    width: 65%;
+    margin-right: -30px;
 }

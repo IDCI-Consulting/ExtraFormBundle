@@ -13,10 +13,10 @@ var editorSimpleFieldOptions = {
           ':value="fieldOptions[key]" ' +
           '@changed="updateOption">' +
         '</component>' +
-        '<editor-simple v-for="(option, key) in options" ' +
+        '<form-editor-simple v-for="(option, key) in options" ' +
           'v-if="option.component_name === \'editor\'" ' +
           ':fields="fieldOptions[key]">' +
-        '</editor-simple>' +
+        '</form-editor-simple>' +
     '</div>',
 
   props: ['type', 'fieldOptions'],

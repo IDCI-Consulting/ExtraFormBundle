@@ -329,7 +329,7 @@ window.loadExtraFormEditors = function () {
         'raw-mode-modal',
         'modal-fullscreen',
         'Editor in raw mode',
-        '<editor-raw :fields="fields" @generated="updateFields"></editor-raw><br>'
+        '<form-editor-raw :fields="fields" @generated="updateFields"></form-editor-raw><br>'
       );
     }
 
@@ -344,7 +344,7 @@ window.loadExtraFormEditors = function () {
         'simple-visual-mode-modal',
         'modal-fullscreen',
         'Simple visual mode',
-        '<editor-simple :fields="fields"></editor-simple>',
+        '<form-editor-simple :fields="fields"></form-editor-simple>',
         '<em>All your changes are automatically saved</em>'
       );
     }
@@ -360,7 +360,7 @@ window.loadExtraFormEditors = function () {
         'advanced-visual-mode-modal',
         'modal-fullscreen',
         'Advanced visual mode',
-        '<editor-advanced :fields="fields"></editor-advanced>',
+        '<form-editor-advanced :fields="fields"></form-editor-advanced>',
         '<button class="btn btn-primary trigger-overview-modal-' + index + '">' +
         'Display the overview <i class="fa fa-eye"></i>' +
         '</button>' +

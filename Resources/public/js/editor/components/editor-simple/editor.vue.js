@@ -1,5 +1,5 @@
 /* global Vue */
-Vue.component('editor-simple', {
+Vue.component('form-editor-simple', {
 
   template:
     '<div class="editor-simple">' +
