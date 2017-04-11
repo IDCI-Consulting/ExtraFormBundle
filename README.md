@@ -85,9 +85,15 @@ Install the assets:
 php app/console assets:install --symlink
 ```
 
-The editor requires bootstrap. If you don't use it already in your project, just add the following lines in your views.
+The editor requires bootstrap and jquery. If you don't use it already in your project, just add the following lines in your views.
 
 ```twig
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/idciextraform/js/vendor/jquery-2.2.4.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/idciextraform/js/vendor/bootstrap.min.js') }}"></script>
+{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/idciextraform/css/bootstrap.min.css') }}" />

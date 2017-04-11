@@ -1,11 +1,11 @@
-/* global extraQuery, createAttributeMapObject, createBootstrapModal */
+/* global $, createAttributeMapObject, createBootstrapModal */
 
 window.loadExtraFormEditors = function () {
 
   /**
    * Create the editor for each textareas with the class extra form editor
    */
-  extraQuery('textarea.extra-form-editor').each(function (index) {
+  $('textarea.extra-form-editor').each(function (index) {
 
     var editorComponentId = 'editorComponent' + index;
 
@@ -48,14 +48,14 @@ window.loadExtraFormEditors = function () {
     /**
      * Insert buttons in place of the textarea
      */
-    extraQuery(this).after(
+    $(this).after(
       '<div class="modal-buttons">' +
          simpleModalButton + ' ' + advancedModalButton + ' ' + rawModalButton +
       '</div>'
     );
 
     // Insert the modals editor at the end of the body
-    var $body = extraQuery('body');
+    var $body = $('body');
 
     $body.append(
       '<div id="' + editorComponentId + '">' + rawModal + simpleModal + advancedModal + overviewModal + '</div>'
@@ -93,12 +93,12 @@ window.loadExtraFormEditors = function () {
      * Show or hide options on the simple editor
      */
     function showOrHideSimpleEditorOptions () {
-      var $simpleEditor = extraQuery('.editor-simple');
+      var $simpleEditor = $('.editor-simple');
 
       $simpleEditor.on('click', '.field-options > label', function (event) {
         // Prevent the click for being triggered multiple times
         event.stopImmediatePropagation();
-        extraQuery(this)
+        $(this)
           .parent()
           .toggleClass('show')
         ;
@@ -106,7 +106,7 @@ window.loadExtraFormEditors = function () {
 
       $simpleEditor.on('click', '.field-constraint-options > label', function (event) {
         event.stopImmediatePropagation();
-        extraQuery(this)
+        $(this)
           .parent()
           .toggleClass('show')
         ;
@@ -117,14 +117,14 @@ window.loadExtraFormEditors = function () {
      * Add some colors on empty required inputs
      */
     function colorEmptyRequiredInputs () {
-      extraQuery(document).on('change', '.extra-form-inputs-required input[required="required"]', function () {
-        if (extraQuery(this).val()) {
-          extraQuery(this).css({
+      $(document).on('change', '.extra-form-inputs-required input[required="required"]', function () {
+        if ($(this).val()) {
+          $(this).css({
             'border-color': '#cccccc',
             'background-color': '#ffffff'
           });
         } else {
-          extraQuery(this).css({
+          $(this).css({
             'border-color': '#c9302c',
             'background-color': '#f3d9d9'
           });
@@ -139,9 +139,9 @@ window.loadExtraFormEditors = function () {
      * @param modalIdentifier
      */
     function showModalOnClick (modalType, modalIdentifier) {
-      extraQuery(document).on('click', 'button.trigger-' + modalType + '-' + modalIdentifier, function (event) {
+      $(document).on('click', 'button.trigger-' + modalType + '-' + modalIdentifier, function (event) {
         event.preventDefault();
-        var $modal = extraQuery('#' + modalType + '-' + modalIdentifier);
+        var $modal = $('#' + modalType + '-' + modalIdentifier);
 
         if ('overview-modal' !== modalType) {
           $modal = $modal.first();
@@ -167,9 +167,9 @@ window.loadExtraFormEditors = function () {
           // On the close button on the left bottom of the modal
         '.' + modalType + ' .modal-header > button.close';
 
-      extraQuery(document).on('click', classes, function (event) {
+      $(document).on('click', classes, function (event) {
         event.preventDefault();
-        extraQuery(this)
+        $(this)
           .closest('.modal')
           .modal('hide')
         ;
@@ -191,11 +191,11 @@ window.loadExtraFormEditors = function () {
       function getFormOverview (callback) {
 
         var raw =
-          extraQuery('#raw-mode-modal-' + index + ' textarea')
+          $('#raw-mode-modal-' + index + ' textarea')
             .first()
             .val();
 
-        var request = extraQuery.ajax({
+        var request = $.ajax({
           url: url,
           method: 'POST',
           data: {
@@ -220,15 +220,15 @@ window.loadExtraFormEditors = function () {
         });
       }
 
-      extraQuery(document).on('click', 'button.trigger-overview-modal-' + index, function () {
+      $(document).on('click', 'button.trigger-overview-modal-' + index, function () {
         setTimeout(function () {
           getFormOverview(function (content) {
             if (content.success) {
-              extraQuery('#overview-modal-' + index + ' .modal-body').replaceWith(
+              $('#overview-modal-' + index + ' .modal-body').replaceWith(
                 '<div class="modal-body">' + content.data + '</div>'
               );
             } else {
-              extraQuery('#overview-modal-' + index + ' .modal-body').replaceWith(
+              $('#overview-modal-' + index + ' .modal-body').replaceWith(
                 '<div class="modal-body">' +
                   '<div>' + content.data.responseText + '</div>' +
                 '</div>'
@@ -244,22 +244,22 @@ window.loadExtraFormEditors = function () {
      */
     function submitFormOverviewOnClick () {
 
-      extraQuery(document).on('click', '#overview-modal-' + index + ' form button[type=\'submit\']', function (event) {
+      $(document).on('click', '#overview-modal-' + index + ' form button[type=\'submit\']', function (event) {
         event.preventDefault();
         resetFormOverviewModal(index);
-        var $form = extraQuery(this).closest('form');
+        var $form = $(this).closest('form');
 
         setTimeout(function () {
 
           submitForm($form, function (content) {
             if (content.success) {
               if (content.data) {
-                extraQuery('#overview-modal-' + index + ' .modal-body').replaceWith(
+                $('#overview-modal-' + index + ' .modal-body').replaceWith(
                   '<div class="modal-body">' + content.data + '</div>'
                 );
               }
             } else {
-              extraQuery('#overview-modal-' + index + ' .modal-body').replaceWith(
+              $('#overview-modal-' + index + ' .modal-body').replaceWith(
                 '<div class="modal-body">' +
                   '<div>' + content.data.responseText + '</div>' +
                 '</div>'
@@ -274,7 +274,7 @@ window.loadExtraFormEditors = function () {
      * Reset the content of the overview modal when it's closed
      */
     function resetFormOverviewModalOnClose () {
-      extraQuery(document).on('hidden.bs.modal', '#overview-modal-' + index, function () {
+      $(document).on('hidden.bs.modal', '#overview-modal-' + index, function () {
         resetFormOverviewModal(index);
       });
     }
@@ -283,7 +283,7 @@ window.loadExtraFormEditors = function () {
      * Reset the content of the overview modal
      */
     function resetFormOverviewModal () {
-      extraQuery('#overview-modal-' + index + ' .modal-body').replaceWith(
+      $('#overview-modal-' + index + ' .modal-body').replaceWith(
         '<div class="modal-body">' +
           '<div style="text-align: center;"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i></div>' +
         '</div>'
@@ -297,7 +297,7 @@ window.loadExtraFormEditors = function () {
      * @param callback
      */
     function submitForm ($form, callback) {
-      var request = extraQuery.ajax({
+      var request = $.ajax({
         url: $form.attr('action'),
         method: $form.attr('method'),
         data: $form.serialize()

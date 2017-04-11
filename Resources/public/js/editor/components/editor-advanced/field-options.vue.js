@@ -1,5 +1,5 @@
 /* exported editorAdvancedFieldOptions */
-/* global generateUniqueId, extraQuery */
+/* global generateUniqueId, $ */
 
 var editorAdvancedFieldOptions = {
 
@@ -101,7 +101,7 @@ var editorAdvancedFieldOptions = {
      * @param event
      */
     triggerModal: function (event) {
-      var $button = extraQuery(event.target);
+      var $button = $(event.target);
       var $modal = $button
         .siblings('#modal_' + event.target.id)
         .first();
@@ -109,7 +109,7 @@ var editorAdvancedFieldOptions = {
       $modal.modal('show');
       $modal.find('.close').on('click', function (e) {
         e.preventDefault();
-        extraQuery(this)
+        $(this)
           .closest('.modal')
           .modal('hide')
         ;
