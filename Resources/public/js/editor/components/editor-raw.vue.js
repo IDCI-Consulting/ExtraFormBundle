@@ -69,19 +69,11 @@ Vue.component('form-editor-raw', {
         newFields = this.createFieldsRecursively(raw);
 
         this.$emit('generated', newFields);
+        this.closeModal(event);
 
-        // close the modal if everything is fine
-        $(event.target)
-          .closest('.modal')
-          .modal('hide')
-        ;
-
-        // Json parsing error
+      // Json parsing error
       } catch (e) {
-        $(event.target)
-          .siblings('.json-errors')
-          .text('There are errors in your json : ' + e)
-        ;
+        this.displayJsonParseErrors(event);
       }
     },
 
@@ -94,6 +86,40 @@ Vue.component('form-editor-raw', {
       var raw = this.createExtraFormRawRecursively(fields);
 
       return twigifyJsonString(JSON.stringify(raw, null, 4));
+    },
+
+    /**
+     * Close the modal
+     *
+     * @param event - the event triggered by the click on the button
+     */
+    closeModal: function (event) {
+      if (typeof event !== 'undefined') {
+        $(event.target)
+          .closest('.modal')
+          .modal('hide')
+        ;
+
+        // Remove last errors
+        $(event.target)
+          .siblings('.json-errors')
+          .empty()
+        ;
+      }
+    },
+
+    /**
+     * Display the errors caused by json parse
+     *
+     * @param event
+     */
+    displayJsonParseErrors: function (event) {
+      if (typeof event !== 'undefined') {
+        $(event.target)
+          .siblings('.json-errors')
+          .text('There are errors in your json : ' + e)
+        ;
+      }
     }
 
   }
