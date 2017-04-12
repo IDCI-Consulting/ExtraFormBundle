@@ -96,7 +96,7 @@ var rawMixin = {
             if (0 === options[option].length) {
               delete options[option];
             } else {
-              options[option] = JSON.parse(options[option]);
+              options[option] = JSON.parse(jsonifyTwigStrings(options[option]));
             }
           } catch (e) {}
         }

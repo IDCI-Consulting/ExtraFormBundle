@@ -10,7 +10,8 @@ Vue.component('form-editor-raw', {
           'style="width: 100%; height: 300px;"' +
         '>' +
         '</textarea>' +
-        '<button class="close-modal" @click.prevent="generateFields">' +
+        '<div class="json-errors"></div>' +
+        '<button @click.prevent="generateFields">' +
           'Fill the visual mode form fields from this json' +
         '</button>' +
     '</div>',
@@ -28,14 +29,11 @@ Vue.component('form-editor-raw', {
   mixins: [rawMixin],
 
   created: function () {
-    try {
-      // If the textarea is empty, do not attempt to generate fields
-      if (this.textarea.value !== '') {
-        this.raw = this.textarea.value;
-        this.generateFields();
-      }
-      // Json parsing error
-    } catch (e) {}
+    // If the textarea is empty, do not attempt to generate fields
+    if (this.textarea.value !== '') {
+      this.raw = this.textarea.value;
+      this.generateFields();
+    }
   },
 
   watch: {
@@ -62,16 +60,29 @@ Vue.component('form-editor-raw', {
     /**
      * Generate the form fields from the textarea raw
      */
-    generateFields: function () {
+    generateFields: function (event) {
       var newFields = [];
 
       try {
-        var raw = JSON.parse(this.raw);
+        var raw = JSON.parse(jsonifyTwigStrings(this.raw));
 
         newFields = this.createFieldsRecursively(raw);
+
         this.$emit('generated', newFields);
+
+        // close the modal if everything is fine
+        $(event.target)
+          .closest('.modal')
+          .modal('hide')
+        ;
+
         // Json parsing error
-      } catch (e) {}
+      } catch (e) {
+        $(event.target)
+          .siblings('.json-errors')
+          .text('There are errors in your json : ' + e)
+        ;
+      }
     },
 
     /**
@@ -82,7 +93,7 @@ Vue.component('form-editor-raw', {
     generateRaw: function (fields) {
       var raw = this.createExtraFormRawRecursively(fields);
 
-      return JSON.stringify(raw, null, 4);
+      return twigifyJsonString(JSON.stringify(raw, null, 4));
     }
 
   }

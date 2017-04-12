@@ -2,6 +2,12 @@
 /* EDITOR */
 /**********/
 
+.editor-modal .json-errors {
+    color: #d43f3a;
+    font-weight: bold;
+    padding: 10px 0;
+}
+
 .editor-modal .modal-footer button {
     float: left;
     margin-right: 15px;
@@ -48,10 +54,12 @@ select, input, textarea, button, optgroup {
 }
 
 .editor .form-group > label {
-    display: inline-block;
+    display: block;
     font-weight: bold;
     padding-bottom: 3px;
     width: 35%;
+    float: left;
+    position: relative;
 }
 
 .editor .form-group > .form-control {
@@ -65,14 +73,14 @@ select, input, textarea, button, optgroup {
     width: inherit;
 }
 
-.editor .form-group > i.feedback {
-    position: absolute;
+.editor .form-group i.feedback {
     right: 10px;
-    top: 10px;
+    position: absolute;
+
 }
 
-.editor .form-group > i.warning.feedback { color: #d43f3a; }
-.editor .form-group > i.success.feedback { color: #4cae4c; }
+.editor .form-group i.warning.feedback { color: #d43f3a; }
+.editor .form-group i.success.feedback { color: #4cae4c; }
 
 /********************/
 /* FULLSCREEN MODAL */

@@ -167,3 +167,43 @@ function createBootstrapModal (id, name, extraClasses, title, body, modalFooter)
     '</div>'
   ;
 }
+
+/**
+ * Format the raw to have twig string json valid
+ *
+ * @param raw
+ * @returns {*}
+ */
+function jsonifyTwigStrings(raw) {
+
+  function replace(match) {
+    return match
+      .replace(/\\'/g, '\\\\\'')
+      .replace(/\\"/g, '\\\\\"')
+      ;
+  }
+
+  var twigRegex = /{{.*}}/g;
+
+  return raw.replace(twigRegex, replace);
+}
+
+/**
+ * Format the json to have valid twig strings
+ *
+ * @param json
+ * @returns {*}
+ */
+function twigifyJsonString(json) {
+
+  function replace(match) {
+    return match
+      .replace(/\\\\'/g, '\\\'')
+      .replace(/\\\\"/g, '\\\"')
+      ;
+  }
+
+  var twigRegex = /{{.*}}/g;
+
+  return json.replace(twigRegex, replace);
+}

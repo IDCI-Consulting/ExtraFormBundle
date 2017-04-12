@@ -16,6 +16,7 @@ src.scripts = [
   'Resources/public/js/vendor/vue-resource-1.2.0.min.js',
   'Resources/public/js/vendor/utils.js',
   'Resources/public/js/editor/mixins/option.vue.js',
+  'Resources/public/js/editor/mixins/jsonOption.vue.js',
   'Resources/public/js/editor/mixins/http.vue.js',
   'Resources/public/js/editor/mixins/raw.vue.js',
   'Resources/public/js/editor/mixins/icon.vue.js',
