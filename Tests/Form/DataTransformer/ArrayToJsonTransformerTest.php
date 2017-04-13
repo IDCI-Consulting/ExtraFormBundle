@@ -2,21 +2,21 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Tests\Form\DataTransformer;
 
-use IDCI\Bundle\ExtraFormBundle\Form\DataTransformer\JsonToArrayTransformer;
+use IDCI\Bundle\ExtraFormBundle\Form\DataTransformer\ArrayToJsonTransformer;
 
 /**
  * @author:  Eddie BARRACO <eddie.barraco@idci-consulting.fr>
  * @license: MIT
  */
-class JsonToArrayTransformerTest extends \PHPUnit_Framework_TestCase
+class ArrayToJsonTransformerTest extends \PHPUnit_Framework_TestCase
 {
     private $json;
     private $array;
 
     /**
-     * @var JsonToArrayTransformer $jsonToArrayTransformer
+     * @var ArrayToJsonTransformer $arrayToJsonTransformer
      */
-    private $jsonToArrayTransformer;
+    private $arrayToJsonTransformer;
 
     /**
      * {@inheritDoc}
@@ -38,16 +38,16 @@ EOF;
             )
         );
 
-        $this->jsonToArrayTransformer = new JsonToArrayTransformer();
+        $this->arrayToJsonTransformer = new ArrayToJsonTransformer();
     }
 
     public function testTransform()
     {
-        $this->assertEquals($this->json, $this->jsonToArrayTransformer->transform($this->array));
+        $this->assertEquals($this->json, $this->arrayToJsonTransformer->transform($this->array));
     }
 
     public function testReverseTransform()
     {
-        $this->assertEquals($this->array, $this->jsonToArrayTransformer->reverseTransform($this->json));
+        $this->assertEquals($this->array, $this->arrayToJsonTransformer->reverseTransform($this->json));
     }
 }

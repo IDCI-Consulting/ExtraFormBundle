@@ -9,7 +9,7 @@ namespace IDCI\Bundle\ExtraFormBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use IDCI\Bundle\ExtraFormBundle\Form\DataTransformer\JsonToArrayTransformer;
+use IDCI\Bundle\ExtraFormBundle\Form\DataTransformer\ArrayToJsonTransformer;
 
 class JsonTextareaType extends AbstractType
 {
@@ -18,7 +18,7 @@ class JsonTextareaType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addModelTransformer(new JsonToArrayTransformer());
+        $builder->addModelTransformer(new ArrayToJsonTransformer());
     }
 
     /**
