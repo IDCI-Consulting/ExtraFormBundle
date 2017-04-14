@@ -38,23 +38,10 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new FOS\RestBundle\FOSRestBundle(),
         new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
         new IDCI\Bundle\ExtraFormBundle\IDCIExtraFormBundle(),
-        new JMS\SerializerBundle\JMSSerializerBundle(),
     );
 }
-```
-
-Enable the serializer:
-
-```yml
-# app/config/config.yml
-
-fos_rest:
-    param_fetcher_listener: true # if you want to add configured types
-    service:
-        serializer: jms_serializer.serializer
 ```
 
 Import the bundle configuration:
@@ -71,6 +58,31 @@ Use the editor
 --------------
 
 If you need the api or the editor:
+
+```php
+<?php
+// app/AppKernel.php
+
+public function registerBundles()
+{
+    $bundles = array(
+        // ...
+        new FOS\RestBundle\FOSRestBundle(),
+        new JMS\SerializerBundle\JMSSerializerBundle(),
+    );
+}
+```
+
+Enable the serializer:
+
+```yml
+# app/config/config.yml
+
+fos_rest:
+    param_fetcher_listener: true # if you want to add configured types
+    service:
+        serializer: jms_serializer.serializer
+```
 
 Import the routes:
 ```yml
