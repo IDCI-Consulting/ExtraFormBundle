@@ -18,7 +18,7 @@ var jsonOptionMixin = {
    * Update the value on component creation
    */
   created: function () {
-    if (typeof this.value === 'object' || typeof this.value === 'array') {
+    if ('object' === typeof this.value) {
       this.data = twigifyJsonString(JSON.stringify(this.value, null, 4));
       this.setJsonAttemptClass(this.data);
     }
@@ -30,8 +30,9 @@ var jsonOptionMixin = {
   watch: {
     value: {
       handler: function (value) {
-        if (typeof value === 'object' || typeof value === 'array') {
-          this.data = twigifyJsonString(JSON.stringify(this.value, null, 4));
+        if ('object' === typeof value) {
+          /* global twigifyJsonString */
+          this.data = twigifyJsonString(JSON.stringify(value, null, 4));
           this.setJsonAttemptClass(this.data);
         }
       }
@@ -53,6 +54,7 @@ var jsonOptionMixin = {
     setJsonAttemptClass: function (value) {
       if (0 === value.indexOf('{') || 0 === value.indexOf('[')) {
         try {
+          /* global jsonifyTwigStrings */
           JSON.parse(jsonifyTwigStrings(value));
           this.classes = 'fa fa-check success feedback';
         } catch (e) {

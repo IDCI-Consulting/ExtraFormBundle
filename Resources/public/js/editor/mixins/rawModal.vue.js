@@ -1,3 +1,5 @@
+/* global $ */
+
 /**
  * Global methods for the raw editor modals
  */
