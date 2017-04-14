@@ -83,11 +83,13 @@ window.loadExtraFormEditors = function () {
     getFormOverviewOnClick(configuration.extra_form_editor_overview_url, index);
     resetFormOverviewModalOnClose(index);
     submitFormOverviewOnClick(index);
-    colorEmptyRequiredInputs();
     showOrHideSimpleEditorOptions();
 
     /* global triggerVueEditor */
     triggerVueEditor('#' + editorComponentId, formProperties, configuration);
+
+    /* global colorEmptyRequiredInputs */
+    colorEmptyRequiredInputs(editorComponentId, '.extra-form-inputs-required');
 
     /**
      * Show or hide options on the simple editor
@@ -110,25 +112,6 @@ window.loadExtraFormEditors = function () {
           .parent()
           .toggleClass('show')
         ;
-      });
-    }
-
-    /**
-     * Add some colors on empty required inputs
-     */
-    function colorEmptyRequiredInputs () {
-      $(document).on('change', '.extra-form-inputs-required input[required="required"]', function () {
-        if ($(this).val()) {
-          $(this).css({
-            'border-color': '#cccccc',
-            'background-color': '#ffffff'
-          });
-        } else {
-          $(this).css({
-            'border-color': '#c9302c',
-            'background-color': '#f3d9d9'
-          });
-        }
       });
     }
 
