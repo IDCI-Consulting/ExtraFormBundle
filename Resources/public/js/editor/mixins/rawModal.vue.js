@@ -9,6 +9,15 @@ var rawModalMixin = {
   methods: {
 
     /**
+     * Set the new value of the initial textarea
+     */
+    updateInitialTextareaValue: function () {
+      if (this.textarea.id) {
+        document.getElementById(this.textarea.id).value = this.raw;
+      }
+    },
+
+    /**
      * Close the modal
      *
      * @param event - the event triggered by the click on the button

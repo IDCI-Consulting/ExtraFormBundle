@@ -49,15 +49,6 @@ Vue.component('form-editor-raw', {
   methods: {
 
     /**
-     * Set the new value of the initial textarea
-     */
-    updateInitialTextareaValue: function () {
-      if (this.textarea.id) {
-        document.getElementById(this.textarea.id).value = this.raw;
-      }
-    },
-
-    /**
      * Generate the form fields from the textarea raw
      */
     generateFields: function (event) {
