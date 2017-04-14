@@ -9,7 +9,7 @@ namespace IDCI\Bundle\ExtraFormBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use IDCI\Bundle\ExtraFormBundle\Form\DataTransformer\IbanTransformer;
+use IDCI\Bundle\ExtraFormBundle\Form\DataTransformer\IbanToArrayTransformer;
 
 class IbanType extends AbstractType
 {
@@ -18,7 +18,7 @@ class IbanType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $transformer = new IbanTransformer();
+        $transformer = new IbanToArrayTransformer();
         $builder->addModelTransformer($transformer);
 
         $builder
