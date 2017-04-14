@@ -2,21 +2,21 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Tests\Form\DataTransformer;
 
-use IDCI\Bundle\ExtraFormBundle\Form\DataTransformer\IbanTransformer;
+use IDCI\Bundle\ExtraFormBundle\Form\DataTransformer\IbanToArrayTransformer;
 
 /**
  * @author:  Eddie BARRACO <eddie.barraco@idci-consulting.fr>
  * @license: MIT
  */
-class IbanTransformerTest extends \PHPUnit_Framework_TestCase
+class IbanToArrayTransformerTest extends \PHPUnit_Framework_TestCase
 {
     private $iban;
     private $array;
 
     /**
-     * @var IbanTransformer $ibanTransformer
+     * @var IbanToArrayTransformer $ibanToArrayTransformer
      */
-    private $ibanTransformer;
+    private $ibanToArrayTransformer;
 
     /**
      * {@inheritDoc}
@@ -35,16 +35,16 @@ class IbanTransformerTest extends \PHPUnit_Framework_TestCase
             "c8" => ''
         );
 
-        $this->ibanTransformer = new IbanTransformer();
+        $this->ibanToArrayTransformer = new IbanToArrayTransformer();
     }
 
     public function testTransform()
     {
-        $this->assertEquals($this->array, $this->ibanTransformer->transform($this->iban));
+        $this->assertEquals($this->array, $this->ibanToArrayTransformer->transform($this->iban));
     }
 
     public function testReverseTransform()
     {
-        $this->assertEquals($this->iban, $this->ibanTransformer->reverseTransform($this->array));
+        $this->assertEquals($this->iban, $this->ibanToArrayTransformer->reverseTransform($this->array));
     }
 }

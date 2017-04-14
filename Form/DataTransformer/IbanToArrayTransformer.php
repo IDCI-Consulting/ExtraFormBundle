@@ -9,7 +9,7 @@ namespace IDCI\Bundle\ExtraFormBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 
-class IbanTransformer implements DataTransformerInterface
+class IbanToArrayTransformer implements DataTransformerInterface
 {
     /**
      * Transforms
