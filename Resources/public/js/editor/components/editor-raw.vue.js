@@ -25,8 +25,8 @@ Vue.component('form-editor-raw', {
     };
   },
 
-  /* global rawMixin */
-  mixins: [rawMixin],
+  /* global rawMixin, rawModalMixin */
+  mixins: [rawMixin, rawModalMixin],
 
   created: function () {
     // If the textarea is empty, do not attempt to generate fields
@@ -72,8 +72,8 @@ Vue.component('form-editor-raw', {
         this.closeModal(event);
 
       // Json parsing error
-      } catch (e) {
-        this.displayJsonParseErrors(event);
+      } catch (error) {
+        this.displayJsonParseErrors(event, error);
       }
     },
 
@@ -86,40 +86,6 @@ Vue.component('form-editor-raw', {
       var raw = this.createExtraFormRawRecursively(fields);
 
       return twigifyJsonString(JSON.stringify(raw, null, 4));
-    },
-
-    /**
-     * Close the modal
-     *
-     * @param event - the event triggered by the click on the button
-     */
-    closeModal: function (event) {
-      if (typeof event !== 'undefined') {
-        $(event.target)
-          .closest('.modal')
-          .modal('hide')
-        ;
-
-        // Remove last errors
-        $(event.target)
-          .siblings('.json-errors')
-          .empty()
-        ;
-      }
-    },
-
-    /**
-     * Display the errors caused by json parse
-     *
-     * @param event
-     */
-    displayJsonParseErrors: function (event) {
-      if (typeof event !== 'undefined') {
-        $(event.target)
-          .siblings('.json-errors')
-          .text('There are errors in your json : ' + e)
-        ;
-      }
     }
 
   }

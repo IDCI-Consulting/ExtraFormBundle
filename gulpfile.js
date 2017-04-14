@@ -18,6 +18,7 @@ src.scripts = [
   'Resources/public/js/editor/mixins/option.vue.js',
   'Resources/public/js/editor/mixins/jsonOption.vue.js',
   'Resources/public/js/editor/mixins/http.vue.js',
+  'Resources/public/js/editor/mixins/rawModal.vue.js',
   'Resources/public/js/editor/mixins/raw.vue.js',
   'Resources/public/js/editor/mixins/icon.vue.js',
   'Resources/public/js/editor/store/getters.vue.js',
