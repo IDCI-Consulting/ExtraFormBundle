@@ -52,7 +52,10 @@ var jsonOptionMixin = {
      * @param value
      */
     setJsonAttemptClass: function (value) {
-      if (0 === value.indexOf('{') || 0 === value.indexOf('[')) {
+      if (
+        0 !== value.indexOf('{{') &&
+        (0 === value.indexOf('{') || 0 === value.indexOf('['))
+      ) {
         try {
           /* global jsonifyTwigStrings */
           JSON.parse(jsonifyTwigStrings(value));
