@@ -2,12 +2,11 @@
 Vue.component('form-editor-raw', {
 
   template:
-    '<div>' +
+    '<div class="extra-form-editor raw-mode">' +
         '<textarea ' +
           ':data-textarea-id="textarea.id" ' +
           'v-model="raw" ' +
           ':name="textarea.name" ' +
-          'style="width: 100%; height: 300px;"' +
         '>' +
         '</textarea>' +
         '<div class="json-errors"></div>' +
