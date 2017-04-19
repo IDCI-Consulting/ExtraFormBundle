@@ -204,7 +204,8 @@ select, input, textarea, button, optgroup {
     top: 3px;
 }
 
-.editor button.extra-btn:hover {
+.editor button.extra-btn:hover,
+.editor button.extra-btn:focus  {
     background: #514D61;
     border-color: #514D61;
     color: #FFF;
