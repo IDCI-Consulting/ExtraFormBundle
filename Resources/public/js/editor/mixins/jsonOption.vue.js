@@ -19,7 +19,8 @@ var jsonOptionMixin = {
    */
   created: function () {
     if ('object' === typeof this.value) {
-      this.data = twigifyJsonString(JSON.stringify(this.value, null, 4));
+      /* global transformJsonToRaw */
+      this.data = transformJsonToRaw(JSON.stringify(this.value, null, 4));
       this.setJsonAttemptClass(this.data);
     }
   },
@@ -31,8 +32,7 @@ var jsonOptionMixin = {
     value: {
       handler: function (value) {
         if ('object' === typeof value) {
-          /* global twigifyJsonString */
-          this.data = twigifyJsonString(JSON.stringify(value, null, 4));
+          this.data = transformJsonToRaw(JSON.stringify(value, null, 4));
           this.setJsonAttemptClass(this.data);
         }
       }
@@ -57,8 +57,8 @@ var jsonOptionMixin = {
         (0 === value.indexOf('{') || 0 === value.indexOf('['))
       ) {
         try {
-          /* global jsonifyTwigStrings */
-          JSON.parse(jsonifyTwigStrings(value));
+          /* global transformRawToJson */
+          JSON.parse(transformRawToJson(value));
           this.classes = 'fa fa-check success feedback';
         } catch (e) {
           this.classes = 'fa fa-exclamation-circle warning feedback';

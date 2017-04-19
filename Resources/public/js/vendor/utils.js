@@ -169,46 +169,6 @@ function createBootstrapModal (id, name, extraClasses, title, body, modalFooter)
 }
 
 /**
- * Format the raw to have twig string json valid
- *
- * @param raw
- * @returns {*}
- */
-function jsonifyTwigStrings(raw) {
-
-  function replace(match) {
-    return match
-      .replace(/\\'/g, '\\\\\'')
-      .replace(/\\"/g, '\\\\\"')
-      ;
-  }
-
-  var twigRegex = /{{.*}}/g;
-
-  return raw.replace(twigRegex, replace);
-}
-
-/**
- * Format the json to have valid twig strings
- *
- * @param json
- * @returns {*}
- */
-function twigifyJsonString(json) {
-
-  function replace(match) {
-    return match
-      .replace(/\\\\'/g, '\\\'')
-      .replace(/\\\\"/g, '\\\"')
-      ;
-  }
-
-  var twigRegex = /{{.*}}/g;
-
-  return json.replace(twigRegex, replace);
-}
-
-/**
  * Add some colors on empty required inputs
  *
  * @param elementId - the if of the element wrapping the inputs
@@ -256,4 +216,177 @@ function colorEmptyRequiredInputs (elementId, parentClass) {
   });
 
   observer.observe(target, config);
+}
+
+/**
+ * Transform a raw string in json
+ *
+ * The content of the step workflow is a wrong json containing for example twig strings
+ * which prevent the string to be parsed in json. This function makes it parse-able
+ */
+function transformRawToJson(raw) {
+
+  /**
+   * "{{ ... }}"
+   * "{{ '{{ ... }}' }}"
+   * ('{{ '{{ ... }}' }}')
+   * ('{{ '{% ... %}' }}')
+   */
+  var twigStatmentRegex = /([^']{{.*?}}[^'])|(\('{{.*?}}'\))/g;
+
+   /**
+    * [\s\S]* matches new lines
+    */
+   var twigOperationsArrayRegex = /\[{%([\s\S]*.*)%}\]/g;
+
+  var twigOperationsStringRegex = /\{%(.*)%}/g;
+
+  var htmlAttributesRegex = /=\\".*\\"/g;
+
+  /**
+   * Format twig statements
+   *
+   * Ex: {{ raw_benefit|json_encode|trim(\\'\\"\\')|raw }} -> {{ raw_benefit|json_encode|trim(\\'\\\"\\')|raw }}
+   */
+  function formatTwigStatements(twigStatement) {
+    var replacement = twigStatement.replace(/\\'/g, '\\\\\'');
+
+    // Prevent some weird escaping within the twig replace function (do nothing in that case)
+    if (twigStatement.indexOf('|replace(') !== -1 || twigStatement.indexOf('|trim(') !== -1) {
+      return replacement;
+    } else {
+      return replacement.replace(/\\"/g, '\\\\\"');
+    }
+  }
+
+  /**
+   * Format the twig operations array
+   *
+   * Ex:
+   *     "history": [{% for b in bs %}
+   *     {
+   *         "id": "{{ b.position }}",
+   *     }{% if not loop.last %},{% endif %}
+   *     {% endfor %}]
+   *
+   *     ->
+   *
+   *     "history": "[{% for b in bs %}{\"id\": \"{{ b.position }}\",}{% if not loop.last %},{% endif %}{% endfor %}]"
+   */
+  function formatTwigOperationsArray(twigOperationArray) {
+    var replacement = twigOperationArray
+      .replace(/([^\\])"/g, '$1\\"') // [^\\] -> everything except \
+      .replace(/\r?\n|\r/g, '')
+    ;
+
+    // Wrap the twig in double quotes
+    return '"' + replacement + '"';
+  }
+
+  /**
+   * Format the twig operations string
+   * Ex:
+   */
+  function formatTwigOperationsString(twigOperationString) {
+    return twigOperationString
+      .replace(/\\'/g, '\\\\\'')
+    ;
+  }
+
+  /**
+   * Format the html attributes
+   *
+   * Ex: <a class=\"close-reveal-modal\"></a> -> <a class=\\"close-reveal-modal\\"></a>
+   */
+  function formatHtmlAttributes(htmlAttributes) {
+    return htmlAttributes
+      .replace(/=\\"/g, '=\\\\\"')
+    ;
+  }
+
+  return raw
+    .replace(twigStatmentRegex, formatTwigStatements)
+    .replace(twigOperationsArrayRegex, formatTwigOperationsArray)
+    //.replace(twigOperationsStringRegex, formatTwigOperationsString)
+    //.replace(htmlAttributesRegex, formatHtmlAttributes)
+  ;
+}
+
+/**
+ * Reverse transform json to raw content
+ *
+ * @param json
+ * @returns {*}
+ */
+function transformJsonToRaw (json) {
+
+  var twigStatmentRegex = /[^']{{.*}}[^']/g;
+  var twigOperationsArrayRegex = /"\[{%(.*)%}\]"/g;
+  var twigOperationsStringRegex = /\{%(.*)%}/g;
+  var htmlAttributesRegex = /=\\\\".*\\\\"/g;
+
+  /**
+   * Format twig statements
+   *
+   * Ex: {{ raw_benefit|json_encode|trim(\\'\\\"\\')|raw }} -> {{ raw_benefit|json_encode|trim(\\'\\"\\')|raw }}
+   */
+  function formatTwigStatements(twigStatement) {
+    var replacement = twigStatement.replace(/\\\\'/g, '\\\'');
+
+    // Prevent some weird escaping within the twig replace function (do nothing in that case)
+    if (twigStatement.indexOf('|replace(') !== -1 || twigStatement.indexOf('|trim(') !== -1) {
+      return replacement;
+    } else {
+      return replacement.replace(/\\\\"/g, '\\\"');
+    }
+  }
+
+  /**
+   * Format the twig operations array
+   *
+   * Ex:
+   *     "history": "[{% for b in bs %}{\"id\": \"{{ b.position }}\",}{% if not loop.last %},{% endif %}{% endfor %}]"
+   *     ->
+   *     "history": [{% for b in bs %} {"id": "{{ b.position }}",}{% if not loop.last %},{% endif %}{% endfor %}]
+   */
+  function formatTwigOperationsArray(twigOperationsArray) {
+    var replacement = twigOperationsArray
+      .replace(/\\"/g, '"')
+      .replace(/\\\\'/g, '\\\'')
+    ;
+
+    // Unwrap the twig form the quotes
+    return replacement.substring(1, replacement.length -1);
+  }
+
+  /**
+   * Format the twig operations string
+   * Ex:
+   */
+  function formatTwigOperationsString(match) {
+    var replacement = match
+      .replace(/\\\\'/g, '\\\'')
+    ;
+
+    // Unwrap the twig form the quotes
+    return replacement.substring(1, replacement.length -1);
+  }
+
+  /**
+   * Format the html attributes
+   *
+   * Ex: <a class=\\"close-reveal-modal\\"></a> -> <a class=\"close-reveal-modal\"></a>
+   */
+  function formatHtmlAttributes(htmlAttributes) {
+    return htmlAttributes
+      .replace(/=\\\\"/g, '=\\\"')
+    ;
+  }
+
+  return json
+    .replace(twigStatmentRegex, formatTwigStatements)
+    .replace(twigOperationsArrayRegex, formatTwigOperationsArray)
+    //.replace(twigOperationsStringRegex, formatTwigOperationsString)
+    //.replace(htmlAttributesRegex, formatHtmlAttributes)
+  ;
 }
