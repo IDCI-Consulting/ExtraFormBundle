@@ -234,14 +234,10 @@ function transformRawToJson(raw) {
    */
   var twigStatmentRegex = /([^']{{.*?}}[^'])|(\('{{.*?}}'\))/g;
 
-   /**
-    * [\s\S]* matches new lines
-    */
-   var twigOperationsArrayRegex = /\[{%([\s\S]*.*)%}\]/g;
-
-  var twigOperationsStringRegex = /\{%(.*)%}/g;
-
-  var htmlAttributesRegex = /=\\".*\\"/g;
+  /**
+  * [\s\S]* matches new lines
+  */
+  var twigOperationsArrayRegex = /\[{%([\s\S]*.*)%}\]/g;
 
   /**
    * Format twig statements
@@ -251,12 +247,9 @@ function transformRawToJson(raw) {
   function formatTwigStatements(twigStatement) {
     var replacement = twigStatement.replace(/\\'/g, '\\\\\'');
 
-    // Prevent some weird escaping within the twig replace function (do nothing in that case)
-    if (twigStatement.indexOf('|replace(') !== -1 || twigStatement.indexOf('|trim(') !== -1) {
-      return replacement;
-    } else {
-      return replacement.replace(/\\"/g, '\\\\\"');
-    }
+    return replacement
+      .replace(/([^\\])\\\\"/g, '$1\\\\\\"') // a\\" -> a\\\"
+    ;
   }
 
   /**
@@ -283,32 +276,9 @@ function transformRawToJson(raw) {
     return '"' + replacement + '"';
   }
 
-  /**
-   * Format the twig operations string
-   * Ex:
-   */
-  function formatTwigOperationsString(twigOperationString) {
-    return twigOperationString
-      .replace(/\\'/g, '\\\\\'')
-    ;
-  }
-
-  /**
-   * Format the html attributes
-   *
-   * Ex: <a class=\"close-reveal-modal\"></a> -> <a class=\\"close-reveal-modal\\"></a>
-   */
-  function formatHtmlAttributes(htmlAttributes) {
-    return htmlAttributes
-      .replace(/=\\"/g, '=\\\\\"')
-    ;
-  }
-
   return raw
     .replace(twigStatmentRegex, formatTwigStatements)
     .replace(twigOperationsArrayRegex, formatTwigOperationsArray)
-    //.replace(twigOperationsStringRegex, formatTwigOperationsString)
-    //.replace(htmlAttributesRegex, formatHtmlAttributes)
   ;
 }
 
@@ -320,10 +290,15 @@ function transformRawToJson(raw) {
  */
 function transformJsonToRaw (json) {
 
-  var twigStatmentRegex = /[^']{{.*}}[^']/g;
+  /**
+   * "{{ ... }}"
+   * "{{ '{{ ... }}' }}"
+   * ('{{ '{{ ... }}' }}')
+   * ('{{ '{% ... %}' }}')
+   */
+  var twigStatmentRegex = /([^']{{.*?}}[^'])|(\('{{.*?}}'\))/g;
+
   var twigOperationsArrayRegex = /"\[{%(.*)%}\]"/g;
-  var twigOperationsStringRegex = /\{%(.*)%}/g;
-  var htmlAttributesRegex = /=\\\\".*\\\\"/g;
 
   /**
    * Format twig statements
@@ -333,12 +308,11 @@ function transformJsonToRaw (json) {
   function formatTwigStatements(twigStatement) {
     var replacement = twigStatement.replace(/\\\\'/g, '\\\'');
 
-    // Prevent some weird escaping within the twig replace function (do nothing in that case)
-    if (twigStatement.indexOf('|replace(') !== -1 || twigStatement.indexOf('|trim(') !== -1) {
-      return replacement;
-    } else {
-      return replacement.replace(/\\\\"/g, '\\\"');
-    }
+    return replacement
+      //.replace(/([^\\])\\\\"/g, '$1\\"')     // a\\"  -> a\" -> WRONG NOT JSON VALID ?
+      .replace(/([^\\])\\\\\\"/g, '$1\\\\"') // a\\\" -> a\\"
+    ;
+
   }
 
   /**
@@ -359,34 +333,8 @@ function transformJsonToRaw (json) {
     return replacement.substring(1, replacement.length -1);
   }
 
-  /**
-   * Format the twig operations string
-   * Ex:
-   */
-  function formatTwigOperationsString(match) {
-    var replacement = match
-      .replace(/\\\\'/g, '\\\'')
-    ;
-
-    // Unwrap the twig form the quotes
-    return replacement.substring(1, replacement.length -1);
-  }
-
-  /**
-   * Format the html attributes
-   *
-   * Ex: <a class=\\"close-reveal-modal\\"></a> -> <a class=\"close-reveal-modal\"></a>
-   */
-  function formatHtmlAttributes(htmlAttributes) {
-    return htmlAttributes
-      .replace(/=\\\\"/g, '=\\\"')
-    ;
-  }
-
   return json
     .replace(twigStatmentRegex, formatTwigStatements)
     .replace(twigOperationsArrayRegex, formatTwigOperationsArray)
-    //.replace(twigOperationsStringRegex, formatTwigOperationsString)
-    //.replace(htmlAttributesRegex, formatHtmlAttributes)
   ;
 }
