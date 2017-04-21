@@ -13,7 +13,7 @@ var editorAdvancedField = {
         '@click="openSaveModal" class="fa fa-floppy-o">' +
       '</i>' +
       '<strong>{{ field.extra_form_type }}</strong>' +
-      '<i :class="getFontAwsomeIconClass(field.icon)" aria-hidden="true"></i><br>' +
+      '<i :class="getFontAwsomeIconClass(field.icon, field.extra_form_type)" aria-hidden="true"></i><br>' +
       '<span>' +
         'Name:<input class="field-name-input" type="text" v-model="field.name" pattern="/^([a-z][0-9])+$/" />' +
       '</span>' +

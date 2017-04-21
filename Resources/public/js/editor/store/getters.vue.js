@@ -60,6 +60,21 @@ var extraFormEditorGetters = {
 
   getBaseExtraFormTypes: function (state) {
     return state.baseTypes;
+  },
+
+  getExtraFormTypeIcon: function (state) {
+    return function (type) {
+      for (var i = 0, len = state.baseTypes.length; i < len; i++) {
+        if (
+          state.baseTypes[i].form_type_name === type &&
+          typeof state.baseTypes[i].icon !== 'undefined'
+        ) {
+          return state.baseTypes[i].icon;
+        }
+      }
+
+      return null;
+    };
   }
 
 };
