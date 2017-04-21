@@ -231,8 +231,13 @@ function transformRawToJson(raw) {
    * "{{ '{{ ... }}' }}"
    * ('{{ '{{ ... }}' }}')
    * ('{{ '{% ... %}' }}')
+   * "{{ '{% if a == \'M\' %}Monsieur, Madame {{ b }}, {% endif %}' }}End of text."
+   *
+   * .*? is for ungreedy search
+   * ([^']) -> a character which is not a simple quote
+   * .*(\2) -> anything followed by the 2nd matched group (the character which is not a simple quote)
    */
-  var twigStatmentRegex = /([^']{{.*?}}[^'])|(\('{{.*?}}'\))/g;
+  var twigStatmentRegex = /(([^']){{.*?}}.*(\2)[^'])|(\('{{.*?}}'\))/g;
 
   /**
   * [\s\S]* matches new lines
