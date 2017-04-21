@@ -309,7 +309,6 @@ function transformJsonToRaw (json) {
     var replacement = twigStatement.replace(/\\\\'/g, '\\\'');
 
     return replacement
-      //.replace(/([^\\])\\\\"/g, '$1\\"')     // a\\"  -> a\" -> WRONG NOT JSON VALID ?
       .replace(/([^\\])\\\\\\"/g, '$1\\\\"') // a\\\" -> a\\"
     ;
 
