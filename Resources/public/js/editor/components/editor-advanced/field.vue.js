@@ -61,8 +61,8 @@ var editorAdvancedField = {
     }
   },
 
-  /* global fontAwesomeIconMixin */
-  mixins: [fontAwesomeIconMixin],
+  /* global fontAwesomeIconMixin, rawMixin */
+  mixins: [fontAwesomeIconMixin, rawMixin],
 
   watch: {
     field: {
@@ -123,7 +123,6 @@ var editorAdvancedField = {
       delete type.constraints;
       type.form_type = type.extra_form_type;
       delete type.extra_form_type;
-
       return type;
     },
 
@@ -131,11 +130,13 @@ var editorAdvancedField = {
      * Save a configured type
      */
     saveConfiguredType: function (field) {
-      var type = this.transformFieldToType(field);
+      var name = field.name;
+      var raw = this.createExtraFormRawRecursively([field]);
+      var type = this.transformFieldToType(raw[field.name]);
       var url = this.$store.getters.postConfiguredExtraFormTypesApiUrl;
       var body = {
-        name: type.name,
-        configuration: JSON.stringify(type)
+        name: name,
+        configuration: JSON.stringify(type, null, 2)
       };
 
       this
@@ -158,10 +159,11 @@ var editorAdvancedField = {
      * Update a configured type
      */
     updateConfiguredType: function (field) {
-      var type = this.transformFieldToType(field);
-      var url = this.$store.getters.putConfiguredExtraForTypesApiUrl(type.name);
+      var raw = this.createExtraFormRawRecursively([field]);
+      var type = this.transformFieldToType(raw[field.name]);
+      var url = this.$store.getters.putConfiguredExtraForTypesApiUrl(field.name);
       var body = {
-        configuration: JSON.stringify(type)
+        configuration: JSON.stringify(type, null, 2)
       };
 
       this
