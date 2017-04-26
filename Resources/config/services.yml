@@ -129,3 +129,8 @@ services:
         class: IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormEditorType
         tags:
             - { name: form.type, alias: extra_form_editor }
+
+    form.type.idci_extra_form.tags:
+        class: IDCI\Bundle\ExtraFormBundle\Form\Type\TagsType
+        tags:
+            - { name: form.type, alias: extra_form_tags }

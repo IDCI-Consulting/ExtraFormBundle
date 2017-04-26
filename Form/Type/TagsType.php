@@ -1,31 +1,29 @@
 <?php
 
 /**
- * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ * @author:  Baptiste BOUCHEREAU <baptiste.bouchereau@idci-consulting.fr>
  * @license: MIT
  */
 
-namespace IDCI\Bundle\ExtraFormBundle\Form;
+namespace IDCI\Bundle\ExtraFormBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\OptionsResolver\Options;
 
-class ConfiguredTypeType extends AbstractType
+class TagsType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $builder
-            ->add('name')
-            ->add('description')
-            ->add('tags', 'extra_form_tags', array('required' => false))
-            ->add('configuration')
-        ;
+        $view->vars['separator'] = $options['separator'];
+
+        return $view->vars;
     }
 
     /**
@@ -35,7 +33,10 @@ class ConfiguredTypeType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => 'IDCI\Bundle\ExtraFormBundle\Model\ConfiguredType'
+                'separator' => ','
+            ))
+            ->setAllowedTypes(array(
+                'separator' => array('string')
             ))
         ;
     }
@@ -53,9 +54,17 @@ class ConfiguredTypeType extends AbstractType
     /**
      * {@inheritdoc}
      */
+    public function getParent()
+    {
+        return 'textarea';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getBlockPrefix()
     {
-        return 'idci_extraform_configured_type_type';
+        return 'extra_form_tags';
     }
 
     /**

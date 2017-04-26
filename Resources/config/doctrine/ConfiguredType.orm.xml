@@ -4,7 +4,9 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="IDCI\Bundle\ExtraFormBundle\Model\ConfiguredType" table="configured_type">
+    <entity name="IDCI\Bundle\ExtraFormBundle\Model\ConfiguredType"
+            table="configured_type"
+            repository-class="IDCI\Bundle\ExtraFormBundle\Repository\ConfiguredTypeRepository">
 
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>

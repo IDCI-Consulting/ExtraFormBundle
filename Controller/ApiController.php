@@ -207,6 +207,32 @@ class ApiController extends FOSRestController
     }
 
     /**
+         * [GET] /configured-extra-form-types-tags
+         *
+         * Retrieve all tags of configured extra form types
+         *
+         * @Get("/configured-extra-form-types-tags.{_format}")
+         *
+         * @param string $_format
+         *
+         * @return Response
+         */
+        public function getConfiguredExtraFormTypesTagsAction($_format)
+        {
+            $view = View::create()->setFormat($_format);
+            $tags = $this
+                ->getDoctrine()
+                ->getManager()
+                ->getRepository('IDCIExtraFormBundle:ConfiguredType')
+                ->getAllTags()
+            ;
+            ksort($tags);
+            $view->setData($tags);
+
+            return $this->handleView($view);
+        }
+
+    /**
      * [POST] /configured-extra-form-types
      *
      * Save an extra form type.

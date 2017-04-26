@@ -219,3 +219,63 @@
     {% set type = type|default('range') %}
     {{- block('form_widget_simple') -}}
 {%- endblock extra_form_range_widget %}
+
+{%- block extra_form_tags_widget -%}
+    <div class="extra-form-tags">
+        {{- form_widget(form) -}}
+        <div class="tags_box" id="tags_{{ form.vars.id }}"></div>
+    </div>
+
+    <script type="text/javascript">
+        window.addEventListener('load', function () {
+            var formId = '{{ form.vars.id }}';
+            var separator = '{{ form.vars.separator }}';
+            var textarea = document.getElementById(formId);
+            var tags = [];
+            if (textarea.value !== '') {
+                tags = textarea.value.split(separator);
+            }
+
+            var updateTags = function () {
+                var taggleTags = taggle_{{ form.vars.id }}.getTags();
+                textarea.value = taggleTags.values.join(separator);
+            };
+
+            textarea.style.display = 'none';
+            var taggle_{{ form.vars.id }} = new Taggle('tags_' + formId, {
+                tags: tags,
+                onTagAdd: updateTags,
+                onTagRemove: updateTags
+            });
+            var container_{{ form.vars.id }} = taggle_{{ form.vars.id }}.getContainer();
+            var input_{{ form.vars.id }} = taggle_{{ form.vars.id }}.getInput();
+
+            var request = $.ajax({
+                url: '{{ path('idci_extraform_api_getconfiguredextraformtypestags', { '_format': 'json' }) }}',
+                method: 'GET'
+            });
+
+            request.done(function (tags) {
+                $(input_{{ form.vars.id }}).autocomplete({
+                    source: tags,
+                    appendTo: container_{{ form.vars.id }},
+                    position: { at: 'left bottom', of: container_{{ form.vars.id }} },
+                    select: function(event, data) {
+                        event.preventDefault();
+                        //Add the tag if user clicks
+                        if (event.which === 1) {
+                            taggle_{{ form.vars.id }}.add(data.item.value);
+                        }
+                    }
+                });
+            });
+        });
+
+        if (typeof Taggle !== 'function') {
+            document.write(
+                    '<script type="text/javascript" src="{{ asset('bundles/idciextraform/js/vendor/taggle.js') }}"></scri'+'pt>' +
+                    '<link rel="stylesheet" type="text/css" href="{{ asset('bundles/idciextraform/css/taggle.css') }}" />'
+            );
+        }
+    </script>
+{%- endblock extra_form_tags_widget -%}
