@@ -20,7 +20,7 @@ var optionMixin = {
   created: function () {
     if (typeof this.value !== 'undefined') {
       this.data = this.value;
-      if (typeof this.value === 'object') {
+      if ('object' === typeof this.value) {
         this.data = JSON.stringify(this.value);
       }
     }
@@ -34,7 +34,7 @@ var optionMixin = {
       handler: function (value) {
         if (typeof value !== 'undefined') {
           this.data = value;
-          if (typeof value === 'object') {
+          if ('object' === typeof value) {
             this.data = JSON.stringify(value);
           }
         }

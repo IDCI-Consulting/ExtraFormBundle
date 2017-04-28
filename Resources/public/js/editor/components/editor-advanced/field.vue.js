@@ -119,6 +119,7 @@ var editorAdvancedField = {
       delete type.constraints;
       type.form_type = type.extra_form_type;
       delete type.extra_form_type;
+
       return type;
     },
 
