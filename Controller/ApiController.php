@@ -4,6 +4,7 @@ namespace IDCI\Bundle\ExtraFormBundle\Controller;
 
 use FOS\RestBundle\Request\ParamFetcher;
 use IDCI\Bundle\ExtraFormBundle\Model\ConfiguredType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -196,10 +197,17 @@ class ApiController extends FOSRestController
      *
      * @return Response
      */
-    public function getConfiguredExtraFormTypesAction($_format)
+    public function getConfiguredExtraFormTypesAction(Request $request, $_format)
     {
+        $tags = $request->query->has('tags') ? $request->query->get('tags') : array();
+
         $view = View::create()->setFormat($_format);
-        $types = $this->getDoctrine()->getManager()->getRepository('IDCIExtraFormBundle:ConfiguredType')->findAll();
+        $types = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('IDCIExtraFormBundle:ConfiguredType')
+            ->findByTags($tags)
+        ;
         ksort($types);
         $view->setData($types);
 
@@ -241,12 +249,19 @@ class ApiController extends FOSRestController
      *   name="name",
      *   description="The name of the configured type",
      *   allowBlank=false
-     * ),
+     * )
+     *
      * @RequestParam(
      *   name="configuration",
      *   description="The configured type configuration",
      *   allowBlank=false
-     * ),
+     * )
+     *
+     * @RequestParam(
+     *   name="tags",
+     *   description="The configured type tags",
+     *   allowBlank=true
+     * )
      *
      * @Post("/configured-extra-form-types")
      *
@@ -269,7 +284,8 @@ class ApiController extends FOSRestController
 
         $configuredType = new ConfiguredType(
             $paramFetcher->get('name'),
-            $paramFetcher->get('configuration')
+            $paramFetcher->get('configuration'),
+            $paramFetcher->get('tags')
         );
 
         $em->persist($configuredType);

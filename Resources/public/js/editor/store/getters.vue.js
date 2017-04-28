@@ -14,8 +14,18 @@ var extraFormEditorGetters = {
     return state.configuration.show_configured_types;
   },
 
+  getConfiguredExtraFormTypesTags: function (state) {
+    return state.configuration.configured_types_tags;
+  },
+
   getConfiguredExtraFormTypesApiUrl: function (state) {
-    return state.configuration.api_url.get_configured_extra_form_types;
+    var url = state.configuration.api_url.get_configured_extra_form_types + '?';
+    var tags = state.configuration.configured_types_tags;
+    for (var i = 0, len = tags.length; i < len; i++) {
+      url = url + 'tags[]=' + tags[i] + '&';
+    }
+
+    return url.replace('+', '%2B');
   },
 
   getBaseExtraFormTypesApiUrl: function (state) {

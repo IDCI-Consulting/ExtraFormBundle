@@ -1,12 +1,14 @@
 IDCI\Bundle\ExtraFormBundle\Model\ConfiguredType:
 
     accessor_order: custom
-    custom_accessor_order: [name]
+    custom_accessor_order: [name, tags]
 
     exclusion_policy: ALL
 
     properties:
         name:
+            expose: true
+        tags:
             expose: true
 
     virtual_properties:

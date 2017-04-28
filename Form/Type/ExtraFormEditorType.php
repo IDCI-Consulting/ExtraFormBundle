@@ -32,6 +32,7 @@ class ExtraFormEditorType extends AbstractType
         $view->vars['attr']['data-configuration-variable']  = $view->vars['id'] . '_configuration';
         $view->vars['allow_configured_types_edition']       = $options['allow_configured_types_edition'];
         $view->vars['show_configured_types']                = $options['show_configured_types'];
+        $view->vars['configured_types_tags']                = $options['configured_types_tags'];
 
         return $view->vars;
     }
@@ -46,10 +47,14 @@ class ExtraFormEditorType extends AbstractType
                 'required'                       => false,
                 'available_modes'                => array('advanced'),
                 'allow_configured_types_edition' => false,
-                'show_configured_types'          => false
+                'show_configured_types'          => false,
+                'configured_types_tags'          => array()
             ))
             ->setAllowedTypes(array(
-                'available_modes' => array('array')
+                'available_modes'                => array('array'),
+                'configured_types_tags'          => array('array'),
+                'allow_configured_types_edition' => array('boolean'),
+                'show_configured_types'          => array('boolean')
             ))
             ->setNormalizer('allow_configured_types_edition', function (Options $options, $value) {
                 if ($value && !$options['show_configured_types']) {

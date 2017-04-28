@@ -42,10 +42,13 @@ class ConfiguredType implements ExtraFormTypeInterface
      * @param string $name
      * @param string $configuration
      */
-    public function __construct($name = null, $configuration = null)
+    public function __construct($name = null, $configuration = null, $tags = null)
     {
         $this->name          = $name;
         $this->configuration = $configuration;
+        if (!empty($tags)) {
+            $this->tags = $tags;
+        }
     }
 
     /**

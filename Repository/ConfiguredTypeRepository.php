@@ -15,9 +15,41 @@ use Doctrine\ORM\EntityRepository;
 class ConfiguredTypeRepository extends EntityRepository
 {
     /**
-     * Get all tags query builder
+     * Find configured types by tags
      *
-     * @return QueryBuilder
+     * @return array
+     */
+    public function findByTags(array $tags)
+    {
+        $qb = $this->createQueryBuilder('c');
+
+        foreach ($tags as $key => $tag) {
+            $operator = substr($tag, 0, 1);
+
+            if ($operator === '+' || $operator === '-') {
+                $tag = substr($tag, 1);
+            }
+
+            $literalExpr = $qb->expr()->literal('%' . $tag . '%');
+
+            if ($operator === '-') {
+                $qb->andWhere($qb->expr()->notLike('c.tags', $literalExpr));
+            } else if ($operator === '+') {
+                $qb->andWhere($qb->expr()->like('c.tags', $literalExpr));
+            } else if ($key === 0) {
+                $qb->where($qb->expr()->like('c.tags', $literalExpr));
+            } else {
+                $qb->orWhere($qb->expr()->like('c.tags', $literalExpr));
+            }
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Get all tags
+     *
+     * @return array
      */
     public function getAllTags()
     {

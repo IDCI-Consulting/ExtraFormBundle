@@ -21,7 +21,15 @@ var editorAdvancedField = {
         '<h3 slot="header">Save this configured field' +
           '<button @click="closeSaveModal" type="button" class="close" aria-label="Close">&times;</button>' +
         '</h3>' +
-        '<div slot="body" v-html="modal.content"></div>' +
+        '<div v-if="modal.done" slot="body">' +
+          '<div v-html="modal.done"></div>' +
+        '</div>' +
+        '<div v-else slot="body">' +
+          '<div><i :class="getFontAwsomeIconClass(field.icon)" aria-hidden="true"></i></div>' +
+          '<div>Type: <strong>{{ field.extra_form_type }}</strong></div>' +
+          '<div>Name: <strong>{{ field.name }}</strong></div>' +
+          '<div>Tags: <input v-model="tags" type="text"></div>' +
+        '</div>' +
           '<div slot="footer">' +
             '<div v-if="modal.type == \'save\'">' +
               '<button @click="saveConfiguredType(field)" type="button" class="extra-btn" aria-label="Save">' +
@@ -42,12 +50,16 @@ var editorAdvancedField = {
 
   data: function () {
     return {
-      modal: null
+      modal: null,
+      tags: ''
     };
   },
 
   created: function () {
     this.setInitialSaveModal();
+    this.tags = this.$store.getters.getConfiguredExtraFormTypesTags.filter(function (element) {
+      return 0 !== element.indexOf('-');
+    }).join(',');
   },
 
   computed: {
@@ -64,18 +76,6 @@ var editorAdvancedField = {
   /* global fontAwesomeIconMixin, rawMixin */
   mixins: [fontAwesomeIconMixin, rawMixin],
 
-  watch: {
-    field: {
-      handler: function () {
-        this.modal.content =
-          '<div><i class="' + this.getFontAwsomeIconClass(this.field.icon) + '" aria-hidden="true"></i></div>' +
-          '<div>Type: <strong>' + this.field.extra_form_type + '</strong></div>' +
-          '<div>Name: <strong>' + this.field.name + '</strong></div>';
-      },
-      deep: true
-    }
-  },
-
   methods: {
 
     /**
@@ -84,11 +84,7 @@ var editorAdvancedField = {
     setInitialSaveModal: function () {
       this.modal = {
         show: false,
-        type: 'save',
-        content:
-          '<div><i class="' + this.getFontAwsomeIconClass(this.field.icon) + '" aria-hidden="true"></i></div>' +
-          '<div>Type: <strong>' + this.field.extra_form_type + '</strong></div>' +
-          '<div>Name: <strong>' + this.field.name + '</strong></div>'
+        type: 'save'
       };
     },
 
@@ -136,6 +132,7 @@ var editorAdvancedField = {
       var url = this.$store.getters.postConfiguredExtraFormTypesApiUrl;
       var body = {
         name: name,
+        tags: this.tags,
         configuration: JSON.stringify(type, null, 2)
       };
 
@@ -144,12 +141,12 @@ var editorAdvancedField = {
         .then(
           function (response) {
             this.modal.type = 'success';
-            this.modal.content = 'This field has been successfully saved';
+            this.modal.done = 'This field has been successfully saved';
             this.$store.commit('addConfiguredType', response.body);
           },
           function (response) {
             this.modal.type = 'put';
-            this.modal.content = response.body + '. Do you want to update the configuration ?';
+            this.modal.done = response.body + '. Do you want to update the configuration ?';
           }
         )
       ;
@@ -166,17 +163,20 @@ var editorAdvancedField = {
         configuration: JSON.stringify(type, null, 2)
       };
 
+      if (this.tags !== '') {
+        body.tags = this.tags;
+      }
+
       this
         .$http.put(url, body)
         .then(
           function (response) {
             this.modal.type = 'success';
-            this.modal.content = 'This field has been successfully updated';
+            this.modal.done = 'This field has been successfully updated';
             this.$store.commit('updateConfiguredType', response.body);
           },
           function (response) {
-            this.modal.type = 'error';
-            this.modal.content = response.body;
+            this.modal.done = response.body;
           }
         )
       ;
