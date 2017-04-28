@@ -23,7 +23,10 @@ class ConfiguredTypeType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('tags', 'extra_form_tags', array('required' => false))
+            ->add('tags', 'extra_form_tags', array(
+                'required' => false,
+                'url'      => '/api/configured-extra-form-types-tags.json'
+            ))
             ->add('configuration')
         ;
     }

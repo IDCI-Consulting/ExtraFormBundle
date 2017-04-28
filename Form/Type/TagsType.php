@@ -21,7 +21,13 @@ class TagsType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['separator'] = $options['separator'];
+        $view->vars['separator']           = $options['separator'];
+        $view->vars['jsTransformFunction'] = $options['jsTransformFunction'];
+
+        if (isset($options['url'])) {
+            $view->vars['url'] = $options['url'];
+
+        }
 
         return $view->vars;
     }
@@ -33,10 +39,16 @@ class TagsType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'separator' => ','
+                'separator'           => ',',
+                'jsTransformFunction' => 'function (tags) { return tags; };'
+            ))
+            ->setOptional(array(
+                'url'
             ))
             ->setAllowedTypes(array(
-                'separator' => array('string')
+                'separator'           => array('string'),
+                'jsTransformFunction' => array('string'),
+                'url'                 => array('string')
             ))
         ;
     }

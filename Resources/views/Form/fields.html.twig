@@ -232,49 +232,55 @@
             var separator = '{{ form.vars.separator }}';
             var textarea = document.getElementById(formId);
             var tags = [];
+
             if (textarea.value !== '') {
                 tags = textarea.value.split(separator);
             }
 
             var updateTags = function () {
-                var taggleTags = taggle_{{ form.vars.id }}.getTags();
+                var taggleTags = taggle.getTags();
                 textarea.value = taggleTags.values.join(separator);
             };
 
             textarea.style.display = 'none';
-            var taggle_{{ form.vars.id }} = new Taggle('tags_' + formId, {
+
+            var taggle = new Taggle('tags_' + formId, {
                 tags: tags,
                 onTagAdd: updateTags,
                 onTagRemove: updateTags
             });
-            var container_{{ form.vars.id }} = taggle_{{ form.vars.id }}.getContainer();
-            var input_{{ form.vars.id }} = taggle_{{ form.vars.id }}.getInput();
 
-            var request = $.ajax({
-                url: '{{ path('idci_extraform_api_getconfiguredextraformtypestags', { '_format': 'json' }) }}',
-                method: 'GET'
-            });
-
-            request.done(function (tags) {
-                $(input_{{ form.vars.id }}).autocomplete({
-                    source: tags,
-                    appendTo: container_{{ form.vars.id }},
-                    position: { at: 'left bottom', of: container_{{ form.vars.id }} },
-                    select: function(event, data) {
-                        event.preventDefault();
-                        //Add the tag if user clicks
-                        if (event.which === 1) {
-                            taggle_{{ form.vars.id }}.add(data.item.value);
-                        }
-                    }
+            {% if form.vars.url is defined %}
+                var container = taggle.getContainer();
+                var input = taggle.getInput();
+                var request = $.ajax({
+                    url: '{{ form.vars.url }}',
+                    method: 'GET'
                 });
-            });
+
+                var formatTags = {{ form.vars.jsTransformFunction }};
+
+                request.done(function (tags) {
+                    $(input).autocomplete({
+                        source: formatTags(tags),
+                        appendTo: container,
+                        position: { at: 'left bottom', of: container },
+                        select: function(event, data) {
+                            event.preventDefault();
+                            //Add the tag if user clicks
+                            if (event.which === 1) {
+                                taggle.add(data.item.value);
+                            }
+                        }
+                    });
+                });
+            {% endif %}
         });
 
         if (typeof Taggle !== 'function') {
             document.write(
-                    '<script type="text/javascript" src="{{ asset('bundles/idciextraform/js/vendor/taggle.js') }}"></scri'+'pt>' +
-                    '<link rel="stylesheet" type="text/css" href="{{ asset('bundles/idciextraform/css/taggle.css') }}" />'
+                '<script type="text/javascript" src="{{ asset('bundles/idciextraform/js/vendor/taggle.js') }}"></scri'+'pt>' +
+                '<link rel="stylesheet" type="text/css" href="{{ asset('bundles/idciextraform/css/taggle.css') }}" />'
             );
         }
     </script>
