@@ -13,7 +13,7 @@ module.exports = {
     "arrow-body-style": "error",
     "arrow-parens": "error",
     "arrow-spacing": "error",
-    "block-scoped-var": "error",
+    "block-scoped-var": "off",
     "block-spacing": "error",
     "brace-style": "error",
     "callback-return": "error",

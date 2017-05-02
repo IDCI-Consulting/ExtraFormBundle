@@ -26,6 +26,8 @@ window.loadExtraFormEditors = function () {
     var overviewModal = '';
     var advancedModalButton = '';
 
+    configuration.componentId = editorComponentId;
+
     if (availableModes.indexOf('simple') > -1) {
       simpleModal = createSimpleModal(index);
       simpleModalButton =

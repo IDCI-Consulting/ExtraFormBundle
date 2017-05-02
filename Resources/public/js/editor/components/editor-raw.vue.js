@@ -3,26 +3,17 @@ Vue.component('form-editor-raw', {
 
   template:
     '<div class="extra-form-editor raw-mode">' +
-        '<textarea ' +
-          ':data-textarea-id="textarea.id" ' +
-          'v-model="raw" ' +
-          ':name="textarea.name" ' +
-        '>' +
-        '</textarea>' +
-        '<div class="json-errors"></div>' +
-        '<button @click.prevent="generateFields">' +
-          'Fill the visual mode form fields from this json' +
-        '</button>' +
+      '<textarea :id="id" v-model="raw"></textarea>' +
+      '<div class="json-errors">{{ error.message }}</div>' +
+      '<button @click.prevent="generateFields">' +
+        'Fill the visual mode form fields from this json' +
+      '</button>' +
+      '<button @click.prevent="saveRaw">' +
+        'Save the content of the textarea (even if the json is not valid)' +
+      '</button>' +
     '</div>',
 
   props: ['fields'],
-
-  data: function () {
-    return {
-      raw: '',
-      textarea: this.$store.state.formProperties
-    };
-  },
 
   /* global rawMixin, rawModalMixin */
   mixins: [rawMixin, rawModalMixin],
@@ -50,21 +41,22 @@ Vue.component('form-editor-raw', {
     /**
      * Generate the form fields from the textarea raw
      */
-    generateFields: function (event) {
+    generateFields: function () {
       var newFields = [];
 
       try {
         /* global transformRawToJson */
-        var raw = JSON.parse(transformRawToJson(this.raw));
+        var transformedJson = transformRawToJson(this.raw);
+        var raw = JSON.parse(transformedJson);
 
         newFields = this.createFieldsRecursively(raw);
 
         this.$emit('generated', newFields);
-        this.closeModal(event);
+        this.closeModal();
 
       // Json parsing error
       } catch (error) {
-        this.displayJsonParseErrors(event, error);
+        this.handleJsonError(error, transformedJson);
       }
     },
 
@@ -78,6 +70,15 @@ Vue.component('form-editor-raw', {
 
       /* global transformJsonToRaw */
       return transformJsonToRaw(JSON.stringify(raw, null, 4));
+    },
+
+    /**
+     * Get the css selector of the modal containing the raw
+     *
+     * @returns {string}
+     */
+    getModalSelector: function () {
+      return '#' + this.$store.state.configuration.componentId + ' .raw-mode-modal';
     }
 
   }

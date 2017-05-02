@@ -8,6 +8,8 @@ src.styles = [
 ];
 src.scripts = [
   //'Resources/public/js/vendor/vue-dev.js',
+  'Resources/public/js/vendor/codemirror.js',
+  'Resources/public/js/vendor/codemirror-javascript-mode.js',
   'Resources/public/js/vendor/vue-prod.min.js',
   'Resources/public/js/vendor/vuex-2.1.2.js',
   'Resources/public/js/vendor/sortable.min.js',
