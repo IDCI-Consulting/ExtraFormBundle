@@ -4,12 +4,13 @@
   /* Set height, width, borders, and global font properties here */
   font-family: monospace;
   height: 75vh;
+  border: 1px solid #eee;
   color: black;
 }
 
 .CodeMirror .line-error {
-    background-color: #d43f3a;
-    opacity: 0.7;
+  background-color: #d43f3a;
+  opacity: 0.7;
 }
 
 /* PADDING */
