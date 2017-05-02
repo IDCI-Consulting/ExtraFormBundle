@@ -5,7 +5,7 @@ Vue.component('form-editor-raw', {
     '<div class="extra-form-editor raw-mode">' +
       '<textarea :id="id" v-model="raw"></textarea>' +
       '<div class="json-errors">{{ error.message }}</div>' +
-      '<button @click.prevent="generateFields">' +
+      '<button style="margin-right: 20px" @click.prevent="generateFields">' +
         'Fill the visual mode form fields from this json' +
       '</button>' +
       '<button @click.prevent="saveRaw">' +
