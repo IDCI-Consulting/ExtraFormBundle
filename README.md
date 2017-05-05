@@ -161,9 +161,11 @@ We use [docker](https://docs.docker.com/engine/installation/) and [docker-compos
 Install the bundle dev dependencies:
 ```sh
 $ make composer-update
+$ make npm-install
 ```
 
 To execute unit tests:
 ```sh
-$ make tests
+$ make phpunit
+$ make karma options='--single-run'
 ```
