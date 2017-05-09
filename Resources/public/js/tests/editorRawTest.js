@@ -61,32 +61,32 @@ describe("Test the editorRaw component", function() {
     var vm = getEditorRawComponent();
     vm.$mount();
 
-    var raw = '{' +
-      '"boy_girl":{' +
-        '"extra_form_type":"choice",' +
-        '"constraints":[],' +
-        '"options":{' +
-          '"choices":["boy","girl"],' +
-          '"label":"Boy or girl?",' +
-          '"data": {' +
-            '"twig":"{{ \'{{ user.id|default(\\\'\\\') }}\' }}"' +
-          '}' +
-        '}' +
-      '}' +
+    var raw = '{ ' +
+      '"boy_girl":{ ' +
+        '"extra_form_type":"choice", ' +
+        '"constraints":[], ' +
+        '"options":{ ' +
+          '"choices":["boy","girl"], ' +
+          '"label":"Boy or girl?", ' +
+          '"data": { ' +
+            '"twig":"{{ \'{{ user.id|default(\\\'\\\') }}\' }}" ' +
+          '} ' +
+        '} ' +
+      '} ' +
     '}';
 
-    var expectedTransformedRaw = '{' +
-      '"boy_girl":{' +
-        '"extra_form_type":"choice",' +
-        '"constraints":[],' +
-        '"options":{' +
-          '"choices":["boy","girl"],' +
-          '"label":"Boy or girl?",' +
-          '"data": {' +
-            '"twig":"{{ \'{{ user.id|default(\\\\\'\\\\\') }}\' }}"' +
-          '}' +
-        '}' +
-      '}' +
+    var expectedTransformedRaw = '{ ' +
+      '"boy_girl":{ ' +
+        '"extra_form_type":"choice", ' +
+        '"constraints":[], ' +
+        '"options":{ ' +
+          '"choices":["boy","girl"], ' +
+          '"label":"Boy or girl?", ' +
+          '"data": { ' +
+            '"twig":"{{ \'{{ user.id|default(\\\\\'\\\\\') }}\' }}" ' +
+          '} ' +
+        '} ' +
+      '} ' +
     '}';
 
     var transformedRaw = transformRawToJson(raw);
@@ -94,6 +94,4 @@ describe("Test the editorRaw component", function() {
     expect(transformedRaw).toEqual(expectedTransformedRaw);
   });
 
-
 });
-
