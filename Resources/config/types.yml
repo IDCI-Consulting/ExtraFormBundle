@@ -43,8 +43,6 @@ idci_extra_form:
             form_type:   textarea
             description: "Textarea input field"
             icon:        "comments-o"
-            extra_form_options:
-                trim:       { extra_form_type: "checkbox", options: {required: false} }
 
         "extra_form_json_textarea":
             parent:      textarea
