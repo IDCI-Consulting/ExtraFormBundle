@@ -175,8 +175,7 @@ function createBootstrapModal (id, name, extraClasses, title, body, modalFooter)
  * @param parentClass - the class of the parent of the required input, in case we don't want to select every inputs
  */
 function colorEmptyRequiredInputs (elementId, parentClass) {
-
-  var inputSelector = parentClass + ' input[required="required"]';
+  var inputSelector = '.' + parentClass + ' input[required="required"]';
 
   /**
    * Color in red when empty, in white when filled
@@ -209,7 +208,15 @@ function colorEmptyRequiredInputs (elementId, parentClass) {
 
   var observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
-      $(mutation.target).find(inputSelector).each(function() {
+      var $inputs = [];
+
+      if ($(mutation.target).hasClass(parentClass)) {
+        $inputs = $(mutation.target).find('input[required="required"]');
+      } else {
+        $inputs = $(mutation.target).find(inputSelector);
+      }
+
+      $inputs.each(function() {
         color($(this));
       });
     });
