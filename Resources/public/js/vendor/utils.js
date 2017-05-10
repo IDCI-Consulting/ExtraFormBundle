@@ -263,7 +263,8 @@ function transformRawToJson(raw) {
   function formatTwigOperationsArray(twigOperationArray) {
     var replacement = twigOperationArray
       .replace(/([^\\])"/g, '$1\\"') // [^\\] -> everything except \
-      .replace(/\r?\n|\r/g, '')
+      .replace(/\r?\n|\r/g, ' ')     // replace line breaks by spaces
+      .replace(/ {2,}/g, ' ')        // replace 2 or more spaces by only one
     ;
 
     // Wrap the twig in double quotes
