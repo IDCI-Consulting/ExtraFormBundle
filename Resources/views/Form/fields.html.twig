@@ -217,7 +217,7 @@
         // We must load the scripts and styles only once, even if many widgets are on the page
         if (typeof window.loadExtraFormEditors !== 'function') {
             document.write(
-                '<script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor.min.js') }}"></scri'+'pt>' +
+                '<script type="text/javascript" src="{{ asset('bundles/idciextraform/js/editor.min.js') }}"><\/script>' +
                 '<link rel="stylesheet" type="text/css" href="{{ asset('bundles/idciextraform/css/font-awesome-4.7.0/css/font-awesome.min.css') }}" />' +
                 '<link rel="stylesheet" type="text/css" href="{{ asset('bundles/idciextraform/css/extra-form-editor.min.css') }}" />' +
                 '<link rel="stylesheet" type="text/css" href="{{ asset('bundles/idciextraform/css/codemirror.css') }}" />'
@@ -291,7 +291,7 @@
 
         if (typeof Taggle !== 'function') {
             document.write(
-                '<script type="text/javascript" src="{{ asset('bundles/idciextraform/js/vendor/taggle.js') }}"></scri'+'pt>' +
+                '<script type="text/javascript" src="{{ asset('bundles/idciextraform/js/vendor/taggle.js') }}"><\/script>' +
                 '<link rel="stylesheet" type="text/css" href="{{ asset('bundles/idciextraform/css/taggle.css') }}" />'
             );
         }
