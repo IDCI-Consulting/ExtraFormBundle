@@ -104,7 +104,7 @@ var rawModalMixin = {
      * Set the new value of the initial textarea
      */
     updateInitialTextareaValue: function () {
-      if (this.textarea.id) {
+      if (typeof this.textarea !== 'undefined' && this.textarea.id) {
         document.getElementById(this.textarea.id).value = this.raw;
       }
     },
