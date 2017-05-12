@@ -20,7 +20,7 @@ Vue.component('form-editor-raw', {
 
   created: function () {
     // If the textarea is empty, do not attempt to generate fields
-    if (this.textarea.value !== '') {
+    if ('undefined' !== typeof this.textarea && '' !== this.textarea.value) {
       this.raw = this.textarea.value;
       this.generateFields();
     }
