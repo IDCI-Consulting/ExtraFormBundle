@@ -88,7 +88,7 @@ window.loadExtraFormEditors = function () {
     showOrHideSimpleEditorOptions();
 
     /* global triggerVueEditor */
-    triggerVueEditor('#' + editorComponentId, formProperties, configuration);
+    triggerVueEditor('#' + editorComponentId, configuration, formProperties);
 
     /* global colorEmptyRequiredInputs */
     colorEmptyRequiredInputs(editorComponentId, 'extra-form-inputs-required');

@@ -4,10 +4,10 @@
  * The function that will trigger the editor
  *
  * @param element {string|Object} The dom element to trigger the editor
- * @param formProperties : Object containing the properties of the default form
  * @param configuration : Object containing the editor configuration (api url, etc)
+ * @param [formProperties] : Object containing the properties of the default form
  */
-function triggerVueEditor (element, formProperties, configuration) {
+function triggerVueEditor (element, configuration, formProperties) {
 
   /* global Vue VueMultiselect VueResource Vuex */
   Vue.component('Multiselect', VueMultiselect.default);
