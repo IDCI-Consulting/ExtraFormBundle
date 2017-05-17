@@ -186,7 +186,6 @@ var editorAdvancedField = {
         tags: this.tags
       };
 
-
       this
         .$http.put(url, body)
         .then(

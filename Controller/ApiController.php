@@ -315,6 +315,12 @@ class ApiController extends FOSRestController
      *   allowBlank=false
      * ),
      *
+     * @RequestParam(
+     *   name="tags",
+     *   description="The configured type tags",
+     *   allowBlank=true
+     * )
+     *
      * @Put("/configured-extra-form-types/{name}")
      *
      * @return Response
@@ -332,6 +338,7 @@ class ApiController extends FOSRestController
         }
 
         $configuredType->setConfiguration($paramFetcher->get('configuration'));
+        $configuredType->setTags(empty($paramFetcher->get('tags')) ? null : $paramFetcher->get('tags'));
 
         $em->persist($configuredType);
         $em->flush();
