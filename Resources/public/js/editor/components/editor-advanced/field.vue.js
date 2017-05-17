@@ -57,9 +57,7 @@ var editorAdvancedField = {
 
   created: function () {
     this.setInitialSaveModal();
-    this.tags = this.$store.getters.getConfiguredExtraFormTypesTags.filter(function (element) {
-      return 0 !== element.indexOf('-');
-    }).join(',');
+    this.initTags();
   },
 
   computed: {
@@ -77,6 +75,29 @@ var editorAdvancedField = {
   mixins: [fontAwesomeIconMixin, rawMixin],
 
   methods: {
+
+    /**
+     * Init appropriate tags
+     */
+    initTags: function () {
+      if (typeof this.field.tags !== 'undefined') {
+        this.tags = this.field.tags;
+
+        return;
+      }
+
+      var configuredExtraFormType = this.$store.getters.getConfiguredExtraFormType(this.field.name);
+
+      if (typeof configuredExtraFormType !== 'undefined') {
+        this.tags = configuredExtraFormType.tags;
+
+        return;
+      }
+
+      this.tags = this.$store.getters.getConfiguredExtraFormTypesTags.filter(function (element) {
+        return 0 !== element.indexOf('-');
+      }).join(',');
+    },
 
     /**
      * The the initial content and type of the save modal
@@ -161,12 +182,10 @@ var editorAdvancedField = {
       var type = this.transformFieldToType(raw[field.name]);
       var url = this.$store.getters.putConfiguredExtraForTypesApiUrl(field.name);
       var body = {
-        configuration: JSON.stringify(type, null, 2)
+        configuration: JSON.stringify(type, null, 2),
+        tags: this.tags
       };
 
-      if (this.tags !== '') {
-        body.tags = this.tags;
-      }
 
       this
         .$http.put(url, body)
