@@ -5,10 +5,6 @@ var extraFormEditorMutations = {
     state.apiCache[payload.api_url] = payload.api_response;
   },
 
-  setConfiguredTypes: function (state, types) {
-    state.configuredTypes = types;
-  },
-
   addConfiguredType: function (state, type) {
     state.configuredTypes.push(type);
   },
