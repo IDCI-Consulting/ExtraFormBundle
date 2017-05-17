@@ -69,6 +69,16 @@ var extraFormEditorGetters = {
     return state.configuredTypes;
   },
 
+  getConfiguredExtraFormType: function (state) {
+    return function (name) {
+      for (var i = 0; i < state.configuredTypes.length; i++) {
+        if (state.configuredTypes[i].name === name) {
+          return state.configuredTypes[i];
+        }
+      }
+    };
+  },
+
   getBaseExtraFormTypes: function (state) {
     return state.baseTypes;
   },

@@ -66,8 +66,8 @@ var extraFormTypes = {
     'base-extra-form-type': baseExtraFormType
   },
 
-  /* global fontAwesomeIconMixin rawMixin */
-  mixins: [fontAwesomeIconMixin, rawMixin],
+  /* global rawMixin */
+  mixins: [rawMixin],
 
   methods: {
 
@@ -135,8 +135,9 @@ var extraFormTypes = {
       }
 
       var field = {
-        name: 'field_' + type.name + '_' + generateUniqueId(),
+        name: type.name,
         icon: type.icon,
+        tags: type.tags,
         extra_form_type: type.form_type_name,
         options: options,
         constraints: type.extra_form_constraints
