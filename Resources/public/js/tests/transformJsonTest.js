@@ -1,67 +1,40 @@
-describe("Test the json transform component", function() {
+describe('Test the json transform component', function() {
+  function minify(str) {
+    return str
+      .replace(/\n/g, ' ')
+      .replace(/ {2,}/g, ' ')
+    ;
+  }
 
-  it("Should parse the fixture1Raw string correctly", function() {
-    var raw = JSON.parse(JSON.stringify(fixture1Raw));
-    var transformedRaw = transformRawToJson(raw);
+  var fixtures = [
+    fixture1Raw,
+    fixture2Raw,
+    fixture3Raw,
+    fixture4Raw,
+    fixture5Raw,
+    fixture6Raw
+  ];
 
-    expect(function () {
-      JSON.parse(raw);
-    }).toThrow();
+  fixtures.forEach(function(fixture, index) {
+    var fixtureNumber = index + 1;
+    var fileName = 'fixture' + fixtureNumber + 'Raw';
 
-    expect(function () {
-      JSON.parse(transformedRaw);
-    }).not.toThrow();
-  });
+    it('Should parse the ' + fileName + ' correctly', function() {
+      var raw = JSON.parse(JSON.stringify(fixture));
+      var transformedRaw = transformRawToJson(raw);
+      var reverseTransformedRaw = transformJsonToRaw(transformedRaw);
 
-  it("Should parse the fixture2Raw correctly", function() {
-    var raw = JSON.parse(JSON.stringify(fixture2Raw));
-    var transformedRaw = transformRawToJson(raw);
+      expect(function () {
+        JSON.parse(raw);
+      }).toThrow();
 
-    expect(function () {
-      JSON.parse(raw);
-    }).toThrow();
+      expect(function () {
+        JSON.parse(transformedRaw);
+      }).not.toThrow();
 
-    expect(function () {
-      JSON.parse(transformedRaw);
-    }).not.toThrow();
-  });
-
-  it("Should parse the fixture3Raw correctly", function() {
-    var raw = JSON.parse(JSON.stringify(fixture3Raw));
-    var transformedRaw = transformRawToJson(raw);
-
-    expect(function () {
-      JSON.parse(raw);
-    }).toThrow();
-
-    expect(function () {
-      JSON.parse(transformedRaw);
-    }).not.toThrow();
-  });
-
-  it("Should parse the fixture4Raw correctly", function() {
-    var raw = JSON.parse(JSON.stringify(fixture4Raw));
-    var transformedRaw = transformRawToJson(raw);
-
-    expect(function () {
-      JSON.parse(raw);
-    }).toThrow();
-
-    expect(function () {
-      JSON.parse(transformedRaw);
-    }).not.toThrow();
-  });
-
-  it("Should parse the fixture5Raw correctly", function() {
-    var raw = JSON.parse(JSON.stringify(fixture5Raw));
-    var transformedRaw = transformRawToJson(raw);
-
-    expect(function () {
-      JSON.parse(raw);
-    }).toThrow();
-
-    expect(function () {
-      JSON.parse(transformedRaw);
-    }).not.toThrow();
+      // We minify to remove multiline differences
+      expect(minify(reverseTransformedRaw)).toEqual(minify(raw));
+    });
   });
 });
+
