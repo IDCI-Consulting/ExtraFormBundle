@@ -63,11 +63,20 @@ var rawModalMixin = {
      * Get the number of the line where the json error is
      */
     getJsonErrorLineNumber: function (error, wrongJson) {
-      var regex = /Unexpected token (.*) in JSON at position ([0-9].*)/g;
+      var regex = /(line|position) (\d+)/g;
       var matches = regex.exec(error.message);
-      var errorIndex = Number(matches[2]) - matches[1].length;
 
-      return wrongJson.substring(0, errorIndex).split('\n').length;
+      if (null !== matches) {
+        if ("line" === matches[1]) {
+          return Number(matches[2]);
+        }
+
+        if ("position" === matches[1]) {
+          return wrongJson.substring(0, Number(matches[2])-1).split('\n').length;
+        }
+      }
+
+      return 0;
     },
 
     /**
