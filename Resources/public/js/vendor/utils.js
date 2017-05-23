@@ -244,6 +244,12 @@ function transformRawToJson(raw) {
   var twigOperationsArrayRegex = /\[{%([\s\S]*.*)%}\]/g;
 
   /**
+   * "key1.key2": [ ... ]
+   * [\s\S]* matches new lines
+   */
+  var twigOperationsArrayNotInStatmentRegex = /("([\w.|]*)"): (\[{%([\s\S]*.*)%}\])/g;
+
+  /**
    * Format twig statements
    */
   function formatTwigStatements(twigStatement) {
@@ -274,13 +280,13 @@ function transformRawToJson(raw) {
       .replace(/ {2,}/g, ' ')        // replace 2 or more spaces by only one
     ;
 
-    // Wrap the twig in double quotes
-    return '"' + replacement + '"';
+    return replacement;
   }
 
   return raw
     .replace(twigStatmentRegex, formatTwigStatements)
     .replace(twigOperationsArrayRegex, formatTwigOperationsArray)
+    .replace(twigOperationsArrayNotInStatmentRegex, '$1: "$3"') // add "" around twig arrays not in twig statement
   ;
 }
 
