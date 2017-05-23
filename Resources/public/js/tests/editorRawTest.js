@@ -3,12 +3,16 @@ describe("Test the editorRaw component", function() {
   /**
    * Get the textarea component
    */
-  function getEditorRawComponent() {
-        var store = new Vuex.Store({
+  function getEditorRawComponent(value) {
+    if ('undefined' === typeof value) {
+      value = '';
+    }
+
+    var store = new Vuex.Store({
       state: {
         configuration: {},
         formProperties: {
-          value: ''
+          value: value
         }
       }
     });
@@ -20,7 +24,7 @@ describe("Test the editorRaw component", function() {
     });
   }
 
-  it("Should parse the raw correctly", function() {
+  it('Should parse the raw correctly', function() {
     var vm = getEditorRawComponent();
     vm.$mount();
 
@@ -57,7 +61,7 @@ describe("Test the editorRaw component", function() {
     expect(fields).toEqual(expectedFields);
   });
 
-  it("Should transform the raw correctly", function() {
+  it('Should transform the raw correctly', function() {
     var vm = getEditorRawComponent();
     vm.$mount();
 
@@ -92,6 +96,13 @@ describe("Test the editorRaw component", function() {
     var transformedRaw = transformRawToJson(raw);
 
     expect(transformedRaw).toEqual(expectedTransformedRaw);
+  });
+
+  it('Should display the line number of the error', function() {
+    var vm = getEditorRawComponent('{\n\"action\":\"retrieve_availability_product\",\n\"name\":\"retrieved_availability_product\",\n\"parameters\":{\n\"stockspace\":\"ferrerounica\",\n\"id\",:\"{{participation.offer.products.0.id}}\",\n\"quantity\":1\n}\n}');
+    vm.$mount();
+
+    expect(vm.error.lineNumber).toEqual(6);
   });
 
 });
