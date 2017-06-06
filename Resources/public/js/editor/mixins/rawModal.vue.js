@@ -89,7 +89,8 @@ var rawModalMixin = {
 
         if (null === self.rawEditor) {
           self.rawEditor = CodeMirror.fromTextArea(document.getElementById(self.id), {
-            lineNumbers: true
+            lineNumbers: true,
+            extraKeys: {"Ctrl-F": "findPersistent"}
           });
 
           self.rawEditor.on('change', function () {
