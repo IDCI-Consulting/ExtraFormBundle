@@ -7,13 +7,16 @@ var textOption = {
         '{{ name }}' +
         '<i :class="classes" aria-hidden="true"></i>' +
       '</label>' +
-      '<input class="form-control" ' +
-        ':required="option.options.required" ' +
-        ':value="data" ' +
-        '@input="onOptionValueChanged($event.target.value)" ' +
-        'type="text" ' +
-        ':name="name"' +
-      '>' +
+      '<div class="form-control-wrapper">' +
+        '<span v-if="option.options.help">{{ option.options.help }}</span>' +
+        '<input class="form-control" ' +
+          ':required="option.options.required" ' +
+          ':value="data" ' +
+          '@input="onOptionValueChanged($event.target.value)" ' +
+          'type="text" ' +
+          ':name="name"' +
+        '>' +
+      '</div>' +
     '</div>',
 
   /* global jsonOptionMixin */

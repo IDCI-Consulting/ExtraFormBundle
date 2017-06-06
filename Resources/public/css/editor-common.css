@@ -67,11 +67,17 @@ select, input, textarea, button, optgroup {
     position: relative;
 }
 
-.editor .form-group > .form-control {
+.editor .form-group > .form-control-wrapper {
     display: inline-block;
     width: 65%;
     /* hack: https://css-tricks.com/fighting-the-space-between-inline-block-elements/ */
     margin-right: -30px;
+}
+
+.editor .form-group > .form-control-wrapper > span {
+    font-style: italic;
+    display: inline-block;
+    padding-bottom: 5px;
 }
 
 .editor .form-group > input[type="checkbox"].form-control {
