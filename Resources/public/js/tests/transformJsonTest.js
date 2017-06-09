@@ -12,7 +12,8 @@ describe('Test the json transform component', function() {
     fixture3Raw,
     fixture4Raw,
     fixture5Raw,
-    fixture6Raw
+    fixture6Raw,
+    fixture7Raw
   ];
 
   fixtures.forEach(function(fixture, index) {

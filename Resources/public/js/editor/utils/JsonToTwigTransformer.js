@@ -16,13 +16,13 @@ JsonToTwigTransformer = {
     /**
      * [\s\S]* matches new lines
      */
-    var twigOperationsArrayRegex = /\[{%([\s\S]*.*)%}\]/g;
+    var twigOperationsArrayRegex = /\[(\s{0,}){%([\s\S]*.*)%}(\s{0,})\]/g;
 
     /**
      * "key1.key2": [ ... ]
      * [\s\S]* matches new lines
      */
-    var twigOperationsArrayNotInStatmentRegex = /("([\w.|]*)"): (\[{%([\s\S]*.*)%}\])/g;
+    var twigOperationsArrayNotInStatmentRegex = /("([\w.|]*)"): (\[(\s{0,}){%([\s\S]*.*)%}(\s{0,})\])(,|\s)/g;
 
     /**
      * Format twig statements
@@ -30,7 +30,7 @@ JsonToTwigTransformer = {
     function formatTwigStatements(twigStatement) {
       return twigStatement
         .replace(/\\/g, '\\\\') //    \  -> \\
-        .replace(/"/g, '\\"');   //    "  -> \"
+        .replace(/"/g, '\\"')   //    "  -> \"
     }
 
     /**
@@ -73,7 +73,7 @@ JsonToTwigTransformer = {
      */
     var twigStatmentRegex = /{{(.*)?}}/g;
 
-    var twigOperationsArrayRegex = /"\[{%(.*)%}\]"/g;
+    var twigOperationsArrayRegex = /"\[( {0,1}){%(.*)%}( {0,1})\]"/g;
 
     /**
      * Format twig statements
