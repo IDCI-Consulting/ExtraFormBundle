@@ -93,7 +93,7 @@ describe("Test the editorRaw component", function() {
       '} ' +
     '}';
 
-    var transformedRaw = transformRawToJson(raw);
+    var transformedRaw = JsonToTwigTransformer.toJson(raw);
 
     expect(transformedRaw).toEqual(expectedTransformedRaw);
   });

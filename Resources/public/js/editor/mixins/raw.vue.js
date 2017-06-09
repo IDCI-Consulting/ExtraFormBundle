@@ -96,8 +96,8 @@ var rawMixin = {
             if (0 === options[option].length) {
               delete options[option];
             } else {
-              /* global transformRawToJson */
-              options[option] = JSON.parse(transformRawToJson(options[option]));
+              /* global JsonToTwigTransformer */
+              options[option] = JSON.parse(JsonToTwigTransformer.toJson(options[option]));
             }
           } catch (e) {}
         }

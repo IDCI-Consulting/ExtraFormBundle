@@ -45,8 +45,8 @@ Vue.component('form-editor-raw', {
       var newFields = [];
 
       try {
-        /* global transformRawToJson */
-        var transformedJson = transformRawToJson(this.raw);
+        /* global JsonToTwigTransformer */
+        var transformedJson = JsonToTwigTransformer.toJson(this.raw);
         var raw = JSON.parse(transformedJson);
 
         newFields = this.createFieldsRecursively(raw);
@@ -68,8 +68,8 @@ Vue.component('form-editor-raw', {
     generateRaw: function (fields) {
       var raw = this.createExtraFormRawRecursively(fields);
 
-      /* global transformJsonToRaw */
-      return transformJsonToRaw(JSON.stringify(raw, null, 4));
+      /* global JsonToTwigTransformer */
+      return JsonToTwigTransformer.toRaw(JSON.stringify(raw, null, 4));
     },
 
     /**

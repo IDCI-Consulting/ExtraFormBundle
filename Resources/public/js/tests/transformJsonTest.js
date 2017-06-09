@@ -21,8 +21,8 @@ describe('Test the json transform component', function() {
 
     it('Should parse the ' + fileName + ' correctly', function() {
       var raw = JSON.parse(JSON.stringify(fixture));
-      var transformedRaw = transformRawToJson(raw);
-      var reverseTransformedRaw = transformJsonToRaw(transformedRaw);
+      var transformedRaw = JsonToTwigTransformer.toJson(raw);
+      var reverseTransformedRaw = JsonToTwigTransformer.toRaw(transformedRaw);
 
       expect(function () {
         JSON.parse(raw);
