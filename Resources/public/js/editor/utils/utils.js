@@ -101,15 +101,15 @@ function getLastKey(object) {
 /**
  * Hash a string to a 32 bit integer
  *
- * @param string
- * @returns {number}
+ * @param {string} string
+ * @returns {string}
  */
 function hashCode(string) {
   var hash = 0;
   var chr;
 
   if (string.length === 0) {
-    return hash;
+    return hash.toString();
   }
 
   for (var i = 0; i < string.length; i++) {
@@ -118,7 +118,7 @@ function hashCode(string) {
     hash |= 0; // Convert to 32bit integer
   }
 
-  return hash;
+  return hash.toString();
 }
 
 /**
