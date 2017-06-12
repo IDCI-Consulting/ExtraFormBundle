@@ -1,4 +1,15 @@
 /**
+ * Remove all lines breaks and "extra" spaces, when there are more than 1 spaces in a row
+ *
+ * @returns {string}
+ */
+String.prototype.removeLineBreaksAnsExtraSpaces = function () {
+  return this
+    .replace(/\r?\n|\r/g, ' ') // replace line breaks by spaces
+    .replace(/ {2,}/g, ' ');   // replace 2 or more spaces by only one
+};
+
+/**
  * Create and return an object which contains all elements for which the callback returns true
  *
  * @param object
