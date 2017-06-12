@@ -11,30 +11,30 @@ JsonToTwigTransformer = {
     /**
      * "{{ ... }}"
      */
-    var twigStatmentRegex = /{{(.*)?}}/g;
+    var twigStatementRegex = /{{(.*)?}}/g;
 
     /**
      * [\s\S]* matches new lines
      */
-    var twigOperationsArrayRegex = /\[(\s{0,}){%([\s\S]*.*)%}(\s{0,})\]/g;
+    var twigOperationArrayRegex = /\[(\s{0,}){%([\s\S]*.*)%}(\s{0,})\]/g;
 
     /**
      * "key1.key2": [ ... ]
      * [\s\S]* matches new lines
      */
-    var twigOperationsArrayNotInStatmentRegex = /("([\w.|]*)"): (\[(\s{0,}){%([\s\S]*.*)%}(\s{0,})\])(,|\s)/g;
+    var twigOperationArrayNotInStatementRegex = /("([\w.|]*)"): (\[(\s{0,}){%([\s\S]*.*)%}(\s{0,})\])/g;
 
     /**
      * Format twig statements
      */
-    function formatTwigStatements(twigStatement) {
+    function formatTwigStatement(twigStatement) {
       return twigStatement
         .replace(/\\/g, '\\\\') //    \  -> \\
-        .replace(/"/g, '\\"')   //    "  -> \"
+        .replace(/"/g, '\\"');  //    "  -> \"
     }
 
     /**
-     * Format the twig operations array
+     * Format the twig operation array
      *
      * Ex:
      *     "history": [{% for b in bs %}
@@ -47,17 +47,35 @@ JsonToTwigTransformer = {
      *
      *     "history": "[{% for b in bs %}{\"id\": \"{{ b.position }}\",}{% if not loop.last %},{% endif %}{% endfor %}]"
      */
-    function formatTwigOperationsArray(twigOperationArray) {
-      return twigOperationArray
-          .replace(/([^\\])"/g, '$1\\"') // [^\\] -> everything except \
-          .replace(/\r?\n|\r/g, ' ')     // replace line breaks by spaces
-          .replace(/ {2,}/g, ' ');        // replace 2 or more spaces by only one
+    function formatTwigOperationArray(twigOperationArray) {
+      var jsonLine = twigOperationArray
+        .removeLineBreaksAnsExtraSpaces()
+        .replace(/([^\\])"/g, '$1\\"'); // [^\\] -> everything except \
+
+      // Save the raw json
+      localStorage.setItem(hashCode(jsonLine), twigOperationArray);
+
+      return jsonLine;
+    }
+
+    /**
+     * add "" around twig arrays not in twig statement
+     *
+     * @param twigOperationArrayNotInStatement
+     * @param group1
+     * @param group2
+     * @param group3
+     *
+     * @returns {string}
+     */
+    function formatTwigOperationArrayNotInStatement(twigOperationArrayNotInStatement, group1, group2, group3) {
+      return group1 + ': "' + group3 + '"';
     }
 
     return raw
-      .replace(twigStatmentRegex, formatTwigStatements)
-      .replace(twigOperationsArrayRegex, formatTwigOperationsArray)
-      .replace(twigOperationsArrayNotInStatmentRegex, '$1: "$3"'); // add "" around twig arrays not in twig statement
+      .replace(twigStatementRegex, formatTwigStatement)
+      .replace(twigOperationArrayRegex, formatTwigOperationArray)
+      .replace(twigOperationArrayNotInStatementRegex, formatTwigOperationArrayNotInStatement);
   },
 
   /**
@@ -71,16 +89,16 @@ JsonToTwigTransformer = {
     /**
      * "{{ ... }}"
      */
-    var twigStatmentRegex = /{{(.*)?}}/g;
+    var twigStatementRegex = /{{(.*)?}}/g;
 
-    var twigOperationsArrayRegex = /"\[( {0,1}){%(.*)%}( {0,1})\]"/g;
+    var twigOperationArrayRegex = /"\[( {0,1}){%(.*)%}( {0,1})\]"/g;
 
     /**
      * Format twig statements
      *
      * Ex: {{ raw_benefit|json_encode|trim(\\'\\\"\\')|raw }} -> {{ raw_benefit|json_encode|trim(\\'\\"\\')|raw }}
      */
-    function formatTwigStatements(twigStatement) {
+    function formatTwigStatement(twigStatement) {
       return twigStatement
         .replace(/\\\\/g, '\\') //  \\ -> \
         .replace(/\\"/g, '"');   //  \"  -> "
@@ -94,18 +112,22 @@ JsonToTwigTransformer = {
      *     ->
      *     "history": [{% for b in bs %} {"id": "{{ b.position }}",}{% if not loop.last %},{% endif %}{% endfor %}]
      */
-    function formatTwigOperationsArray(twigOperationsArray) {
-      var replacement = twigOperationsArray
-          .replace(/\\"/g, '"')
-          .replace(/\\\\'/g, '\\\'');
+    function formatTwigOperationArray(twigOperationsArray) {
+      var jsonLine = twigOperationsArray.substring(1, twigOperationsArray.length -1);
 
-      // Unwrap the twig form the quotes
-      return replacement.substring(1, replacement.length -1);
+      // Retrieve the saved raw json
+      if (localStorage.getItem(hashCode(jsonLine)) !== null) {
+        return localStorage.getItem(hashCode(jsonLine));
+      }
+
+      return jsonLine
+        .replace(/\\"/g, '"')
+        .replace(/\\\\'/g, '\\\'');
     }
 
     return json
-      .replace(twigStatmentRegex, formatTwigStatements)
-      .replace(twigOperationsArrayRegex, formatTwigOperationsArray);
+      .replace(twigOperationArrayRegex, formatTwigOperationArray)
+      .replace(twigStatementRegex, formatTwigStatement);
   }
 
 };
