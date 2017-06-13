@@ -1,4 +1,5 @@
-JsonToTwigTransformer = {
+/* exported JsonToTwigTransformer */
+var JsonToTwigTransformer = {
 
   /**
    * Transform a raw string in json
@@ -27,10 +28,13 @@ JsonToTwigTransformer = {
     /**
      * Format twig statements
      */
-    function formatTwigStatement(twigStatement) {
+    function formatTwigStatement (twigStatement) {
       return twigStatement
-        .replace(/\\/g, '\\\\') //    \  -> \\
-        .replace(/"/g, '\\"');  //    "  -> \"
+        // \ -> \\
+        .replace(/\\/g, '\\\\')
+
+        //" -> \"
+        .replace(/"/g, '\\"');
     }
 
     /**
@@ -47,19 +51,22 @@ JsonToTwigTransformer = {
      *
      *     "history": "[{% for b in bs %}{\"id\": \"{{ b.position }}\",}{% if not loop.last %},{% endif %}{% endfor %}]"
      */
-    function formatTwigOperationArray(twigOperationArray) {
+    function formatTwigOperationArray (twigOperationArray) {
       var jsonLine = twigOperationArray
         .removeLineBreaksAnsExtraSpaces()
-        .replace(/([^\\])"/g, '$1\\"'); // [^\\] -> everything except \
+
+        // [^\\] means everything except \
+        .replace(/([^\\])"/g, '$1\\"');
 
       // Save the raw json
+      /* global hashCode */
       localStorage.setItem(hashCode(jsonLine), twigOperationArray);
 
       return jsonLine;
     }
 
     /**
-     * add "" around twig arrays not in twig statement
+     * Add "" around twig arrays not in twig statement
      *
      * @param twigOperationArrayNotInStatement
      * @param group1
@@ -68,7 +75,7 @@ JsonToTwigTransformer = {
      *
      * @returns {string}
      */
-    function formatTwigOperationArrayNotInStatement(twigOperationArrayNotInStatement, group1, group2, group3) {
+    function formatTwigOperationArrayNotInStatement (twigOperationArrayNotInStatement, group1, group2, group3) {
       return group1 + ': "' + group3 + '"';
     }
 
@@ -98,10 +105,12 @@ JsonToTwigTransformer = {
      *
      * Ex: {{ raw_benefit|json_encode|trim(\\'\\\"\\')|raw }} -> {{ raw_benefit|json_encode|trim(\\'\\"\\')|raw }}
      */
-    function formatTwigStatement(twigStatement) {
+    function formatTwigStatement (twigStatement) {
       return twigStatement
-        .replace(/\\\\/g, '\\') //  \\ -> \
-        .replace(/\\"/g, '"');   //  \"  -> "
+        // \\ -> \
+        .replace(/\\\\/g, '\\')
+        // \"  -> "
+        .replace(/\\"/g, '"');
     }
 
     /**
@@ -112,8 +121,8 @@ JsonToTwigTransformer = {
      *     ->
      *     "history": [{% for b in bs %} {"id": "{{ b.position }}",}{% if not loop.last %},{% endif %}{% endfor %}]
      */
-    function formatTwigOperationArray(twigOperationsArray) {
-      var jsonLine = twigOperationsArray.substring(1, twigOperationsArray.length -1);
+    function formatTwigOperationArray (twigOperationsArray) {
+      var jsonLine = twigOperationsArray.substring(1, twigOperationsArray.length - 1);
 
       // Retrieve the saved raw json
       if (localStorage.getItem(hashCode(jsonLine)) !== null) {

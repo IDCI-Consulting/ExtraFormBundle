@@ -67,12 +67,12 @@ var rawModalMixin = {
       var matches = regex.exec(error.message);
 
       if (null !== matches) {
-        if ("line" === matches[1]) {
+        if ('line' === matches[1]) {
           return Number(matches[2]);
         }
 
-        if ("position" === matches[1]) {
-          return wrongJson.substring(0, Number(matches[2])-1).split('\n').length;
+        if ('position' === matches[1]) {
+          return wrongJson.substring(0, Number(matches[2]) - 1).split('\n').length;
         }
       }
 
@@ -90,7 +90,9 @@ var rawModalMixin = {
         if (null === self.rawEditor) {
           self.rawEditor = CodeMirror.fromTextArea(document.getElementById(self.id), {
             lineNumbers: true,
-            extraKeys: {"Ctrl-F": "findPersistent"}
+            extraKeys: {
+              'Ctrl-F': 'findPersistent'
+            }
           });
 
           self.rawEditor.on('change', function () {

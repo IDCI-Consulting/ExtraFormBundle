@@ -43,6 +43,7 @@ var jsonOptionMixin = {
     onOptionValueChanged: function (value) {
       var self = this;
 
+      /* global Promise */
       return new Promise(function (resolve) {
         self.waitForIt(function () {
           self.updateOption(value);

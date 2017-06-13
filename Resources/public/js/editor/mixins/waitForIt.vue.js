@@ -20,7 +20,7 @@ var waitForItMixin = {
      * @param time
      */
     waitForIt: function (callback, time) {
-      if (typeof time === 'undefined') {
+      if ('undefined' === typeof time) {
         time = 500;
       }
 

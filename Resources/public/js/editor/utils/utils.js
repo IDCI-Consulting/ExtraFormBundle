@@ -1,3 +1,15 @@
+/* exported
+    filterObject,
+    sortObject,
+    generateUniqueId,
+    hashCode,
+    createBootstrapModal,
+    colorEmptyRequiredInputs,
+    createAttributeMapObject
+*/
+
+/* global $ */
+
 /**
  * Remove all lines breaks and "extra" spaces, when there are more than 1 spaces in a row
  *
@@ -5,24 +17,26 @@
  */
 String.prototype.removeLineBreaksAnsExtraSpaces = function () {
   return this
-    .replace(/\r?\n|\r/g, ' ') // replace line breaks by spaces
-    .replace(/ {2,}/g, ' ');   // replace 2 or more spaces by only one
+    // Replace line breaks by spaces
+    .replace(/\r?\n|\r/g, ' ')
+    // Replace 2 or more spaces by only one
+    .replace(/ {2,}/g, ' ');
 };
 
 /**
  * Create and return an object which contains all elements for which the callback returns true
  *
- * @param object
- * @param callback
+ * @param {object} object
+ * @param {function} callable
  *
- * @return object
+ * @return {object}
  */
-function filterObject(object, callback) {
+function filterObject (object, callable) {
   var filteredObject = {};
 
   for (var property in object) {
     if (object.hasOwnProperty(property)) {
-      if (callback(object[property])) {
+      if (callable(object[property])) {
         filteredObject[property] = object[property];
       }
     }
@@ -35,38 +49,42 @@ function filterObject(object, callback) {
  * Sort an object by keys
  *
  *
- * @param object
+ * @param {object} object
  * @param {[]} [firstKeys] : if the firstKeys param is set, set them at the beginning of the object
  * @param {boolean} [sortAll] : if false, only sort by first keys
  *
  * @returns {{}}
  */
-function sortObject(object, firstKeys, sortAll) {
-  const ordered = {};
+function sortObject (object, firstKeys, sortAll) {
+  var ordered = {};
 
-  if (typeof sortAll === 'undefined') {
+  if ('undefined' === typeof sortAll) {
     sortAll = true;
   }
 
-  if (typeof firstKeys === 'undefined') {
+  if ('undefined' === typeof firstKeys) {
     firstKeys = [];
   }
 
-  for (var i = 0, len = firstKeys.length;  i < len; i++) {
-    var key = firstKeys[i];
-    ordered[key] = object[key];
+  for (var i = 0, len = firstKeys.length; i < len; i++) {
+    var k = firstKeys[i];
+
+    ordered[k] = object[k];
   }
 
   if (sortAll) {
-    Object.keys(object).sort().forEach(function(key) {
-      if (firstKeys.indexOf(key) === -1) {
-        ordered[key] = object[key];
-      }
-    });
+    Object
+      .keys(object)
+      .sort()
+      .forEach(function (key) {
+        if (-1 === firstKeys.indexOf(key)) {
+          ordered[key] = object[key];
+        }
+      });
   } else {
     for (var key in object) {
       if (object.hasOwnProperty(key)) {
-        if (firstKeys.indexOf(key) === -1) {
+        if (-1 === firstKeys.indexOf(key)) {
           ordered[key] = object[key];
         }
       }
@@ -79,23 +97,14 @@ function sortObject(object, firstKeys, sortAll) {
 /**
  * Generate a unique id for the fields default names
  *
- * @returns string
+ * @returns {string}
  */
-function generateUniqueId() {
-  return Math.random().toString(36).substr(2, 9);
-}
-
-/**
- * Get the last key of an object
- *
- * @param object
- * @returns string
- */
-function getLastKey(object) {
-  var keys = Object.keys(object);
-  var lastElementPosition = keys.length - 1;
-
-  return keys[lastElementPosition];
+function generateUniqueId () {
+  return Math
+    .random()
+    .toString(36)
+    .substr(2, 9)
+    ;
 }
 
 /**
@@ -104,18 +113,19 @@ function getLastKey(object) {
  * @param {string} string
  * @returns {string}
  */
-function hashCode(string) {
+function hashCode (string) {
   var hash = 0;
-  var chr;
 
-  if (string.length === 0) {
+  if (0 === string.length) {
     return hash.toString();
   }
 
   for (var i = 0; i < string.length; i++) {
-    chr   = string.charCodeAt(i);
-    hash  = ((hash << 5) - hash) + chr;
-    hash |= 0; // Convert to 32bit integer
+    var chr = string.charCodeAt(i);
+
+    hash = (hash << 5) - hash + chr;
+    // Convert to 32bit integer
+    hash |= 0;
   }
 
   return hash.toString();
@@ -126,9 +136,9 @@ function hashCode(string) {
  *
  * @param element
  *
- * @return object
+ * @return {object}
  */
-function createAttributeMapObject(element) {
+function createAttributeMapObject (element) {
   var attributes = element.attributes;
   var object = {};
 
@@ -215,10 +225,14 @@ function colorEmptyRequiredInputs (elementId, parentClass) {
   // Color when new children are added to the dom
   // Sometimes they are added but already filled by vuejs, sometimes they are empty
   var target = document.getElementById(elementId);
-  var config = { childList: true, characterData: true, subtree: true};
+  var config = {
+    childList: true,
+    characterData: true,
+    subtree: true
+  };
 
-  var observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
+  var observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
       var $inputs = [];
 
       if ($(mutation.target).hasClass(parentClass)) {
@@ -227,7 +241,7 @@ function colorEmptyRequiredInputs (elementId, parentClass) {
         $inputs = $(mutation.target).find(inputSelector);
       }
 
-      $inputs.each(function() {
+      $inputs.each(function () {
         color($(this));
       });
     });
