@@ -5,8 +5,8 @@
 
 var jsonOptionMixin = {
 
-  /* global optionMixin */
-  mixins: [optionMixin],
+  /* global optionMixin, waitForItMixin */
+  mixins: [optionMixin, waitForItMixin],
 
   data: function () {
     return {
@@ -41,8 +41,16 @@ var jsonOptionMixin = {
 
   methods: {
     onOptionValueChanged: function (value) {
-      this.updateOption(value);
-      this.setJsonAttemptClass(value);
+      var self = this;
+
+      return new Promise(function (resolve) {
+        self.waitForIt(function () {
+          self.updateOption(value);
+          self.setJsonAttemptClass(value);
+          resolve();
+        }, 300);
+      });
+
     },
 
     /**

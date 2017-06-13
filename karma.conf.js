@@ -30,6 +30,7 @@ module.exports = function(config) {
       'vendor/vue-resource-1.2.0.min.js',
       'editor/utils/utils.js',
       'editor/utils/JsonToTwigTransformer.js',
+      'editor/mixins/waitForIt.vue.js',
       'editor/mixins/option.vue.js',
       'editor/mixins/jsonOption.vue.js',
       'editor/mixins/http.vue.js',

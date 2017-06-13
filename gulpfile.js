@@ -24,6 +24,7 @@ src.scripts = [
   'Resources/public/js/vendor/vue-resource-1.2.0.min.js',
   'Resources/public/js/editor/utils/utils.js',
   'Resources/public/js/editor/utils/JsonToTwigTransformer.js',
+  'Resources/public/js/editor/mixins/waitForIt.vue.js',
   'Resources/public/js/editor/mixins/option.vue.js',
   'Resources/public/js/editor/mixins/jsonOption.vue.js',
   'Resources/public/js/editor/mixins/http.vue.js',

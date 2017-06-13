@@ -17,20 +17,36 @@ describe("Test the textareaOption component", function() {
     });
   }
 
-  it("Should set the classes correctly", function() {
+  it("Should set the classes correctly", function(done) {
     var vm = getTextareaComponent();
     vm.$mount();
 
     expect(vm.classes).toBe('');
 
-    vm.onOptionValueChanged('{"key": "value"}');
-    expect(vm.classes).toBe('fa fa-check success feedback');
+    vm.onOptionValueChanged('{"key": "value"}').then(function () {
+      expect(vm.classes).toBe('fa fa-check success feedback');
+      done();
+    });
+  });
 
-    vm.onOptionValueChanged('["value1", "value2"]');
-    expect(vm.classes).toBe('fa fa-check success feedback');
+  it("Should set the classes correctly", function(done) {
+    var vm = getTextareaComponent();
+    vm.$mount();
 
-    vm.onOptionValueChanged('{key": "value"}');
-    expect(vm.classes).toBe('fa fa-exclamation-circle warning feedback');
+    vm.onOptionValueChanged('["value1", "value2"]').then(function () {
+      expect(vm.classes).toBe('fa fa-check success feedback');
+      done();
+    });
+  });
+
+  it("Should set the classes correctly", function(done) {
+    var vm = getTextareaComponent();
+    vm.$mount();
+
+    vm.onOptionValueChanged('{key": "value"}').then(function () {
+      expect(vm.classes).toBe('fa fa-exclamation-circle warning feedback');
+      done();
+    });
   });
 
 });
