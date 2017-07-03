@@ -23,6 +23,9 @@ var extraFormEditorActions = {
       .then(
         function (response) {
           return response.json();
+        },
+        function () {
+          return null;
         }
       )
       .then(

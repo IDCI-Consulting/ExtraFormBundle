@@ -142,7 +142,7 @@
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -158,7 +158,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createBootstrapModal", function() { return createBootstrapModal; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "colorEmptyRequiredInputs", function() { return colorEmptyRequiredInputs; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createAttributeMapObject", function() { return createAttributeMapObject; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
 
 
@@ -408,11 +408,17 @@ function colorEmptyRequiredInputs (elementId, parentClass) {
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports) {
+
+module.exports = jQuery;
+
+/***/ }),
+/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__load_editor_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__load_editor_js__ = __webpack_require__(3);
 
 
 window.addEventListener('load', function () {
@@ -421,13 +427,13 @@ window.addEventListener('load', function () {
 
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = loadExtraFormEditors;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_utils__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 
 
@@ -540,7 +546,7 @@ function loadExtraFormEditors () {
         $simpleEditor.on('click', '.field-options > label', function (event) {
           // Prevent the click for being triggered multiple times
           event.stopImmediatePropagation();
-          __WEBPACK_IMPORTED_MODULE_1_jquery___default.a(textarea)
+          __WEBPACK_IMPORTED_MODULE_1_jquery___default.a(this)
             .parent()
             .toggleClass('show')
           ;
@@ -548,7 +554,7 @@ function loadExtraFormEditors () {
 
         $simpleEditor.on('click', '.field-constraint-options > label', function (event) {
           event.stopImmediatePropagation();
-          __WEBPACK_IMPORTED_MODULE_1_jquery___default.a(textarea)
+          __WEBPACK_IMPORTED_MODULE_1_jquery___default.a(this)
             .parent()
             .toggleClass('show')
           ;
@@ -565,7 +571,6 @@ function loadExtraFormEditors () {
         __WEBPACK_IMPORTED_MODULE_1_jquery___default.a(document).on('click', 'button.trigger-' + modalType + '-' + modalIdentifier, function (event) {
           event.preventDefault();
           var $modal = __WEBPACK_IMPORTED_MODULE_1_jquery___default.a('#' + modalType + '-' + modalIdentifier);
-
           if ('overview-modal' !== modalType) {
             $modal = $modal.first();
           }
@@ -584,15 +589,15 @@ function loadExtraFormEditors () {
           // On the generate field button from the editor-raw
           '.' + modalType + ' .modal-body button.close-modal, ' +
 
-            // On the upper right cross of the modal
+            // On the close button on the left bottom of the modal
           '.' + modalType + ' .modal-footer > button.close-modal, ' +
 
-            // On the close button on the left bottom of the modal
+            // On the upper right cross of the modal
           '.' + modalType + ' .modal-header > button.close';
 
         __WEBPACK_IMPORTED_MODULE_1_jquery___default.a(document).on('click', classes, function (event) {
           event.preventDefault();
-          __WEBPACK_IMPORTED_MODULE_1_jquery___default.a(textarea)
+          __WEBPACK_IMPORTED_MODULE_1_jquery___default.a(this)
             .closest('.modal')
             .modal('hide')
           ;
@@ -670,7 +675,7 @@ function loadExtraFormEditors () {
         __WEBPACK_IMPORTED_MODULE_1_jquery___default.a(document).on('click', '#overview-modal-' + index + ' form button[type=\'submit\']', function (event) {
           event.preventDefault();
           resetFormOverviewModal(index);
-          var $form = __WEBPACK_IMPORTED_MODULE_1_jquery___default.a(textarea).closest('form');
+          var $form = __WEBPACK_IMPORTED_MODULE_1_jquery___default.a(this).closest('form');
 
           setTimeout(function () {
 
@@ -812,12 +817,6 @@ function loadExtraFormEditors () {
 
 };
 
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-module.exports = jQuery;
 
 /***/ })
 /******/ ]);

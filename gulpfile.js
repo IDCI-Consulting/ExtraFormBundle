@@ -4,8 +4,10 @@ var src = {};
 src.styles = [
   'Resources/public/css/editor-simple.css',
   'Resources/public/css/editor-advanced.css',
-  'Resources/public/css/editor-common.css'
+  'Resources/public/css/editor-common.css',
+  'Resources/public/css/multiselect.css'
 ];
+
 src.scripts = [
   //'Resources/public/js/vendor/vue-dev.js',
   'Resources/public/js/vendor/codemirror.js',

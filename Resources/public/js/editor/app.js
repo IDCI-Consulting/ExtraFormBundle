@@ -13,6 +13,7 @@ import modalComponent from './components/common/modal.vue.js';
 Vue.component('form-editor-raw', formEditorRawComponent);
 Vue.component('form-editor-advanced', formEditorAdvancedComponent);
 Vue.component('modal', modalComponent);
+Vue.component('multiselect', Multiselect);
 
 /**
  * The function that will trigger the editor

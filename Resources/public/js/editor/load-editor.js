@@ -109,7 +109,7 @@ export default function loadExtraFormEditors () {
         $simpleEditor.on('click', '.field-options > label', function (event) {
           // Prevent the click for being triggered multiple times
           event.stopImmediatePropagation();
-          $(textarea)
+          $(this)
             .parent()
             .toggleClass('show')
           ;
@@ -117,7 +117,7 @@ export default function loadExtraFormEditors () {
 
         $simpleEditor.on('click', '.field-constraint-options > label', function (event) {
           event.stopImmediatePropagation();
-          $(textarea)
+          $(this)
             .parent()
             .toggleClass('show')
           ;
@@ -134,7 +134,6 @@ export default function loadExtraFormEditors () {
         $(document).on('click', 'button.trigger-' + modalType + '-' + modalIdentifier, function (event) {
           event.preventDefault();
           var $modal = $('#' + modalType + '-' + modalIdentifier);
-
           if ('overview-modal' !== modalType) {
             $modal = $modal.first();
           }
@@ -153,15 +152,15 @@ export default function loadExtraFormEditors () {
           // On the generate field button from the editor-raw
           '.' + modalType + ' .modal-body button.close-modal, ' +
 
-            // On the upper right cross of the modal
+            // On the close button on the left bottom of the modal
           '.' + modalType + ' .modal-footer > button.close-modal, ' +
 
-            // On the close button on the left bottom of the modal
+            // On the upper right cross of the modal
           '.' + modalType + ' .modal-header > button.close';
 
         $(document).on('click', classes, function (event) {
           event.preventDefault();
-          $(textarea)
+          $(this)
             .closest('.modal')
             .modal('hide')
           ;
@@ -239,7 +238,7 @@ export default function loadExtraFormEditors () {
         $(document).on('click', '#overview-modal-' + index + ' form button[type=\'submit\']', function (event) {
           event.preventDefault();
           resetFormOverviewModal(index);
-          var $form = $(textarea).closest('form');
+          var $form = $(this).closest('form');
 
           setTimeout(function () {
 

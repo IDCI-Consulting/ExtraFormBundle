@@ -30,10 +30,6 @@ export default {
     this.getExtraFormConstraints();
   },
 
-  components: {
-    multiselect: Multiselect
-  },
-
   methods: {
 
     /**

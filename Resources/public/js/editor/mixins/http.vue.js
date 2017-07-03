@@ -27,6 +27,9 @@ export default {
         .then(
           function (response) {
             return response.json();
+          },
+          function () {
+            return null;
           }
         )
         .then(function (json) {
