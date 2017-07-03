@@ -1,9 +1,8 @@
 /**
  * Base component for a field option
  */
-/* exported optionMixin */
 
-var optionMixin = {
+export default {
 
   props: ['option', 'name', 'value'],
 
@@ -59,4 +58,5 @@ var optionMixin = {
       }
     }
   }
+
 };

@@ -1,5 +1,7 @@
-/* exported textareaOption */
-var textareaOption = {
+
+import jsonOptionMixin from '../../../mixins/jsonOption.vue.js';
+
+export default {
 
   template:
     '<div class="form-group">' +
@@ -18,7 +20,6 @@ var textareaOption = {
       '</div>' +
     '</div>',
 
-  /* global jsonOptionMixin */
   mixins: [jsonOptionMixin]
 
 };

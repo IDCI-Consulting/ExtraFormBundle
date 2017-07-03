@@ -1,5 +1,7 @@
-/* exported JsonToTwigTransformer */
-var JsonToTwigTransformer = {
+
+import { hashCode } from './utils';
+
+export default {
 
   /**
    * Transform a raw string in json
@@ -59,7 +61,7 @@ var JsonToTwigTransformer = {
         .replace(/([^\\])"/g, '$1\\"');
 
       // Save the raw json
-      /* global hashCode */
+
       localStorage.setItem(hashCode(jsonLine), twigOperationArray);
 
       return jsonLine;

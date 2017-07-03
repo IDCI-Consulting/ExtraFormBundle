@@ -1,11 +1,16 @@
-/* global $, CodeMirror, generateUniqueId */
+
+import {generateUniqueId} from '../utils/utils.js';
+import CodeMirror from 'codemirror';
+
+require('codemirror/addon/scroll/annotatescrollbar');
+require('codemirror/addon/search/matchesonscrollbar');
+require('codemirror/addon/search/searchcursor');
 
 /**
  * Global methods for the raw editor modals
  */
 
-/* exported rawModalMixin */
-var rawModalMixin = {
+export default {
 
   data: function () {
     return {

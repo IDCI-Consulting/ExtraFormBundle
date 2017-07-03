@@ -1,4 +1,18 @@
-/* exported triggerVueEditor */
+
+import Vue from 'vue';
+import Vuex from 'vuex';
+import Multiselect from 'vue-multiselect';
+import VueResource from 'vue-resource';
+import extraFormEditorGetters from './store/getters.vue.js';
+import extraFormEditorMutations from './store/mutations.vue.js';
+import extraFormEditorActions from './store/actions.vue.js';
+import formEditorRawComponent from './components/editor-raw.vue.js';
+import formEditorAdvancedComponent from './components/editor-advanced/editor.vue.js';
+import modalComponent from './components/common/modal.vue.js';
+
+Vue.component('form-editor-raw', formEditorRawComponent);
+Vue.component('form-editor-advanced', formEditorAdvancedComponent);
+Vue.component('modal', modalComponent);
 
 /**
  * The function that will trigger the editor
@@ -9,9 +23,9 @@
  */
 function triggerVueEditor (element, configuration, formProperties) {
 
-  /* global Vue VueMultiselect VueResource Vuex */
-  Vue.component('Multiselect', VueMultiselect.default);
+  Vue.use(Vuex);
   Vue.use(VueResource);
+  Vue.use(Multiselect);
 
   /**
    * The common state
@@ -26,13 +40,8 @@ function triggerVueEditor (element, configuration, formProperties) {
       apiCache: {}
     },
 
-    /* global extraFormEditorGetters */
     getters: extraFormEditorGetters,
-
-    /* global extraFormEditorMutations */
     mutations: extraFormEditorMutations,
-
-    /* global extraFormEditorActions */
     actions: extraFormEditorActions
 
   });
@@ -75,3 +84,5 @@ function triggerVueEditor (element, configuration, formProperties) {
 
   });
 }
+
+export { triggerVueEditor }

@@ -1,7 +1,13 @@
-/* exported editorAdvancedFieldConstraintOptions */
-/* global generateUniqueId */
 
-var editorAdvancedFieldConstraintOptions = {
+import {generateUniqueId} from '../../utils/utils.js'
+import httpMixin from '../../mixins/http.vue.js'
+import checkboxOption from '../common/options/checkbox.vue.js';
+import textareaOption from '../common/options/textarea.vue.js';
+import choiceOption from '../common/options/choice.vue.js';
+import textOption from '../common/options/text.vue.js';
+import numberOption from '../common/options/number.vue.js';
+
+export default {
 
   template:
     '<div class="options extra-form-inputs-required">' +
@@ -44,23 +50,13 @@ var editorAdvancedFieldConstraintOptions = {
 
   components: {
 
-    /* global checkboxOption */
     'option-checkbox': checkboxOption,
-
-    /* global textareaOption */
     'option-textarea': textareaOption,
-
-    /* global choiceOption */
     'option-choice': choiceOption,
-
-    /* global textOption */
     'option-text': textOption,
-
-    /* global numberOption */
     'option-number': numberOption
   },
 
-  /* global httpMixin */
   mixins: [httpMixin],
 
   created: function () {

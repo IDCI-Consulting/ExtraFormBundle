@@ -1,5 +1,8 @@
-/* global Vue */
-Vue.component('form-editor-raw', {
+import rawMixin from '../mixins/raw.vue';
+import rawModalMixin from '../mixins/rawModal.vue';
+import JsonToTwigTransformer from '../utils/JsonToTwigTransformer.js';
+
+export default {
 
   template:
     '<div class="extra-form-editor raw-mode">' +
@@ -15,7 +18,6 @@ Vue.component('form-editor-raw', {
 
   props: ['fields'],
 
-  /* global rawMixin, rawModalMixin */
   mixins: [rawMixin, rawModalMixin],
 
   created: function () {
@@ -45,7 +47,6 @@ Vue.component('form-editor-raw', {
       var newFields = [];
 
       try {
-        /* global JsonToTwigTransformer */
         var transformedJson = JsonToTwigTransformer.toJson(this.raw);
         var raw = JSON.parse(transformedJson);
 
@@ -68,7 +69,6 @@ Vue.component('form-editor-raw', {
     generateRaw: function (fields) {
       var raw = this.createExtraFormRawRecursively(fields);
 
-      /* global JsonToTwigTransformer */
       return JsonToTwigTransformer.toRaw(JSON.stringify(raw, null, 4));
     },
 
@@ -82,4 +82,4 @@ Vue.component('form-editor-raw', {
     }
 
   }
-});
+};

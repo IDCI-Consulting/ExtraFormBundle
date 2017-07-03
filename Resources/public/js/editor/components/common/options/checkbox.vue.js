@@ -1,5 +1,7 @@
-/* exported checkboxOption */
-var checkboxOption = {
+
+import optionMixin from '../../../mixins/option.vue.js';
+
+export default {
 
   template:
     '<div class="form-group">' +
@@ -16,7 +18,6 @@ var checkboxOption = {
       '</div>' +
     '</div>',
 
-  /* global optionMixin */
   mixins: [optionMixin]
 
 };

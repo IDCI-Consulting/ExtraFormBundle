@@ -1,5 +1,7 @@
-/* exported integerOption */
-var integerOption = {
+
+import optionMixin from '../../../mixins/option.vue.js';
+
+export default {
 
   template:
     '<div class="form-group">' +
@@ -17,7 +19,6 @@ var integerOption = {
       '</div>' +
     '</div>',
 
-  /* global optionMixin */
   mixins: [optionMixin]
 
 };

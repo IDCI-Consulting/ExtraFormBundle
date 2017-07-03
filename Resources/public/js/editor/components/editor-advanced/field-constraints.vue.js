@@ -1,5 +1,7 @@
-/* exported editorAdvancedFieldConstraints */
-var editorAdvancedFieldConstraints = {
+
+import editorAdvancedFieldConstraintOptions from './field-constraint-options.vue.js';
+
+export default {
 
   template:
     '<div>' +
@@ -17,7 +19,6 @@ var editorAdvancedFieldConstraints = {
 
   components: {
 
-    /* global editorAdvancedFieldConstraintOptions */
     'field-constraint-options': editorAdvancedFieldConstraintOptions
   },
 

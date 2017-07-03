@@ -1,5 +1,9 @@
-/* exported extraFormFieldsConfiguration */
-var extraFormFieldsConfiguration = {
+
+import editorAdvancedFieldOptions from './field-options.vue.js';
+import editorAdvancedFieldConstraints from './field-constraints.vue.js';
+import editorAdvancedNewFieldConstraint from './new-field-constraint.vue.js';
+
+export default {
 
   template:
     '<div>' +
@@ -28,14 +32,8 @@ var extraFormFieldsConfiguration = {
   props: ['fields'],
 
   components: {
-
-    /* global editorAdvancedFieldOptions */
     'field-options': editorAdvancedFieldOptions,
-
-    /* global editorAdvancedFieldConstraints */
     'field-constraints': editorAdvancedFieldConstraints,
-
-    /* global editorAdvancedNewFieldConstraint */
     'new-field-constraint': editorAdvancedNewFieldConstraint
   },
 

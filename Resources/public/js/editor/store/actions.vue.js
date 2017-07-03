@@ -1,4 +1,4 @@
-/* exported extraFormEditorActions */
+
 var extraFormEditorActions = {
 
   /**
@@ -83,3 +83,5 @@ var extraFormEditorActions = {
   }
 
 };
+
+export default extraFormEditorActions;

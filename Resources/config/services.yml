@@ -127,6 +127,9 @@ services:
 
     form.type.idci_extra_form.editor:
         class: IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormEditorType
+        arguments:
+            - @twig
+            - @event_dispatcher
         tags:
             - { name: form.type, alias: extra_form_editor }
 

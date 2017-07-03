@@ -1,5 +1,7 @@
-/* exported configuredExtraFormType */
-var configuredExtraFormType = {
+
+import fontAwesomeIconMixin from '../../mixins/icon.vue.js'
+
+export default {
 
   template:
     '<div>' +
@@ -41,7 +43,6 @@ var configuredExtraFormType = {
     }
   },
 
-  /* global fontAwesomeIconMixin */
   mixins: [fontAwesomeIconMixin],
 
   methods: {

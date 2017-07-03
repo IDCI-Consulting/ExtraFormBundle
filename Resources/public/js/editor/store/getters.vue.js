@@ -1,6 +1,5 @@
-/* exported extraFormEditorGetters */
 
-var extraFormEditorGetters = {
+export default {
 
   editorId: function (state) {
     return state.configuration.editorId;

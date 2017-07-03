@@ -1,5 +1,8 @@
-/* exported editorAdvancedField */
-var editorAdvancedField = {
+
+import fontAwesomeIconMixin from '../../mixins/icon.vue.js'
+import rawMixin from '../../mixins/raw.vue.js'
+
+export default {
 
   template:
     '<div :class="activeClass" @click="setActiveClass(index)">' +
@@ -30,17 +33,16 @@ var editorAdvancedField = {
           '<div>Name: <strong>{{ field.name }}</strong></div>' +
           '<div>Tags: <input v-model="tags" type="text"></div>' +
         '</div>' +
-          '<div slot="footer">' +
-            '<div v-if="modal.type == \'save\'">' +
-              '<button @click="saveConfiguredType(field)" type="button" class="extra-btn" aria-label="Save">' +
-                'Save' +
-              '</button>' +
-            '</div>' +
-            '<div v-if="modal.type == \'put\'">' +
-              '<button @click="updateConfiguredType(field)" type="button" class="extra-btn" aria-label="Save">' +
-                'Update' +
-              '</button>' +
-            '</div>' +
+        '<div slot="footer">' +
+          '<div v-if="modal.type == \'save\'">' +
+            '<button @click="saveConfiguredType(field)" type="button" class="extra-btn" aria-label="Save">' +
+              'Save' +
+            '</button>' +
+          '</div>' +
+          '<div v-if="modal.type == \'put\'">' +
+            '<button @click="updateConfiguredType(field)" type="button" class="extra-btn" aria-label="Save">' +
+              'Update' +
+            '</button>' +
           '</div>' +
         '</div>' +
       '</modal>' +
@@ -71,7 +73,6 @@ var editorAdvancedField = {
     }
   },
 
-  /* global fontAwesomeIconMixin, rawMixin */
   mixins: [fontAwesomeIconMixin, rawMixin],
 
   methods: {
@@ -148,6 +149,7 @@ var editorAdvancedField = {
      * Save a configured type
      */
     saveConfiguredType: function (field) {
+      var self = this;
       var name = field.name;
       var raw = this.createExtraFormRawRecursively([field]);
       var type = this.transformFieldToType(raw[field.name]);
@@ -162,13 +164,13 @@ var editorAdvancedField = {
         .$http.post(url, body)
         .then(
           function (response) {
-            this.modal.type = 'success';
-            this.modal.done = 'This field has been successfully saved';
-            this.$store.commit('addConfiguredType', response.body);
+            self.modal.type = 'success';
+            self.modal.done = 'This field has been successfully saved';
+            self.$store.commit('addConfiguredType', response.body);
           },
           function (response) {
-            this.modal.type = 'put';
-            this.modal.done = response.body + '. Do you want to update the configuration ?';
+            self.modal.type = 'put';
+            self.modal.done = response.body + '. Do you want to update the configuration ?';
           }
         )
       ;
@@ -178,6 +180,7 @@ var editorAdvancedField = {
      * Update a configured type
      */
     updateConfiguredType: function (field) {
+      var self = this;
       var raw = this.createExtraFormRawRecursively([field]);
       var type = this.transformFieldToType(raw[field.name]);
       var url = this.$store.getters.putConfiguredExtraForTypesApiUrl(field.name);
@@ -190,12 +193,12 @@ var editorAdvancedField = {
         .$http.put(url, body)
         .then(
           function (response) {
-            this.modal.type = 'success';
-            this.modal.done = 'This field has been successfully updated';
-            this.$store.commit('updateConfiguredType', response.body);
+            self.modal.type = 'success';
+            self.modal.done = 'This field has been successfully updated';
+            self.$store.commit('updateConfiguredType', response.body);
           },
           function (response) {
-            this.modal.done = response.body;
+            self.modal.done = response.body;
           }
         )
       ;

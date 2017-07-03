@@ -1,5 +1,8 @@
-/* exported editorAdvancedNewFieldConstraint */
-var editorAdvancedNewFieldConstraint = {
+
+import httpMixin from '../../mixins/http.vue.js';
+import Multiselect from 'vue-multiselect';
+
+export default {
 
   template:
     '<div class="new-field-constraint">' +
@@ -14,7 +17,6 @@ var editorAdvancedNewFieldConstraint = {
       '<button class="extra-btn" @click.prevent="createConstraint">Add</button>' +
     '</div>',
 
-  /* global httpMixin */
   mixins: [httpMixin],
 
   data: function () {
@@ -26,6 +28,10 @@ var editorAdvancedNewFieldConstraint = {
 
   created: function () {
     this.getExtraFormConstraints();
+  },
+
+  components: {
+    multiselect: Multiselect
   },
 
   methods: {

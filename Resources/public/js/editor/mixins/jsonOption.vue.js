@@ -1,11 +1,14 @@
+
+import optionMixin from './option.vue.js'
+import waitForItMixin from './waitForIt.vue.js'
+import JsonToTwigTransformer from '../utils/JsonToTwigTransformer.js'
+
 /**
  * Option where we can put json in (input type text and textareas)
  */
-/* exported jsonOptionMixin */
 
-var jsonOptionMixin = {
+export default {
 
-  /* global optionMixin, waitForItMixin */
   mixins: [optionMixin, waitForItMixin],
 
   data: function () {
@@ -19,7 +22,6 @@ var jsonOptionMixin = {
    */
   created: function () {
     if ('object' === typeof this.value) {
-      /* global JsonToTwigTransformer */
       this.data = JsonToTwigTransformer.toRaw(JSON.stringify(this.value, null, 4));
       this.setJsonAttemptClass(this.data);
     }
@@ -43,7 +45,6 @@ var jsonOptionMixin = {
     onOptionValueChanged: function (value) {
       var self = this;
 
-      /* global Promise */
       return new Promise(function (resolve) {
         self.waitForIt(function () {
           self.updateOption(value);
@@ -66,7 +67,6 @@ var jsonOptionMixin = {
         (0 === value.indexOf('{') || 0 === value.indexOf('['))
       ) {
         try {
-          /* global JsonToTwigTransformer */
           JSON.parse(JsonToTwigTransformer.toJson(value));
           this.classes = 'fa fa-check success feedback';
         } catch (e) {

@@ -1,5 +1,9 @@
-/* global Vue */
-Vue.component('form-editor-advanced', {
+
+import extraFormTypes from './extra-form-types.vue.js';
+import extraFormFields from './extra-form-fields.vue.js';
+import extraFormFieldsConfiguration from './extra-form-fields-configuration.vue.js';
+
+export default {
 
   template:
     '<div class="editor-advanced editor row">' +
@@ -14,14 +18,8 @@ Vue.component('form-editor-advanced', {
   props: ['fields'],
 
   components: {
-
-    /* global extraFormTypes */
     'extra-form-types': extraFormTypes,
-
-    /* global extraFormFields */
     'extra-form-fields': extraFormFields,
-
-    /* global extraFormFieldsConfiguration */
     'extra-form-fields-configuration': extraFormFieldsConfiguration
   },
 
@@ -45,4 +43,4 @@ Vue.component('form-editor-advanced', {
     }
   }
 
-});
+};

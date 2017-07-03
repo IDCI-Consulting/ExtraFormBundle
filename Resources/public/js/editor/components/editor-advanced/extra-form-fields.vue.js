@@ -1,5 +1,8 @@
-/* exported extraFormFields */
-var extraFormFields = {
+
+import editorAdvancedField from './field.vue.js';
+import draggable from 'vuedraggable';
+
+export default {
 
   template:
     '<div>' +
@@ -7,7 +10,8 @@ var extraFormFields = {
         '<field ' +
           '@active-class="setActiveClass" ' +
           '@removed="removeField" ' +
-          'v-for="(field, index) in fields" :field="field" :index="index"' +
+          'v-for="(field, index) in fields" :field="field" :index="index" ' +
+          'key="index"' +
         '/>' +
       '</draggable>' +
     '</div>',
@@ -23,8 +27,7 @@ var extraFormFields = {
   },
 
   components: {
-
-    /* global editorAdvancedField */
+    draggable: draggable,
     field: editorAdvancedField
   },
 

@@ -1,7 +1,10 @@
-/* exported extraFormTypes */
-/* global generateUniqueId */
 
-var extraFormTypes = {
+import {generateUniqueId} from '../../utils/utils.js';
+import baseExtraFormType from './base-extra-form-type.vue.js';
+import configuredExtraFormType from './configured-extra-form-type.vue.js';
+import rawMixin from '../../mixins/raw.vue.js';
+
+export default {
 
   template:
     '<div>' +
@@ -19,7 +22,8 @@ var extraFormTypes = {
             '<base-extra-form-type ' +
               '@created="createField" ' +
               ':type="baseType" ' +
-              'v-for="baseType in baseTypes"' +
+              'v-for="baseType in baseTypes" ' +
+              ':key="baseType"' +
             '>' +
             '</base-extra-form-type>' +
           '</div>' +
@@ -28,7 +32,8 @@ var extraFormTypes = {
               '@delete="deleteConfiguredType" ' +
               '@created="createConfiguredField" ' +
               ':type="configuredType" ' +
-              'v-for="configuredType in configuredTypes"' +
+              'v-for="configuredType in configuredTypes" ' +
+              ':key="configuredType"' +
             '> ' +
             '</configured-extra-form-type>' +
           '</div>' +
@@ -58,15 +63,10 @@ var extraFormTypes = {
   },
 
   components: {
-
-    /* global configuredExtraFormType */
     'configured-extra-form-type': configuredExtraFormType,
-
-    /* global baseExtraFormType */
     'base-extra-form-type': baseExtraFormType
   },
 
-  /* global rawMixin */
   mixins: [rawMixin],
 
   methods: {
@@ -102,6 +102,7 @@ var extraFormTypes = {
      * Delete a configured type
      */
     deleteConfiguredType: function (type) {
+      var self = this;
       this
         .$http.delete(this.$store.getters.deleteConfiguredExtraForTypesApiUrl(type.name))
         .then(
@@ -109,7 +110,7 @@ var extraFormTypes = {
             // Delete the type from the configured types
             for (var i = 0, len = this.configuredTypes.length; i < len; i++) {
               if (this.configuredTypes[i].name === type.name) {
-                this.$store.commit('removeConfiguredType', i);
+                self.$store.commit('removeConfiguredType', i);
 
                 // Avoid too keep looping over a sliced array
                 return;

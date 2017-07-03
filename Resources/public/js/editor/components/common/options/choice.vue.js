@@ -1,5 +1,7 @@
-/* exported choiceOption */
-var choiceOption = {
+
+import optionMixin from '../../../mixins/option.vue.js';
+
+export default {
 
   template:
     '<div class="form-group">' +
@@ -17,7 +19,6 @@ var choiceOption = {
       '</div>' +
     '</div>',
 
-  /* global optionMixin */
   mixins: [optionMixin],
 
   /**

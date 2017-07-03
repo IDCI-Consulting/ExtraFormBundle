@@ -1,7 +1,14 @@
-/* exported editorAdvancedFieldOptions */
-/* global generateUniqueId, $ */
 
-var editorAdvancedFieldOptions = {
+import {generateUniqueId} from '../../utils/utils.js'
+import checkboxOption from '../common/options/checkbox.vue.js';
+import textareaOption from '../common/options/textarea.vue.js';
+import choiceOption from '../common/options/choice.vue.js';
+import textOption from '../common/options/text.vue.js';
+import numberOption from '../common/options/number.vue.js';
+import integerOption from '../common/options/integer.vue.js';
+import httpMixin from '../../mixins/http.vue.js';
+
+export default {
 
   template:
     '<div class="extra-form-inputs-required">' +
@@ -59,26 +66,14 @@ var editorAdvancedFieldOptions = {
 
   components: {
 
-    /* global checkboxOption */
     'option-checkbox': checkboxOption,
-
-    /* global textareaOption */
     'option-textarea': textareaOption,
-
-    /* global choiceOption */
     'option-choice': choiceOption,
-
-    /* global textOption */
     'option-text': textOption,
-
-    /* global numberOption */
     'option-number': numberOption,
-
-    /* global integerOption */
     'option-integer': integerOption
   },
 
-  /* global httpMixin */
   mixins: [httpMixin],
 
   created: function () {

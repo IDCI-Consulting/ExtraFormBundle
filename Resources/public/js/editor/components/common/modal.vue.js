@@ -1,5 +1,4 @@
-/* global Vue */
-Vue.component('modal', {
+export default {
 
   template:
     '<transition name="modal">' +
@@ -17,4 +16,5 @@ Vue.component('modal', {
         '</div>' +
       '</div>' +
     '</transition>'
-});
+
+};

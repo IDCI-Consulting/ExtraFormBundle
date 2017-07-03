@@ -1,5 +1,6 @@
-/* exported baseExtraFormType */
-var baseExtraFormType = {
+import fontAwesomeIconMixin from '../../mixins/icon.vue.js'
+
+export default {
 
   template:
     '<div>' +
@@ -11,7 +12,6 @@ var baseExtraFormType = {
 
   props: ['type'],
 
-  /* global fontAwesomeIconMixin */
   mixins: [fontAwesomeIconMixin],
 
   methods: {

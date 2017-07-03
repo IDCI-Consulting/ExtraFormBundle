@@ -1,8 +1,8 @@
 /**
  * Global methods used to perform http requests in components
  */
-/* exported httpMixin */
-var httpMixin = {
+
+export default {
 
   methods: {
 
@@ -15,6 +15,7 @@ var httpMixin = {
      * @returns Object : the json response
      */
     handleGetRequest: function (url, callback) {
+      var self = this;
       var cachedResource = this.$store.getters.getCachedResource(url);
 
       if (cachedResource) {
@@ -29,7 +30,7 @@ var httpMixin = {
           }
         )
         .then(function (json) {
-          this.$store.commit({
+          self.$store.commit({
             type: 'cache',
             api_url: url,
             api_response: json

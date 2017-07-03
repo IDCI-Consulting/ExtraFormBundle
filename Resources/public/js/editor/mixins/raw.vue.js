@@ -1,8 +1,10 @@
 /**
- * Global methods used to generate raw json
+ * Methods used to generate raw json
  */
-/* exported rawMixin */
-var rawMixin = {
+
+import JsonToTwigTransformer from '../utils/JsonToTwigTransformer.js';
+
+export default {
 
   methods: {
 
@@ -96,7 +98,6 @@ var rawMixin = {
             if (0 === options[option].length) {
               delete options[option];
             } else {
-              /* global JsonToTwigTransformer */
               options[option] = JSON.parse(JsonToTwigTransformer.toJson(options[option]));
             }
           } catch (e) {}
