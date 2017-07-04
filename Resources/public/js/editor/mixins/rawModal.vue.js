@@ -1,10 +1,15 @@
 
 import {generateUniqueId} from '../utils/utils.js';
-import CodeMirror from 'codemirror';
 
-require('codemirror/addon/scroll/annotatescrollbar');
-require('codemirror/addon/search/matchesonscrollbar');
-require('codemirror/addon/search/searchcursor');
+import 'codemirror/mode/javascript/javascript.js';
+import 'codemirror/addon/scroll/annotatescrollbar.js';
+import 'codemirror/addon/search/matchesonscrollbar.js';
+import 'codemirror/addon/search/search';
+import 'codemirror/addon/search/searchcursor';
+import 'codemirror/addon/search/jump-to-line.js';
+import 'codemirror/addon/dialog/dialog.js';
+
+import CodeMirror from 'codemirror/lib/codemirror.js';
 
 /**
  * Global methods for the raw editor modals
