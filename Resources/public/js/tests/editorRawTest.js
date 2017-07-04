@@ -1,4 +1,13 @@
+
+import Vue from 'vue';
+import Vuex from 'vuex';
+import formEditorRawComponent from '../editor/components/editor-raw.vue.js';
+import JsonToTwigTransformer from '../editor/utils/JsonToTwigTransformer.js';
+
 describe("Test the editorRaw component", function() {
+
+  Vue.component('form-editor-raw', formEditorRawComponent);
+  Vue.use(Vuex);
 
   /**
    * Get the textarea component

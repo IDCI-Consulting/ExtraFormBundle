@@ -1,11 +1,11 @@
 module.exports = {
   entry: {
-    'form-editor': './Resources/public/js/editor/entrypoint.js'
+    'editor': './Resources/public/js/editor/entrypoint.js'
   },
   output: {
     path: __dirname + '/Resources/public/js',
-    filename: 'editor.[name].js',
-    chunkFilename: '[name].vendor.js',
+    filename: '[name].js',
+    chunkFilename: '[name].async.js',
     publicPath: "/bundles/idciextraform/js/"
   },
   // To remove if using .vue loader

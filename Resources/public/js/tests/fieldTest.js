@@ -1,82 +1,90 @@
+
+import Vue from 'vue';
+import Vuex from 'vuex';
+import editorAdvancedField from '../editor/components/editor-advanced/field.vue.js';
+import extraFormEditorGetters from '../editor/store/getters.vue.js';
+
 describe('Test the field component', function() {
 
-    /**
-     * Get the textarea component
-     */
-    function getFieldComponent(field) {
-        var editorAdvancedFieldComponent = Vue.extend(editorAdvancedField);
+  Vue.use(Vuex);
 
-        var store = new Vuex.Store({
-            state: {
-                configuration: {
-                    configured_types_tags: [
-                        'defaultTag1',
-                        '-defaultTag2',
-                        '+defaultTag3'
-                    ]
-                },
-                formProperties: {
-                    value: ''
-                },
-                configuredTypes: [
-                    {
-                        name: 'my_email',
-                        tags: 'my_email_tag',
-                        icon: 'envelope',
-                        description: 'Email input field',
-                        form_type: 'email',
-                        form_type_name: 'email',
-                        extra_form_options: {
-                            label: {
-                                extra_form_type: 'text',
-                                options: {
-                                    required: false,
-                                    data: 'ouais le mien'
-                                }
-                            },
-                            extra_form_constraints: {}
-                        }
-                    }
-                ]
-            },
-            getters: extraFormEditorGetters
-        });
+  /**
+   * Get the textarea component
+   */
+  function getFieldComponent(field) {
+      var editorAdvancedFieldComponent = Vue.extend(editorAdvancedField);
 
-        return new editorAdvancedFieldComponent({
-            store: store,
-            propsData: {
-                index: 1,
-                field: field
-            }
+      var store = new Vuex.Store({
+          state: {
+              configuration: {
+                  configured_types_tags: [
+                      'defaultTag1',
+                      '-defaultTag2',
+                      '+defaultTag3'
+                  ]
+              },
+              formProperties: {
+                  value: ''
+              },
+              configuredTypes: [
+                  {
+                      name: 'my_email',
+                      tags: 'my_email_tag',
+                      icon: 'envelope',
+                      description: 'Email input field',
+                      form_type: 'email',
+                      form_type_name: 'email',
+                      extra_form_options: {
+                          label: {
+                              extra_form_type: 'text',
+                              options: {
+                                  required: false,
+                                  data: 'ouais le mien'
+                              }
+                          },
+                          extra_form_constraints: {}
+                      }
+                  }
+              ]
+          },
+          getters: extraFormEditorGetters
+      });
 
-        }).$mount();
-    }
+      return new editorAdvancedFieldComponent({
+          store: store,
+          propsData: {
+              index: 1,
+              field: field
+          }
 
-    it('Should initialize tags correctly', function() {
-        var vm = getFieldComponent({
-            tags: 'francois,nicolas,macron'
-        });
+      }).$mount();
+  }
 
-        expect(vm.tags).toEqual('francois,nicolas,macron');
+  it('Should initialize tags correctly', function() {
+      var vm = getFieldComponent({
+          tags: 'francois,nicolas,macron'
+      });
 
-        var vm = getFieldComponent({
-            name: 'my_email',
-            tags: 'the_good_tag'
-        });
+      expect(vm.tags).toEqual('francois,nicolas,macron');
 
-        expect(vm.tags).toEqual('the_good_tag');
+      var vm = getFieldComponent({
+          name: 'my_email',
+          tags: 'the_good_tag'
+      });
 
-        var vm = getFieldComponent({
-            name: 'my_email',
-        });
+      expect(vm.tags).toEqual('the_good_tag');
 
-        expect(vm.tags).toEqual('my_email_tag');
+      var vm = getFieldComponent({
+          name: 'my_email',
+      });
 
-        var vm = getFieldComponent({
-            name: 'un_unknow_field'
-        });
+      expect(vm.tags).toEqual('my_email_tag');
 
-        expect(vm.tags).toEqual('defaultTag1,+defaultTag3');
-    });
+      var vm = getFieldComponent({
+          name: 'un_unknow_field'
+      });
+
+      expect(vm.tags).toEqual('defaultTag1,+defaultTag3');
+  });
 
 });

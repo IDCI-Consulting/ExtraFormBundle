@@ -11,12 +11,7 @@ export default function loadExtraFormEditors () {
 
     var textarea = this;
 
-    Promise.all([
-        import(/* webpackChunkName: "bootstrap-vue-editor" */ './app'),
-        import(/* webpackChunkName: "utils" */ './utils/utils'),
-    ]).then(function (dependencies) {
-      var app = dependencies[0];
-      var utils = dependencies[1];
+    import(/* webpackChunkName: "bootstrap-vue-editor" */ './app').then(function (app) {
       var editorComponentId = 'editorComponent' + index;
 
       // Do not load the editor if it was already loaded
@@ -42,7 +37,7 @@ export default function loadExtraFormEditors () {
         simpleModal = createSimpleModal(index);
         simpleModalButton =
           '<button class="trigger-simple-visual-mode-modal-' + index + '">' +
-          'Simple visual mode' +
+            'Simple visual mode' +
           '</button>'
         ;
       }
@@ -52,7 +47,7 @@ export default function loadExtraFormEditors () {
         overviewModal = createOverviewModal(index);
         advancedModalButton =
           '<button class="trigger-advanced-visual-mode-modal-' + index + '">' +
-          'Advanced visual mode' +
+            'Advanced visual mode' +
           '</button>'
         ;
       }
@@ -62,7 +57,7 @@ export default function loadExtraFormEditors () {
        */
       $(textarea).after(
         '<div class="modal-buttons">' +
-        simpleModalButton + ' ' + advancedModalButton + ' ' + rawModalButton +
+          simpleModalButton + ' ' + advancedModalButton + ' ' + rawModalButton +
         '</div>'
       );
 

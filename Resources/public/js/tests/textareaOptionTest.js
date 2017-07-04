@@ -1,3 +1,7 @@
+
+import Vue from 'vue';
+import textareaOption from '../editor/components/common/options/textarea.vue.js';
+
 describe("Test the textareaOption component", function() {
 
   /**

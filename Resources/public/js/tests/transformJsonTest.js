@@ -1,3 +1,14 @@
+
+import JsonToTwigTransformer from '../editor/utils/JsonToTwigTransformer.js';
+
+import fixture1Raw from './fixtures/fixture1.js';
+import fixture2Raw from './fixtures/fixture2.js';
+import fixture3Raw from './fixtures/fixture3.js';
+import fixture4Raw from './fixtures/fixture4.js';
+import fixture5Raw from './fixtures/fixture5.js';
+import fixture6Raw from './fixtures/fixture6.js';
+import fixture7Raw from './fixtures/fixture7.js';
+
 describe('Test the json transform component', function() {
   function minify(str) {
     return str
