@@ -49,7 +49,7 @@ class ExtraFormEditorType extends AbstractType
             $content  = $response->getContent();
             $scripts = '';
 
-            if (strripos($content, 'bundles/idciextraform/js/editor.form-editor.js') === false) {
+            if (strripos($content, 'bundles/idciextraform/js/dist/editor.js') === false) {
                 $scripts .= $this->twig->render('IDCIExtraFormBundle:Form:extra_form_editor_assets.html.twig');
             }
 
