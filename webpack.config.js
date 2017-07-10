@@ -3,10 +3,10 @@ module.exports = {
     'editor': './Resources/public/js/editor/entrypoint.js'
   },
   output: {
-    path: __dirname + '/Resources/public/js',
+    path: __dirname + '/Resources/public/js/dist',
     filename: '[name].js',
     chunkFilename: '[name].async.js',
-    publicPath: "/bundles/idciextraform/js/"
+    publicPath: "/bundles/idciextraform/js/dist/"
   },
   // To remove if using .vue loader
   resolve: {
@@ -16,5 +16,13 @@ module.exports = {
   },
   externals: {
     jquery: 'jQuery'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        use: 'vue-loader'
+      }
+    ]
   }
 };

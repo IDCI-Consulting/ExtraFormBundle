@@ -12,3 +12,5 @@ node_modules
 
 # vendor
 /vendor
+
+Resources/public/js/dist/
