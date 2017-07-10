@@ -1,20 +1,25 @@
+<template>
+
+    <div class="extra-form-editor raw-mode">
+        <textarea :id="id" v-model="raw"></textarea>
+        <div class="json-errors">{{ error.message }}</div>
+        <button style="margin-right: 20px" @click.prevent="generateFields">
+            Fill the visual mode form fields from this json
+        </button>
+        <button @click.prevent="saveRaw">
+            Save the content of the textarea (even if the json is not valid)
+        </button>
+    </div>
+
+</template>
+
+<script>
+
 import rawMixin from '../mixins/raw.vue';
 import rawModalMixin from '../mixins/rawModal.vue';
 import JsonToTwigTransformer from '../utils/JsonToTwigTransformer.js';
 
 export default {
-
-  template:
-    '<div class="extra-form-editor raw-mode">' +
-      '<textarea :id="id" v-model="raw"></textarea>' +
-      '<div class="json-errors">{{ error.message }}</div>' +
-      '<button style="margin-right: 20px" @click.prevent="generateFields">' +
-        'Fill the visual mode form fields from this json' +
-      '</button>' +
-      '<button @click.prevent="saveRaw">' +
-        'Save the content of the textarea (even if the json is not valid)' +
-      '</button>' +
-    '</div>',
 
   props: ['fields'],
 
@@ -83,3 +88,5 @@ export default {
 
   }
 };
+
+</script>

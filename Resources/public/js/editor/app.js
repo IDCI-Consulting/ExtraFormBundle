@@ -6,7 +6,7 @@ import VueResource from 'vue-resource';
 import extraFormEditorGetters from './store/getters.vue.js';
 import extraFormEditorMutations from './store/mutations.vue.js';
 import extraFormEditorActions from './store/actions.vue.js';
-import formEditorRawComponent from './components/editor-raw.vue.js';
+import formEditorRawComponent from './components/editor-raw.vue';
 import formEditorAdvancedComponent from './components/editor-advanced/editor.vue.js';
 import modalComponent from './components/common/modal.vue.js';
 

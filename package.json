@@ -20,8 +20,9 @@
     "karma-firefox-launcher": "^1.0.1",
     "karma-jasmine": "^1.1.0",
     "karma-webpack": "^2.0.3",
-    "webpack": "^3.0.0",
-    "webpack-dev-server": "^2.5.0"
+    "vue-loader": "^13.0.0",
+    "vue-template-compiler": "^2.3.4",
+    "webpack": "^3.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
