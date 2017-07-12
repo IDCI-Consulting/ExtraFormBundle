@@ -132,6 +132,7 @@ services:
             - @event_dispatcher
         tags:
             - { name: form.type, alias: extra_form_editor }
+            - { name: idci_asset_loader.asset_provider, alias: extra_form_editor }
 
     form.type.idci_extra_form.tags:
         class: IDCI\Bundle\ExtraFormBundle\Form\Type\TagsType

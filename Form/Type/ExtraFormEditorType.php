@@ -7,6 +7,9 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Form\Type;
 
+use IDCI\Bundle\AssetLoaderBundle\AssetProvider\AssetProviderInterface;
+use IDCI\Bundle\AssetLoaderBundle\Model\Asset;
+use IDCI\Bundle\AssetLoaderBundle\Model\AssetCollection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
@@ -15,61 +18,27 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ExtraFormEditorType extends AbstractType
+class ExtraFormEditorType extends AbstractType implements AssetProviderInterface
 {
     /**
-     * \Twig_Environment
+     * @var AssetCollection
      */
-    private $twig;
-
-    /**
-     * EventDispatcherInterface
-     */
-    private $dispatcher;
+    private $assetCollection;
 
     /**
      * Constructor
-     *
-     * @param \Twig_Environment $twig
-     * @param EventDispatcherInterface $dispatcher
      */
-    public function __construct(\Twig_Environment $twig, EventDispatcherInterface $dispatcher)
+    public function __construct()
     {
-        $this->twig       = $twig;
-        $this->dispatcher = $dispatcher;
+        $this->assetCollection = new AssetCollection();
     }
 
     /**
-     * Load the widget assets (css and js files) at the end of the body
+     * {@inheritDoc}
      */
-    private function loadWidgetAssets($id, $options)
+    public function getAssetCollection()
     {
-        $this->dispatcher->addListener('kernel.response', function($event) use ($id, $options) {
-            $response = $event->getResponse();
-            $content  = $response->getContent();
-            $scripts = '';
-
-            if (strripos($content, 'bundles/idciextraform/js/dist/editor.js') === false) {
-                $scripts .= $this->twig->render('IDCIExtraFormBundle:Form:extra_form_editor_assets.html.twig');
-            }
-
-            $scripts .= $this->twig->render(
-                'IDCIExtraFormBundle:Form:extra_form_editor_configuration.html.twig',
-                array(
-                    'id'                             => $id,
-                    'allow_configured_types_edition' => $options['allow_configured_types_edition'],
-                    'show_configured_types'          => $options['show_configured_types'],
-                    'configured_types_tags'          => $options['configured_types_tags']
-                )
-            );
-
-            $pos      = strripos($content, '</body>');
-            $content  = substr($content, 0, $pos) . $scripts.substr($content, $pos);
-
-            $response->setContent($content);
-
-            $event->setResponse($response);
-        });
+        return $this->assetCollection;
     }
 
     /**
@@ -77,7 +46,11 @@ class ExtraFormEditorType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $this->loadWidgetAssets($view->vars['id'], $options);
+        $this->assetCollection->add(new Asset('IDCIExtraFormBundle:Form:form_editor_assets.html.twig', array(), 1));
+        $this->assetCollection->add(new Asset('IDCIExtraFormBundle:Form:form_editor_configuration.html.twig', array(
+            'options' => $options,
+            'form'    => $view
+        ), 0));
 
         $attrClass = 'extra-form-editor';
 
