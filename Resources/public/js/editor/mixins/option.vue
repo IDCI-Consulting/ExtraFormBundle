@@ -1,3 +1,5 @@
+<script>
+
 /**
  * Base component for a field option
  */
@@ -60,3 +62,5 @@ export default {
   }
 
 };
+
+</script>

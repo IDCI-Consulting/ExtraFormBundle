@@ -1,3 +1,5 @@
+<script>
+
 /**
  * Global methods used to get icons
  */
@@ -31,3 +33,5 @@ export default {
   }
 
 };
+
+</script>

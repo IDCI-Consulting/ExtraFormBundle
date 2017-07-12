@@ -1,3 +1,4 @@
+<script>
 
 import {generateUniqueId} from '../utils/utils.js';
 
@@ -154,4 +155,4 @@ export default {
 
 };
 
-
+</script>

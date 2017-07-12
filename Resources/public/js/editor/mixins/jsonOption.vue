@@ -1,7 +1,8 @@
+<script>
 
-import optionMixin from './option.vue.js'
-import waitForItMixin from './waitForIt.vue.js'
-import JsonToTwigTransformer from '../utils/JsonToTwigTransformer.js'
+import optionMixin from './option.vue'
+import waitForItMixin from './waitForIt.vue'
+import JsonToTwigTransformer from '../utils/JsonToTwigTransformer'
 
 /**
  * Option where we can put json in (input type text and textareas)
@@ -78,3 +79,5 @@ export default {
     }
   }
 };
+
+</script>

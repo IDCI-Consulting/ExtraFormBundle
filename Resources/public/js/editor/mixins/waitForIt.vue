@@ -1,3 +1,5 @@
+<script>
+
 /**
  * Mixin adding a method allowing to avoid calling a function too many times
  * For example, when a user press a key, wait for the user to do a pause before triggering some process
@@ -29,3 +31,5 @@ export default {
     }
   }
 };
+
+</script>

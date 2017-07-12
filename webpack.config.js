@@ -8,7 +8,6 @@ module.exports = {
     chunkFilename: '[name].async.js',
     publicPath: "/bundles/idciextraform/js/dist/"
   },
-  // To remove if using .vue loader
   resolve: {
     alias: {
       vue: 'vue/dist/vue.js'

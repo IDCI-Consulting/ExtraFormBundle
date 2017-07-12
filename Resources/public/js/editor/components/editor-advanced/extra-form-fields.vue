@@ -1,20 +1,24 @@
+<template>
 
-import editorAdvancedField from './field.vue.js';
+  <div>
+    <draggable :list="fields" :options="sortableOptions">
+      <field
+        @active-class="setActiveClass"
+        @removed="removeField"
+        v-for="(field, index) in fields" :field="field" :index="index"
+        key="index"
+      />
+    </draggable>
+  </div>
+
+</template>
+
+<script>
+
+import editorAdvancedField from './field.vue';
 import draggable from 'vuedraggable';
 
 export default {
-
-  template:
-    '<div>' +
-      '<draggable :list="fields" :options="sortableOptions">' +
-        '<field ' +
-          '@active-class="setActiveClass" ' +
-          '@removed="removeField" ' +
-          'v-for="(field, index) in fields" :field="field" :index="index" ' +
-          'key="index"' +
-        '/>' +
-      '</draggable>' +
-    '</div>',
 
   props: ['fields'],
 
@@ -63,3 +67,5 @@ export default {
   }
 
 };
+
+</script>

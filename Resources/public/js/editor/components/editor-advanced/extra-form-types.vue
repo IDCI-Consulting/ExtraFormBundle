@@ -1,45 +1,49 @@
+<template>
+
+  <div>
+    <div>
+      <ul v-if="showConfiguredTypes" class="nav nav-pills" role="tablist">
+        <li role="presentation" class="active">
+          <a role="tab" data-toggle="tab" :href="anchor('#', 'basic_types')">Base types</a>
+        </li>
+        <li role="presentation">
+          <a role="tab" data-toggle="tab" :href="anchor('#', 'configured_types')">Configured types</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane in active" :id="anchor('', 'basic_types')">
+          <base-extra-form-type
+            @created="createField"
+            :type="baseType"
+            v-for="baseType in baseTypes"
+            :key="baseType"
+          >
+          </base-extra-form-type>
+        </div>
+        <div role="tabpanel" class="tab-pane" :id="anchor('', 'configured_types')">
+          <configured-extra-form-type
+            @delete="deleteConfiguredType"
+            @created="createConfiguredField"
+            :type="configuredType"
+            v-for="configuredType in configuredTypes"
+            :key="configuredType"
+          >
+          </configured-extra-form-type>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</template>
+
+<script>
 
 import {generateUniqueId} from '../../utils/utils.js';
-import baseExtraFormType from './base-extra-form-type.vue.js';
-import configuredExtraFormType from './configured-extra-form-type.vue.js';
-import rawMixin from '../../mixins/raw.vue.js';
+import baseExtraFormType from './base-extra-form-type.vue';
+import configuredExtraFormType from './configured-extra-form-type.vue';
+import rawMixin from '../../mixins/raw.vue';
 
 export default {
-
-  template:
-    '<div>' +
-      '<div>' +
-        '<ul v-if="showConfiguredTypes" class="nav nav-pills" role="tablist">' +
-          '<li role="presentation" class="active">' +
-            '<a role="tab" data-toggle="tab" :href="anchor(\'#\', \'basic_types\')">Base types</a>' +
-          '</li>' +
-          '<li role="presentation">' +
-            '<a role="tab" data-toggle="tab" :href="anchor(\'#\', \'configured_types\')">Configured types</a>' +
-          '</li>' +
-        '</ul>' +
-        '<div class="tab-content">' +
-          '<div role="tabpanel" class="tab-pane in active" :id="anchor(\'\', \'basic_types\')">' +
-            '<base-extra-form-type ' +
-              '@created="createField" ' +
-              ':type="baseType" ' +
-              'v-for="baseType in baseTypes" ' +
-              ':key="baseType"' +
-            '>' +
-            '</base-extra-form-type>' +
-          '</div>' +
-          '<div role="tabpanel" class="tab-pane" :id="anchor(\'\', \'configured_types\')">' +
-            '<configured-extra-form-type ' +
-              '@delete="deleteConfiguredType" ' +
-              '@created="createConfiguredField" ' +
-              ':type="configuredType" ' +
-              'v-for="configuredType in configuredTypes" ' +
-              ':key="configuredType"' +
-            '> ' +
-            '</configured-extra-form-type>' +
-          '</div>' +
-        '</div>' +
-      '</div>' +
-    '</div>',
 
   data: function () {
     return {
@@ -156,3 +160,5 @@ export default {
   }
 
 };
+
+</script>

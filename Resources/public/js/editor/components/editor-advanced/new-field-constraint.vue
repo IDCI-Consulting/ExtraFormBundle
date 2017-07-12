@@ -1,21 +1,25 @@
+<template>
 
-import httpMixin from '../../mixins/http.vue.js';
+  <div class="new-field-constraint">
+    <multiselect
+      v-model="selectedConstraint"
+      :options="constraints"
+      label="description"
+      key="name"
+      selectLabel=""
+      placeholder="Select a constraint">
+    </multiselect>
+    <button class="extra-btn" @click.prevent="createConstraint">Add</button>
+  </div>
+
+</template>
+
+<script>
+
+import httpMixin from '../../mixins/http.vue';
 import Multiselect from 'vue-multiselect';
 
 export default {
-
-  template:
-    '<div class="new-field-constraint">' +
-      '<multiselect ' +
-        'v-model="selectedConstraint" ' +
-        ':options="constraints" ' +
-        'label="description" ' +
-        'key="name" ' +
-        'selectLabel="" ' +
-        'placeholder="Select a constraint">' +
-      '</multiselect>' +
-      '<button class="extra-btn" @click.prevent="createConstraint">Add</button>' +
-    '</div>',
 
   mixins: [httpMixin],
 
@@ -65,3 +69,5 @@ export default {
 
   }
 };
+
+</script>

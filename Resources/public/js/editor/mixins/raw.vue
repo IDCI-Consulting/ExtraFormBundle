@@ -1,3 +1,5 @@
+<script>
+
 /**
  * Methods used to generate raw json
  */
@@ -110,3 +112,5 @@ export default {
   }
 
 };
+
+</script>

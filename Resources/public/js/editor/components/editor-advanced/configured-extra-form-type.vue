@@ -1,27 +1,31 @@
+<template>
 
-import fontAwesomeIconMixin from '../../mixins/icon.vue.js'
+  <div>
+    <button @click="createConfiguredField(type)" class="extra-btn" type="button" :class="type.name">
+      <i :class="getFontAwsomeIconClass(type.icon)" aria-hidden="true"></i>
+      <span>{{ type.name }}</span>
+      <i v-if="configuredTypesEditionAllowed" class="fa fa-trash delete" @click.stop="openDeleteModal"></i>
+    </button>
+    <modal v-if="modal.show">
+      <h3 slot="header">Delete this configured field
+        <button @click="closeDeleteModal" type="button" class="close" aria-label="Close">&times;</button>
+      </h3>
+      <div slot="body" v-html="modal.content"></div>
+      <div slot="footer">
+        <button @click="deleteConfiguredType(type)" type="button" class="extra-btn" aria-label="Save">
+          Delete
+        </button>
+      </div>
+    </modal>
+  </div>
+
+</template>
+
+<script>
+
+import fontAwesomeIconMixin from '../../mixins/icon.vue'
 
 export default {
-
-  template:
-    '<div>' +
-      '<button @click="createConfiguredField(type)" class="extra-btn" type="button" :class="type.name">' +
-        '<i :class="getFontAwsomeIconClass(type.icon)" aria-hidden="true"></i>' +
-        '<span>{{ type.name }}</span>' +
-        '<i v-if="configuredTypesEditionAllowed" class="fa fa-trash delete" @click.stop="openDeleteModal"></i>' +
-      '</button>' +
-      '<modal v-if="modal.show">' +
-        '<h3 slot="header">Delete this configured field' +
-          '<button @click="closeDeleteModal" type="button" class="close" aria-label="Close">&times;</button>' +
-        '</h3>' +
-        '<div slot="body" v-html="modal.content"></div>' +
-        '<div slot="footer">' +
-          '<button @click="deleteConfiguredType(type)" type="button" class="extra-btn" aria-label="Save">' +
-            'Delete' +
-          '</button>' +
-        '</div>' +
-      '</modal>' +
-    '</div>',
 
   props: ['type'],
 
@@ -77,3 +81,5 @@ export default {
   }
 
 };
+
+</script>

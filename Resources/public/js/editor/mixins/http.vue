@@ -1,3 +1,5 @@
+<script>
+
 /**
  * Global methods used to perform http requests in components
  */
@@ -46,3 +48,5 @@ export default {
   }
 
 };
+
+</script>

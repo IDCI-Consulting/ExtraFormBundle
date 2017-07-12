@@ -1,30 +1,33 @@
+<template>
+  <div class="options extra-form-inputs-required">
+    <a role="button" data-toggle="collapse" :href="'#'+id">
+      Options<span class="toggle"></span>
+    </a>
+    <div :id="id" class="panel-collapse collapse" role="tabpanel" aria-expanded="false" :aria-controls="id">
+      <component
+        :is="option.component_name"
+        v-for="(option, key) in constraint.extra_form_options"
+        :option="option"
+        :name="key"
+        :key="key"
+        :value="fieldConstraint.options[key]"
+        @changed="updateOption"
+      />
+    </div>
+  </div>
+</template>
 
-import {generateUniqueId} from '../../utils/utils.js'
-import httpMixin from '../../mixins/http.vue.js'
-import checkboxOption from '../common/options/checkbox.vue.js';
-import textareaOption from '../common/options/textarea.vue.js';
-import choiceOption from '../common/options/choice.vue.js';
-import textOption from '../common/options/text.vue.js';
-import numberOption from '../common/options/number.vue.js';
+<script>
+
+import {generateUniqueId} from '../../utils/utils'
+import httpMixin from '../../mixins/http.vue'
+import checkboxOption from '../common/options/checkbox.vue';
+import textareaOption from '../common/options/textarea.vue';
+import choiceOption from '../common/options/choice.vue';
+import textOption from '../common/options/text.vue';
+import numberOption from '../common/options/number.vue';
 
 export default {
-
-  template:
-    '<div class="options extra-form-inputs-required">' +
-      '<a role="button" data-toggle="collapse" :href="\'#\' + id">' +
-        'Options<span class="toggle"></span>' +
-      '</a>' +
-      '<div :id="id" class="panel-collapse collapse" role="tabpanel" aria-expanded="false" :aria-controls="id">' +
-        '<component ' +
-          ':is="option.component_name" ' +
-          'v-for="(option, key) in constraint.extra_form_options" ' +
-          ':option="option" ' +
-          ':name="key" ' +
-          ':value="fieldConstraint.options[key]" ' +
-          '@changed="updateOption"' +
-        '/>' +
-      '</div>' +
-    '</div>',
 
   props: ['fieldConstraint', 'index'],
 
@@ -99,3 +102,5 @@ export default {
     }
   }
 };
+
+</script>
