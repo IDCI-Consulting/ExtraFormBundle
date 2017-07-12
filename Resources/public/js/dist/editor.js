@@ -420,9 +420,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__load_editor_js__ = __webpack_require__(3);
 
 
-window.addEventListener('load', function () {
-  __WEBPACK_IMPORTED_MODULE_0__load_editor_js__["a" /* default */]();
-});
+__WEBPACK_IMPORTED_MODULE_0__load_editor_js__["a" /* default */]();
 
 
 /***/ }),

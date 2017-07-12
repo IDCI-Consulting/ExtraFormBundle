@@ -1,6 +1,6 @@
 <script type="text/javascript">
     var configuredTypeTags = [
-        {% for tag in configured_types_tags %}
+        {% for tag in options.configured_types_tags %}
             {% if loop.last %}
                 '{{ tag }}'
             {% else %}
@@ -9,10 +9,10 @@
         {% endfor %}
     ];
 
-    var {{ id }}_configuration = {
-        editorId: '{{ id }}',
-        allow_configured_types_edition: {{ allow_configured_types_edition ? 'true' : 'false' }},
-        show_configured_types: {{ show_configured_types ? 'true' : 'false' }},
+    var {{ form.vars.id }}_configuration = {
+        editorId: '{{ form.vars.id }}',
+        allow_configured_types_edition: {{ options.allow_configured_types_edition ? 'true' : 'false' }},
+        show_configured_types: {{ options.show_configured_types ? 'true' : 'false' }},
         configured_types_tags: configuredTypeTags,
         extra_form_editor_overview_url: '{{ path('idci_extra_form_editor_overview') }}',
         api_url: {
