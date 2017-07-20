@@ -16,6 +16,8 @@
 
 <script>
 
+import '../../styles/multiselect.css';
+
 import httpMixin from '../../mixins/http.vue';
 import Multiselect from 'vue-multiselect';
 

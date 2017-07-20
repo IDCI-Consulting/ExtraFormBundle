@@ -15,6 +15,9 @@
 
 <script>
 
+import '../styles/codemirror.css';
+import '../styles/codemirror-dialog.css';
+
 import rawMixin from '../mixins/raw.vue';
 import rawModalMixin from '../mixins/rawModal.vue';
 import JsonToTwigTransformer from '../utils/JsonToTwigTransformer.js';
