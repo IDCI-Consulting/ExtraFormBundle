@@ -16,7 +16,7 @@
             @created="createField"
             :type="baseType"
             v-for="baseType in baseTypes"
-            :key="baseType"
+            :key="baseType.name"
           >
           </base-extra-form-type>
         </div>
@@ -26,7 +26,7 @@
             @created="createConfiguredField"
             :type="configuredType"
             v-for="configuredType in configuredTypes"
-            :key="configuredType"
+            :key="configuredType.name"
           >
           </configured-extra-form-type>
         </div>
