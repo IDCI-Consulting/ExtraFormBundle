@@ -14,7 +14,7 @@
       </component>
       <div v-for="(option, key) in options" v-if="option.component_name === 'editor'">
         <button :id="id" class="extra-btn" @click.prevent="triggerModal">
-          'Add fields for this "sub" extra form
+          Add fields for this "sub" extra form
         </button>
         <div class="modal fade modal-fullscreen" :id="'modal_'+id">
           <div class="modal-dialog" role="document">
@@ -30,7 +30,7 @@
               </div>
               <div class="modal-footer">
                 <button class="btn btn-default close-modal">
-                  'Go back to the parent editor <i class="fa fa-times"></i>
+                  Go back to the parent editor <i class="fa fa-times"></i>
                 </button>
                 <em>All your changes are automatically saved</em>
               </div>
