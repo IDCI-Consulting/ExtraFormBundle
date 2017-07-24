@@ -65,8 +65,8 @@ export default {
           var newField = {
             name: name,
             extra_form_type: object[field].extra_form_type,
-            options: object[field].options,
-            constraints: object[field].constraints
+            options: object[field].options || {},
+            constraints: object[field].constraints || []
           };
 
           // Set the first field as active
