@@ -16,9 +16,9 @@
 
 <script>
 
-import '../../styles/multiselect.css';
+import 'ExtraFormBundle/styles/multiselect.css';
 
-import httpMixin from '../../mixins/http.vue';
+import httpMixin from 'ExtraFormBundle/mixins/http.vue';
 import Multiselect from 'vue-multiselect';
 
 export default {

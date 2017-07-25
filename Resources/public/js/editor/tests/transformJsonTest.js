@@ -1,5 +1,5 @@
 
-import JsonToTwigTransformer from '../editor/utils/JsonToTwigTransformer.js';
+import JsonToTwigTransformer from '../src/utils/JsonToTwigTransformer.js';
 
 import fixture1Raw from './fixtures/fixture1.js';
 import fixture2Raw from './fixtures/fixture2.js';
@@ -49,4 +49,3 @@ describe('Test the json transform component', function() {
     });
   });
 });
-

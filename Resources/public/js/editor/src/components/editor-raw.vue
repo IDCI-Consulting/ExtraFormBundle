@@ -18,9 +18,9 @@
 import '../styles/codemirror.css';
 import '../styles/codemirror-dialog.css';
 
-import rawMixin from '../mixins/raw.vue';
-import rawModalMixin from '../mixins/rawModal.vue';
-import JsonToTwigTransformer from '../utils/JsonToTwigTransformer.js';
+import rawMixin from 'ExtraFormBundle/mixins/raw.vue';
+import rawModalMixin from 'ExtraFormBundle/mixins/rawModal.vue';
+import JsonToTwigTransformer from 'ExtraFormBundle/utils/JsonToTwigTransformer.js';
 
 export default {
 

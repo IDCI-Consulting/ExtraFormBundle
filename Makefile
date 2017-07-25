@@ -20,7 +20,7 @@ npm-install:
 
 .PHONY: karma
 karma:
-	./node_modules/karma/bin/karma start $(options)
+	docker-compose run --rm node ./node_modules/karma/bin/karma start $(options)
 
 .PHONY: gulp
 gulp:

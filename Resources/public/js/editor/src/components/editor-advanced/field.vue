@@ -47,8 +47,8 @@
 
 <script>
 
-import fontAwesomeIconMixin from '../../mixins/icon.vue'
-import rawMixin from '../../mixins/raw.vue'
+import fontAwesomeIconMixin from 'ExtraFormBundle/mixins/icon.vue'
+import rawMixin from 'ExtraFormBundle/mixins/raw.vue'
 
 export default {
 

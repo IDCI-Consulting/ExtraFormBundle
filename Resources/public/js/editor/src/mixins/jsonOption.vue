@@ -2,7 +2,7 @@
 
 import optionMixin from './option.vue'
 import waitForItMixin from './waitForIt.vue'
-import JsonToTwigTransformer from '../utils/JsonToTwigTransformer'
+import JsonToTwigTransformer from 'ExtraFormBundle/utils/JsonToTwigTransformer.js'
 
 /**
  * Option where we can put json in (input type text and textareas)

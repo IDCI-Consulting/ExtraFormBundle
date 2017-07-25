@@ -4,7 +4,7 @@
  * Methods used to generate raw json
  */
 
-import JsonToTwigTransformer from '../utils/JsonToTwigTransformer.js';
+import JsonToTwigTransformer from 'ExtraFormBundle/utils/JsonToTwigTransformer.js';
 
 export default {
 

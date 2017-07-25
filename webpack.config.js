@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var path    = require('path');
 
 module.exports = {
   entry: {
@@ -12,7 +13,11 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue': 'vue/dist/vue.esm.js'
+      'vue': 'vue/dist/vue.esm.js',
+      'ExtraFormBundle': path.resolve(
+        __dirname,
+        'Resources/public/js/editor/src/'
+      )
     }
   },
   externals: {

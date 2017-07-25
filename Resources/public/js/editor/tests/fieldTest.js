@@ -1,8 +1,8 @@
 
 import Vue from 'vue';
 import Vuex from 'vuex';
-import editorAdvancedField from '../editor/components/editor-advanced/field.vue';
-import extraFormEditorGetters from '../editor/store/getters.js';
+import editorAdvancedField from '../src/components/editor-advanced/field.vue';
+import extraFormEditorGetters from '../src/store/getters.js';
 
 describe('Test the field component', function() {
 

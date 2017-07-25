@@ -18,7 +18,7 @@
 
 <script>
 
-  import optionMixin from '../../../mixins/option.vue';
+  import optionMixin from 'ExtraFormBundle/mixins/option.vue';
 
   export default {
     mixins: [optionMixin]

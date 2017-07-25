@@ -38,10 +38,10 @@
 
 <script>
 
-import {generateUniqueId} from '../../utils/utils.js';
+import {generateUniqueId} from 'ExtraFormBundle/utils/utils.js';
 import baseExtraFormType from './base-extra-form-type.vue';
 import configuredExtraFormType from './configured-extra-form-type.vue';
-import rawMixin from '../../mixins/raw.vue';
+import rawMixin from 'ExtraFormBundle/mixins/raw.vue';
 
 export default {
 

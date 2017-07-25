@@ -21,7 +21,7 @@
 
 <script>
 
-import jsonOptionMixin from '../../../mixins/jsonOption.vue';
+import jsonOptionMixin from 'ExtraFormBundle/mixins/jsonOption.vue';
 
 export default {
   mixins: [jsonOptionMixin]

@@ -23,7 +23,7 @@
 
 <script>
 
-import fontAwesomeIconMixin from '../../mixins/icon.vue'
+import fontAwesomeIconMixin from 'ExtraFormBundle/mixins/icon.vue'
 
 export default {
 

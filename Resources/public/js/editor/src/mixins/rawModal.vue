@@ -1,6 +1,6 @@
 <script>
 
-import {generateUniqueId} from '../utils/utils.js';
+import {generateUniqueId} from 'ExtraFormBundle/utils/utils.js';
 
 import 'codemirror/mode/javascript/javascript.js';
 import 'codemirror/addon/scroll/annotatescrollbar.js';

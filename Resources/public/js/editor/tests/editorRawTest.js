@@ -1,8 +1,8 @@
 
 import Vue from 'vue';
 import Vuex from 'vuex';
-import formEditorRawComponent from '../editor/components/editor-raw.vue';
-import JsonToTwigTransformer from '../editor/utils/JsonToTwigTransformer.js';
+import formEditorRawComponent from '../src/components/editor-raw.vue';
+import JsonToTwigTransformer from '../src/utils/JsonToTwigTransformer.js';
 
 describe("Test the editorRaw component", function() {
 

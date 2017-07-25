@@ -44,14 +44,14 @@
 
 <script>
 
-import {generateUniqueId} from '../../utils/utils'
-import checkboxOption from '../common/options/checkbox.vue';
-import textareaOption from '../common/options/textarea.vue';
-import choiceOption from '../common/options/choice.vue';
-import textOption from '../common/options/text.vue';
-import numberOption from '../common/options/number.vue';
-import integerOption from '../common/options/integer.vue';
-import httpMixin from '../../mixins/http.vue';
+import {generateUniqueId} from 'ExtraFormBundle/utils/utils'
+import checkboxOption from 'ExtraFormBundle/components/common/options/checkbox.vue';
+import textareaOption from 'ExtraFormBundle/components/common/options/textarea.vue';
+import choiceOption from 'ExtraFormBundle/components/common/options/choice.vue';
+import textOption from 'ExtraFormBundle/components/common/options/text.vue';
+import numberOption from 'ExtraFormBundle/components/common/options/number.vue';
+import integerOption from 'ExtraFormBundle/components/common/options/integer.vue';
+import httpMixin from 'ExtraFormBundle/mixins/http.vue';
 
 export default {
 
