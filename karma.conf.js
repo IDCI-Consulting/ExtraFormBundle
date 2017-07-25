@@ -1,11 +1,10 @@
-
 var webpackConfig = require('./webpack.config.js');
 
 module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: 'Resources/public/js/',
+    basePath: 'Resources/public/js/editor',
 
     browserConsoleLogOptions: {
       level: 'log',
@@ -19,7 +18,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'vendor/jquery-2.2.4.min.js',
+      '../vendor/jquery-2.2.4.min.js',
       'tests/**/*.js'
     ],
 
