@@ -8,6 +8,8 @@ import extraFormEditorMutations from './store/mutations.js';
 import extraFormEditorActions from './store/actions.js';
 import modalComponent from './components/common/modal.vue';
 
+import './styles/editor-common.css';
+
 Vue.component('modal', modalComponent);
 Vue.component('multiselect', Multiselect);
 
