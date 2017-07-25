@@ -156,7 +156,7 @@ select, input, textarea, button, optgroup {
     width: 50%;
 }
 
-.editor .vue-modal-mask > .vue-modal-container > .vue-modal-header > h3 > .close {
+.editor .vue-modal-mask > .vue-modal-container > .vue-modal-header > h3 > button.close {
     color: #000000;
     visibility: inherit;
 }
