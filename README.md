@@ -161,7 +161,7 @@ We use [docker](https://docs.docker.com/engine/installation/) and [docker-compos
 Install the bundle dev dependencies:
 ```sh
 $ make composer-update
-$ make npm-install
+$ make yarn cmd="install"
 ```
 
 To execute unit tests:
