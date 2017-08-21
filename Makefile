@@ -14,6 +14,10 @@ command:
 
 # NodeJs commands
 
+.PHONY: yarn
+yarn:
+	docker-compose run --rm node yarn $(cmd) $(options)
+
 .PHONY: npm-install
 npm-install:
 	docker-compose run --rm node npm install $(options)
