@@ -8,6 +8,7 @@
 namespace IDCI\Bundle\ExtraFormBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class IbanTextType extends AbstractType
 {
@@ -16,7 +17,7 @@ class IbanTextType extends AbstractType
      */
     public function getParent()
     {
-        return 'text';
+        return TextType::class;
     }
 
     /**

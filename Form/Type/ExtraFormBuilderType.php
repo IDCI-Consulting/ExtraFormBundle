@@ -67,21 +67,23 @@ class ExtraFormBuilderType extends AbstractType
             ->setRequired(array(
                 'configuration'
             ))
-            ->setAllowedTypes(array(
-                'configuration' => array(
+            ->setAllowedTypes(
+                'configuration',
+                array(
                     'string',
                     'array',
                     'IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherInterface'
                 )
-            ))
+            )
             ->setDefaults(array(
                 'inherit_data'     => false,
                 'parameters'       => array(),
                 'transform_method' => null,
             ))
-            ->setAllowedValues(array(
-                'transform_method' => array(null, 'jsonize', 'serialize')
-            ))
+            ->setAllowedValues(
+                'transform_method',
+                array(null, 'jsonize', 'serialize')
+            )
         ;
     }
 

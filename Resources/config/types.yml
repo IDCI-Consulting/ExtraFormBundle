@@ -2,7 +2,7 @@ idci_extra_form:
     types:
         "form":
             parent:      ~
-            form_type:   form
+            form_type:   Symfony\Component\Form\Extension\Core\Type\FormType
             abstract:    true
             description: "Form"
             extra_form_options:
@@ -19,7 +19,7 @@ idci_extra_form:
 
         "extra_form_builder":
             parent:      form
-            form_type:   extra_form_builder
+            form_type:   IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormBuilderType
             description: "Extra form"
             icon: "cogs"
             extra_form_options:
@@ -27,7 +27,7 @@ idci_extra_form:
 
         "extra_form_collection":
             parent:      form
-            form_type:   extra_form_collection
+            form_type:   IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormCollectionType
             description: "Form collection"
             icon:        "list"
             extra_form_options:
@@ -40,19 +40,19 @@ idci_extra_form:
 
         "textarea":
             parent:      form
-            form_type:   textarea
+            form_type:   Symfony\Component\Form\Extension\Core\Type\TextareaType
             description: "Textarea input field"
             icon:        "comments-o"
 
         "extra_form_json_textarea":
             parent:      textarea
-            form_type:   extra_form_json_textarea
+            form_type:   IDCI\Bundle\ExtraFormBundle\Form\Type\JsonTextareaType
             description: "Text input field in JSON format"
             icon:        "jsfiddle"
 
         "checkbox":
             parent:      form
-            form_type:   checkbox
+            form_type:   Symfony\Component\Form\Extension\Core\Type\CheckboxType
             description: "Boolean input field"
             icon:        "check-square"
             extra_form_options:
@@ -60,7 +60,7 @@ idci_extra_form:
 
         "choice":
             parent:      form
-            form_type:   choice
+            form_type:   Symfony\Component\Form\Extension\Core\Type\ChoiceType
             description: "Selection field"
             extra_form_options:
                 choices:           { extra_form_type: "text",     options: {required: false} }
@@ -71,7 +71,7 @@ idci_extra_form:
 
         "number":
             parent:      form
-            form_type:   number
+            form_type:   Symfony\Component\Form\Extension\Core\Type\NumberType
             description: "Decimal input field"
             icon:        "sort-numeric-asc"
             extra_form_options:
@@ -80,7 +80,7 @@ idci_extra_form:
 
         "integer":
             parent:      form
-            form_type:   integer
+            form_type:   Symfony\Component\Form\Extension\Core\Type\IntegerType
             description: "Integer input field"
             icon:     "sort-numeric-asc"
             extra_form_options:
@@ -89,7 +89,7 @@ idci_extra_form:
 
         "money":
             parent:      form
-            form_type:   money
+            form_type:   Symfony\Component\Form\Extension\Core\Type\MoneyType
             description: "Monetary input field"
             icon:        "money"
             extra_form_options:
@@ -99,7 +99,7 @@ idci_extra_form:
 
         "percent":
             parent:      form
-            form_type:   percent
+            form_type:   Symfony\Component\Form\Extension\Core\Type\PercentType
             description: "Percentage input field"
             icon:        "percent"
             extra_form_options:
@@ -109,13 +109,13 @@ idci_extra_form:
 
         "text":
             parent:      form
-            form_type:   text
+            form_type:   Symfony\Component\Form\Extension\Core\Type\TextType
             description: "Input text field"
             icon:        "text-height"
 
         "repeated":
             parent:      form
-            form_type:   repeated
+            form_type:   Symfony\Component\Form\Extension\Core\Type\RepeatedType
             description: "Repeated input field"
             icon:        "repeat"
             extra_form_options:
@@ -127,18 +127,18 @@ idci_extra_form:
 
         "hidden":
             parent:      form
-            form_type:   hidden
+            form_type:   Symfony\Component\Form\Extension\Core\Type\HiddenType
             description: "Hidden input field"
 
         "email":
             parent:      text
-            form_type:   email
+            form_type:   Symfony\Component\Form\Extension\Core\Type\EmailType
             description: "Email input field"
             icon:        "envelope"
 
         "url":
             parent:      text
-            form_type:   url
+            form_type:   Symfony\Component\Form\Extension\Core\Type\UrlType
             description: "URL input field"
             icon:        "location-arrow"
             extra_form_options:
@@ -146,7 +146,7 @@ idci_extra_form:
 
         "password":
             parent:      text
-            form_type:   password
+            form_type:   Symfony\Component\Form\Extension\Core\Type\PasswordType
             description: "Password input field"
             icon:        "key"
             extra_form_options:
@@ -154,7 +154,7 @@ idci_extra_form:
 
         "time":
             parent:      form
-            form_type:   time
+            form_type:   Symfony\Component\Form\Extension\Core\Type\TimeType
             description: "Time input field"
             icon:        "clock-o"
             extra_form_options:
@@ -169,7 +169,7 @@ idci_extra_form:
 
         "datetime":
             parent:      form
-            form_type:   datetime
+            form_type:   Symfony\Component\Form\Extension\Core\Type\DateTimeType
             description: "Date and time input field"
             icon:        "calendar"
             extra_form_options:
@@ -189,7 +189,7 @@ idci_extra_form:
 
         "date":
             parent:      form
-            form_type:   date
+            form_type:   Symfony\Component\Form\Extension\Core\Type\DateType
             description: "Date input field"
             icon:        "calendar-o"
             extra_form_options:
@@ -204,25 +204,25 @@ idci_extra_form:
 
         "birthday":
             parent:      date
-            form_type:   birthday
+            form_type:   Symfony\Component\Form\Extension\Core\Type\BirthdayType
             description: "Birthday input field"
             icon:        "birthday-cake"
 
         "country":
             parent:      choice
-            form_type:   country
+            form_type:   Symfony\Component\Form\Extension\Core\Type\CountryType
             description: "Country selection field"
             icon:        "globe"
 
         "iban":
             parent:      form
-            form_type:   extra_form_iban
+            form_type:   IDCI\Bundle\ExtraFormBundle\Form\Type\IbanType
             description: "Iban input field"
             icon:        "credit-card"
 
         "html":
             parent:      form
-            form_type:   extra_form_html
+            form_type:   IDCI\Bundle\ExtraFormBundle\Form\Type\HtmlType
             description: "Html text field"
             icon:        "code"
             extra_form_options:
@@ -231,7 +231,7 @@ idci_extra_form:
 
         "captcha":
             parent:      text
-            form_type:   captcha
+            form_type:   Gregwar\CaptchaBundle\Type\CaptchaType
             description: "Input captcha field"
             icon:        "unlock-alt"
             extra_form_options:
@@ -262,7 +262,7 @@ idci_extra_form:
 
         "extra_form_range":
             parent:      form
-            form_type:   extra_form_range
+            form_type:   IDCI\Bundle\ExtraFormBundle\Form\Type\RangeType
             description: "Range text field"
             icon:        "arrows-v"
             extra_form_options:

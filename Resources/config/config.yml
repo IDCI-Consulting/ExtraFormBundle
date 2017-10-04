@@ -3,6 +3,5 @@ imports:
     - { resource: constraints.yml }
 
 twig:
-    form:
-        resources:
-            - 'IDCIExtraFormBundle:Form:fields.html.twig'
+    form_themes:
+        - 'IDCIExtraFormBundle:Form:fields.html.twig'

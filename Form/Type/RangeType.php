@@ -8,6 +8,7 @@
 namespace IDCI\Bundle\ExtraFormBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -26,15 +27,19 @@ class RangeType extends AbstractType
                 'step'  => 1,
                 'value' => null
             ))
-            ->setNormalizers(array(
-                'value' => function (Options $options, $value) {
+            ->setNormalizer(
+                'value',
+                function (Options $options, $value) {
                     if (isset($options['data']) && null !== $options['data']) {
                         return $options['data'];
                     }
 
                     return $options['min'];
-                },
-                'attr'  => function (Options $options, $value) {
+                }
+            )
+            ->setNormalizer(
+                'attr',
+                function (Options $options, $value) {
                     return array_merge(
                         array(
                             'min'   => $options['min'],
@@ -45,13 +50,11 @@ class RangeType extends AbstractType
                         $value
                     );
                 }
-            ))
-            ->setAllowedTypes(array(
-                'min'   => array('integer'),
-                'max'   => array('integer'),
-                'step'  => array('integer'),
-                'value' => array('null', 'integer'),
-            ))
+            )
+            ->setAllowedTypes('min', array('integer'))
+            ->setAllowedTypes('max', array('integer'))
+            ->setAllowedTypes('step', array('integer'))
+            ->setAllowedTypes('value', array('null'))
         ;
     }
 
@@ -70,7 +73,7 @@ class RangeType extends AbstractType
      */
     public function getParent()
     {
-        return 'text';
+        return TextType::class;
     }
 
     /**

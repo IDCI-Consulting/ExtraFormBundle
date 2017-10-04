@@ -8,6 +8,8 @@
 namespace IDCI\Bundle\ExtraFormBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -40,7 +42,7 @@ class ExtraFormCollectionType extends AbstractType
                 )
             )
         );
-        $prototype->add('__to_remove', 'checkbox', array(
+        $prototype->add('__to_remove', CheckboxType::class, array(
             'mapped'   => false,
             'required' => false,
             'data'     => true,
@@ -76,14 +78,15 @@ class ExtraFormCollectionType extends AbstractType
             ->setDefaults(array(
                 'min_items'     => 1,
                 'max_items'     => 10,
-                'type'          => 'textarea',
+                'type'          => TextareaType::class,
                 'add_button'    => array(),
                 'remove_button' => array(),
                 'options'       => array(),
                 'collection_id' => 'default'
             ))
-            ->setNormalizers(array(
-                'add_button' => function (Options $options, $value) {
+            ->setNormalizer(
+                'add_button',
+                function (Options $options, $value) {
                     $attr = ($options['min_items'] == $options['max_items']) ?
                         array('style' => 'display:none;') :
                         array()
@@ -93,8 +96,11 @@ class ExtraFormCollectionType extends AbstractType
                         array('label' => 'add', 'attr' => $attr),
                         $value
                     );
-                },
-                'remove_button' => function (Options $options, $value) {
+                }
+            )
+            ->setNormalizer(
+                'remove_button',
+                function (Options $options, $value) {
                     $attr = ($options['min_items'] == $options['max_items']) ?
                         array('style' => 'display:none;') :
                         array()
@@ -104,8 +110,11 @@ class ExtraFormCollectionType extends AbstractType
                         array('label' => 'remove', 'attr' => $attr),
                         $value
                     );
-                },
-                'options' => function (Options $options, $value) {
+                }
+            )
+            ->setNormalizer(
+                'options',
+                function (Options $options, $value) {
                     return array_merge(
                         array(
                             'label'    => ' ',
@@ -115,12 +124,10 @@ class ExtraFormCollectionType extends AbstractType
                         $value
                     );
                 }
-            ))
-            ->setAllowedTypes(array(
-                'add_button'    => array('array'),
-                'remove_button' => array('array'),
-                'collection_id' => array('string'),
-            ))
+            )
+            ->setAllowedTypes('add_button', array('array'))
+            ->setAllowedTypes('remove_button', array('array'))
+            ->setAllowedTypes('collection_id', array('string'))
         ;
     }
 

@@ -8,6 +8,7 @@
 namespace IDCI\Bundle\ExtraFormBundle\Tests\Configuration\Builder;
 
 use IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilder;
+use IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormCollectionType;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Form\Form;
 
@@ -52,7 +53,7 @@ class ExtraFormBuilderTest extends WebTestCase
             array(
                 'extra_form_collection',
                 array(
-                    'type' => 'extra_form_collection',
+                    'type' => ExtraFormCollectionType::class,
                     'label' => 'collection_test',
                     'attr' => array('class' => 'test'),
                     'constraints' => array(array(

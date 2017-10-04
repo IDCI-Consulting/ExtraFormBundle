@@ -10,6 +10,7 @@ namespace IDCI\Bundle\ExtraFormBundle\Form\Event;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException;
 
 class CollectionEventSubscriber implements EventSubscriberInterface
@@ -138,7 +139,7 @@ class CollectionEventSubscriber implements EventSubscriberInterface
 
             $form->add($i, $this->options['type'], $options);
 
-            $form->get($i)->add('__to_remove', 'checkbox', array(
+            $form->get($i)->add('__to_remove', CheckboxType::class, array(
                 'mapped'   => false,
                 'required' => false,
                 'data'     => !$displayed,

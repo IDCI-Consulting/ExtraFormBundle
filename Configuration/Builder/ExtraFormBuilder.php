@@ -10,7 +10,7 @@ namespace IDCI\Bundle\ExtraFormBundle\Configuration\Builder;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\Options;
 use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherRegistry;
 use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherInterface;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistryInterface;
@@ -61,9 +61,9 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
     /**
      * Define the field configuration using the option resolver component.
      *
-     * @param OptionsResolverInterface $resolver
+     * @param Options $resolver
      */
-    protected function configureField(OptionsResolverInterface $resolver)
+    protected function configureField(Options $resolver)
     {
         $resolver
             ->setDefaults(array(
