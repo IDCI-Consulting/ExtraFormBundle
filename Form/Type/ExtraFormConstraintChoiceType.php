@@ -43,7 +43,7 @@ class ExtraFormConstraintChoiceType extends AbstractType
 
         $resolver
             ->setDefaults(array(
-                'choices' => $choices
+                'choices' => $choices,
             ))
         ;
     }

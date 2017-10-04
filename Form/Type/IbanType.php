@@ -10,7 +10,6 @@ namespace IDCI\Bundle\ExtraFormBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use IDCI\Bundle\ExtraFormBundle\Form\DataTransformer\IbanToArrayTransformer;
-use IDCI\Bundle\ExtraFormBundle\Form\Type\IbanTextType;
 
 class IbanType extends AbstractType
 {
@@ -24,53 +23,53 @@ class IbanType extends AbstractType
 
         $builder
             ->add('c1', IbanTextType::class, array(
-                'attr'       => array(
+                'attr' => array(
                     'style' => 'width: 4em;',
-                    'maxlength' => 4
-                )
+                    'maxlength' => 4,
+                ),
             ))
             ->add('c2', IbanTextType::class, array(
-                'attr'       => array(
+                'attr' => array(
                     'style' => 'width: 4em;',
-                    'maxlength' => 4
-                )
+                    'maxlength' => 4,
+                ),
             ))
             ->add('c3', IbanTextType::class, array(
-                'attr'       => array(
+                'attr' => array(
                     'style' => 'width: 4em;',
-                    'maxlength' => 4
-                )
+                    'maxlength' => 4,
+                ),
             ))
             ->add('c4', IbanTextType::class, array(
-                'attr'       => array(
+                'attr' => array(
                     'style' => 'width: 4em;',
-                    'maxlength' => 4
-                )
+                    'maxlength' => 4,
+                ),
             ))
             ->add('c5', IbanTextType::class, array(
-                'attr'       => array(
+                'attr' => array(
                     'style' => 'width: 4em;',
-                    'maxlength' => 4
-                )
+                    'maxlength' => 4,
+                ),
             ))
             ->add('c6', IbanTextType::class, array(
-                'attr'       => array(
+                'attr' => array(
                     'style' => 'width: 4em;',
-                    'maxlength' => 4
-                )
+                    'maxlength' => 4,
+                ),
             ))
             ->add('c7', IbanTextType::class, array(
-                'attr'       => array(
+                'attr' => array(
                     'style' => 'width: 3.5em;',
-                    'maxlength' => 3
-                )
+                    'maxlength' => 3,
+                ),
             ))
             ->add('c8', IbanTextType::class, array(
-                'attr'       => array(
+                'attr' => array(
                     'style' => 'width: 6em;background:#DDD;',
-                    'maxlength' => 7
+                    'maxlength' => 7,
                 ),
-                'required'   => false
+                'required' => false,
             ))
         ;
     }

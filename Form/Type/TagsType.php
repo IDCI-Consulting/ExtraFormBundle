@@ -11,7 +11,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -22,12 +21,11 @@ class TagsType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['separator']           = $options['separator'];
+        $view->vars['separator'] = $options['separator'];
         $view->vars['jsTransformFunction'] = $options['jsTransformFunction'];
 
         if (isset($options['url'])) {
             $view->vars['url'] = $options['url'];
-
         }
 
         return $view->vars;
@@ -40,16 +38,16 @@ class TagsType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'separator'           => ',',
-                'jsTransformFunction' => 'function (tags) { return tags; };'
+                'separator' => ',',
+                'jsTransformFunction' => 'function (tags) { return tags; };',
             ))
             ->setOptional(array(
-                'url'
+                'url',
             ))
             ->setAllowedTypes(array(
-                'separator'           => array('string'),
+                'separator' => array('string'),
                 'jsTransformFunction' => array('string'),
-                'url'                 => array('string')
+                'url' => array('string'),
             ))
         ;
     }

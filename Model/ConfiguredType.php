@@ -37,14 +37,14 @@ class ConfiguredType implements ExtraFormTypeInterface
     protected $extraFormType;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $name
      * @param string $configuration
      */
     public function __construct($name = null, $configuration = null, $tags = null)
     {
-        $this->name          = $name;
+        $this->name = $name;
         $this->configuration = $configuration;
         if (!empty($tags)) {
             $this->tags = $tags;
@@ -52,7 +52,7 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * To string
+     * To string.
      *
      * @return string
      */
@@ -72,7 +72,7 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -86,7 +86,7 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -94,7 +94,7 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getFormTypeName()
     {
@@ -106,7 +106,7 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getFormType()
     {
@@ -118,7 +118,7 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getParent()
     {
@@ -130,7 +130,7 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * Set description
+     * Set description.
      *
      * @param string $description
      *
@@ -144,7 +144,7 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getDescription()
     {
@@ -160,7 +160,7 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getIcon()
     {
@@ -172,7 +172,7 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function isAbstract()
     {
@@ -184,7 +184,7 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getExtraFormOptions()
     {
@@ -207,7 +207,7 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * Set tags
+     * Set tags.
      *
      * @param string $tags
      *
@@ -221,7 +221,7 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * Get tags
+     * Get tags.
      *
      * @return string
      */
@@ -231,7 +231,7 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * Set configuration
+     * Set configuration.
      *
      * @param string $configuration
      *
@@ -245,7 +245,7 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * Get configuration
+     * Get configuration.
      *
      * @return string
      */
@@ -255,7 +255,7 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * Set extraFormType
+     * Set extraFormType.
      *
      * @param ExtraFormTypeInterface $extraFormType
      *
@@ -269,7 +269,7 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * Get extraFormType
+     * Get extraFormType.
      *
      * @return ExtraFormTypeInterface
      */
@@ -279,7 +279,7 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * Get extra form constraints
+     * Get extra form constraints.
      *
      * @return array
      */

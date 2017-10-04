@@ -14,25 +14,25 @@ class IbanToArrayTransformerTest extends \PHPUnit_Framework_TestCase
     private $array;
 
     /**
-     * @var IbanToArrayTransformer $ibanToArrayTransformer
+     * @var IbanToArrayTransformer
      */
     private $ibanToArrayTransformer;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function setUp()
     {
-        $this->iban = "GR1601101250000000012300695";
+        $this->iban = 'GR1601101250000000012300695';
         $this->array = array(
-            "c1" => 'GR16',
-            "c2" => '0110',
-            "c3" => '1250',
-            "c4" => '0000',
-            "c5" => '0001',
-            "c6" => '2300',
-            "c7" => '695',
-            "c8" => ''
+            'c1' => 'GR16',
+            'c2' => '0110',
+            'c3' => '1250',
+            'c4' => '0000',
+            'c5' => '0001',
+            'c6' => '2300',
+            'c7' => '695',
+            'c8' => '',
         );
 
         $this->ibanToArrayTransformer = new IbanToArrayTransformer();

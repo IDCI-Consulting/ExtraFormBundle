@@ -12,15 +12,17 @@ use Symfony\Component\Form\DataTransformerInterface;
 class IbanToArrayTransformer implements DataTransformerInterface
 {
     /**
-     * Transforms
+     * Transforms.
      *
      * @param string $in
+     *
      * @return array
      */
     public function transform($in)
     {
         if (null !== $in && !is_array($in)) {
             $in = strtoupper($in);
+
             return array(
                 'c1' => substr($in, 0, 4),
                 'c2' => substr($in, 4, 4),
@@ -37,9 +39,10 @@ class IbanToArrayTransformer implements DataTransformerInterface
     }
 
     /**
-     * Reverse transforms
+     * Reverse transforms.
      *
      * @param array $out
+     *
      * @return string
      */
     public function reverseTransform($out)

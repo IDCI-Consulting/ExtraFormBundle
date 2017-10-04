@@ -20,7 +20,7 @@ class SerializeTransformEventSubscriber implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => array('preSetData', 100),
-            FormEvents::SUBMIT => array('submit', 100)
+            FormEvents::SUBMIT => array('submit', 100),
         );
     }
 

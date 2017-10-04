@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints\EqualToValidator;
 class DateEqualToValidator extends EqualToValidator
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function compareValues($value1, $value2)
     {

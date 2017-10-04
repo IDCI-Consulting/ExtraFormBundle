@@ -12,7 +12,7 @@ interface ConfigurationFetcherInterface
     /**
      * Fetch the configuration.
      *
-     * @param array $parameters The parameters used to fetch the configuration.
+     * @param array $parameters the parameters used to fetch the configuration
      *
      * @return array
      */

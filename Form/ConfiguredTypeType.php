@@ -11,7 +11,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\OptionsResolver\Options;
 
 class ConfiguredTypeType extends AbstractType
 {
@@ -25,7 +24,7 @@ class ConfiguredTypeType extends AbstractType
             ->add('description')
             ->add('tags', 'extra_form_tags', array(
                 'required' => false,
-                'url'      => '/api/configured-extra-form-types-tags.json'
+                'url' => '/api/configured-extra-form-types-tags.json',
             ))
             ->add('configuration')
         ;
@@ -38,7 +37,7 @@ class ConfiguredTypeType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => 'IDCI\Bundle\ExtraFormBundle\Model\ConfiguredType'
+                'data_class' => 'IDCI\Bundle\ExtraFormBundle\Model\ConfiguredType',
             ))
         ;
     }

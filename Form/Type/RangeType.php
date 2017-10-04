@@ -22,10 +22,10 @@ class RangeType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'min'   => 0,
-                'max'   => 100,
-                'step'  => 1,
-                'value' => null
+                'min' => 0,
+                'max' => 100,
+                'step' => 1,
+                'value' => null,
             ))
             ->setNormalizer(
                 'value',
@@ -42,10 +42,10 @@ class RangeType extends AbstractType
                 function (Options $options, $value) {
                     return array_merge(
                         array(
-                            'min'   => $options['min'],
-                            'max'   => $options['max'],
-                            'step'  => $options['step'],
-                            'value' => $options['value']
+                            'min' => $options['min'],
+                            'max' => $options['max'],
+                            'step' => $options['step'],
+                            'value' => $options['value'],
                         ),
                         $value
                     );
