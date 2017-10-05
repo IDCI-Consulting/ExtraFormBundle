@@ -19,28 +19,28 @@ class ExtraFormConstraintRegistryTest extends \PHPUnit_Framework_TestCase
     private $extraFormConstraint;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function setUp()
     {
         $configuration = array(
-            'class'              => '\Symfony\Component\Validator\Constraints\NotBlank',
-            'description'        => 'Not blank constraint',
+            'class' => '\Symfony\Component\Validator\Constraints\NotBlank',
+            'description' => 'Not blank constraint',
             'extra_form_options' => array(
                 'message' => array(
                     'extra_form_type' => 'text',
                     'options' => array(
-                        'required' => false
-                    )
-                )
-            )
+                        'required' => false,
+                    ),
+                ),
+            ),
         );
 
         $this->extraFormConstraint = new ExtraFormConstraint($configuration);
     }
 
     /**
-     * Test setConstraint
+     * Test setConstraint.
      */
     public function testSetConstraint()
     {
@@ -50,7 +50,7 @@ class ExtraFormConstraintRegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getConstraint
+     * Test getConstraint.
      */
     public function testGetConstraints()
     {
@@ -61,7 +61,7 @@ class ExtraFormConstraintRegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getConstraint
+     * Test getConstraint.
      */
     public function testGetConstraint()
     {
@@ -77,7 +77,7 @@ class ExtraFormConstraintRegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test hasConstraint
+     * Test hasConstraint.
      */
     public function testHasConstraint()
     {

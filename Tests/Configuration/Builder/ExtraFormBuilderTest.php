@@ -29,7 +29,7 @@ class ExtraFormBuilderTest extends WebTestCase
         $kernel->boot();
         $container = $kernel->getContainer();
 
-        $this->extraFormBuilder = $container->get('idci_extra_form.builder');
+        $this->extraFormBuilder = $container->get(ExtraFormBuilder::class);
     }
 
     /**

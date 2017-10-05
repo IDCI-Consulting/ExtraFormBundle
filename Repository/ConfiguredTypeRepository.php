@@ -10,12 +10,12 @@ namespace IDCI\Bundle\ExtraFormBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * ConfiguredTypeRepository
+ * ConfiguredTypeRepository.
  */
 class ConfiguredTypeRepository extends EntityRepository
 {
     /**
-     * Find configured types by tags
+     * Find configured types by tags.
      *
      * @return array
      */
@@ -30,13 +30,13 @@ class ConfiguredTypeRepository extends EntityRepository
                 $tag = substr($tag, 1);
             }
 
-            $literalExpr = $qb->expr()->literal('%' . $tag . '%');
+            $literalExpr = $qb->expr()->literal('%'.$tag.'%');
 
             if ($operator === '-') {
                 $qb->andWhere($qb->expr()->notLike('c.tags', $literalExpr));
-            } else if ($operator === '+') {
+            } elseif ($operator === '+') {
                 $qb->andWhere($qb->expr()->like('c.tags', $literalExpr));
-            } else if ($key === 0) {
+            } elseif ($key === 0) {
                 $qb->where($qb->expr()->like('c.tags', $literalExpr));
             } else {
                 $qb->orWhere($qb->expr()->like('c.tags', $literalExpr));
@@ -47,7 +47,7 @@ class ConfiguredTypeRepository extends EntityRepository
     }
 
     /**
-     * Get all tags
+     * Get all tags.
      *
      * @return array
      */
@@ -64,7 +64,7 @@ class ConfiguredTypeRepository extends EntityRepository
         $tagStrings = array_map('current', $qb->getQuery()->getScalarResult());
         $distinctTags = array();
 
-        foreach($tagStrings as $tagString) {
+        foreach ($tagStrings as $tagString) {
             foreach (explode(',', $tagString) as $tag) {
                 if (!in_array($tag, $distinctTags)) {
                     array_push($distinctTags, $tag);

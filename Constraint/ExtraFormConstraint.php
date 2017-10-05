@@ -25,19 +25,19 @@ class ExtraFormConstraint implements ExtraFormConstraintInterface
     protected $extraFormOptions;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $configuration
      */
     public function __construct(array $configuration)
     {
-        $this->className        = $configuration['class'];
-        $this->description      = $configuration['description'];
+        $this->className = $configuration['class'];
+        $this->description = $configuration['description'];
         $this->extraFormOptions = $configuration['extra_form_options'];
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getClassName()
     {
@@ -45,7 +45,7 @@ class ExtraFormConstraint implements ExtraFormConstraintInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getDescription()
     {
@@ -53,7 +53,7 @@ class ExtraFormConstraint implements ExtraFormConstraintInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getExtraFormOptions()
     {

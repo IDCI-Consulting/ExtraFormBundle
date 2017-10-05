@@ -17,28 +17,28 @@ class ExtraFormConstraintTest extends \PHPUnit_Framework_TestCase
     private $extraFormConstraint;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function setUp()
     {
         $configuration = array(
-            'class'              => '\Symfony\Component\Validator\Constraints\NotBlank',
-            'description'        => 'Not blank constraint',
+            'class' => '\Symfony\Component\Validator\Constraints\NotBlank',
+            'description' => 'Not blank constraint',
             'extra_form_options' => array(
                 'message' => array(
                     'extra_form_type' => 'text',
                     'options' => array(
-                        'required' => false
-                    )
-                )
-            )
+                        'required' => false,
+                    ),
+                ),
+            ),
         );
 
         $this->extraFormConstraint = new ExtraFormConstraint($configuration);
     }
 
     /**
-     * Test getClassName
+     * Test getClassName.
      */
     public function testGetClassName()
     {
@@ -48,7 +48,7 @@ class ExtraFormConstraintTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getDescription
+     * Test getDescription.
      */
     public function testGetDescription()
     {
@@ -58,7 +58,7 @@ class ExtraFormConstraintTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getExtraFormOptions
+     * Test getExtraFormOptions.
      */
     public function testGetExtraFormOptions()
     {
@@ -66,9 +66,9 @@ class ExtraFormConstraintTest extends \PHPUnit_Framework_TestCase
             'message' => array(
                 'extra_form_type' => 'text',
                 'options' => array(
-                    'required' => false
-                )
-            )
+                    'required' => false,
+                ),
+            ),
         );
 
         $this->assertEquals($options, $this->extraFormConstraint->getExtraFormOptions());

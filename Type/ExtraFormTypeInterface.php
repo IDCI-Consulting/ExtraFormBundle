@@ -56,7 +56,7 @@ interface ExtraFormTypeInterface
     /**
      * Is abstract.
      *
-     * @return boolean
+     * @return bool
      */
     public function isAbstract();
 

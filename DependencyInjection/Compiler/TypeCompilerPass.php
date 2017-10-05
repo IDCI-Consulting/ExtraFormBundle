@@ -8,12 +8,13 @@
 namespace IDCI\Bundle\ExtraFormBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use IDCI\Bundle\ExtraFormBundle\Exception\UndefinedExtraFormTypeException;
 use IDCI\Bundle\ExtraFormBundle\Exception\WrongExtraFormTypeOptionException;
+use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry;
+use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType;
 
 class TypeCompilerPass implements CompilerPassInterface
 {
@@ -22,18 +23,18 @@ class TypeCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('idci_extra_form.type') ||
-            !$container->hasDefinition('idci_extra_form.type_registry')
+        if (!$container->hasDefinition(ExtraFormType::class) ||
+            !$container->hasDefinition(ExtraFormTypeRegistry::class)
         ) {
             return;
         }
 
-        $registryDefinition = $container->getDefinition('idci_extra_form.type_registry');
+        $registryDefinition = $container->getDefinition(ExtraFormTypeRegistry::class);
 
         $types = $container->getParameter('idci_extra_form.types');
         $extraFormOptions = array();
         foreach ($types as $name => $configuration) {
-            $serviceDefinition = new DefinitionDecorator('idci_extra_form.type');
+            $serviceDefinition = new DefinitionDecorator(ExtraFormType::class);
 
             if (null !== $configuration['parent']) {
                 if (!$container->hasDefinition($this->getDefinitionName($configuration['parent']))) {
@@ -79,9 +80,10 @@ class TypeCompilerPass implements CompilerPassInterface
     }
 
     /**
-     * Get definition name
+     * Get definition name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return string
      */
     protected function getDefinitionName($name)

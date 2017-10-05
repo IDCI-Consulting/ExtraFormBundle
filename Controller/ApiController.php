@@ -4,6 +4,7 @@ namespace IDCI\Bundle\ExtraFormBundle\Controller;
 
 use FOS\RestBundle\Request\ParamFetcher;
 use IDCI\Bundle\ExtraFormBundle\Model\ConfiguredType;
+use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -39,11 +40,11 @@ class ApiController extends FOSRestController
 
             $view
                 ->setData($form->createView())
-                ->setTemplate("IDCIExtraFormBundle:Api:form.html.twig")
+                ->setTemplate('IDCIExtraFormBundle:Api:form.html.twig')
                 ->setTemplateVar('form')
             ;
         } else {
-            $types = $this->get('idci_extra_form.type_registry')->getTypes();
+            $types = $this->get(ExtraFormTypeRegistry::class)->getTypes();
             ksort($types);
             $view->setData(array_values($types));
         }
@@ -64,7 +65,7 @@ class ApiController extends FOSRestController
      */
     public function getExtraFormTypesOptionsAction($_format, $type)
     {
-        $registry = $this->get('idci_extra_form.type_registry');
+        $registry = $this->get(ExtraFormTypeRegistry::class);
         if (!($registry->hasType($type))) {
             throw new NotFoundHttpException(sprintf(
                 'The Type `%s` was not found',
@@ -94,7 +95,7 @@ class ApiController extends FOSRestController
 
             $view
                 ->setData($form->createView())
-                ->setTemplate("IDCIExtraFormBundle:Api:form.html.twig")
+                ->setTemplate('IDCIExtraFormBundle:Api:form.html.twig')
                 ->setTemplateVar('form')
             ;
         } else {
@@ -123,7 +124,7 @@ class ApiController extends FOSRestController
 
             $view
                 ->setData($form->createView())
-                ->setTemplate("IDCIExtraFormBundle:Api:form.html.twig")
+                ->setTemplate('IDCIExtraFormBundle:Api:form.html.twig')
                 ->setTemplateVar('form')
             ;
         } else {
@@ -132,7 +133,6 @@ class ApiController extends FOSRestController
 
         return $this->handleView($view);
     }
-
 
     /**
      * [GET] /extra-form-constraints/{constraint}/options
@@ -177,7 +177,7 @@ class ApiController extends FOSRestController
 
             $view
                 ->setData($form->createView())
-                ->setTemplate("IDCIExtraFormBundle:Api:form.html.twig")
+                ->setTemplate('IDCIExtraFormBundle:Api:form.html.twig')
                 ->setTemplateVar('form')
             ;
         } else {
@@ -215,33 +215,33 @@ class ApiController extends FOSRestController
     }
 
     /**
-         * [GET] /configured-extra-form-types-tags
-         *
-         * Retrieve all tags of configured extra form types
-         *
-         * @Get("/configured-extra-form-types-tags.{_format}")
-         *
-         * @param string $_format
-         *
-         * @return Response
-         */
-        public function getConfiguredExtraFormTypesTagsAction($_format)
-        {
-            $view = View::create()->setFormat($_format);
-            $tags = $this
+     * [GET] /configured-extra-form-types-tags.
+     *
+     * Retrieve all tags of configured extra form types
+     *
+     * @Get("/configured-extra-form-types-tags.{_format}")
+     *
+     * @param string $_format
+     *
+     * @return Response
+     */
+    public function getConfiguredExtraFormTypesTagsAction($_format)
+    {
+        $view = View::create()->setFormat($_format);
+        $tags = $this
                 ->getDoctrine()
                 ->getManager()
                 ->getRepository('IDCIExtraFormBundle:ConfiguredType')
                 ->getAllTags()
             ;
-            ksort($tags);
-            $view->setData($tags);
+        ksort($tags);
+        $view->setData($tags);
 
-            return $this->handleView($view);
-        }
+        return $this->handleView($view);
+    }
 
     /**
-     * [POST] /configured-extra-form-types
+     * [POST] /configured-extra-form-types.
      *
      * Save an extra form type.
      *
@@ -305,7 +305,7 @@ class ApiController extends FOSRestController
     }
 
     /**
-     * [PUT] /configured-extra-form-types/{name}
+     * [PUT] /configured-extra-form-types/{name}.
      *
      * Update an extra form type.
      *
@@ -334,7 +334,7 @@ class ApiController extends FOSRestController
         ;
 
         if (null === $configuredType) {
-            return new Response('No configured type found with name ' . $name, Response::HTTP_NOT_FOUND);
+            return new Response('No configured type found with name '.$name, Response::HTTP_NOT_FOUND);
         }
 
         $configuredType->setConfiguration($paramFetcher->get('configuration'));
@@ -357,7 +357,7 @@ class ApiController extends FOSRestController
     }
 
     /**
-     * [DELETE] /configured-extra-form-types/{name}
+     * [DELETE] /configured-extra-form-types/{name}.
      *
      * Delete an extra form type.
      *
@@ -374,7 +374,7 @@ class ApiController extends FOSRestController
         ;
 
         if (null === $configuredType) {
-            return new Response('No configured type found with name ' . $name, Response::HTTP_NOT_FOUND);
+            return new Response('No configured type found with name '.$name, Response::HTTP_NOT_FOUND);
         }
 
         $em->remove($configuredType);
