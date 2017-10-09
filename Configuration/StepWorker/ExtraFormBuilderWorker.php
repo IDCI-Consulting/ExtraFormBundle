@@ -7,6 +7,7 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Configuration\StepWorker;
 
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use IDCI\Bundle\StepBundle\Configuration\Worker\ConfigurationWorkerInterface;
 use IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilderInterface;
@@ -47,7 +48,7 @@ class ExtraFormBuilderWorker implements ConfigurationWorkerInterface
             ->setAllowedTypes(array(
                 'formBuilder' => array(
                     'null',
-                    'Symfony\Component\Form\FormBuilderInterface',
+                    FormBuilderInterface::class,
                 ),
             ))
         ;

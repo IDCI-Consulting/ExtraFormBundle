@@ -123,8 +123,10 @@ class ApiController extends FOSRestController
      *
      * @return Response
      */
-    public function getExtraFormConstraintsAction($_format)
-    {
+    public function getExtraFormConstraintsAction(
+        $_format,
+        ExtraFormConstraintRegistryInterface $registry
+    ) {
         $view = View::create()->setFormat($_format);
 
         if ('html' === $_format) {
@@ -136,7 +138,7 @@ class ApiController extends FOSRestController
                 ->setTemplateVar('form')
             ;
         } else {
-            $view->setData($this->get('idci_extra_form.constraint_registry')->getConstraints());
+            $view->setData($registry->getConstraints());
         }
 
         return $this->handleView($view);

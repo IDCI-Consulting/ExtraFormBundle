@@ -31,7 +31,7 @@ class ConfigurationFetcherCompilerPass implements CompilerPassInterface
 
         $configurations = $container->getParameter('idci_extra_form.configurations');
         foreach ($configurations as $name => $configuration) {
-            $serviceDefinition = new DefinitionDecorator('idci_extra_form.configuration.fetcher');
+            $serviceDefinition = new DefinitionDecorator(ConfigurationFetcherInterface::class);
             $serviceName = sprintf('idci_extra_form.configuration.fetcher.%s', $name);
 
             $serviceDefinition->setAbstract(false);
