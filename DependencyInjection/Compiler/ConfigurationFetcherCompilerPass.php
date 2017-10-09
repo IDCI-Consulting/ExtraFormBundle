@@ -21,7 +21,7 @@ class ConfigurationFetcherCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->findDefinition(ConfigurationFetcherInterface::class) ||
+        if (!$container->has(ConfigurationFetcherInterface::class) ||
             !$container->hasDefinition(ConfigurationFetcherRegistry::class)
         ) {
             return;

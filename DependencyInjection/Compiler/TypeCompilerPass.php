@@ -23,8 +23,8 @@ class TypeCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->findDefinition(ExtraFormTypeInterface::class) ||
-            !$container->findDefinition(ExtraFormTypeRegistryInterface::class)
+        if (!$container->has(ExtraFormTypeInterface::class) ||
+            !$container->has(ExtraFormTypeRegistryInterface::class)
         ) {
             return;
         }

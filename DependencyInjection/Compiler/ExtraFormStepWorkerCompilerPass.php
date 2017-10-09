@@ -22,7 +22,7 @@ class ExtraFormStepWorkerCompilerPass implements CompilerPassInterface
     {
         // Process it only if the step bundle is loaded.
         if (!class_exists('IDCI\Bundle\StepBundle\Configuration\Worker\ConfigurationWorkerRegistryInterface') ||
-            !$container->findDefinition(
+            !$container->has(
                 'IDCI\Bundle\StepBundle\Configuration\Worker\ConfigurationWorkerRegistryInterface'
             )
         ) {

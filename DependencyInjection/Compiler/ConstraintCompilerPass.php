@@ -21,8 +21,8 @@ class ConstraintCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->findDefinition(ExtraFormConstraintInterface::class) ||
-            !$container->findDefinition(ExtraFormConstraintRegistryInterface::class)
+        if (!$container->has(ExtraFormConstraintInterface::class) ||
+            !$container->has(ExtraFormConstraintRegistryInterface::class)
         ) {
             return;
         }
