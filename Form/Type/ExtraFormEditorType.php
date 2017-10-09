@@ -47,11 +47,14 @@ class ExtraFormEditorType extends AbstractType implements AssetProviderInterface
             new Asset('IDCIExtraFormBundle:Form:extra_form_editor_assets.html.twig', array(), 0)
         );
         $this->assetCollection->add(
-            new Asset('IDCIExtraFormBundle:Form:extra_form_editor_configuration.html.twig',
-            array(
-                'options' => $options,
-                'form' => $view,
-            ), 1)
+            new Asset(
+                'IDCIExtraFormBundle:Form:extra_form_editor_configuration.html.twig',
+                array(
+                    'options' => $options,
+                    'form' => $view,
+                ),
+                1
+            )
         );
 
         $attrClass = 'extra-form-editor';
