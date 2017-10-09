@@ -155,7 +155,8 @@ class ApiController extends FOSRestController
      *
      * @return Response
      */
-    public function getExtraFormConstraintsOptionsAction($_format,
+    public function getExtraFormConstraintsOptionsAction(
+        $_format,
         $constraint,
         ExtraFormConstraintRegistryInterface $registry,
         FormFactoryInterface $formFactory,

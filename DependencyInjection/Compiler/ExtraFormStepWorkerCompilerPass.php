@@ -22,12 +22,19 @@ class ExtraFormStepWorkerCompilerPass implements CompilerPassInterface
     {
         // Process it only if the step bundle is loaded.
         if (!class_exists('IDCI\Bundle\StepBundle\Configuration\Worker\ConfigurationWorkerRegistryInterface') ||
-            !$container->findDefinition('IDCI\Bundle\StepBundle\Configuration\Worker\ConfigurationWorkerRegistryInterface')) {
+            !$container->findDefinition(
+                'IDCI\Bundle\StepBundle\Configuration\Worker\ConfigurationWorkerRegistryInterface'
+            )
+        ) {
             return;
         }
 
-        $registryDefinition = $container->findDefinition('IDCI\Bundle\StepBundle\Configuration\Worker\ConfigurationWorkerRegistryInterface');
-        $workerDefinition = new Definition('IDCI\\Bundle\\ExtraFormBundle\\Configuration\\StepWorker\\ExtraFormBuilderWorker');
+        $registryDefinition = $container->findDefinition(
+            'IDCI\Bundle\StepBundle\Configuration\Worker\ConfigurationWorkerRegistryInterface'
+        );
+        $workerDefinition = new Definition(
+            'IDCI\\Bundle\\ExtraFormBundle\\Configuration\\StepWorker\\ExtraFormBuilderWorker'
+        );
         $workerServiceId = 'idci_extra_form.configuration.step_worker.extra_form_builder';
 
         $workerDefinition->addArgument(new Reference(ExtraFormBuilder::class));
