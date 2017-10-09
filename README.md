@@ -11,7 +11,8 @@ This bundle provide:
 
 For a quick overview on what this bundle offer, you can [test the form editor](http://extra-form.labs.idci.fr/extra-form/editor).
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/6b163476-64da-450a-8c34-3b1e5225bde2/mini.png)](https://insight.sensiolabs.com/projects/6b163476-64da-450a-8c34-3b1e5225bde2)
+[![SensioLabsInsight][insight-image]][insight-url]
+[![Build][build-image]][build-url]
 
 Installation
 ------------
@@ -169,3 +170,9 @@ To execute unit tests:
 $ make phpunit
 $ make karma options='--single-run'
 ```
+
+[build-image]: https://img.shields.io/travis/IDCI-Consulting/ExtraFormBundle.svg?style=flat
+[build-url]: https://travis-ci.org/IDCI-Consulting/ExtraFormBundle
+[insight-image]: https://insight.sensiolabs.com/projects/6b163476-64da-450a-8c34-3b1e5225bde2/mini.png
+[insight-url]: https://insight.sensiolabs.com/projects/6b163476-64da-450a-8c34-3b1e5225bde2
+
