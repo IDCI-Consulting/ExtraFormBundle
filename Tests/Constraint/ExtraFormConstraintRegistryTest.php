@@ -10,6 +10,9 @@ namespace IDCI\Bundle\ExtraFormBundle\Tests\Constraint;
 use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraint;
 use IDCI\Bundle\ExtraFormBundle\Tests\Constraint;
 use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistry;
+use IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException;
+use IDCI\Bundle\ExtraFormBundle\Exception\InvalidArgumentException;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ExtraFormConstraintRegistryTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,7 +27,7 @@ class ExtraFormConstraintRegistryTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $configuration = array(
-            'class' => '\Symfony\Component\Validator\Constraints\NotBlank',
+            'class' => NotBlank::class,
             'description' => 'Not blank constraint',
             'extra_form_options' => array(
                 'message' => array(
@@ -69,10 +72,10 @@ class ExtraFormConstraintRegistryTest extends \PHPUnit_Framework_TestCase
         $registry->setConstraint('not_blank', $this->extraFormConstraint);
         $this->assertNotEmpty($registry->getConstraint('not_blank'));
 
-        $this->expectException('IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException');
+        $this->expectException(UnexpectedTypeException::class);
         $registry->getConstraint(array());
 
-        $this->expectException('IDCI\Bundle\ExtraFormBundle\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $registry->getConstraint('no_blank');
     }
 

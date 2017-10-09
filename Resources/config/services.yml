@@ -4,6 +4,13 @@ services:
         autoconfigure: true
         public: true
 
+    # Controllers
+    IDCI\Bundle\ExtraFormBundle\Controller\:
+        resource: '../../Controller'
+        # apply some configuration to these services
+        public: true
+        tags: ['controller.service_arguments']
+
     # Events Subscriber
 
     IDCI\Bundle\ExtraFormBundle\Event\Subscriber\SerializerSubscriber:
@@ -13,10 +20,12 @@ services:
     # ExtraFormType
 
     IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry: ~
+    IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistryInterface: '@IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry'
 
     IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType:
         abstract: true
         arguments: [null]
+    IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeInterface: '@IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType'
 
     # ExtraFormConstraint
 
@@ -26,12 +35,16 @@ services:
     IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraint:
         abstract: true
         arguments: [null]
+    IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintInterface: '@IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraint'
 
 
     # ConfigurationFetcher
 
     IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcher:
         abstract: true
+    IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherInterface: '@IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcher'
+
+    IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherRegistry: ~
 
     #idci_extra_form.configuration.fetcher.doctrine:
     #    class: IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\DoctrineConfigurationFetcher
@@ -50,7 +63,7 @@ services:
     IDCI\Bundle\ExtraFormBundle\Form\Extension\HelpMessageTypeExtension:
         tags:
           - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
-
+    IDCI\Bundle\ExtraFormBundle\Form\Extension\HelpMessageTypeExtensionInterface: '@IDCI\Bundle\ExtraFormBundle\Form\Extension\HelpMessageTypeExtension'
 
     # Form Types
 

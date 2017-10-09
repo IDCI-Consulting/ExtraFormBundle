@@ -11,6 +11,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherInterface;
 use IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilderInterface;
 use IDCI\Bundle\ExtraFormBundle\Form\Event\RawEventSubscriber;
 
@@ -71,7 +72,7 @@ class ExtraFormBuilderType extends AbstractType
                 array(
                     'string',
                     'array',
-                    'IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherInterface',
+                    ConfigurationFetcherInterface::class,
                 )
             )
             ->setDefaults(array(

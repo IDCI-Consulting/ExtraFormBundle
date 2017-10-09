@@ -7,7 +7,7 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\DependencyInjection\Compiler;
 
-use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcher;
+use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherInterface;
 use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherRegistry;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -21,7 +21,7 @@ class ConfigurationFetcherCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition(ConfigurationFetcher::class) ||
+        if (!$container->findDefinition(ConfigurationFetcherInterface::class) ||
             !$container->hasDefinition(ConfigurationFetcherRegistry::class)
         ) {
             return;

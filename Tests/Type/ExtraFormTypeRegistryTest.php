@@ -7,6 +7,8 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Tests\Type;
 
+use IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException;
+use IDCI\Bundle\ExtraFormBundle\Exception\InvalidArgumentException;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry;
 
@@ -79,10 +81,10 @@ class ExtraFormTypeRegistryTest extends \PHPUnit_Framework_TestCase
         $registry->setType('html', $this->extraFormType);
         $this->assertNotEmpty($registry->getType('html'));
 
-        $this->expectException('IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException');
+        $this->expectException(UnexpectedTypeException::class);
         $registry->getType(array());
 
-        $this->expectException('IDCI\Bundle\ExtraFormBundle\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $registry->getType('no_blank');
     }
 

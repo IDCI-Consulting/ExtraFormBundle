@@ -8,6 +8,7 @@
 namespace IDCI\Bundle\ExtraFormBundle\Tests\Constraint;
 
 use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraint;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ExtraFormConstraintTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,7 +23,7 @@ class ExtraFormConstraintTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $configuration = array(
-            'class' => '\Symfony\Component\Validator\Constraints\NotBlank',
+            'class' => NotBlank::class,
             'description' => 'Not blank constraint',
             'extra_form_options' => array(
                 'message' => array(
@@ -42,9 +43,7 @@ class ExtraFormConstraintTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetClassName()
     {
-        $className = '\Symfony\Component\Validator\Constraints\NotBlank';
-
-        $this->assertEquals($className, $this->extraFormConstraint->getClassName());
+        $this->assertEquals(NotBlank::class, $this->extraFormConstraint->getClassName());
     }
 
     /**

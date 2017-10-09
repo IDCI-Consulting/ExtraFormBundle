@@ -7,6 +7,7 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Form;
 
+use IDCI\Bundle\ExtraFormBundle\Model\ConfiguredType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -37,7 +38,7 @@ class ConfiguredTypeType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => 'IDCI\Bundle\ExtraFormBundle\Model\ConfiguredType',
+                'data_class' => ConfiguredType::class,
             ))
         ;
     }

@@ -3,8 +3,11 @@
 namespace IDCI\Bundle\ExtraFormBundle\Controller;
 
 use FOS\RestBundle\Request\ParamFetcher;
+use IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilderInterface;
 use IDCI\Bundle\ExtraFormBundle\Model\ConfiguredType;
-use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry;
+use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistryInterface;
+use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistryInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -31,8 +34,10 @@ class ApiController extends FOSRestController
      *
      * @return Response
      */
-    public function getExtraFormTypesAction($_format)
-    {
+    public function getExtraFormTypesAction(
+        $_format,
+        ExtraFormTypeRegistryInterface $extraFormTypeRegistry
+    ) {
         $view = View::create()->setFormat($_format);
 
         if ('html' === $_format) {
@@ -44,7 +49,7 @@ class ApiController extends FOSRestController
                 ->setTemplateVar('form')
             ;
         } else {
-            $types = $this->get(ExtraFormTypeRegistry::class)->getTypes();
+            $types = $extraFormTypeRegistry->getTypes();
             ksort($types);
             $view->setData(array_values($types));
         }
@@ -63,9 +68,13 @@ class ApiController extends FOSRestController
      *
      * @return Response
      */
-    public function getExtraFormTypesOptionsAction($_format, $type)
-    {
-        $registry = $this->get(ExtraFormTypeRegistry::class);
+    public function getExtraFormTypesOptionsAction(
+        $_format,
+        $type,
+        ExtraFormTypeRegistryInterface $registry,
+        FormFactoryInterface $formFactory,
+        ExtraFormBuilderInterface $extraFormBuilder
+    ) {
         if (!($registry->hasType($type))) {
             throw new NotFoundHttpException(sprintf(
                 'The Type `%s` was not found',
@@ -77,13 +86,12 @@ class ApiController extends FOSRestController
         $options = $registry->getType($type)->getExtraFormOptions();
 
         if ('html' === $_format) {
-            $form = $this
-                ->get('idci_extra_form.builder')
+            $form = $extraFormBuilder
                 ->build(
                     $options,
                     array(),
                     null,
-                    $this->container->get('form.factory')->createNamedBuilder(
+                    $formFactory->createNamedBuilder(
                         null,
                         'form',
                         null,
@@ -145,9 +153,12 @@ class ApiController extends FOSRestController
      *
      * @return Response
      */
-    public function getExtraFormConstraintsOptionsAction($_format, $constraint)
-    {
-        $registry = $this->get('idci_extra_form.constraint_registry');
+    public function getExtraFormConstraintsOptionsAction($_format,
+        $constraint,
+        ExtraFormConstraintRegistryInterface $registry,
+        FormFactoryInterface $formFactory,
+        ExtraFormBuilderInterface $extraFormBuilder
+    ) {
         if (!($registry->hasConstraint($constraint))) {
             throw new NotFoundHttpException(sprintf(
                 'The Constraint `%s` was not found',
@@ -159,13 +170,12 @@ class ApiController extends FOSRestController
         $options = $registry->getConstraint($constraint)->getExtraFormOptions();
 
         if ('html' === $_format) {
-            $form = $this
-                ->get('idci_extra_form.builder')
+            $form = $extraFormBuilder
                 ->build(
                     $options,
                     array(),
                     null,
-                    $this->container->get('form.factory')->createNamedBuilder(
+                    $formFactory->createNamedBuilder(
                         null,
                         'form',
                         null,

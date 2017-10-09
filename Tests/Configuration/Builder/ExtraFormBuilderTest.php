@@ -7,7 +7,7 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Tests\Configuration\Builder;
 
-use IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilder;
+use IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilderInterface;
 use IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormCollectionType;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Form\Form;
@@ -29,7 +29,7 @@ class ExtraFormBuilderTest extends WebTestCase
         $kernel->boot();
         $container = $kernel->getContainer();
 
-        $this->extraFormBuilder = $container->get(ExtraFormBuilder::class);
+        $this->extraFormBuilder = $container->get(ExtraFormBuilderInterface::class);
     }
 
     /**

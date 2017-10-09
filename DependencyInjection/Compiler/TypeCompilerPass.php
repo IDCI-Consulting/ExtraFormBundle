@@ -13,8 +13,8 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use IDCI\Bundle\ExtraFormBundle\Exception\UndefinedExtraFormTypeException;
 use IDCI\Bundle\ExtraFormBundle\Exception\WrongExtraFormTypeOptionException;
-use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry;
-use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType;
+use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistryInterface;
+use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeInterface;
 
 class TypeCompilerPass implements CompilerPassInterface
 {
@@ -23,18 +23,18 @@ class TypeCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition(ExtraFormType::class) ||
-            !$container->hasDefinition(ExtraFormTypeRegistry::class)
+        if (!$container->findDefinition(ExtraFormTypeInterface::class) ||
+            !$container->findDefinition(ExtraFormTypeRegistryInterface::class)
         ) {
             return;
         }
 
-        $registryDefinition = $container->getDefinition(ExtraFormTypeRegistry::class);
+        $registryDefinition = $container->findDefinition(ExtraFormTypeRegistryInterface::class);
 
         $types = $container->getParameter('idci_extra_form.types');
         $extraFormOptions = array();
         foreach ($types as $name => $configuration) {
-            $serviceDefinition = new DefinitionDecorator(ExtraFormType::class);
+            $serviceDefinition = new DefinitionDecorator(ExtraFormTypeInterface::class);
 
             if (null !== $configuration['parent']) {
                 if (!$container->hasDefinition($this->getDefinitionName($configuration['parent']))) {

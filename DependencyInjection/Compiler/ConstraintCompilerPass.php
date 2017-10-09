@@ -7,8 +7,8 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\DependencyInjection\Compiler;
 
-use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraint;
-use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistry;
+use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintInterface;
+use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistryInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Reference;
@@ -21,17 +21,17 @@ class ConstraintCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition(ExtraFormConstraint::class) ||
-            !$container->hasDefinition(ExtraFormConstraintRegistry::class)
+        if (!$container->findDefinition(ExtraFormConstraintInterface::class) ||
+            !$container->findDefinition(ExtraFormConstraintRegistryInterface::class)
         ) {
             return;
         }
 
-        $registryDefinition = $container->getDefinition(ExtraFormConstraintRegistry::class);
+        $registryDefinition = $container->findDefinition(ExtraFormConstraintRegistryInterface::class);
 
         $constraints = $container->getParameter('idci_extra_form.constraints');
         foreach ($constraints as $name => $configuration) {
-            $serviceDefinition = new DefinitionDecorator(ExtraFormConstraint::class);
+            $serviceDefinition = new DefinitionDecorator(ExtraFormConstraintInterface::class);
             $serviceDefinition->replaceArgument(0, $configuration);
 
             $container->setDefinition(
