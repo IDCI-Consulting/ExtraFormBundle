@@ -228,7 +228,7 @@
       <UML:Abstraction supplier="bfDkqccvw7VB" visibility="public" name="" isSpecification="false" client="leA2EAirGGgn" xmi.id="yaPThLtsHQXQ" namespace="Logical View"/>
       <UML:Class isRoot="false" visibility="public" name="FormFactoryInterface" isSpecification="false" isLeaf="false" isAbstract="false" xmi.id="yFIqIlA5uSHY" namespace="Logical View"/>
       <UML:Class isRoot="false" visibility="public" name="ConfigurationFetcherRegistry" isSpecification="false" isLeaf="false" isAbstract="false" xmi.id="HsQ0o2wEICaE" namespace="Logical View"/>
-      <UML:Class isRoot="false" visibility="public" name="OptionsResolverInterface" isSpecification="false" isLeaf="false" isAbstract="false" xmi.id="JgGy8Hj7mm1W" namespace="Logical View"/>
+      <UML:Class isRoot="false" visibility="public" name="OptionsResolver" isSpecification="false" isLeaf="false" isAbstract="false" xmi.id="JgGy8Hj7mm1W" namespace="Logical View"/>
       <UML:Class isRoot="false" stereotype="h2cYs8rbfgQx" visibility="public" name="ConfiguredType" isSpecification="false" isLeaf="false" isAbstract="false" xmi.id="yQbcOb3BARG9" namespace="Logical View">
        <UML:Classifier.feature>
         <UML:Attribute visibility="protected" type="noRRtT9IqsdM" name="id" isSpecification="false" xmi.id="bf6gWzzRr143"/>

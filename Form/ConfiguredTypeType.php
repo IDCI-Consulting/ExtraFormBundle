@@ -11,7 +11,6 @@ use IDCI\Bundle\ExtraFormBundle\Model\ConfiguredType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ConfiguredTypeType extends AbstractType
 {
@@ -48,7 +47,7 @@ class ConfiguredTypeType extends AbstractType
      *
      * @deprecated
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $this->configureOptions($resolver);
     }

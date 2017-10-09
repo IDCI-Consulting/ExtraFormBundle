@@ -10,8 +10,6 @@ namespace IDCI\Bundle\ExtraFormBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\OptionsResolver\Options;
 
 class RangeType extends AbstractType
 {
@@ -29,7 +27,7 @@ class RangeType extends AbstractType
             ))
             ->setNormalizer(
                 'value',
-                function (Options $options, $value) {
+                function (OptionsResolver $options, $value) {
                     if (isset($options['data']) && null !== $options['data']) {
                         return $options['data'];
                     }
@@ -39,7 +37,7 @@ class RangeType extends AbstractType
             )
             ->setNormalizer(
                 'attr',
-                function (Options $options, $value) {
+                function (OptionsResolver $options, $value) {
                     return array_merge(
                         array(
                             'min' => $options['min'],
@@ -63,7 +61,7 @@ class RangeType extends AbstractType
      *
      * @deprecated
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $this->configureOptions($resolver);
     }

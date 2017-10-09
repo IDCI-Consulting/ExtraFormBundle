@@ -7,7 +7,7 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Common\Util\Inflector;
 use IDCI\Bundle\ExtraFormBundle\Exception\FetchConfigurationException;
@@ -29,7 +29,7 @@ class DoctrineConfigurationFetcher extends AbstractConfigurationFetcher
     /**
      * {@inheritdoc}
      */
-    protected function setDefaultParameters(OptionsResolverInterface $resolver)
+    protected function setDefaultParameters(OptionsResolver $resolver)
     {
         parent::setDefaultParameters($resolver);
 

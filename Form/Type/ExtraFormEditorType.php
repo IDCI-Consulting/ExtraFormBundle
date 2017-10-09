@@ -13,9 +13,7 @@ use IDCI\Bundle\AssetLoaderBundle\Model\AssetCollection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ExtraFormEditorType extends AbstractType implements AssetProviderInterface
 {
@@ -83,7 +81,7 @@ class ExtraFormEditorType extends AbstractType implements AssetProviderInterface
                 'allow_configured_types_edition' => array('boolean'),
                 'show_configured_types' => array('boolean'),
             ))
-            ->setNormalizer('allow_configured_types_edition', function (Options $options, $value) {
+            ->setNormalizer('allow_configured_types_edition', function (OptionsResolver $options, $value) {
                 if ($value && !$options['show_configured_types']) {
                     throw new \Exception(
                         'The option `allow_configured_types_edition` for the extra_form_editor form type'.
@@ -101,7 +99,7 @@ class ExtraFormEditorType extends AbstractType implements AssetProviderInterface
      *
      * @deprecated
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $this->configureOptions($resolver);
     }

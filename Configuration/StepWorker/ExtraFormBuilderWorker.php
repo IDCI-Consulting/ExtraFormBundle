@@ -8,7 +8,6 @@
 namespace IDCI\Bundle\ExtraFormBundle\Configuration\StepWorker;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use IDCI\Bundle\StepBundle\Configuration\Worker\ConfigurationWorkerInterface;
 use IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilderInterface;
 
@@ -34,9 +33,9 @@ class ExtraFormBuilderWorker implements ConfigurationWorkerInterface
     /**
      * Sets the default parameters.
      *
-     * @param OptionsResolverInterface $resolver the options resolver
+     * @param OptionsResolver $resolver the options resolver
      */
-    public function setDefaultParameters(OptionsResolverInterface $resolver)
+    public function setDefaultParameters(OptionsResolver $resolver)
     {
         $resolver
             ->setRequired(array('configuration'))

@@ -14,8 +14,6 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\OptionsResolver\Options;
 use IDCI\Bundle\ExtraFormBundle\Form\Event\CollectionEventSubscriber;
 
 class ExtraFormCollectionType extends AbstractType
@@ -86,7 +84,7 @@ class ExtraFormCollectionType extends AbstractType
             ))
             ->setNormalizer(
                 'add_button',
-                function (Options $options, $value) {
+                function (OptionsResolver $options, $value) {
                     $attr = ($options['min_items'] == $options['max_items']) ?
                         array('style' => 'display:none;') :
                         array()
@@ -100,7 +98,7 @@ class ExtraFormCollectionType extends AbstractType
             )
             ->setNormalizer(
                 'remove_button',
-                function (Options $options, $value) {
+                function (OptionsResolver $options, $value) {
                     $attr = ($options['min_items'] == $options['max_items']) ?
                         array('style' => 'display:none;') :
                         array()
@@ -114,7 +112,7 @@ class ExtraFormCollectionType extends AbstractType
             )
             ->setNormalizer(
                 'options',
-                function (Options $options, $value) {
+                function (OptionsResolver $options, $value) {
                     return array_merge(
                         array(
                             'label' => ' ',
@@ -136,7 +134,7 @@ class ExtraFormCollectionType extends AbstractType
      *
      * @deprecated
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $this->configureOptions($resolver);
     }
