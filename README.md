@@ -94,7 +94,7 @@ extra_form:
 
 Install the assets:
 ```sh
-php app/console assets:install --symlink
+php bin/console assets:install --symlink
 ```
 
 The editor requires bootstrap and jquery. If you don't use it already in your project, just add the following lines in your views.

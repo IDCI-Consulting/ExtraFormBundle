@@ -51,7 +51,7 @@ class ExtraFormType implements ExtraFormTypeInterface
      */
     public function __construct(array $configuration)
     {
-        $this->blockPrefix = $configuration['blockPrefix'];
+        $this->blockPrefix = $configuration['block_prefix'];
         $this->formType = $configuration['form_type'];
         $this->parent = $configuration['parent'];
         $this->description = $configuration['description'];

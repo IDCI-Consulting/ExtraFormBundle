@@ -46,7 +46,7 @@ class TypeCompilerPass implements CompilerPassInterface
                 );
             }
 
-            $configuration['blockPrefix'] = $blockPrefix;
+            $configuration['block_prefix'] = $blockPrefix;
 
             $serviceDefinition->setAbstract(false);
             $serviceDefinition->setPublic(!$configuration['abstract']);

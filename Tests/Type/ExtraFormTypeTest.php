@@ -22,7 +22,7 @@ class ExtraFormTypeTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $configuration = array(
-            'name' => 'html',
+            'block_prefix' => 'html',
             'description' => 'Html text field',
             'icon' => 'code',
             'parent' => null,
@@ -53,9 +53,9 @@ class ExtraFormTypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetBlockPrefix()
     {
-        $name = 'html';
+        $blockPrefix = 'html';
 
-        $this->assertEquals($name, $this->extraFormType->getBlockPrefix());
+        $this->assertEquals($blockPrefix, $this->extraFormType->getBlockPrefix());
     }
 
     /**
