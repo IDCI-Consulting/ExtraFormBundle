@@ -146,14 +146,4 @@ class ExtraFormCollectionType extends AbstractType
     {
         return 'extra_form_collection';
     }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @deprecated
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
 }

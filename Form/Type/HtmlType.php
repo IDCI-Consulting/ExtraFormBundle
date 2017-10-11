@@ -55,14 +55,4 @@ class HtmlType extends AbstractType
     {
         return 'extra_form_html';
     }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @deprecated
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
 }

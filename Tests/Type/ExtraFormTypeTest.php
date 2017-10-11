@@ -49,13 +49,13 @@ class ExtraFormTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getName.
+     * Test getBlockPrefix.
      */
-    public function testGetName()
+    public function testGetBlockPrefix()
     {
         $name = 'html';
 
-        $this->assertEquals($name, $this->extraFormType->getName());
+        $this->assertEquals($name, $this->extraFormType->getBlockPrefix());
     }
 
     /**

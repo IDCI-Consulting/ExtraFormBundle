@@ -81,14 +81,4 @@ class RangeType extends AbstractType
     {
         return 'extra_form_range';
     }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @deprecated
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
 }

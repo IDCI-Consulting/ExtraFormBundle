@@ -76,14 +76,4 @@ class TagsType extends AbstractType
     {
         return 'extra_form_tags';
     }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @deprecated
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
 }

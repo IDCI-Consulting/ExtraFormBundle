@@ -12,7 +12,7 @@ class ExtraFormType implements ExtraFormTypeInterface
     /**
      * @var string
      */
-    protected $name;
+    protected $blockPrefix;
 
     /**
      * @var string
@@ -51,7 +51,7 @@ class ExtraFormType implements ExtraFormTypeInterface
      */
     public function __construct(array $configuration)
     {
-        $this->name = $configuration['name'];
+        $this->blockPrefix = $configuration['blockPrefix'];
         $this->formType = $configuration['form_type'];
         $this->parent = $configuration['parent'];
         $this->description = $configuration['description'];
@@ -63,9 +63,9 @@ class ExtraFormType implements ExtraFormTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
-        return $this->name;
+        return $this->blockPrefix;
     }
 
     /**
@@ -73,7 +73,7 @@ class ExtraFormType implements ExtraFormTypeInterface
      */
     public function getFormTypeName()
     {
-        return $this->getName();
+        return $this->getBlockPrefix();
     }
 
     /**

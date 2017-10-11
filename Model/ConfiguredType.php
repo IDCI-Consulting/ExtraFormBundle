@@ -14,7 +14,7 @@ class ConfiguredType implements ExtraFormTypeInterface
     /**
      * @var string
      */
-    protected $name;
+    protected $blockPrefix;
 
     /**
      * @var string
@@ -39,12 +39,12 @@ class ConfiguredType implements ExtraFormTypeInterface
     /**
      * Constructor.
      *
-     * @param string $name
+     * @param string $blockPrefix
      * @param string $configuration
      */
-    public function __construct($name = null, $configuration = null, $tags = null)
+    public function __construct($blockPrefix = null, $configuration = null, $tags = null)
     {
-        $this->name = $name;
+        $this->blockPrefix = $blockPrefix;
         $this->configuration = $configuration;
         if (!empty($tags)) {
             $this->tags = $tags;
@@ -58,7 +58,7 @@ class ConfiguredType implements ExtraFormTypeInterface
      */
     public function __toString()
     {
-        return $this->getName();
+        return $this->getBlockPrefix();
     }
 
     /**
@@ -72,15 +72,15 @@ class ConfiguredType implements ExtraFormTypeInterface
     }
 
     /**
-     * Set name.
+     * Set blockPrefix.
      *
-     * @param string $name
+     * @param string $blockPrefix
      *
      * @return ConfiguredType
      */
-    public function setName($name)
+    public function setBlockPrefix($blockPrefix)
     {
-        $this->name = $name;
+        $this->blockPrefix = $blockPrefix;
 
         return $this;
     }
@@ -88,9 +88,9 @@ class ConfiguredType implements ExtraFormTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
-        return $this->name;
+        return $this->blockPrefix;
     }
 
     /**
@@ -102,7 +102,7 @@ class ConfiguredType implements ExtraFormTypeInterface
             return null;
         }
 
-        return $this->extraFormType->getName();
+        return $this->extraFormType->getBlockPrefix();
     }
 
     /**

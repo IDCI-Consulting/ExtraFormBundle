@@ -81,14 +81,4 @@ class IbanType extends AbstractType
     {
         return 'extra_form_iban';
     }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @deprecated
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
 }

@@ -25,7 +25,7 @@ class ExtraFormTypeRegistryTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $configuration = array(
-            'name' => 'html',
+            'blockPrefix' => 'html',
             'description' => 'Html text field',
             'icon' => 'code',
             'parent' => 'form',

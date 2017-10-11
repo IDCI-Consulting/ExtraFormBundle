@@ -33,7 +33,7 @@ class TypeCompilerPass implements CompilerPassInterface
 
         $types = $container->getParameter('idci_extra_form.types');
         $extraFormOptions = array();
-        foreach ($types as $name => $configuration) {
+        foreach ($types as $blockPrefix => $configuration) {
             $serviceDefinition = new DefinitionDecorator(ExtraFormTypeInterface::class);
 
             if (null !== $configuration['parent']) {
@@ -46,31 +46,31 @@ class TypeCompilerPass implements CompilerPassInterface
                 );
             }
 
-            $configuration['name'] = $name;
+            $configuration['blockPrefix'] = $blockPrefix;
 
             $serviceDefinition->setAbstract(false);
             $serviceDefinition->setPublic(!$configuration['abstract']);
             $serviceDefinition->replaceArgument(0, $configuration);
 
             $container->setDefinition(
-                $this->getDefinitionName($name),
+                $this->getDefinitionName($blockPrefix),
                 $serviceDefinition
             );
 
             $registryDefinition->addMethodCall(
                 'setType',
-                array($name, new Reference($this->getDefinitionName($name)))
+                array($blockPrefix, new Reference($this->getDefinitionName($blockPrefix)))
             );
 
-            $extraFormOptions[$name] = $configuration['extra_form_options'];
+            $extraFormOptions[$blockPrefix] = $configuration['extra_form_options'];
         }
 
         // Check extra_form_options
-        foreach ($extraFormOptions as $name => $options) {
+        foreach ($extraFormOptions as $blockPrefix => $options) {
             foreach ($options as $optionName => $optionValue) {
                 if (!$container->hasDefinition($this->getDefinitionName($optionValue['extra_form_type']))) {
                     throw new WrongExtraFormTypeOptionException(
-                        $name,
+                        $blockPrefix,
                         $optionName,
                         sprintf('Undefined ExtraFormType "%s"', $optionValue['extra_form_type'])
                     );
@@ -86,8 +86,8 @@ class TypeCompilerPass implements CompilerPassInterface
      *
      * @return string
      */
-    protected function getDefinitionName($name)
+    protected function getDefinitionName($blockPrefix)
     {
-        return sprintf('idci_extra_form.type.%s', $name);
+        return sprintf('idci_extra_form.type.%s', $blockPrefix);
     }
 }

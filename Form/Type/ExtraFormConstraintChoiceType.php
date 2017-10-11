@@ -72,14 +72,4 @@ class ExtraFormConstraintChoiceType extends AbstractType
     {
         return 'extra_form_constraint_choice';
     }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @deprecated
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
 }

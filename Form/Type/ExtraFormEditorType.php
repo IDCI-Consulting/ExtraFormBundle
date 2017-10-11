@@ -127,14 +127,4 @@ class ExtraFormEditorType extends AbstractType implements AssetProviderInterface
     {
         return 'extra_form_editor';
     }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @deprecated
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
 }

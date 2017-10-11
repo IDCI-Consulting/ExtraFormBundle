@@ -59,14 +59,4 @@ class ConfiguredTypeType extends AbstractType
     {
         return 'idci_extraform_configured_type_type';
     }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @deprecated
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
 }

@@ -37,14 +37,4 @@ class JsonTextareaType extends AbstractType
     {
         return 'extra_form_json_textarea';
     }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @deprecated
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
 }

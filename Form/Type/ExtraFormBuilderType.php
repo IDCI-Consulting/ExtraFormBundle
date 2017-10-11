@@ -103,14 +103,4 @@ class ExtraFormBuilderType extends AbstractType
     {
         return 'extra_form_builder';
     }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @deprecated
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
 }
