@@ -49,7 +49,7 @@ Import the bundle configuration:
 # app/config/config.yml
 
 imports:
-    - { resource: @IDCIExtraFormBundle/Resources/config/config.yml }
+    - { resource: '@IDCIExtraFormBundle/Resources/config/config.yml' }
 ```
 
 That's it, you are ready to use the [extra form builder](Resources/doc/usage.md).
@@ -89,7 +89,7 @@ Import the routes:
 # app/config/routing.yml
 extra_form:
     resource: "@IDCIExtraFormBundle/Controller/"
-    type:     annotation
+    type: annotation
 ```
 
 Install the assets:
