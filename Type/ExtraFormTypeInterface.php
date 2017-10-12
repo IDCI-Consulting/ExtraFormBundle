@@ -7,7 +7,6 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Type;
 
-
 interface ExtraFormTypeInterface
 {
     /**
@@ -34,7 +33,7 @@ interface ExtraFormTypeInterface
     /**
      * Is abstract.
      *
-     * @return boolean
+     * @return bool
      */
     public function isAbstract();
 
@@ -46,7 +45,7 @@ interface ExtraFormTypeInterface
     public function getExtraFormOptions();
 
     /**
-     * Returns extra form constraints
+     * Returns extra form constraints.
      *
      * @return array
      */

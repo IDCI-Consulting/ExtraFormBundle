@@ -11,18 +11,17 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class JsonToArrayTransformer implements DataTransformerInterface
 {
-
     /**
      * {@inheritdoc}
      */
     public function transform($value)
     {
         if (null === $value) {
-            return "";
+            return '';
         }
 
         if (is_array($value)) {
-           return json_encode($value);
+            return json_encode($value);
         }
 
         return $value;
@@ -38,5 +37,3 @@ class JsonToArrayTransformer implements DataTransformerInterface
         return null === $decoded ? $value : $decoded;
     }
 }
-
-

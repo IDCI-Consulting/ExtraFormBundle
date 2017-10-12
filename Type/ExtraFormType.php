@@ -7,8 +7,7 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Type;
 
-
-class ExtraFormType implements ExtraFormTypeInterface 
+class ExtraFormType implements ExtraFormTypeInterface
 {
     protected $formType;
     protected $parent;
@@ -18,22 +17,22 @@ class ExtraFormType implements ExtraFormTypeInterface
     protected $extraFormConstraints;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $configuration
      */
     public function __construct(array $configuration)
     {
-        $this->formType             = $configuration['form_type'];
-        $this->parent               = $configuration['parent'];
-        $this->description          = $configuration['description'];
-        $this->abstract             = $configuration['abstract'];
-        $this->extraFormOptions     = $configuration['extra_form_options'];
+        $this->formType = $configuration['form_type'];
+        $this->parent = $configuration['parent'];
+        $this->description = $configuration['description'];
+        $this->abstract = $configuration['abstract'];
+        $this->extraFormOptions = $configuration['extra_form_options'];
         $this->extraFormConstraints = $configuration['extra_form_constraints'];
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getFormType()
     {
@@ -41,7 +40,7 @@ class ExtraFormType implements ExtraFormTypeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getParent()
     {
@@ -49,7 +48,7 @@ class ExtraFormType implements ExtraFormTypeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getDescription()
     {
@@ -57,7 +56,7 @@ class ExtraFormType implements ExtraFormTypeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function isAbstract()
     {
@@ -65,7 +64,7 @@ class ExtraFormType implements ExtraFormTypeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getExtraFormOptions()
     {
@@ -80,7 +79,7 @@ class ExtraFormType implements ExtraFormTypeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getExtraFormConstraints()
     {

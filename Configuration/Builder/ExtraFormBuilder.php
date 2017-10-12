@@ -14,7 +14,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherRegistry;
 use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherInterface;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistryInterface;
-use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeInterface;
 use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistryInterface;
 
 class ExtraFormBuilder implements ExtraFormBuilderInterface
@@ -25,24 +24,23 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
     protected $constraintRegistry;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param FormFactoryInterface                 $formFactory                  The form factory.
-     * @param ConfigurationFetcherRegistry         $configurationFetcherRegistry The configuration fetcher registry.
-     * @param ExtraFormTypeRegistryInterface       $typeRegistry                 The type registry.
-     * @param ExtraFormConstraintRegistryInterface $constraintRegistry           The constraint registry.
+     * @param FormFactoryInterface                 $formFactory                  the form factory
+     * @param ConfigurationFetcherRegistry         $configurationFetcherRegistry the configuration fetcher registry
+     * @param ExtraFormTypeRegistryInterface       $typeRegistry                 the type registry
+     * @param ExtraFormConstraintRegistryInterface $constraintRegistry           the constraint registry
      */
     public function __construct(
         FormFactoryInterface                 $formFactory,
         ConfigurationFetcherRegistry         $configurationFetcherRegistry,
         ExtraFormTypeRegistryInterface       $typeRegistry,
         ExtraFormConstraintRegistryInterface $constraintRegistry
-    )
-    {
-        $this->formFactory                  = $formFactory;
+    ) {
+        $this->formFactory = $formFactory;
         $this->configurationFetcherRegistry = $configurationFetcherRegistry;
-        $this->typeRegistry                 = $typeRegistry;
-        $this->constraintRegistry           = $constraintRegistry;
+        $this->typeRegistry = $typeRegistry;
+        $this->constraintRegistry = $constraintRegistry;
     }
 
     /**
@@ -55,22 +53,21 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
         $resolver
             ->setDefaults(array(
                 'extra_form_type' => 'text',
-                'options'         => array(),
-                'constraints'     => array()
+                'options' => array(),
+                'constraints' => array(),
             ))
         ;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function build(
         $configuration,
         array $parameters = array(),
         $data = null,
         FormBuilderInterface $formBuilder = null
-    )
-    {
+    ) {
         if (null === $formBuilder) {
             $formBuilder = $this->formFactory->createBuilder();
         }

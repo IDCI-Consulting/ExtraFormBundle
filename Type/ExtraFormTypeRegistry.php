@@ -17,7 +17,7 @@ class ExtraFormTypeRegistry implements ExtraFormTypeRegistryInterface
     protected $types;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setType($alias, ExtraFormTypeInterface $type)
     {
@@ -27,7 +27,7 @@ class ExtraFormTypeRegistry implements ExtraFormTypeRegistryInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getTypes()
     {
@@ -35,7 +35,7 @@ class ExtraFormTypeRegistry implements ExtraFormTypeRegistryInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getType($alias)
     {
@@ -51,7 +51,7 @@ class ExtraFormTypeRegistry implements ExtraFormTypeRegistryInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function hasType($alias)
     {

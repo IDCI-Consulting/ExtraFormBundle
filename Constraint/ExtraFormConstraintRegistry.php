@@ -17,7 +17,7 @@ class ExtraFormConstraintRegistry implements ExtraFormConstraintRegistryInterfac
     protected $constraints;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setConstraint($alias, ExtraFormConstraintInterface $constraint)
     {
@@ -27,7 +27,7 @@ class ExtraFormConstraintRegistry implements ExtraFormConstraintRegistryInterfac
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getConstraints()
     {
@@ -35,7 +35,7 @@ class ExtraFormConstraintRegistry implements ExtraFormConstraintRegistryInterfac
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getConstraint($alias)
     {
@@ -51,7 +51,7 @@ class ExtraFormConstraintRegistry implements ExtraFormConstraintRegistryInterfac
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function hasConstraint($alias)
     {

@@ -82,9 +82,10 @@ class TypeCompilerPass implements CompilerPassInterface
     }
 
     /**
-     * Get definition name
+     * Get definition name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return string
      */
     protected function getDefinitionName($name)
@@ -93,10 +94,11 @@ class TypeCompilerPass implements CompilerPassInterface
     }
 
     /**
-     * Get definition name
+     * Get definition name.
      *
-     * @param  Container $container
-     * @param  string $name
+     * @param Container $container
+     * @param string    $name
+     *
      * @return string
      */
     protected function isExtraFormTypeDefined(Container $container, $name)
