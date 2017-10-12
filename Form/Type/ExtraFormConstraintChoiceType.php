@@ -8,14 +8,8 @@
 namespace IDCI\Bundle\ExtraFormBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\OptionsResolver\Options;
-use IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilderInterface;
-use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistryInterface;
-use IDCI\Bundle\ExtraFormBundle\Form\Event\RawEventSubscriber;
 use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistryInterface;
-
 
 class ExtraFormConstraintChoiceType extends AbstractType
 {
@@ -47,7 +41,7 @@ class ExtraFormConstraintChoiceType extends AbstractType
 
         $resolver
             ->setDefaults(array(
-                'choices' => $choices
+                'choices' => $choices,
             ))
         ;
     }
@@ -67,5 +61,4 @@ class ExtraFormConstraintChoiceType extends AbstractType
     {
         return 'extra_form_constraint_choice';
     }
-
 }

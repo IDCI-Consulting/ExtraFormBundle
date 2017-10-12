@@ -45,9 +45,10 @@ class ConstraintCompilerPass implements CompilerPassInterface
     }
 
     /**
-     * Get definition name
+     * Get definition name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return string
      */
     protected function getDefinitionName($name)

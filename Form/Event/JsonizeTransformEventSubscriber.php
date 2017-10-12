@@ -1,15 +1,14 @@
 <?php
 
-/**
- * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
- * @license: MIT
- */
+ /**
+  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+  * @license: MIT
+  */
 
- namespace IDCI\Bundle\ExtraFormBundle\Form\Event;
+namespace IDCI\Bundle\ExtraFormBundle\Form\Event;
 
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class JsonizeTransformEventSubscriber implements EventSubscriberInterface
@@ -21,7 +20,7 @@ class JsonizeTransformEventSubscriber implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => array('preSetData', 100),
-            FormEvents::SUBMIT => array('submit', 100)
+            FormEvents::SUBMIT => array('submit', 100),
         );
     }
 

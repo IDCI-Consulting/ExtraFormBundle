@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints\LessThanOrEqualValidator;
 class DateLessThanOrEqualValidator extends LessThanOrEqualValidator
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function compareValues($value1, $value2)
     {

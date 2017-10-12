@@ -27,7 +27,7 @@ class DoctrineConfigurationFetcher extends AbstractConfigurationFetcher
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function setDefaultParameters(OptionsResolverInterface $resolver)
     {
@@ -36,7 +36,7 @@ class DoctrineConfigurationFetcher extends AbstractConfigurationFetcher
         $resolver
             ->setRequired(array('class', 'criteria', 'property'))
             ->setAllowedTypes(array(
-                'class'    => 'string',
+                'class' => 'string',
                 'criteria' => 'array',
                 'property' => 'string',
             ))
@@ -44,7 +44,7 @@ class DoctrineConfigurationFetcher extends AbstractConfigurationFetcher
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function doFetch(array $parameters = array())
     {

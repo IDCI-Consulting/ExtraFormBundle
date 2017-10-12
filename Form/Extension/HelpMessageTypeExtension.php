@@ -29,13 +29,12 @@ class HelpMessageTypeExtension extends AbstractTypeExtension
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars['help'] = $form->getConfig()->getAttribute('help');
-
     }
 
     /**
      * {@inheritdoc}
      */
-     public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'help' => null,
