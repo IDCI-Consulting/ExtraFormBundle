@@ -13,8 +13,8 @@ interface ExtraFormConstraintRegistryInterface
     /**
      * Sets an extra form constraint identify by a alias.
      *
-     * @param string                       $alias      The constraint alias.
-     * @param ExtraFormConstraintInterface $constraint The constraint.
+     * @param string                       $alias      the constraint alias
+     * @param ExtraFormConstraintInterface $constraint the constraint
      *
      * @return ExtraFormConstraintRegistryInterface
      */
@@ -30,21 +30,21 @@ interface ExtraFormConstraintRegistryInterface
     /**
      * Returns an extra form constraint by alias.
      *
-     * @param string $alias The alias of the constraint.
+     * @param string $alias the alias of the constraint
      *
      * @return ExtraFormConstraintInterface The constraint
      *
-     * @throws \IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException  if the passed alias is not a string.
-     * @throws Exception\InvalidArgumentException if the constraint can not be retrieved.
+     * @throws \IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException if the passed alias is not a string
+     * @throws Exception\InvalidArgumentException                             if the constraint can not be retrieved
      */
     public function getConstraint($alias);
 
     /**
      * Returns whether the given extra form constraint is supported.
      *
-     * @param string $alias The alias of the constraint.
+     * @param string $alias the alias of the constraint
      *
-     * @return bool Whether the constraint is supported.
+     * @return bool whether the constraint is supported
      */
     public function hasConstraint($alias);
 }

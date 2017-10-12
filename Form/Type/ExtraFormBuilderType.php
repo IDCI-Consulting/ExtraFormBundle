@@ -11,7 +11,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\OptionsResolver\Options;
 use IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilderInterface;
 use IDCI\Bundle\ExtraFormBundle\Form\Event\RawEventSubscriber;
 
@@ -39,7 +38,7 @@ class ExtraFormBuilderType extends AbstractType
                 'IDCI\Bundle\ExtraFormBundle\Form\Event\%sTransformEventSubscriber',
                 ucfirst(strtolower($options['transform_method']))
             );
-            $builder->addEventSubscriber(new $subscriberClassName);
+            $builder->addEventSubscriber(new $subscriberClassName());
         }
 
         try {
@@ -65,22 +64,22 @@ class ExtraFormBuilderType extends AbstractType
     {
         $resolver
             ->setRequired(array(
-                'configuration'
+                'configuration',
             ))
             ->setAllowedTypes(array(
                 'configuration' => array(
                     'string',
                     'array',
-                    'IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherInterface'
-                )
+                    'IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherInterface',
+                ),
             ))
             ->setDefaults(array(
-                'inherit_data'     => false,
-                'parameters'       => array(),
+                'inherit_data' => false,
+                'parameters' => array(),
                 'transform_method' => null,
             ))
             ->setAllowedValues(array(
-                'transform_method' => array(null, 'jsonize', 'serialize')
+                'transform_method' => array(null, 'jsonize', 'serialize'),
             ))
         ;
     }

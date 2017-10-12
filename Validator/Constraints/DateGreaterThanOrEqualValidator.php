@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints\GreaterThanOrEqualValidator;
 class DateGreaterThanOrEqualValidator extends GreaterThanOrEqualValidator
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function compareValues($value1, $value2)
     {

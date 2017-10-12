@@ -10,9 +10,10 @@ namespace IDCI\Bundle\ExtraFormBundle\Validator\Constraints;
 abstract class DateValidatorTool
 {
     /**
-     * Clean the given date
+     * Clean the given date.
      *
      * @param mixed $value
+     *
      * @return DateTime | false if not well converted
      */
     public static function cleanDateValue($value)

@@ -19,7 +19,7 @@ class ExtraFormBuilderTest extends WebTestCase
     private $extraFormBuilder;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setUp()
     {
@@ -32,7 +32,7 @@ class ExtraFormBuilderTest extends WebTestCase
     }
 
     /**
-     * The types provider
+     * The types provider.
      *
      * @return array
      */
@@ -59,8 +59,8 @@ class ExtraFormBuilderTest extends WebTestCase
                         'extra_form_constraint' => 'not_blank',
                         'options' => array(
                             'message' => 'this value should not be blank',
-                        )
-                    ))
+                        ),
+                    )),
                 ),
             ),
             array('extra_form_json_textarea'),
@@ -79,13 +79,13 @@ class ExtraFormBuilderTest extends WebTestCase
                 array('label' => 'firstname'),
                 array(array(
                     'extra_form_constraint' => 'length',
-                    'options' => array (
+                    'options' => array(
                         'min' => '3',
                         'max' => '50',
                         'minMessage' => 'too short',
                         'maxMessage' => 'too long',
-                    )
-                ))
+                    ),
+                )),
             ),
             array('textarea'),
             array('time'),
@@ -94,21 +94,21 @@ class ExtraFormBuilderTest extends WebTestCase
     }
 
     /**
-     * Test build
+     * Test build.
      *
      * @dataProvider typesProvider
      *
      * @param string $type
-     * @param array $options
-     * @param array $constraints
+     * @param array  $options
+     * @param array  $constraints
      */
     public function testBuild($type, $options = array(), $constraints = array())
     {
         $builder = $this->extraFormBuilder->build(array(
-           sprintf('field_%s', $type) => array (
+           sprintf('field_%s', $type) => array(
                 'extra_form_type' => $type,
-                'constraints'     => $constraints,
-                'options'         => $options,
+                'constraints' => $constraints,
+                'options' => $options,
             ),
         ));
 

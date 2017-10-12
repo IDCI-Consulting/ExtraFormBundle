@@ -35,7 +35,7 @@ class ExtraFormType implements ExtraFormTypeInterface
     protected $icon;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $abstract;
 
@@ -45,23 +45,23 @@ class ExtraFormType implements ExtraFormTypeInterface
     protected $extraFormOptions;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $configuration
      */
     public function __construct(array $configuration)
     {
-        $this->name                 = $configuration['name'];
-        $this->formType             = $configuration['form_type'];
-        $this->parent               = $configuration['parent'];
-        $this->description          = $configuration['description'];
-        $this->icon                 = $configuration['icon'];
-        $this->abstract             = $configuration['abstract'];
-        $this->extraFormOptions     = $configuration['extra_form_options'];
+        $this->name = $configuration['name'];
+        $this->formType = $configuration['form_type'];
+        $this->parent = $configuration['parent'];
+        $this->description = $configuration['description'];
+        $this->icon = $configuration['icon'];
+        $this->abstract = $configuration['abstract'];
+        $this->extraFormOptions = $configuration['extra_form_options'];
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -69,7 +69,7 @@ class ExtraFormType implements ExtraFormTypeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getFormTypeName()
     {
@@ -77,7 +77,7 @@ class ExtraFormType implements ExtraFormTypeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getFormType()
     {
@@ -85,7 +85,7 @@ class ExtraFormType implements ExtraFormTypeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getParent()
     {
@@ -93,7 +93,7 @@ class ExtraFormType implements ExtraFormTypeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getDescription()
     {
@@ -101,7 +101,7 @@ class ExtraFormType implements ExtraFormTypeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getIcon()
     {
@@ -113,7 +113,7 @@ class ExtraFormType implements ExtraFormTypeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function isAbstract()
     {
@@ -121,7 +121,7 @@ class ExtraFormType implements ExtraFormTypeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getExtraFormOptions()
     {

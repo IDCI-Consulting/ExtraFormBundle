@@ -35,7 +35,7 @@ class HtmlType extends AbstractType
     {
         $resolver->setDefaults(array(
             'content' => null,
-            'mapped'  => false,
+            'mapped' => false,
         ));
     }
 

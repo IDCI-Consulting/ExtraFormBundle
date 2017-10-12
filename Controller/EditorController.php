@@ -16,7 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class EditorController extends Controller
 {
     /**
-     * Overview action
+     * Overview action.
      *
      * @Route("/overview", name="idci_extra_form_editor_overview")
      * @Method({"POST"})
@@ -33,7 +33,7 @@ class EditorController extends Controller
             ->createNamedBuilder($formName)
             ->setAction($this->generateUrl('idci_extra_form_editor_overview'))
             ->add('configuration', 'hidden', array(
-                'data' => $configurationRaw
+                'data' => $configurationRaw,
             ))
         ;
 

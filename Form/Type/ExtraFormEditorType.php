@@ -13,7 +13,6 @@ use IDCI\Bundle\AssetLoaderBundle\Model\AssetCollection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -26,7 +25,7 @@ class ExtraFormEditorType extends AbstractType implements AssetProviderInterface
     private $assetCollection;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -34,7 +33,7 @@ class ExtraFormEditorType extends AbstractType implements AssetProviderInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getAssetCollection()
     {
@@ -49,18 +48,18 @@ class ExtraFormEditorType extends AbstractType implements AssetProviderInterface
         $this->assetCollection->add(new Asset('IDCIExtraFormBundle:Form:extra_form_editor_assets.html.twig', array(), 0));
         $this->assetCollection->add(new Asset('IDCIExtraFormBundle:Form:extra_form_editor_configuration.html.twig', array(
             'options' => $options,
-            'form'    => $view
+            'form' => $view,
         ), 1));
 
         $attrClass = 'extra-form-editor';
 
         if (isset($options['attr']) && isset($options['attr']['class'])) {
-            $attrClass .= ' ' . $options['attr']['class'];
+            $attrClass .= ' '.$options['attr']['class'];
         }
 
-        $view->vars['attr']['class']                        = $attrClass;
-        $view->vars['attr']['data-available-modes']         = implode($options['available_modes'], '__');
-        $view->vars['attr']['data-configuration-variable']  = $view->vars['id'] . '_configuration';
+        $view->vars['attr']['class'] = $attrClass;
+        $view->vars['attr']['data-available-modes'] = implode($options['available_modes'], '__');
+        $view->vars['attr']['data-configuration-variable'] = $view->vars['id'].'_configuration';
 
         return $view->vars;
     }
@@ -72,22 +71,22 @@ class ExtraFormEditorType extends AbstractType implements AssetProviderInterface
     {
         $resolver
             ->setDefaults(array(
-                'required'                       => false,
-                'available_modes'                => array('advanced'),
+                'required' => false,
+                'available_modes' => array('advanced'),
                 'allow_configured_types_edition' => false,
-                'show_configured_types'          => false,
-                'configured_types_tags'          => array()
+                'show_configured_types' => false,
+                'configured_types_tags' => array(),
             ))
             ->setAllowedTypes(array(
-                'available_modes'                => array('array'),
-                'configured_types_tags'          => array('array'),
+                'available_modes' => array('array'),
+                'configured_types_tags' => array('array'),
                 'allow_configured_types_edition' => array('boolean'),
-                'show_configured_types'          => array('boolean')
+                'show_configured_types' => array('boolean'),
             ))
             ->setNormalizer('allow_configured_types_edition', function (Options $options, $value) {
                 if ($value && !$options['show_configured_types']) {
                     throw new \Exception(
-                        'The option `allow_configured_types_edition` for the extra_form_editor form type' .
+                        'The option `allow_configured_types_edition` for the extra_form_editor form type'.
                         ' is set to true, therefore the option `show_configured_types` should not be set to false'
                     );
                 }

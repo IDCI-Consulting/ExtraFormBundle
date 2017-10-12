@@ -18,13 +18,13 @@ class ExtraFormTypeRegistryTest extends \PHPUnit_Framework_TestCase
     private $extraFormType;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function setUp()
     {
         $configuration = array(
-            'name'              => 'html',
-            'description'        => 'Html text field',
+            'name' => 'html',
+            'description' => 'Html text field',
             'icon' => 'code',
             'parent' => 'form',
             'abstract' => false,
@@ -33,24 +33,24 @@ class ExtraFormTypeRegistryTest extends \PHPUnit_Framework_TestCase
                 'content' => array(
                     'extra_form_type' => 'textarea',
                     'options' => array(
-                        'required' => false
-                    )
+                        'required' => false,
+                    ),
                 ),
                 'mapped' => array(
                     'extra_form_type' => 'checkbox',
                     'options' => array(
                         'required' => false,
-                        'data'     => false
-                    )
-                )
-            )
+                        'data' => false,
+                    ),
+                ),
+            ),
         );
 
         $this->extraFormType = new ExtraFormType($configuration);
     }
 
     /**
-     * Test setType
+     * Test setType.
      */
     public function testSetType()
     {
@@ -60,7 +60,7 @@ class ExtraFormTypeRegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getTypes
+     * Test getTypes.
      */
     public function testGetTypes()
     {
@@ -71,7 +71,7 @@ class ExtraFormTypeRegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getType
+     * Test getType.
      */
     public function testGetType()
     {
@@ -87,7 +87,7 @@ class ExtraFormTypeRegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test hasType
+     * Test hasType.
      */
     public function testHasType()
     {

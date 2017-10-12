@@ -39,12 +39,12 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
     protected $constraintRegistry;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param FormFactoryInterface                 $formFactory                  The form factory.
-     * @param ConfigurationFetcherRegistry         $configurationFetcherRegistry The configuration fetcher registry.
-     * @param ExtraFormTypeRegistryInterface       $typeRegistry                 The type registry.
-     * @param ExtraFormConstraintRegistryInterface $constraintRegistry           The constraint registry.
+     * @param FormFactoryInterface                 $formFactory                  the form factory
+     * @param ConfigurationFetcherRegistry         $configurationFetcherRegistry the configuration fetcher registry
+     * @param ExtraFormTypeRegistryInterface       $typeRegistry                 the type registry
+     * @param ExtraFormConstraintRegistryInterface $constraintRegistry           the constraint registry
      */
     public function __construct(
         FormFactoryInterface                 $formFactory,
@@ -52,10 +52,10 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
         ExtraFormTypeRegistryInterface       $typeRegistry,
         ExtraFormConstraintRegistryInterface $constraintRegistry
     ) {
-        $this->formFactory                  = $formFactory;
+        $this->formFactory = $formFactory;
         $this->configurationFetcherRegistry = $configurationFetcherRegistry;
-        $this->typeRegistry                 = $typeRegistry;
-        $this->constraintRegistry           = $constraintRegistry;
+        $this->typeRegistry = $typeRegistry;
+        $this->constraintRegistry = $constraintRegistry;
     }
 
     /**
@@ -68,14 +68,14 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
         $resolver
             ->setDefaults(array(
                 'extra_form_type' => 'text',
-                'options'         => array(),
-                'constraints'     => array()
+                'options' => array(),
+                'constraints' => array(),
             ))
         ;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function build(
         $configuration,

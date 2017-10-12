@@ -11,14 +11,13 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class ArrayToJsonTransformer implements DataTransformerInterface
 {
-
     /**
      * {@inheritdoc}
      */
     public function transform($value)
     {
         if (null === $value) {
-            return "";
+            return '';
         }
 
         if (is_array($value)) {

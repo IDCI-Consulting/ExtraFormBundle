@@ -8,7 +8,6 @@
 namespace IDCI\Bundle\ExtraFormBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
@@ -79,9 +78,10 @@ class TypeCompilerPass implements CompilerPassInterface
     }
 
     /**
-     * Get definition name
+     * Get definition name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return string
      */
     protected function getDefinitionName($name)

@@ -17,13 +17,13 @@ class ExtraFormTypeTest extends \PHPUnit_Framework_TestCase
     private $extraFormType;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function setUp()
     {
         $configuration = array(
-            'name'              => 'html',
-            'description'        => 'Html text field',
+            'name' => 'html',
+            'description' => 'Html text field',
             'icon' => 'code',
             'parent' => null,
             'abstract' => false,
@@ -32,24 +32,24 @@ class ExtraFormTypeTest extends \PHPUnit_Framework_TestCase
                 'content' => array(
                     'extra_form_type' => 'textarea',
                     'options' => array(
-                        'required' => false
-                    )
+                        'required' => false,
+                    ),
                 ),
                 'mapped' => array(
                     'extra_form_type' => 'checkbox',
                     'options' => array(
                         'required' => false,
-                        'data'     => false
-                    )
-                )
-            )
+                        'data' => false,
+                    ),
+                ),
+            ),
         );
 
         $this->extraFormType = new ExtraFormType($configuration);
     }
 
     /**
-     * Test getName
+     * Test getName.
      */
     public function testGetName()
     {
@@ -59,7 +59,7 @@ class ExtraFormTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getFormType
+     * Test getFormType.
      */
     public function testGetFormType()
     {
@@ -69,7 +69,7 @@ class ExtraFormTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getParent
+     * Test getParent.
      */
     public function testGetParent()
     {
@@ -79,7 +79,7 @@ class ExtraFormTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getDescription
+     * Test getDescription.
      */
     public function testGetDescription()
     {
@@ -89,7 +89,7 @@ class ExtraFormTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getIcon
+     * Test getIcon.
      */
     public function testGetIcon()
     {
@@ -99,7 +99,7 @@ class ExtraFormTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test isAbstract
+     * Test isAbstract.
      */
     public function testIsAbstract()
     {
@@ -109,7 +109,7 @@ class ExtraFormTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getExtraFormOptions
+     * Test getExtraFormOptions.
      */
     public function testGetExtraFormOptions()
     {
@@ -117,16 +117,16 @@ class ExtraFormTypeTest extends \PHPUnit_Framework_TestCase
             'content' => array(
                 'extra_form_type' => 'textarea',
                 'options' => array(
-                    'required' => false
-                )
+                    'required' => false,
+                ),
             ),
             'mapped' => array(
                 'extra_form_type' => 'checkbox',
                 'options' => array(
                     'required' => false,
-                    'data'     => false
-                )
-            )
+                    'data' => false,
+                ),
+            ),
         );
 
         $this->assertEquals($options, $this->extraFormType->getExtraFormOptions());

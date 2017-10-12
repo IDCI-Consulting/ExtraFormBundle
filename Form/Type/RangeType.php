@@ -21,10 +21,10 @@ class RangeType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'min'   => 0,
-                'max'   => 100,
-                'step'  => 1,
-                'value' => null
+                'min' => 0,
+                'max' => 100,
+                'step' => 1,
+                'value' => null,
             ))
             ->setNormalizers(array(
                 'value' => function (Options $options, $value) {
@@ -34,22 +34,22 @@ class RangeType extends AbstractType
 
                     return $options['min'];
                 },
-                'attr'  => function (Options $options, $value) {
+                'attr' => function (Options $options, $value) {
                     return array_merge(
                         array(
-                            'min'   => $options['min'],
-                            'max'   => $options['max'],
-                            'step'  => $options['step'],
-                            'value' => $options['value']
+                            'min' => $options['min'],
+                            'max' => $options['max'],
+                            'step' => $options['step'],
+                            'value' => $options['value'],
                         ),
                         $value
                     );
-                }
+                },
             ))
             ->setAllowedTypes(array(
-                'min'   => array('integer'),
-                'max'   => array('integer'),
-                'step'  => array('integer'),
+                'min' => array('integer'),
+                'max' => array('integer'),
+                'step' => array('integer'),
                 'value' => array('null', 'integer'),
             ))
         ;

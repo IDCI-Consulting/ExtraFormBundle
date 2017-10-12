@@ -22,7 +22,7 @@ class ConfigurationFetcher extends AbstractConfigurationFetcher
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function doFetch(array $parameters = array())
     {
