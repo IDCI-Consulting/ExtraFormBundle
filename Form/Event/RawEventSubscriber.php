@@ -20,7 +20,7 @@ class RawEventSubscriber implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => array('preSetData', 1),
-            FormEvents::SUBMIT => array('submit', 900)
+            FormEvents::SUBMIT => array('submit', 900),
         );
     }
 

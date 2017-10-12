@@ -13,8 +13,8 @@ interface ExtraFormTypeRegistryInterface
     /**
      * Sets an extra form type identify by a alias.
      *
-     * @param string                 $alias  The type alias.
-     * @param ExtraFormTypeInterface $type   The type.
+     * @param string                 $alias the type alias
+     * @param ExtraFormTypeInterface $type  the type
      *
      * @return ExtraFormTypeRegistryInterface
      */
@@ -30,21 +30,21 @@ interface ExtraFormTypeRegistryInterface
     /**
      * Returns an extra form type by alias.
      *
-     * @param string $alias The type alias.
+     * @param string $alias the type alias
      *
      * @return ExtraFormTypeInterface
      *
-     * @throws \IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException if the passed alias is not a string.
-     * @throws Exception\InvalidArgumentException if the type can not be retrieved.
+     * @throws \IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException if the passed alias is not a string
+     * @throws Exception\InvalidArgumentException                             if the type can not be retrieved
      */
     public function getType($alias);
 
     /**
      * Returns whether the given extra form type is supported.
      *
-     * @param string $alias The alias of the type.
+     * @param string $alias the alias of the type
      *
-     * @return bool Whether the type is supported.
+     * @return bool whether the type is supported
      */
     public function hasType($alias);
 }

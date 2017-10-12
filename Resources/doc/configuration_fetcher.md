@@ -59,7 +59,7 @@ which extends `AbstractConfigurationFetcher` and implement necessary methods.
 
 namespace My\Bundle\Configuration\ExtraFormFetcher;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\AbstractConfigurationFetcher;
 use IDCI\Bundle\ExtraFormBundle\Exception\FetchConfigurationException;
 
@@ -68,7 +68,7 @@ class MyConfigurationFetcher extends AbstractConfigurationFetcher
     /**
      * {@inheritDoc}
      */
-    protected function setDefaultParameters(OptionsResolverInterface $resolver)
+    protected function setDefaultParameters(OptionsResolver $resolver)
     {
         ...
     }
@@ -87,9 +87,7 @@ class MyConfigurationFetcher extends AbstractConfigurationFetcher
 Then declare this new ConfigurationFetcher as service:
 ```yml
 services:
-    idci_extra_form.configuration.fetcher.my_fetcher:
-        class: My\Bundle\Configuration\ExtraFormFetcher\MyConfigurationFetcher
-        arguments: []
+    My\Bundle\Configuration\ExtraFormFetcher\MyConfigurationFetcher:
         tags:
             - { name: idci_extra_form.configuration.fetcher, alias: my_fetcher }
 ```
@@ -100,8 +98,8 @@ The doFetch function must return an array that should be in the following format
 array(
     'field_name' => array(
         'extra_form_type' => ...<string a valid ExtraFormType name>
-        'options'         => ...<array list of valid options>
-        'constraints'     => ...<array list of valid constraints>
+        'options' => ...<array list of valid options>
+        'constraints' => ...<array list of valid constraints>
     )
     // ...
 )

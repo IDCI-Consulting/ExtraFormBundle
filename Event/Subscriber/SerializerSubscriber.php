@@ -9,7 +9,7 @@ use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\EventDispatcher\Events;
 
 /**
- * SerializerSubscriber
+ * SerializerSubscriber.
  */
 class SerializerSubscriber implements EventSubscriberInterface
 {
@@ -19,7 +19,7 @@ class SerializerSubscriber implements EventSubscriberInterface
     private $registry;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ExtraFormTypeRegistryInterface $registry
      */
@@ -35,14 +35,14 @@ class SerializerSubscriber implements EventSubscriberInterface
     {
         return array(
             array(
-                'event'     => Events::PRE_SERIALIZE,
-                'method'    => 'onPreSerialize',
+                'event' => Events::PRE_SERIALIZE,
+                'method' => 'onPreSerialize',
             ),
         );
     }
 
     /**
-     * Method called on pre serialize event
+     * Method called on pre serialize event.
      *
      * @param ObjectEvent $event
      */

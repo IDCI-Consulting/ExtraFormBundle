@@ -10,11 +10,11 @@ namespace IDCI\Bundle\ExtraFormBundle\Type;
 interface ExtraFormTypeInterface
 {
     /**
-     * Get name.
+     * Get block pefix.
      *
      * @return string
      */
-    public function getName();
+    public function getBlockPrefix();
 
     /**
      * Get form type service name.
@@ -56,7 +56,7 @@ interface ExtraFormTypeInterface
     /**
      * Is abstract.
      *
-     * @return boolean
+     * @return bool
      */
     public function isAbstract();
 

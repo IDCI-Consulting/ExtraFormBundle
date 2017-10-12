@@ -7,13 +7,12 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractConfigurationFetcher implements ConfigurationFetcherInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function fetch(array $parameters = array())
     {
@@ -26,16 +25,16 @@ abstract class AbstractConfigurationFetcher implements ConfigurationFetcherInter
     /**
      * Set default parameters.
      *
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    protected function setDefaultParameters(OptionsResolverInterface $resolver)
+    protected function setDefaultParameters(OptionsResolver $resolver)
     {
     }
 
     /**
      * Fetch the configuration.
      *
-     * @param  array $parameters
+     * @param array $parameters
      *
      * @return array
      *

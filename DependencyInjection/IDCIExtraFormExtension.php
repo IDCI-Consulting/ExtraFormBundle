@@ -14,7 +14,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * This is the class that loads and manages your bundle configuration
+ * This is the class that loads and manages your bundle configuration.
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
@@ -34,10 +34,10 @@ class IDCIExtraFormExtension extends Extension implements PrependExtensionInterf
                             'type' => 'xml',
                             'dir' => 'Resources/config/doctrine/',
                             'prefix' => 'IDCI\Bundle\ExtraFormBundle\Model',
-                            'is_bundle' => true
-                        )
-                    )
-                )
+                            'is_bundle' => true,
+                        ),
+                    ),
+                ),
             );
 
             $container->prependExtensionConfig('doctrine', $config);
@@ -45,7 +45,7 @@ class IDCIExtraFormExtension extends Extension implements PrependExtensionInterf
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {

@@ -12,7 +12,7 @@
             <generator strategy="AUTO"/>
         </id>
 
-        <field name="name" column="name" type="string" length="255" unique="true" />
+        <field name="blockPrefix" column="block_prefix" type="string" length="255" unique="true" />
 
         <field name="description" column="description" type="string" length="255" nullable="true" />
 

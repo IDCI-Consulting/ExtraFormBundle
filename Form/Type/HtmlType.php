@@ -11,7 +11,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class HtmlType extends AbstractType
 {
@@ -35,7 +34,7 @@ class HtmlType extends AbstractType
     {
         $resolver->setDefaults(array(
             'content' => null,
-            'mapped'  => false,
+            'mapped' => false,
         ));
     }
 
@@ -44,7 +43,7 @@ class HtmlType extends AbstractType
      *
      * @deprecated
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $this->configureOptions($resolver);
     }
@@ -55,15 +54,5 @@ class HtmlType extends AbstractType
     public function getBlockPrefix()
     {
         return 'extra_form_html';
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @deprecated
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 }

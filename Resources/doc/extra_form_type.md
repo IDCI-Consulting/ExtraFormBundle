@@ -27,11 +27,11 @@ Here is an example for a service named `idci_extra_form.type.my_type`:
 idci_extra_form:
     types:
         my_type:
-            parent:      form
-            form_type:   sf2_my_type
+            parent: form
+            form_type: sf2_my_type
             description: A short description about your FormType
             extra_form_options:
-                my_option1: { extra_form_type: "text",     options: {required: false} }
+                my_option1: { extra_form_type: "text", options: {required: false} }
                 my_option2: { extra_form_type: "checkbox", options: {required: false} }
                 ...
 ```

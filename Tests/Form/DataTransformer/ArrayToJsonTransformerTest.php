@@ -14,12 +14,12 @@ class ArrayToJsonTransformerTest extends \PHPUnit_Framework_TestCase
     private $array;
 
     /**
-     * @var ArrayToJsonTransformer $arrayToJsonTransformer
+     * @var ArrayToJsonTransformer
      */
     private $arrayToJsonTransformer;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function setUp()
     {
@@ -32,10 +32,10 @@ class ArrayToJsonTransformerTest extends \PHPUnit_Framework_TestCase
 }
 EOF;
         $this->array = array(
-            "test" => array(
-                "valueA" => "test",
-                "valueB" => "test2"
-            )
+            'test' => array(
+                'valueA' => 'test',
+                'valueB' => 'test2',
+            ),
         );
 
         $this->arrayToJsonTransformer = new ArrayToJsonTransformer();

@@ -8,6 +8,7 @@
 namespace IDCI\Bundle\ExtraFormBundle\Tests\Constraint;
 
 use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraint;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ExtraFormConstraintTest extends \PHPUnit_Framework_TestCase
 {
@@ -17,38 +18,36 @@ class ExtraFormConstraintTest extends \PHPUnit_Framework_TestCase
     private $extraFormConstraint;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function setUp()
     {
         $configuration = array(
-            'class'              => '\Symfony\Component\Validator\Constraints\NotBlank',
-            'description'        => 'Not blank constraint',
+            'class' => NotBlank::class,
+            'description' => 'Not blank constraint',
             'extra_form_options' => array(
                 'message' => array(
                     'extra_form_type' => 'text',
                     'options' => array(
-                        'required' => false
-                    )
-                )
-            )
+                        'required' => false,
+                    ),
+                ),
+            ),
         );
 
         $this->extraFormConstraint = new ExtraFormConstraint($configuration);
     }
 
     /**
-     * Test getClassName
+     * Test getClassName.
      */
     public function testGetClassName()
     {
-        $className = '\Symfony\Component\Validator\Constraints\NotBlank';
-
-        $this->assertEquals($className, $this->extraFormConstraint->getClassName());
+        $this->assertEquals(NotBlank::class, $this->extraFormConstraint->getClassName());
     }
 
     /**
-     * Test getDescription
+     * Test getDescription.
      */
     public function testGetDescription()
     {
@@ -58,7 +57,7 @@ class ExtraFormConstraintTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getExtraFormOptions
+     * Test getExtraFormOptions.
      */
     public function testGetExtraFormOptions()
     {
@@ -66,9 +65,9 @@ class ExtraFormConstraintTest extends \PHPUnit_Framework_TestCase
             'message' => array(
                 'extra_form_type' => 'text',
                 'options' => array(
-                    'required' => false
-                )
-            )
+                    'required' => false,
+                ),
+            ),
         );
 
         $this->assertEquals($options, $this->extraFormConstraint->getExtraFormOptions());

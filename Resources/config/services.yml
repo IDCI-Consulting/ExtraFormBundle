@@ -1,140 +1,113 @@
-parameters:
-    idci_extra_form.type_registry.class:                  IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry
-    idci_extra_form.type.class:                           IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType
-    idci_extra_form.constraint_registry.class:            IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistry
-    idci_extra_form.constraint.class:                     IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraint
-    idci_extra_form.configuration.fetcher_registry.class: IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherRegistry
-    idci_extra_form.configuration.fetcher.class:          IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcher
-    idci_extra_form.builder.class:                        IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilder
-    idci_extra_form.event.subscriber.serializer.class:    IDCI\Bundle\ExtraFormBundle\Event\Subscriber\SerializerSubscriber
-
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    # Controllers
+    IDCI\Bundle\ExtraFormBundle\Controller\:
+        resource: '../../Controller'
+        # apply some configuration to these services
+        public: true
+        tags: ['controller.service_arguments']
 
     # Events Subscriber
-    idci_extra_form.event.subscriber.serializer:
-        class: %idci_extra_form.event.subscriber.serializer.class%
-        arguments: ["@idci_extra_form.type_registry"]
+
+    IDCI\Bundle\ExtraFormBundle\Event\Subscriber\SerializerSubscriber:
         tags:
             - { name: jms_serializer.event_subscriber }
 
     # ExtraFormType
 
-    idci_extra_form.type_registry:
-        class: %idci_extra_form.type_registry.class%
+    IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry: ~
+    IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistryInterface: '@IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry'
 
-    idci_extra_form.type:
-        class: %idci_extra_form.type.class%
-        arguments: [null]
+    IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType:
         abstract: true
-
+        arguments: [null]
+    IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeInterface: '@IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType'
 
     # ExtraFormConstraint
 
-    idci_extra_form.constraint_registry:
-        class: %idci_extra_form.constraint_registry.class%
+    IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistry: ~
+    IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistryInterface: '@IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistry'
 
-    idci_extra_form.constraint:
-        class: %idci_extra_form.constraint.class%
-        arguments: [null]
+    IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraint:
         abstract: true
+        arguments: [null]
+    IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintInterface: '@IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraint'
 
 
     # ConfigurationFetcher
 
-    idci_extra_form.configuration.fetcher_registry:
-        class: %idci_extra_form.configuration.fetcher_registry.class%
-
-    idci_extra_form.configuration.fetcher:
-        class: %idci_extra_form.configuration.fetcher.class%
-        arguments: [null]
+    IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcher:
         abstract: true
+    IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherInterface: '@IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcher'
+
+    IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherRegistry: ~
 
     #idci_extra_form.configuration.fetcher.doctrine:
     #    class: IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\DoctrineConfigurationFetcher
-    #    arguments: ["@doctrine.orm.entity_manager"]
+    #    arguments: ['@doctrine.orm.entity_manager']
     #    tags:
     #        - { name: idci_extra_form.configuration.fetcher, alias: doctrine }
 
 
     # ExtraFormBuilder
 
-    idci_extra_form.builder:
-        class: %idci_extra_form.builder.class%
-        arguments:
-            - "@form.factory"
-            - "@idci_extra_form.configuration.fetcher_registry"
-            - "@idci_extra_form.type_registry"
-            - "@idci_extra_form.constraint_registry"
-
+    IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilder: ~
+    IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilderInterface: '@IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilder'
 
     # Form type extensions
 
-    form.type_extension.help_message:
-        class: IDCI\Bundle\ExtraFormBundle\Form\Extension\HelpMessageTypeExtension
+    IDCI\Bundle\ExtraFormBundle\Form\Extension\HelpMessageTypeExtension:
         tags:
-          - { name: "form.type_extension", alias: "form" }
-
+          - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+    IDCI\Bundle\ExtraFormBundle\Form\Extension\HelpMessageTypeExtensionInterface: '@IDCI\Bundle\ExtraFormBundle\Form\Extension\HelpMessageTypeExtension'
 
     # Form Types
 
-    form.type.idci_extra_form.extra_form_builder:
-        class: IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormBuilderType
-        arguments: ["@idci_extra_form.builder"]
+    IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormBuilderType:
         tags:
             - { name: form.type, alias: extra_form_builder }
 
-    form.type.idci_extra_form.extra_form_collection:
-        class: IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormCollectionType
+    IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormCollectionType:
         tags:
             - { name: form.type, alias: extra_form_collection }
 
-    form.type.idci_extra_form.json_textarea:
-        class: IDCI\Bundle\ExtraFormBundle\Form\Type\JsonTextareaType
+    IDCI\Bundle\ExtraFormBundle\Form\Type\JsonTextareaType:
         tags:
             - { name: form.type, alias: extra_form_json_textarea }
 
-    form.type.idci_extra_form.iban_text:
-        class: IDCI\Bundle\ExtraFormBundle\Form\Type\IbanTextType
+    IDCI\Bundle\ExtraFormBundle\Form\Type\IbanTextType:
         tags:
             - { name: form.type, alias: extra_form_iban_text }
 
-    form.type.idci_extra_form.iban:
-        class: IDCI\Bundle\ExtraFormBundle\Form\Type\IbanType
+    IDCI\Bundle\ExtraFormBundle\Form\Type\IbanType:
         tags:
             - { name: form.type, alias: extra_form_iban }
 
-    form.type.idci_extra_form.html:
-        class: IDCI\Bundle\ExtraFormBundle\Form\Type\HtmlType
+    IDCI\Bundle\ExtraFormBundle\Form\Type\HtmlType:
         tags:
             - { name: form.type, alias: extra_form_html }
 
-    form.type.idci_extra_form.range:
-        class: IDCI\Bundle\ExtraFormBundle\Form\Type\RangeType
+    IDCI\Bundle\ExtraFormBundle\Form\Type\RangeType:
         tags:
             - { name: form.type, alias: extra_form_range }
 
-    form.type.idci_extra_form.extra_form_type_choice:
-        class: IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormTypeChoiceType
-        arguments: ["@idci_extra_form.type_registry"]
+    IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormTypeChoiceType:
         tags:
             - { name: form.type, alias: extra_form_type_choice }
 
-    form.type.idci_extra_form.extra_form_constraint_choice:
-            class: IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormConstraintChoiceType
-            arguments: ["@idci_extra_form.constraint_registry"]
+    IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormConstraintChoiceType:
             tags:
                 - { name: form.type, alias: extra_form_constraint_choice }
 
-    form.type.idci_extra_form.editor:
-        class: IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormEditorType
-        arguments:
-            - @twig
-            - @event_dispatcher
+    IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormEditorType:
         tags:
             - { name: form.type, alias: extra_form_editor }
             - { name: idci_asset_loader.asset_provider, alias: extra_form_editor }
 
-    form.type.idci_extra_form.tags:
-        class: IDCI\Bundle\ExtraFormBundle\Form\Type\TagsType
+    IDCI\Bundle\ExtraFormBundle\Form\Type\TagsType:
         tags:
             - { name: form.type, alias: extra_form_tags }

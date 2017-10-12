@@ -50,7 +50,7 @@ Import the bundle configuration:
 # app/config/config.yml
 
 imports:
-    - { resource: @IDCIExtraFormBundle/Resources/config/config.yml }
+    - { resource: '@IDCIExtraFormBundle/Resources/config/config.yml' }
 ```
 
 That's it, you are ready to use the [extra form builder](Resources/doc/usage.md).
@@ -90,12 +90,12 @@ Import the routes:
 # app/config/routing.yml
 extra_form:
     resource: "@IDCIExtraFormBundle/Controller/"
-    type:     annotation
+    type: annotation
 ```
 
 Install the assets:
 ```sh
-php app/console assets:install --symlink
+php bin/console assets:install --symlink
 ```
 
 The editor requires bootstrap and jquery. If you don't use it already in your project, just add the following lines in your views.

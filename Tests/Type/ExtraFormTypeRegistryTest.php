@@ -7,6 +7,8 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Tests\Type;
 
+use IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException;
+use IDCI\Bundle\ExtraFormBundle\Exception\InvalidArgumentException;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry;
 
@@ -18,13 +20,13 @@ class ExtraFormTypeRegistryTest extends \PHPUnit_Framework_TestCase
     private $extraFormType;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function setUp()
     {
         $configuration = array(
-            'name'              => 'html',
-            'description'        => 'Html text field',
+            'block_prefix' => 'html',
+            'description' => 'Html text field',
             'icon' => 'code',
             'parent' => 'form',
             'abstract' => false,
@@ -33,24 +35,24 @@ class ExtraFormTypeRegistryTest extends \PHPUnit_Framework_TestCase
                 'content' => array(
                     'extra_form_type' => 'textarea',
                     'options' => array(
-                        'required' => false
-                    )
+                        'required' => false,
+                    ),
                 ),
                 'mapped' => array(
                     'extra_form_type' => 'checkbox',
                     'options' => array(
                         'required' => false,
-                        'data'     => false
-                    )
-                )
-            )
+                        'data' => false,
+                    ),
+                ),
+            ),
         );
 
         $this->extraFormType = new ExtraFormType($configuration);
     }
 
     /**
-     * Test setType
+     * Test setType.
      */
     public function testSetType()
     {
@@ -60,7 +62,7 @@ class ExtraFormTypeRegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getTypes
+     * Test getTypes.
      */
     public function testGetTypes()
     {
@@ -71,7 +73,7 @@ class ExtraFormTypeRegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getType
+     * Test getType.
      */
     public function testGetType()
     {
@@ -79,15 +81,15 @@ class ExtraFormTypeRegistryTest extends \PHPUnit_Framework_TestCase
         $registry->setType('html', $this->extraFormType);
         $this->assertNotEmpty($registry->getType('html'));
 
-        $this->expectException('IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException');
+        $this->expectException(UnexpectedTypeException::class);
         $registry->getType(array());
 
-        $this->expectException('IDCI\Bundle\ExtraFormBundle\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $registry->getType('no_blank');
     }
 
     /**
-     * Test hasType
+     * Test hasType.
      */
     public function testHasType()
     {

@@ -10,7 +10,7 @@ The `idci_extra_form.builder` service is the main service that you will use in o
 To use it:
 ```php
 $builder = $this
-    ->get('idci_extra_form.builder')
+    ->get(ExtraFormBuilderInterface::class)
     ->build(array(
         'first_name' => array(
             'extra_form_type' => 'text',
@@ -54,7 +54,7 @@ Finally you could display it in your twig :
 Instead of injecting a configuration array in the `build()` method, you may use a Configuration fetcher as shown after :
 ```php
 $form = $this
-    ->get('idci_extra_form.builder')
+    ->get(ExtraFormBuilderInterface::class)
     ->build('identity_form', array())
     ->getForm()
 ;

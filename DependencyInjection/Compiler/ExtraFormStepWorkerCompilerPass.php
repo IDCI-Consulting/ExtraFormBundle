@@ -7,6 +7,7 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\DependencyInjection\Compiler;
 
+use IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilder;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Reference;
@@ -20,17 +21,23 @@ class ExtraFormStepWorkerCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         // Process it only if the step bundle is loaded.
-        if (!$container->hasDefinition('idci_step.configuration.worker_registry')) {
+        if (!class_exists('IDCI\Bundle\StepBundle\Configuration\Worker\ConfigurationWorkerRegistryInterface') ||
+            !$container->has(
+                'IDCI\Bundle\StepBundle\Configuration\Worker\ConfigurationWorkerRegistryInterface'
+            )
+        ) {
             return;
         }
 
-        $registryDefinition = $container->getDefinition('idci_step.configuration.worker_registry');
+        $registryDefinition = $container->findDefinition(
+            'IDCI\Bundle\StepBundle\Configuration\Worker\ConfigurationWorkerRegistryInterface'
+        );
         $workerDefinition = new Definition(
             'IDCI\\Bundle\\ExtraFormBundle\\Configuration\\StepWorker\\ExtraFormBuilderWorker'
         );
         $workerServiceId = 'idci_extra_form.configuration.step_worker.extra_form_builder';
 
-        $workerDefinition->addArgument(new Reference('idci_extra_form.builder'));
+        $workerDefinition->addArgument(new Reference(ExtraFormBuilder::class));
 
         $container->setDefinition(
             $workerServiceId,

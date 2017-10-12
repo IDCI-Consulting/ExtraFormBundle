@@ -10,6 +10,7 @@ namespace IDCI\Bundle\ExtraFormBundle\Form\Event;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException;
 
 class CollectionEventSubscriber implements EventSubscriberInterface
@@ -20,7 +21,7 @@ class CollectionEventSubscriber implements EventSubscriberInterface
     protected $options;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $options
      */
@@ -39,23 +40,23 @@ class CollectionEventSubscriber implements EventSubscriberInterface
                 array('preSetData', 1),
                 array('buildCollection', 0),
             ),
-            FormEvents::PRE_SUBMIT   => array(
+            FormEvents::PRE_SUBMIT => array(
                 array('preSubmitData', 2),
                 array('changeData', 1),
                 array('buildCollection', 0),
             ),
-            FormEvents::SUBMIT       => array(
+            FormEvents::SUBMIT => array(
                 array('onSubmit', 50),
             ),
         );
     }
 
     /**
-     * Disable constraints
+     * Disable constraints.
      *
      * @param array $options
      */
-    public static function disableConstraints(& $options)
+    public static function disableConstraints(&$options)
     {
         if (!is_array($options)) {
             return;
@@ -114,8 +115,8 @@ class CollectionEventSubscriber implements EventSubscriberInterface
     {
         $form = $event->getForm();
 
-        for ($i = 0; $i < $this->options['max_items']; $i++) {
-            $required  = $i < $this->options['min_items'] ? true : false;
+        for ($i = 0; $i < $this->options['max_items']; ++$i) {
+            $required = $i < $this->options['min_items'] ? true : false;
             $displayed = $i < $this->options['min_items'] || $this->isDisplayable($event, $i);
 
             $options = $this->options['options'];
@@ -127,8 +128,8 @@ class CollectionEventSubscriber implements EventSubscriberInterface
                 isset($options['attr']) ? $options['attr'] : array(),
                 array(
                     'data-collection-id' => $this->options['collection_id'],
-                    'data-display'       => $displayed ? 'show' : 'hide',
-                    'data-position'      => $i,
+                    'data-display' => $displayed ? 'show' : 'hide',
+                    'data-position' => $i,
                 )
             );
 
@@ -138,13 +139,13 @@ class CollectionEventSubscriber implements EventSubscriberInterface
 
             $form->add($i, $this->options['type'], $options);
 
-            $form->get($i)->add('__to_remove', 'checkbox', array(
-                'mapped'   => false,
+            $form->get($i)->add('__to_remove', CheckboxType::class, array(
+                'mapped' => false,
                 'required' => false,
-                'data'     => !$displayed,
-                'attr'     => array(
-                    'class' => 'idci_collection_item_remove'
-                )
+                'data' => !$displayed,
+                'attr' => array(
+                    'class' => 'idci_collection_item_remove',
+                ),
             ));
         }
     }
@@ -211,12 +212,12 @@ class CollectionEventSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * Is displayable
+     * Is displayable.
      *
      * @param FormEvent $event
-     * @param integer   $i
+     * @param int       $i
      *
-     * @return boolean
+     * @return bool
      */
     protected function isDisplayable(FormEvent $event, $i)
     {
@@ -227,7 +228,7 @@ class CollectionEventSubscriber implements EventSubscriberInterface
             return false;
         }
 
-        $item = is_object($data[$i]) ? (array)$data[$i] : $data[$i];
+        $item = is_object($data[$i]) ? (array) $data[$i] : $data[$i];
 
         if (!is_array($item)) {
             return true;
@@ -235,7 +236,7 @@ class CollectionEventSubscriber implements EventSubscriberInterface
 
         if (FormEvents::PRE_SUBMIT === $event->getName()) {
             if (isset($item['__to_remove'])) {
-                return !(bool)$item['__to_remove'];
+                return !(bool) $item['__to_remove'];
             }
         }
 

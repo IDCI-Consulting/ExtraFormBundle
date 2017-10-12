@@ -8,12 +8,12 @@
 namespace IDCI\Bundle\ExtraFormBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\OptionsResolver\Options;
 use IDCI\Bundle\ExtraFormBundle\Form\Event\CollectionEventSubscriber;
 
 class ExtraFormCollectionType extends AbstractType
@@ -30,23 +30,23 @@ class ExtraFormCollectionType extends AbstractType
                 $options['options'],
                 array(
                     'required' => false,
-                    'attr'     => array_merge(
+                    'attr' => array_merge(
                         $options['options']['attr'],
                         array(
                             'data-collection-id' => $options['collection_id'],
-                            'data-display'       => 'prototype',
+                            'data-display' => 'prototype',
                         )
-                    )
+                    ),
                 )
             )
         );
-        $prototype->add('__to_remove', 'checkbox', array(
-            'mapped'   => false,
+        $prototype->add('__to_remove', CheckboxType::class, array(
+            'mapped' => false,
             'required' => false,
-            'data'     => true,
-            'attr'     => array(
-                'class' => 'unchangeable_field idci_collection_item_remove'
-            )
+            'data' => true,
+            'attr' => array(
+                'class' => 'unchangeable_field idci_collection_item_remove',
+            ),
         ));
 
         $builder->setAttribute('prototype', $prototype->getForm());
@@ -59,12 +59,12 @@ class ExtraFormCollectionType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['min_items']     = $options['min_items'];
-        $view->vars['max_items']     = $options['max_items'];
-        $view->vars['add_button']    = $options['add_button'];
+        $view->vars['min_items'] = $options['min_items'];
+        $view->vars['max_items'] = $options['max_items'];
+        $view->vars['add_button'] = $options['add_button'];
         $view->vars['remove_button'] = $options['remove_button'];
         $view->vars['collection_id'] = $options['collection_id'];
-        $view->vars['prototype']     = $form->getConfig()->getAttribute('prototype')->createView($view);
+        $view->vars['prototype'] = $form->getConfig()->getAttribute('prototype')->createView($view);
     }
 
     /**
@@ -74,16 +74,17 @@ class ExtraFormCollectionType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'min_items'     => 1,
-                'max_items'     => 10,
-                'type'          => 'textarea',
-                'add_button'    => array(),
+                'min_items' => 1,
+                'max_items' => 10,
+                'type' => TextareaType::class,
+                'add_button' => array(),
                 'remove_button' => array(),
-                'options'       => array(),
-                'collection_id' => 'default'
+                'options' => array(),
+                'collection_id' => 'default',
             ))
-            ->setNormalizers(array(
-                'add_button' => function (Options $options, $value) {
+            ->setNormalizer(
+                'add_button',
+                function (OptionsResolver $options, $value) {
                     $attr = ($options['min_items'] == $options['max_items']) ?
                         array('style' => 'display:none;') :
                         array()
@@ -93,8 +94,11 @@ class ExtraFormCollectionType extends AbstractType
                         array('label' => 'add', 'attr' => $attr),
                         $value
                     );
-                },
-                'remove_button' => function (Options $options, $value) {
+                }
+            )
+            ->setNormalizer(
+                'remove_button',
+                function (OptionsResolver $options, $value) {
                     $attr = ($options['min_items'] == $options['max_items']) ?
                         array('style' => 'display:none;') :
                         array()
@@ -104,23 +108,24 @@ class ExtraFormCollectionType extends AbstractType
                         array('label' => 'remove', 'attr' => $attr),
                         $value
                     );
-                },
-                'options' => function (Options $options, $value) {
+                }
+            )
+            ->setNormalizer(
+                'options',
+                function (OptionsResolver $options, $value) {
                     return array_merge(
                         array(
-                            'label'    => ' ',
-                            'attr'     => array(),
-                            'compound' => true
+                            'label' => ' ',
+                            'attr' => array(),
+                            'compound' => true,
                         ),
                         $value
                     );
                 }
-            ))
-            ->setAllowedTypes(array(
-                'add_button'    => array('array'),
-                'remove_button' => array('array'),
-                'collection_id' => array('string'),
-            ))
+            )
+            ->setAllowedTypes('add_button', array('array'))
+            ->setAllowedTypes('remove_button', array('array'))
+            ->setAllowedTypes('collection_id', array('string'))
         ;
     }
 
@@ -129,7 +134,7 @@ class ExtraFormCollectionType extends AbstractType
      *
      * @deprecated
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $this->configureOptions($resolver);
     }
@@ -140,15 +145,5 @@ class ExtraFormCollectionType extends AbstractType
     public function getBlockPrefix()
     {
         return 'extra_form_collection';
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @deprecated
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 }

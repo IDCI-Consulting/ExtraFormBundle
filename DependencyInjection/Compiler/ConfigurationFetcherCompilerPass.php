@@ -7,6 +7,8 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\DependencyInjection\Compiler;
 
+use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherInterface;
+use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherRegistry;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Reference;
@@ -19,17 +21,17 @@ class ConfigurationFetcherCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('idci_extra_form.configuration.fetcher') ||
-            !$container->hasDefinition('idci_extra_form.configuration.fetcher_registry')
+        if (!$container->has(ConfigurationFetcherInterface::class) ||
+            !$container->hasDefinition(ConfigurationFetcherRegistry::class)
         ) {
             return;
         }
 
-        $registryDefinition = $container->getDefinition('idci_extra_form.configuration.fetcher_registry');
+        $registryDefinition = $container->getDefinition(ConfigurationFetcherRegistry::class);
 
         $configurations = $container->getParameter('idci_extra_form.configurations');
         foreach ($configurations as $name => $configuration) {
-            $serviceDefinition = new DefinitionDecorator('idci_extra_form.configuration.fetcher');
+            $serviceDefinition = new DefinitionDecorator(ConfigurationFetcherInterface::class);
             $serviceName = sprintf('idci_extra_form.configuration.fetcher.%s', $name);
 
             $serviceDefinition->setAbstract(false);

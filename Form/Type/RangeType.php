@@ -8,9 +8,8 @@
 namespace IDCI\Bundle\ExtraFormBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\OptionsResolver\Options;
 
 class RangeType extends AbstractType
 {
@@ -21,37 +20,39 @@ class RangeType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'min'   => 0,
-                'max'   => 100,
-                'step'  => 1,
-                'value' => null
+                'min' => 0,
+                'max' => 100,
+                'step' => 1,
+                'value' => null,
             ))
-            ->setNormalizers(array(
-                'value' => function (Options $options, $value) {
+            ->setNormalizer(
+                'value',
+                function (OptionsResolver $options, $value) {
                     if (isset($options['data']) && null !== $options['data']) {
                         return $options['data'];
                     }
 
                     return $options['min'];
-                },
-                'attr'  => function (Options $options, $value) {
+                }
+            )
+            ->setNormalizer(
+                'attr',
+                function (OptionsResolver $options, $value) {
                     return array_merge(
                         array(
-                            'min'   => $options['min'],
-                            'max'   => $options['max'],
-                            'step'  => $options['step'],
-                            'value' => $options['value']
+                            'min' => $options['min'],
+                            'max' => $options['max'],
+                            'step' => $options['step'],
+                            'value' => $options['value'],
                         ),
                         $value
                     );
                 }
-            ))
-            ->setAllowedTypes(array(
-                'min'   => array('integer'),
-                'max'   => array('integer'),
-                'step'  => array('integer'),
-                'value' => array('null', 'integer'),
-            ))
+            )
+            ->setAllowedTypes('min', array('integer'))
+            ->setAllowedTypes('max', array('integer'))
+            ->setAllowedTypes('step', array('integer'))
+            ->setAllowedTypes('value', array('null'))
         ;
     }
 
@@ -60,7 +61,7 @@ class RangeType extends AbstractType
      *
      * @deprecated
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $this->configureOptions($resolver);
     }
@@ -70,7 +71,7 @@ class RangeType extends AbstractType
      */
     public function getParent()
     {
-        return 'text';
+        return TextType::class;
     }
 
     /**
@@ -79,15 +80,5 @@ class RangeType extends AbstractType
     public function getBlockPrefix()
     {
         return 'extra_form_range';
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @deprecated
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 }

@@ -7,11 +7,10 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Form;
 
+use IDCI\Bundle\ExtraFormBundle\Model\ConfiguredType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\OptionsResolver\Options;
 
 class ConfiguredTypeType extends AbstractType
 {
@@ -25,7 +24,7 @@ class ConfiguredTypeType extends AbstractType
             ->add('description')
             ->add('tags', 'extra_form_tags', array(
                 'required' => false,
-                'url'      => '/api/configured-extra-form-types-tags.json'
+                'url' => '/api/configured-extra-form-types-tags.json',
             ))
             ->add('configuration')
         ;
@@ -38,7 +37,7 @@ class ConfiguredTypeType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => 'IDCI\Bundle\ExtraFormBundle\Model\ConfiguredType'
+                'data_class' => ConfiguredType::class,
             ))
         ;
     }
@@ -48,7 +47,7 @@ class ConfiguredTypeType extends AbstractType
      *
      * @deprecated
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $this->configureOptions($resolver);
     }
@@ -59,15 +58,5 @@ class ConfiguredTypeType extends AbstractType
     public function getBlockPrefix()
     {
         return 'idci_extraform_configured_type_type';
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @deprecated
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 }

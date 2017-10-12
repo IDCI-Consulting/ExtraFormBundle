@@ -11,7 +11,7 @@ Here is a quick example :
 ```php
 $form = $this
     ->createFormBuilder()
-    ->add('editor', 'extra_form_editor', array(
+    ->add('editor', ExtraFormEditorType::class, array(
         'available_modes'               => array('advanced', 'simple'),
         'allow_configured_type_edition' => true,
     ))
