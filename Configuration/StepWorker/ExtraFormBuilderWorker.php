@@ -45,12 +45,12 @@ class ExtraFormBuilderWorker implements ConfigurationWorkerInterface
                 'data' => array(),
                 'formBuilder' => null,
             ))
-            ->setAllowedTypes(array(
-                'formBuilder' => array(
+            ->setAllowedTypes(
+                'formBuilder', array(
                     'null',
                     FormBuilderInterface::class,
-                ),
-            ))
+                )
+            )
         ;
     }
 
