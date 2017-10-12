@@ -27,7 +27,7 @@ class DoctrineConfigurationFetcher extends AbstractConfigurationFetcher
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function setDefaultParameters(OptionsResolverInterface $resolver)
     {
@@ -36,7 +36,7 @@ class DoctrineConfigurationFetcher extends AbstractConfigurationFetcher
         $resolver
             ->setRequired(array('class', 'criteria', 'property'))
             ->setAllowedTypes(array(
-                'class'    => 'string',
+                'class' => 'string',
                 'criteria' => 'array',
                 'property' => 'string',
             ))
@@ -44,7 +44,7 @@ class DoctrineConfigurationFetcher extends AbstractConfigurationFetcher
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function doFetch(array $parameters = array())
     {
@@ -58,7 +58,7 @@ class DoctrineConfigurationFetcher extends AbstractConfigurationFetcher
             throw new FetchConfigurationException(
                 'doctrine',
                 $parameters
-            ));
+            );
         }
 
         $getter = sprintf(
@@ -71,7 +71,8 @@ class DoctrineConfigurationFetcher extends AbstractConfigurationFetcher
             throw new FetchConfigurationException(
                 'doctrine',
                 $parameters,
-                sprintf('Undefined method \'%s\' in \'%s\' class',
+                sprintf(
+                    'Undefined method \'%s\' in \'%s\' class',
                     $getter,
                     get_class($entity)
                 )

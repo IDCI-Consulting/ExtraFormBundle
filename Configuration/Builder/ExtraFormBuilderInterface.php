@@ -8,20 +8,18 @@
 namespace IDCI\Bundle\ExtraFormBundle\Configuration\Builder;
 
 use Symfony\Component\Form\FormBuilderInterface;
-use IDCI\Bundle\ExtraFormBundle\Configurator\ExtraFormConfiguratorInterface;
-use IDCI\Bundle\ExtraFormBundle\Exception\UndefinedExtraFormConfiguratorException;
 
 interface ExtraFormBuilderInterface
 {
     /**
      * Build the extra form.
      *
-     * @param  mixed                $configuration
-     * @param  array                $parameters
-     * @param  array|null           $data
-     * @param  FormBuilderInterface $formBuilder
+     * @param mixed                $configuration
+     * @param array                $parameters
+     * @param array|null           $data
+     * @param FormBuilderInterface $formBuilder
      *
-     * @return FormBuilderInterface The built form builder.
+     * @return FormBuilderInterface the built form builder
      */
     public function build(
         $configuration,
