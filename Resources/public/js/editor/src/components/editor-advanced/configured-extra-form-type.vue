@@ -1,9 +1,9 @@
 <template>
 
   <div>
-    <button @click="createConfiguredField(type)" class="extra-btn" type="button" :class="type.name">
+    <button @click="createConfiguredField(type)" class="extra-btn" type="button" :class="type.form_type_name">
       <i :class="getFontAwsomeIconClass(type.icon)" aria-hidden="true"></i>
-      <span>{{ type.name }}</span>
+      <span>{{ type.form_type_name }}</span>
       <i v-if="configuredTypesEditionAllowed" class="fa fa-trash delete" @click.stop="openDeleteModal"></i>
     </button>
     <modal v-if="modal.show">
@@ -36,7 +36,7 @@ export default {
         content:
           '<div><i class="' + this.getFontAwsomeIconClass(this.type.icon) + '" aria-hidden="true"></i></div>' +
           '<div>Type: <strong>' + this.type.form_type + '</strong></div>' +
-          '<div>Name: <strong>' + this.type.name + '</strong></div>'
+          '<div>Name: <strong>' + this.type.form_type_name + '</strong></div>'
       }
     };
   },

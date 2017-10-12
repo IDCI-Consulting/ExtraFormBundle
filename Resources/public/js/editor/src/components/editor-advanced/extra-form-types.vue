@@ -92,9 +92,9 @@ export default {
      */
     createField: function (type) {
       var field = {
-        name: 'field_' + type.name + '_' + generateUniqueId(),
+        name: 'field_' + type.form_type_name + '_' + generateUniqueId(),
         icon: type.icon,
-        extra_form_type: type.name,
+        extra_form_type: type.form_type_name,
         options: {},
         constraints: []
       };
@@ -108,12 +108,12 @@ export default {
     deleteConfiguredType: function (type) {
       var self = this;
       this
-        .$http.delete(this.$store.getters.deleteConfiguredExtraForTypesApiUrl(type.name))
+        .$http.delete(this.$store.getters.deleteConfiguredExtraForTypesApiUrl(type.form_type_name))
         .then(
           function () {
             // Delete the type from the configured types
             for (var i = 0, len = this.configuredTypes.length; i < len; i++) {
-              if (this.configuredTypes[i].name === type.name) {
+              if (this.configuredTypes[i].form_type_name === type.form_type_name) {
                 self.$store.commit('removeConfiguredType', i);
 
                 // Avoid too keep looping over a sliced array
@@ -140,7 +140,7 @@ export default {
       }
 
       var field = {
-        name: type.name,
+        name: type.form_type_name,
         icon: type.icon,
         tags: type.tags,
         extra_form_type: type.form_type_name,

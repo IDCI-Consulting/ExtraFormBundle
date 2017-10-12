@@ -3,7 +3,7 @@
   <div>
     <button class="extra-btn" @click="createField(type)" type="button">
       <i :class="getFontAwsomeIconClass(type.icon)" aria-hidden="true"></i>
-      {{ type.name }}
+      {{ type.form_type_name }}
     </button>
   </div>
 
