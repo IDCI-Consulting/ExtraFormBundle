@@ -14,7 +14,7 @@ export default {
     /**
      * "{{ ... }}"
      */
-    var twigStatementRegex = /{{(.*)?}}/g;
+    var twigStatementRegex = /{{.*?}}/g;
 
     /**
      * [\s\S]*? matches new lines between zero and unlimited times, as few times as possible
