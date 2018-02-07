@@ -11,6 +11,7 @@ parameters:
 services:
 
     # Events Subscriber
+
     idci_extra_form.event.subscriber.serializer:
         class: %idci_extra_form.event.subscriber.serializer.class%
         arguments: ["@idci_extra_form.type_registry"]
