@@ -65,6 +65,12 @@ services:
           - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
     IDCI\Bundle\ExtraFormBundle\Form\Extension\HelpMessageTypeExtensionInterface: '@IDCI\Bundle\ExtraFormBundle\Form\Extension\HelpMessageTypeExtension'
 
+    # Form Type Data Transformers
+
+    IDCI\Bundle\ExtraFormBundle\Form\DataTransformer\UploadedFileToPathTransformer:
+        arguments:
+            $workingDir: '%idci_extra_form.working_dir%/uploaded_files'
+
     # Form Types
 
     IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormBuilderType:
@@ -74,6 +80,10 @@ services:
     IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormCollectionType:
         tags:
             - { name: form.type, alias: extra_form_collection }
+
+    IDCI\Bundle\ExtraFormBundle\Form\Type\FileType:
+        tags:
+            - { name: form.type, alias: extra_form_file }
 
     IDCI\Bundle\ExtraFormBundle\Form\Type\JsonTextareaType:
         tags:
@@ -111,3 +121,4 @@ services:
     IDCI\Bundle\ExtraFormBundle\Form\Type\TagsType:
         tags:
             - { name: form.type, alias: extra_form_tags }
+

@@ -269,3 +269,9 @@ idci_extra_form:
                 min:  { extra_form_type: "integer", options: {required: false, data: 0} }
                 max:  { extra_form_type: "integer", options: {required: false, data: 100} }
                 step: { extra_form_type: "integer", options: {required: false, data: 1} }
+
+        "extra_form_file":
+            parent:      form
+            form_type:   IDCI\Bundle\ExtraFormBundle\Form\Type\FileType
+            description: "File field"
+            icon:        "arrows-v"
