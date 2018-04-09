@@ -8,7 +8,10 @@ class UploadedFileToPathTransformer implements DataTransformerInterface
 {
     private $uploadsDir;
 
-    public function __construct(string $uploadsDir)
+    /**
+     * @param string $uploadsDir
+     */
+    public function __construct($uploadsDir)
     {
         $this->uploadsDir = $uploadsDir;
     }
