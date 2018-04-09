@@ -69,7 +69,7 @@ services:
 
     IDCI\Bundle\ExtraFormBundle\Form\DataTransformer\UploadedFileToPathTransformer:
         arguments:
-            $workingDir: '%idci_extra_form.working_dir%/uploaded_files'
+            $uploadsDir: '%idci_extra_form.working_dir%/uploaded_files'
 
     # Form Types
 

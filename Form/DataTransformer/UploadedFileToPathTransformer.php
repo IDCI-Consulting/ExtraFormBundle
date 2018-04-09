@@ -6,11 +6,11 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class UploadedFileToPathTransformer implements DataTransformerInterface
 {
-    private $workingDir;
+    private $uploadsDir;
 
-    public function __construct(string $workingDir)
+    public function __construct(string $uploadsDir)
     {
-        $this->workingDir = $workingDir;
+        $this->uploadsDir = $uploadsDir;
     }
 
     /**
@@ -26,17 +26,8 @@ class UploadedFileToPathTransformer implements DataTransformerInterface
      */
     public function reverseTransform($uploadedFile)
     {
-        $path = sprintf(
-            '%s/%s',
-            $this->workingDir,
-            (new \DateTime('now'))->format('Ymd')
-        );
-
-        $name = sprintf(
-            '%s-%s',
-            uniqid(),
-            $uploadedFile->getClientOriginalName()
-        );
+        $path = sprintf('%s/%s', $this->uploadsDir, (new \DateTime('now'))->format('Ymd'));
+        $name = sprintf('%s-%s', uniqid(), $uploadedFile->getClientOriginalName());
 
         $uploadedFile->move($path, $name);
 
