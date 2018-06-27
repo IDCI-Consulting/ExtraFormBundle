@@ -59,5 +59,9 @@ class IDCIExtraFormExtension extends Extension implements PrependExtensionInterf
         $container->setParameter('idci_extra_form.types', $config['types']);
         $container->setParameter('idci_extra_form.constraints', $config['constraints']);
         $container->setParameter('idci_extra_form.configurations', $config['configurations']);
+
+        $container->setParameter('idci_extra_form.recaptcha', $config['recaptcha']);
+        $container->setParameter('idci_extra_form.recaptcha.parameters', $config['recaptcha']['parameters']);
+        $container->setParameter('idci_extra_form.recaptcha.http_proxy', $config['recaptcha']['http_proxy']);
     }
 }

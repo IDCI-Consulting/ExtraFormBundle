@@ -15,6 +15,7 @@
         "php": ">=5.6",
         "symfony/framework-bundle": "~3.3",
         "idci/asset-loader-bundle": "~2.0",
+        "google/recaptcha": "^1.1",
         "gregwar/captcha-bundle": "~2.0",
         "friendsofsymfony/rest-bundle": "~1.5",
         "jms/serializer-bundle": "^1.1"
