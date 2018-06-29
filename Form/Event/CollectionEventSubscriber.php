@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException;
 
 class CollectionEventSubscriber implements EventSubscriberInterface
@@ -244,7 +245,7 @@ class CollectionEventSubscriber implements EventSubscriberInterface
 
         foreach ($item as $k => $v) {
             if (FormEvents::PRE_SUBMIT === $eventName &&
-                'hidden' === $form->get($i)->get($k)->getConfig()->getType()->getName()
+                HiddenType::class === get_class($form->get($i)->get($k)->getConfig()->getType()->getInnerType())
             ) {
                 continue;
             }
