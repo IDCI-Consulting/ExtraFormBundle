@@ -110,14 +110,15 @@ class CollectionEventSubscriber implements EventSubscriberInterface
      * Build collection.
      *
      * @param FormEvent $event
+     * @param string    $eventName
      */
-    public function buildCollection(FormEvent $event)
+    public function buildCollection(FormEvent $event, $eventName)
     {
         $form = $event->getForm();
 
         for ($i = 0; $i < $this->options['max_items']; ++$i) {
             $required = $i < $this->options['min_items'] ? true : false;
-            $displayed = $i < $this->options['min_items'] || $this->isDisplayable($event, $i);
+            $displayed = $i < $this->options['min_items'] || $this->isDisplayable($event, $i, $eventName);
 
             $options = $this->options['options'];
             $options['required'] = isset($options['required']) ?
@@ -216,10 +217,11 @@ class CollectionEventSubscriber implements EventSubscriberInterface
      *
      * @param FormEvent $event
      * @param int       $i
+     * @param string    $eventName
      *
      * @return bool
      */
-    protected function isDisplayable(FormEvent $event, $i)
+    protected function isDisplayable(FormEvent $event, $i, $eventName)
     {
         $form = $event->getForm();
         $data = $event->getData();
@@ -234,14 +236,14 @@ class CollectionEventSubscriber implements EventSubscriberInterface
             return true;
         }
 
-        if (FormEvents::PRE_SUBMIT === $event->getName()) {
+        if (FormEvents::PRE_SUBMIT === $eventName) {
             if (isset($item['__to_remove'])) {
                 return !(bool) $item['__to_remove'];
             }
         }
 
         foreach ($item as $k => $v) {
-            if (FormEvents::PRE_SUBMIT === $event->getName() &&
+            if (FormEvents::PRE_SUBMIT === $eventName &&
                 'hidden' === $form->get($i)->get($k)->getConfig()->getType()->getName()
             ) {
                 continue;
