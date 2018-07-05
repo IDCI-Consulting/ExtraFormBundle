@@ -39,6 +39,7 @@ class Configuration implements ConfigurationInterface
                 ->append($this->addExtraFormTypesNode())
                 ->append($this->addExtraFormConstraintsNode())
                 ->append($this->addExtraFormConfiguratorsNode())
+                ->append($this->addReCaptchaConfigurationNode())
             ->end()
         ;
 
@@ -156,6 +157,42 @@ class Configuration implements ConfigurationInterface
                         ->useAttributeAsKey('id')
                         ->prototype('variable')
                         ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+
+        return $node;
+    }
+
+    /**
+     * addReCaptchaConfigurationNode.
+     *
+     * @return ArrayNodeDefinition|NodeDefinition
+     */
+    private function addReCaptchaConfigurationNode()
+    {
+        $builder = new TreeBuilder();
+        $node = $builder->root('recaptcha');
+
+        $node
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->arrayNode('http_proxy')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('host')->defaultValue(null)->end()
+                        ->scalarNode('port')->defaultValue(null)->end()
+                        ->scalarNode('auth')->defaultValue(null)->end()
+                    ->end()
+                ->end()
+                ->arrayNode('parameters')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('enabled')->defaultTrue()->end()
+                        ->booleanNode('enable_host_check')->defaultFalse()->end()
+                        ->scalarNode('api_endpoint')->defaultValue('https://www.google.com/recaptcha/api')->end()
+                        ->arrayNode('trusted_roles')->prototype('scalar')->treatNullLike(array())->end()
                     ->end()
                 ->end()
             ->end()

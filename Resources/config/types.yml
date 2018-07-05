@@ -275,3 +275,14 @@ idci_extra_form:
             form_type:   IDCI\Bundle\ExtraFormBundle\Form\Type\FileType
             description: "File field"
             icon:        "arrows-v"
+
+        "recaptcha":
+            parent:      form
+            form_type:   IDCI\Bundle\ExtraFormBundle\Form\Type\ReCaptchaType
+            description: "Input captcha field"
+            icon:        "unlock-alt"
+            extra_form_options:
+                language:    { extra_form_type: "text", options: {required: false} }
+                bind_selector: { extra_form_type: "text", options: {required: false} }
+                public_key:  { extra_form_type: "text", options: {required: true} }
+                private_key: { extra_form_type: "text", options: {required: true} }

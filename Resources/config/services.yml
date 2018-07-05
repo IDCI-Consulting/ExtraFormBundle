@@ -122,3 +122,17 @@ services:
         tags:
             - { name: form.type, alias: extra_form_tags }
 
+    IDCI\Bundle\ExtraFormBundle\Form\Type\ReCaptchaType:
+        arguments:
+            - '%idci_extra_form.recaptcha.parameters%'
+            - '@request_stack'
+        tags:
+            - { name: form.type, alias: extra_form_recaptcha }
+
+    IDCI\Bundle\ExtraFormBundle\Validator\Constraints\ReCaptchaVerifiedValidator:
+        arguments:
+            - '%idci_extra_form.recaptcha%'
+            - '@request_stack'
+            - '@?security.authorization_checker'
+        tags:
+            - { name: validator.constraint_validator, alias: 'idci_extra_form_recaptcha.verified' }
