@@ -1,0 +1,77 @@
+{% block extra_form_recaptcha_widget %}
+    {% if form.vars.enabled %}
+        <div id="{{ form.reCaptchaResponse.vars.id}}_errors"></div>
+        {{ form_errors(form.reCaptchaResponse) }}
+        {{ form_widget(form.reCaptchaResponse) }}
+        {% if attr['data-size'] == 'invisible' %}
+            <script type="text/javascript">
+                var verified = false;
+                var challengeOrigin = null;
+                var onReCaptchaSuccess = function(response) {
+                    document.getElementById('{{ form.reCaptchaResponse.vars.id }}').value = response;
+                    verified = true;
+
+                    challengeOrigin.click();
+                };
+                var initializeBindedElement = function (bindedElement) {
+                    bindedElement.addEventListener('click', function (e) {
+                        if (verified) {
+                            return;
+                        }
+                        e.preventDefault();
+
+                        challengeOrigin = e.originalTarget;
+                        grecaptcha.execute();
+                    });
+                }
+                var initializeBindedElements = function (bindedElements) {
+                    for (let bindedElement of bindedElements) {
+                        initializeBindedElement(bindedElement);
+                    }
+                }
+                document.addEventListener('DOMContentLoaded', function() {
+                    initializeBindedElements(document.querySelectorAll('{{ form.vars.bind_selector|raw }}'));
+                });
+            </script>
+        {% else %}
+            <script type="text/javascript">
+                var onReCaptchaSuccess = function(response) {
+                    document.getElementById('{{ form.reCaptchaResponse.vars.id }}').value = response;
+                };
+            </script>
+        {% endif %}
+        <script type="text/javascript">
+            var onReCaptchaExpired = function() {
+                document.getElementById('{{ form.reCaptchaResponse.vars.id }}').value = '';
+            };
+
+            var errors = document.getElementById('{{ form.reCaptchaResponse.vars.id}}_errors');
+            var onReCaptchaError = function() {
+                var text = document.createTextNode("An error occured with Google ReCaptcha");
+                errors.appendChild(text);
+            };
+        </script>
+
+        <script type="text/javascript" src="{{ form.vars.url_challenge }}"
+            {%- if attr.defer is defined and attr.defer %} defer{% endif -%}
+            {%- if attr.async is defined and attr.async %} async{% endif -%}
+        ></script>
+        <div class="g-recaptcha" {% for attrKey, attrValue in attr %}{% if attrValue is not null %}{{ attrKey }}="{{ attrValue }}"{% endif %}{% endfor %}></div>
+        <noscript>
+            <div>
+                <div style="width: 302px; height: 422px; position: relative;">
+                    <div style="width: 302px; height: 422px; position: absolute;">
+                        <iframe src="{{ form.vars.api_endpoint }}/fallback?k={{ attr['data-sitekey'] }}&hl={{ form.vars.language }}"
+                            frameborder="0" scrolling="no"
+                            style="width: 302px; height:422px; border-style: none;">
+                        </iframe>
+                    </div>
+                </div>
+                <div style="width: 302px; height: 60px; border-style: none;
+                    bottom: 12px; left: 25px; margin: 0px; padding: 0px; right: 25px;
+                    background: #f9f9f9; border: 1px solid #c1c1c1; border-radius: 3px;">
+                </div>
+            </div>
+        </noscript>
+    {% endif %}
+{% endblock %}

@@ -328,3 +328,10 @@ idci_extra_form:
             extra_form_options:
                 value:   {"extra_form_type": "text", "options": {"required": true} }
                 message: {"extra_form_type": "text", "options": {"required": false} }
+
+        "recaptcha_verified":
+            class: \IDCI\Bundle\ExtraFormBundle\Validator\Constraints\ReCaptchaVerified
+            description: "ReCaptcha verified"
+            extra_form_options:
+                value:   {"extra_form_type": "text", "options": {"required": true} }
+                message: {"extra_form_type": "text", "options": {"required": false} }
