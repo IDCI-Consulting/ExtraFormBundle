@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * A field for entering a recaptcha text.
@@ -32,6 +33,13 @@ class ReCaptchaType extends AbstractType
     private $enabled;
 
     /**
+     * Trusted roles
+     *
+     * @var array
+     */
+    private $trustedRoles;
+
+    /**
      * Request Stack.
      *
      * @var RequestStack
@@ -39,14 +47,26 @@ class ReCaptchaType extends AbstractType
     private $requestStack;
 
     /**
+     * Authorization checker.
+     *
+     * @var AuthorizationCheckerInterface
+     */
+    private $authChecker;
+
+    /**
      * @param array        $configurationParameters configurationParameters
      * @param RequestStack $requestStack
      */
-    public function __construct(array $configurationParameters, RequestStack $requestStack)
-    {
+    public function __construct(
+        array $configurationParameters,
+        RequestStack $requestStack,
+        AuthorizationCheckerInterface $authChecker
+    ) {
         $this->enabled = $configurationParameters['enabled'];
         $this->apiEndpoint = $configurationParameters['api_endpoint'];
+        $this->trustedRoles = $configurationParameters['trusted_roles'];
         $this->requestStack = $requestStack;
+        $this->authChecker = $authChecker;
     }
 
     /**
@@ -76,7 +96,7 @@ class ReCaptchaType extends AbstractType
         $view->vars = array_replace($view->vars, array(
             'api_endpoint' => $this->apiEndpoint,
             'bind_selector' => $options['bind_selector'],
-            'enabled' => $this->enabled,
+            'enabled' => $this->isEnabled(),
             'language' => $language,
             'url_challenge' => sprintf('%s?hl=%s', sprintf('%s.js', $this->apiEndpoint), $language),
         ));
@@ -125,7 +145,7 @@ class ReCaptchaType extends AbstractType
                 return $value;
             })
             ->setNormalizer('label_attr', function (Options $options, $value) {
-                if (!$this->enabled) {
+                if (!$this->isEnabled()) {
                     $value['style'] = 'display: none;';
                 }
 
@@ -144,5 +164,25 @@ class ReCaptchaType extends AbstractType
     public function getBlockPrefix()
     {
         return 'extra_form_recaptcha';
+    }
+
+    /**
+     * Is the recaptcha form field enabled ?
+     *
+     * @return bool
+     */
+    private function isEnabled()
+    {
+        if (!$this->enabled) {
+            return false;
+        }
+
+        foreach ($this->trustedRoles as $trustedRole) {
+            if ($this->authChecker->isGranted($trustedRole)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
