@@ -28,11 +28,15 @@
         }
 
         getJquery(function($) {
+            var getDirectCollection = function() {
+                return $div.find('[data-collection-id={{ form.vars.collection_id }}]').filter(function () {
+                    return $(this).attr('id') == $div.attr('id')+'_'+$(this).data('position');
+                });
+            }
+
             var collectionItemPrototype = '{{ form_row(prototype)|e('js') }}';
             var $div = $('#{{ form.vars.id }}');
-            var $directCollection = $div.find('[data-collection-id={{ form.vars.collection_id }}]').filter(function () {
-                return $(this).attr('id') == $div.attr('id')+'_'+$(this).data('position');
-            });
+            var $directCollection = getDirectCollection();
             var minItems = {{ form.vars.min_items }};
             var maxItems = {{ form.vars.max_items }};
             var countActionable = 0;
@@ -85,9 +89,11 @@
 
             var addRemoveButtons = function() {
                 if (hasRemovedButtons) {
+                    console.log('has one');
                     return;
                 }
 
+                $directCollection = getDirectCollection();
                 $directCollection.each(function(index) {
                     var $removeButton = $('<button{%- for attrname, attrvalue in remove_button.attr %} {{ attrname }}="{{ attrvalue }}"{%- endfor -%}>{{ remove_button.label|trans }}</button>');
                     $removeButton.on('click', function(event) {
@@ -111,7 +117,7 @@
 
                         init();
                     });
-                    if (0 !== index) {
+                    if (0 != index) {
                         $(this).after($removeButton);
                     }
                 });
