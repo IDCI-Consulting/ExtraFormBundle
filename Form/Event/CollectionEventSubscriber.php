@@ -204,12 +204,13 @@ class CollectionEventSubscriber implements EventSubscriberInterface
 
         foreach ($toDelete as $name) {
             unset($data[$name]);
+            $form->remove($name);
         }
 
         if ($data instanceof \Doctrine\Common\Collections\Collection) {
             $event->setData($data->getValues());
         } else {
-            $event->setData(array_values($data));
+            $event->setData($data);
         }
     }
 
