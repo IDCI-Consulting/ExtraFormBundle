@@ -6,7 +6,7 @@
                 if (!document.getElementById('idci_jquery')) {
                     var sJquery = document.createElement('script');
                     sJquery.id = 'idci_jquery';
-                    sJquery.src = '{{ asset('bundles/idciextraform/js/jquery-1.11.3.min.js') }}';
+                    sJquery.src = 'https://code.jquery.com/jquery-3.3.1.min.js';
                     sJquery.type = 'text/javascript';
 
                     var head = document.getElementsByTagName('head')[0];
@@ -75,10 +75,11 @@
 
             var hideRemoveCheckbox = function(item) {
                 var $removeCheckbox = item.find('.idci_collection_item_remove');
-                $removeCheckbox.attr('style', 'display:none;');
+                $removeCheckbox.attr('style', 'visibility:hidden;');
                 getItemContainer(item)
                     .find('label[for='+$removeCheckbox.attr('id')+']')
                     .attr('style', 'display:none;')
+                    .attr('checked','checked')
                 ;
             };
 
@@ -158,7 +159,7 @@
             // Initialize the collection.
             $directCollection.each(function() {
                 hideRemoveCheckbox($(this));
-                if ($(this).data('display') == 'hide') {
+                if ('hide' == $(this).data('display')) {
                     hideItem($(this));
                 }
             });
