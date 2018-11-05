@@ -63,13 +63,7 @@ class CollectionEventSubscriber implements EventSubscriberInterface
             return;
         }
 
-        foreach ($options as $key => $value) {
-            if ('constraints' === $key) {
-                $options[$key] = array();
-            } elseif (is_array($value)) {
-                self::disableConstraints($options[$key]);
-            }
-        }
+        $options['validation_groups'] = false;
     }
 
     /**
@@ -209,7 +203,7 @@ class CollectionEventSubscriber implements EventSubscriberInterface
         if ($data instanceof \Doctrine\Common\Collections\Collection) {
             $event->setData($data->getValues());
         } else {
-            $event->setData(array_values($data));
+            $event->setData($data);
         }
     }
 
