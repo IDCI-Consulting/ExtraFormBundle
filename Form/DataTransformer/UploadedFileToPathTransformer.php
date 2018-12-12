@@ -29,6 +29,10 @@ class UploadedFileToPathTransformer implements DataTransformerInterface
      */
     public function reverseTransform($uploadedFile)
     {
+        if (null === $uploadedFile) {
+            return null;
+        }
+
         $path = sprintf('%s/%s', $this->uploadsDir, (new \DateTime('now'))->format('Ymd'));
         $name = sprintf('%s-%s', uniqid(), $uploadedFile->getClientOriginalName());
 
