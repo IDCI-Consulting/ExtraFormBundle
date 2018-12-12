@@ -1,19 +1,9 @@
-parameters:
-    idci_extra_form.type_registry.class:                  IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry
-    idci_extra_form.type.class:                           IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType
-    idci_extra_form.constraint_registry.class:            IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistry
-    idci_extra_form.constraint.class:                     IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraint
-    idci_extra_form.configuration.fetcher_registry.class: IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherRegistry
-    idci_extra_form.configuration.fetcher.class:          IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcher
-    idci_extra_form.builder.class:                        IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilder
-    idci_extra_form.event.subscriber.serializer.class:    IDCI\Bundle\ExtraFormBundle\Event\Subscriber\SerializerSubscriber
-
 services:
 
     # Events Subscriber
 
     idci_extra_form.event.subscriber.serializer:
-        class: %idci_extra_form.event.subscriber.serializer.class%
+        class: IDCI\Bundle\ExtraFormBundle\Event\Subscriber\SerializerSubscriber
         arguments: ["@idci_extra_form.type_registry"]
         tags:
             - { name: jms_serializer.event_subscriber }
@@ -21,10 +11,10 @@ services:
     # ExtraFormType
 
     idci_extra_form.type_registry:
-        class: %idci_extra_form.type_registry.class%
+        class: IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry
 
     idci_extra_form.type:
-        class: %idci_extra_form.type.class%
+        class: IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType
         arguments: [null]
         abstract: true
 
@@ -32,10 +22,10 @@ services:
     # ExtraFormConstraint
 
     idci_extra_form.constraint_registry:
-        class: %idci_extra_form.constraint_registry.class%
+        class: IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistry
 
     idci_extra_form.constraint:
-        class: %idci_extra_form.constraint.class%
+        class: IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraint
         arguments: [null]
         abstract: true
 
@@ -43,10 +33,10 @@ services:
     # ConfigurationFetcher
 
     idci_extra_form.configuration.fetcher_registry:
-        class: %idci_extra_form.configuration.fetcher_registry.class%
+        class: IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherRegistry
 
     idci_extra_form.configuration.fetcher:
-        class: %idci_extra_form.configuration.fetcher.class%
+        class: IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcher
         arguments: [null]
         abstract: true
 
@@ -60,7 +50,7 @@ services:
     # ExtraFormBuilder
 
     idci_extra_form.builder:
-        class: %idci_extra_form.builder.class%
+        class: IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilder
         arguments:
             - "@form.factory"
             - "@idci_extra_form.configuration.fetcher_registry"
@@ -129,8 +119,8 @@ services:
     form.type.idci_extra_form.editor:
         class: IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormEditorType
         arguments:
-            - @twig
-            - @event_dispatcher
+            - "@twig"
+            - "@event_dispatcher"
         tags:
             - { name: form.type, alias: extra_form_editor }
             - { name: idci_asset_loader.asset_provider, alias: extra_form_editor }
