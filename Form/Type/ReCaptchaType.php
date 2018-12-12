@@ -54,8 +54,9 @@ class ReCaptchaType extends AbstractType
     private $authChecker;
 
     /**
-     * @param array        $configurationParameters configurationParameters
+     * @param array $configurationParameters
      * @param RequestStack $requestStack
+     * @param AuthorizationCheckerInterface $authChecker
      */
     public function __construct(
         array $configurationParameters,
