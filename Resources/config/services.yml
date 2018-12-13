@@ -110,8 +110,8 @@ services:
             - { name: form.type, alias: extra_form_type_choice }
 
     IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormConstraintChoiceType:
-            tags:
-                - { name: form.type, alias: extra_form_constraint_choice }
+        tags:
+            - { name: form.type, alias: extra_form_constraint_choice }
 
     IDCI\Bundle\ExtraFormBundle\Form\Type\ExtraFormEditorType:
         tags:
@@ -126,6 +126,7 @@ services:
         arguments:
             - '%idci_extra_form.recaptcha.parameters%'
             - '@request_stack'
+            - '@?security.authorization_checker'
         tags:
             - { name: form.type, alias: extra_form_recaptcha }
 

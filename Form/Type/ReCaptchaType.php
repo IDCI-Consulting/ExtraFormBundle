@@ -51,23 +51,23 @@ class ReCaptchaType extends AbstractType
      *
      * @var AuthorizationCheckerInterface
      */
-    private $authChecker;
+    private $authorizationChecker;
 
     /**
      * @param array $configurationParameters
      * @param RequestStack $requestStack
-     * @param AuthorizationCheckerInterface $authChecker
+     * @param AuthorizationCheckerInterface $authorizationChecker
      */
     public function __construct(
         array $configurationParameters,
         RequestStack $requestStack,
-        AuthorizationCheckerInterface $authChecker
+        AuthorizationCheckerInterface $authorizationChecker = null
     ) {
         $this->enabled = $configurationParameters['enabled'];
         $this->apiEndpoint = $configurationParameters['api_endpoint'];
         $this->trustedRoles = $configurationParameters['trusted_roles'];
         $this->requestStack = $requestStack;
-        $this->authChecker = $authChecker;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
@@ -178,9 +178,11 @@ class ReCaptchaType extends AbstractType
             return false;
         }
 
-        foreach ($this->trustedRoles as $trustedRole) {
-            if ($this->authChecker->isGranted($trustedRole)) {
-                return false;
+        if ($this->authorizationChecker) {
+            foreach ($this->trustedRoles as $trustedRole) {
+                if ($this->authorizationChecker->isGranted($trustedRole)) {
+                    return false;
+                }
             }
         }
 
