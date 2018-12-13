@@ -17,9 +17,9 @@ before_script:
   - sh -e /etc/init.d/xvfb start
 
 script:
-  - make phpunit
   - make phpcs
-  - make karma options='--single-run'
+  - make phpunit
+#  - make karma options='--single-run'
 
 notifications:
     on_success: never

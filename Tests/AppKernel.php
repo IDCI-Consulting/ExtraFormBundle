@@ -10,9 +10,10 @@ class AppKernel extends Kernel
         $bundles = array();
         if (in_array($this->getEnvironment(), array('test'))) {
             $bundles[] = new Symfony\Bundle\FrameworkBundle\FrameworkBundle();
+            $bundles[] = new Symfony\Bundle\SecurityBundle\SecurityBundle();
             $bundles[] = new Symfony\Bundle\TwigBundle\TwigBundle();
-            $bundles[] = new IDCI\Bundle\ExtraFormBundle\IDCIExtraFormBundle();
             $bundles[] = new Gregwar\CaptchaBundle\GregwarCaptchaBundle();
+            $bundles[] = new IDCI\Bundle\ExtraFormBundle\IDCIExtraFormBundle();
         }
 
         return $bundles;

@@ -11,3 +11,9 @@ framework:
         strict_requirements: ~
     templating:
         engines: ['twig']
+
+idci_extra_form:
+    recaptcha:
+        parameters:
+            trusted_roles:
+                - ROLE_ADMIN

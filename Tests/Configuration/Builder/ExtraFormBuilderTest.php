@@ -106,7 +106,7 @@ class ExtraFormBuilderTest extends WebTestCase
     public function testBuild($type, $options = array(), $constraints = array())
     {
         $builder = $this->extraFormBuilder->build(array(
-           sprintf('field_%s', $type) => array(
+            sprintf('field_%s', $type) => array(
                 'extra_form_type' => $type,
                 'constraints' => $constraints,
                 'options' => $options,
