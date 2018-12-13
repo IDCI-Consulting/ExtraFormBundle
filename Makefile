@@ -64,6 +64,10 @@ phpcpd:
 phpdcd:
 	docker run -i -v `pwd`:/project jolicode/phaudit bash -c "phpdcd $(php_sources); exit $$?"
 
+.PHONY: phpcs-fix
+phpcs-fix:
+	docker run --rm -i -v `pwd`:`pwd` -w `pwd` grachev/php-cs-fixer --rules=@Symfony --verbose fix $(php_sources)
+
 
 # Symfony bundle commands
 

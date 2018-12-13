@@ -33,7 +33,7 @@ class ReCaptchaType extends AbstractType
     private $enabled;
 
     /**
-     * Trusted roles
+     * Trusted roles.
      *
      * @var array
      */
@@ -54,8 +54,8 @@ class ReCaptchaType extends AbstractType
     private $authorizationChecker;
 
     /**
-     * @param array $configurationParameters
-     * @param RequestStack $requestStack
+     * @param array                         $configurationParameters
+     * @param RequestStack                  $requestStack
      * @param AuthorizationCheckerInterface $authorizationChecker
      */
     public function __construct(
