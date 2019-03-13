@@ -12,7 +12,7 @@ use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistryInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 
 class ConstraintCompilerPass implements CompilerPassInterface
 {
@@ -31,7 +31,7 @@ class ConstraintCompilerPass implements CompilerPassInterface
 
         $constraints = $container->getParameter('idci_extra_form.constraints');
         foreach ($constraints as $name => $configuration) {
-            $serviceDefinition = new DefinitionDecorator(ExtraFormConstraintInterface::class);
+            $serviceDefinition = new ChildDefinition(ExtraFormConstraintInterface::class);
             $serviceDefinition->replaceArgument(0, $configuration);
 
             $container->setDefinition(
