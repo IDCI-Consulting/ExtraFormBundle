@@ -4,5 +4,5 @@ imports:
 
 twig:
     form_themes:
-        - 'IDCIExtraFormBundle:Form:fields.html.twig'
-        - 'IDCIExtraFormBundle:Form:extra_form_recaptcha.html.twig'
+        - '@IDCIExtraForm/Form/fields.html.twig'
+        - '@IDCIExtraForm/Form/extra_form_recaptcha.html.twig'
