@@ -37,7 +37,8 @@
         "idci/step-bundle": "Allow to use the extra form mechanism in a step workflow"
     },
     "autoload": {
-        "psr-0": { "IDCI\\Bundle\\ExtraFormBundle": "" }
-    },
-    "target-dir": "IDCI/Bundle/ExtraFormBundle"
+        "psr-4": {
+            "IDCI\\Bundle\\ExtraFormBundle\\": ""
+        }
+    }
 }
