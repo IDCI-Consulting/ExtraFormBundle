@@ -2,27 +2,27 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Controller;
 
+use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\Delete;
+use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Post;
+use FOS\RestBundle\Controller\Annotations\Put;
+use FOS\RestBundle\Controller\Annotations\RequestParam;
 use FOS\RestBundle\Request\ParamFetcher;
+use FOS\RestBundle\View\View;
 use IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilderInterface;
+use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistryInterface;
 use IDCI\Bundle\ExtraFormBundle\Model\ConfiguredType;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistryInterface;
-use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations\RequestParam;
-use FOS\RestBundle\Controller\Annotations\Put;
-use FOS\RestBundle\Controller\Annotations\Delete;
-use FOS\RestBundle\Controller\Annotations\Get;
-use FOS\RestBundle\Controller\Annotations\Post;
-use FOS\RestBundle\View\View;
 
 /**
  * Api controller.
  */
-class ApiController extends FOSRestController
+class ApiController extends AbstractFOSRestController
 {
     /**
      * [GET] /extra-form-types
@@ -242,11 +242,11 @@ class ApiController extends FOSRestController
     {
         $view = View::create()->setFormat($_format);
         $tags = $this
-                ->getDoctrine()
-                ->getManager()
-                ->getRepository('IDCIExtraFormBundle:ConfiguredType')
-                ->getAllTags()
-            ;
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('IDCIExtraFormBundle:ConfiguredType')
+            ->getAllTags()
+        ;
         ksort($tags);
         $view->setData($tags);
 
@@ -347,7 +347,7 @@ class ApiController extends FOSRestController
         ;
 
         if (null === $configuredType) {
-            return new Response('No configured type found with name '.$name, Response::HTTP_NOT_FOUND);
+            return new Response('No configured type found with name ' . $name, Response::HTTP_NOT_FOUND);
         }
 
         $configuredType->setConfiguration($paramFetcher->get('configuration'));
@@ -387,7 +387,7 @@ class ApiController extends FOSRestController
         ;
 
         if (null === $configuredType) {
-            return new Response('No configured type found with name '.$name, Response::HTTP_NOT_FOUND);
+            return new Response('No configured type found with name ' . $name, Response::HTTP_NOT_FOUND);
         }
 
         $em->remove($configuredType);
