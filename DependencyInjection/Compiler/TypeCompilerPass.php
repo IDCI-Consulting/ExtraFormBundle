@@ -10,7 +10,7 @@ namespace IDCI\Bundle\ExtraFormBundle\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use IDCI\Bundle\ExtraFormBundle\Exception\UndefinedExtraFormTypeException;
 use IDCI\Bundle\ExtraFormBundle\Exception\WrongExtraFormTypeOptionException;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistryInterface;
@@ -34,7 +34,7 @@ class TypeCompilerPass implements CompilerPassInterface
         $types = $container->getParameter('idci_extra_form.types');
         $extraFormOptions = array();
         foreach ($types as $blockPrefix => $configuration) {
-            $serviceDefinition = new DefinitionDecorator(ExtraFormTypeInterface::class);
+            $serviceDefinition = new ChildDefinition(ExtraFormTypeInterface::class);
 
             if (null !== $configuration['parent']) {
                 if (!$container->hasDefinition($this->getDefinitionName($configuration['parent']))) {

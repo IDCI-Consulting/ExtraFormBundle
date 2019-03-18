@@ -12,7 +12,7 @@ use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherRegist
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 
 class ConfigurationFetcherCompilerPass implements CompilerPassInterface
 {
@@ -31,7 +31,7 @@ class ConfigurationFetcherCompilerPass implements CompilerPassInterface
 
         $configurations = $container->getParameter('idci_extra_form.configurations');
         foreach ($configurations as $name => $configuration) {
-            $serviceDefinition = new DefinitionDecorator(ConfigurationFetcherInterface::class);
+            $serviceDefinition = new ChildDefinition(ConfigurationFetcherInterface::class);
             $serviceName = sprintf('idci_extra_form.configuration.fetcher.%s', $name);
 
             $serviceDefinition->setAbstract(false);
