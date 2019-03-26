@@ -33,6 +33,7 @@ class Configuration implements ConfigurationInterface
         // more information on that topic.
         $rootNode
             ->children()
+                ->scalarNode('working_dir')->defaultValue('/tmp/idci_extra_form')->end()
                 ->append($this->addExtraFormTypesNode())
                 ->append($this->addExtraFormConstraintsNode())
                 ->append($this->addExtraFormConfiguratorsNode())

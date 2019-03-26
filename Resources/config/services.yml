@@ -65,7 +65,6 @@ services:
         tags:
           - { name: "form.type_extension", alias: "form" }
 
-
     # Form Types
 
     form.type.idci_extra_form.extra_form_builder:
@@ -79,7 +78,11 @@ services:
         tags:
             - { name: form.type, alias: extra_form_collection }
 
-    form.type.idci_extra_form.json_textarea:
+    form.type.idci_extra_form.extra_form_file:
+        tags:
+            - { name: form.type, alias: extra_form_file }
+
+    form.type.idci_extra_form.extra_form_json_textarea:
         class: IDCI\Bundle\ExtraFormBundle\Form\Type\JsonTextareaType
         tags:
             - { name: form.type, alias: extra_form_json_textarea }
