@@ -7,10 +7,10 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\DependencyInjection;
 
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader;
-use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
@@ -55,6 +55,7 @@ class IDCIExtraFormExtension extends Extension implements PrependExtensionInterf
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
+        $container->setParameter('idci_extra_form.working_dir', $config['working_dir']);
         $container->setParameter('idci_extra_form.types', $config['types']);
         $container->setParameter('idci_extra_form.constraints', $config['constraints']);
         $container->setParameter('idci_extra_form.configurations', $config['configurations']);
