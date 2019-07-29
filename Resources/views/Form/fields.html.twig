@@ -49,8 +49,11 @@
                 return itemContainer;
             };
 
-            var showItem = function(item) {
+            var showItem = function(item, $parentRequired) {
                 item.attr('data-display', 'show');
+                if ($parentRequired) {
+                    item.find('input').prop('required', 'required');
+                }
                 // Uncheck remove input
                 item
                     .find('.idci_collection_item_remove')
@@ -63,6 +66,7 @@
 
             var hideItem = function(item) {
                 item.attr('data-display', 'hide');
+                item.find('input').prop('required', false);
                 // Check remove input
                 item
                     .find('.idci_collection_item_remove')
@@ -145,10 +149,14 @@
                 event.preventDefault();
                 if (countActionable > 0) {
                     var $parent = $(this).parent();
+                    var $parentRequired = $parent.find('[data-collection-id={{ form.vars.collection_id }}][data-display=show]').filter(function () {
+                        return $(this).attr('id') == $parent.attr('id')+'_'+$(this).data('position');
+                    }).first().find('input').prop('required');
                     var $toShow = $parent.find('[data-collection-id={{ form.vars.collection_id }}][data-display=hide]').filter(function () {
                         return $(this).attr('id') == $parent.attr('id')+'_'+$(this).data('position');
                     }).first();
-                    showItem($toShow);
+
+                    showItem($toShow, $parentRequired);
                     hideRemoveCheckbox($toShow);
                     init();
                 }
