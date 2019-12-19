@@ -7,6 +7,7 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Form;
 
+use IDCI\Bundle\ExtraFormBundle\Form\Type\TagsType;
 use IDCI\Bundle\ExtraFormBundle\Model\ConfiguredType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,9 +21,9 @@ class ConfiguredTypeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('blockPrefix')
             ->add('description')
-            ->add('tags', 'extra_form_tags', array(
+            ->add('tags', TagsType::class, array(
                 'required' => false,
                 'url' => '/api/configured-extra-form-types-tags.json',
             ))
