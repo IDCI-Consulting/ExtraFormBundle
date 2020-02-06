@@ -13,6 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherInterface;
 use IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilderInterface;
 use IDCI\Bundle\ExtraFormBundle\Form\Event\RawEventSubscriber;
+use IDCI\Bundle\ExtraFormBundle\Form\Type\JsonTextareaType;
 
 class ExtraFormBuilderType extends AbstractType
 {
@@ -52,7 +53,7 @@ class ExtraFormBuilderType extends AbstractType
                 )
             ;
         } catch (\Exception $e) {
-            $builder->add('raw', 'extra_form_json_textarea');
+            $builder->add('raw', JsonTextareaType::class);
             $builder->addEventSubscriber(new RawEventSubscriber());
         }
     }
