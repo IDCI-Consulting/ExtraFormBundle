@@ -25,13 +25,12 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('idci_extra_form');
+        $treeBuilder = new TreeBuilder('idci_extra_form');
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
-        $rootNode
+        $treeBuilder->getRootNode()
             ->children()
                 ->scalarNode('working_dir')
                     ->defaultValue(sprintf('%s/idci_extra_form', sys_get_temp_dir()))
@@ -53,9 +52,8 @@ class Configuration implements ConfigurationInterface
      */
     protected function addExtraFormTypesNode()
     {
-        $builder = new TreeBuilder();
-        $node = $builder->root('types');
-
+        $builder = new TreeBuilder('types');
+        $node = $builder->getRootNode();
         $node
             ->defaultValue(array())
             ->useAttributeAsKey('id')
@@ -92,9 +90,8 @@ class Configuration implements ConfigurationInterface
      */
     protected function addExtraFormConstraintsNode()
     {
-        $builder = new TreeBuilder();
-        $node = $builder->root('constraints');
-
+        $builder = new TreeBuilder('constraints');
+        $node = $builder->getRootNode();
         $node
             ->defaultValue(array())
             ->useAttributeAsKey('id')
@@ -128,9 +125,8 @@ class Configuration implements ConfigurationInterface
      */
     protected function addExtraFormConfiguratorsNode()
     {
-        $builder = new TreeBuilder();
-        $node = $builder->root('configurations');
-
+        $builder = new TreeBuilder('configurations');
+        $node = $builder->getRootNode();
         $node
             ->defaultValue(array())
             ->useAttributeAsKey('id')
@@ -172,9 +168,8 @@ class Configuration implements ConfigurationInterface
      */
     private function addReCaptchaConfigurationNode()
     {
-        $builder = new TreeBuilder();
-        $node = $builder->root('recaptcha');
-
+        $builder = new TreeBuilder('recaptcha');
+        $node = $builder->getRootNode();
         $node
             ->addDefaultsIfNotSet()
             ->children()

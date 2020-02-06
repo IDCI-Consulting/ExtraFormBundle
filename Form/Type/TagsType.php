@@ -40,14 +40,10 @@ class TagsType extends AbstractType
                 'separator' => ',',
                 'jsTransformFunction' => 'function (tags) { return tags; };',
             ))
-            ->setOptional(array(
-                'url',
-            ))
-            ->setAllowedTypes(array(
-                'separator' => array('string'),
-                'jsTransformFunction' => array('string'),
-                'url' => array('string'),
-            ))
+            ->setDefined('url')
+            ->setAllowedTypes('separator', array('string'))
+            ->setAllowedTypes('jsTransformFunction', array('string'))
+            ->setAllowedTypes('url', array('string'))
         ;
     }
 
