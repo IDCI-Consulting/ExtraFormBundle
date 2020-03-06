@@ -124,7 +124,7 @@ select, input, textarea, button, optgroup {
 
 .modal-fullscreen .modal-footer {
     bottom: 0;
-    position: fixed;
+    position: relative;
     width: 100%;
 }
 
