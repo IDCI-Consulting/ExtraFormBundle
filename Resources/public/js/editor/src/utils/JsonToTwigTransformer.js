@@ -98,9 +98,9 @@ export default {
     /**
      * "{{ ... }}"
      */
-    var twigStatementRegex = /{{(.*)?}}/g;
+    var twigStatementRegex = /{{(.*?)}}/g;
 
-    var twigOperationArrayRegex = /"\[( {0,1}){%(.*)?%}( {0,1})\]"/g;
+    var twigOperationArrayRegex = /"\[( {0,1}){%(.*?)%}( {0,1})\]"/g;
 
     /**
      * Format twig statements
