@@ -11,33 +11,6 @@ css_sources ?= Resources/public/css/editor-*.css
 command:
 	docker-compose run --rm $(target_container) $(cmd)
 
-
-# NodeJs commands
-
-.PHONY: yarn
-yarn:
-	docker-compose run --rm node yarn $(cmd) $(options)
-
-.PHONY: npm-install
-npm-install:
-	docker-compose run --rm node npm install $(options)
-
-.PHONY: karma
-karma:
-	docker-compose run --rm node ./node_modules/karma/bin/karma start $(options)
-
-.PHONY: gulp
-gulp:
-	docker-compose run --rm node gulp $(task)
-
-.PHONY: eslint
-eslint:
-	docker-compose run --rm node eslint $(js_sources)
-
-.PHONY: eslint
-csslint:
-	docker-compose run --rm node csslint $(css_sources)
-
 # PHP commands
 
 .PHONY: composer-update

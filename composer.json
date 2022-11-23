@@ -15,7 +15,6 @@
         "php": "^7.2|^8.0",
         "google/recaptcha": "^1.1",
         "gregwar/captcha-bundle": "~2.0",
-        "idci/asset-loader-bundle": "~2.1",
         "jms/serializer-bundle": ">=1.1",
         "symfony/dependency-injection": "^4.4|^5.3|^6.0",
         "symfony/event-dispatcher": "^4.4|^5.3|^6.0",

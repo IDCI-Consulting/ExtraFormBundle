@@ -9,8 +9,6 @@ This bundle provide:
 * An api that exposes all symfony form types as 'extra form types'
 * An api that exposes all symfony validation constraints as 'extra form constraints'
 
-For a quick overview on what this bundle offer, you can [test the form editor](http://extra-form.labs.idci.fr/extra-form/editor).
-
 [![SensioLabsInsight][insight-image]][insight-url]
 [![Build][build-image]][build-url]
 
@@ -149,7 +147,6 @@ Going further
 -------------
 
 * [Api](Resources/doc/api.md)
-* [Editor](Resources/doc/editor.md)
 * [ExtraFormBuilderType](Resources/doc/extra_form_builder_type.md)
 * [ConfigurationFetcher](Resources/doc/configuration_fetcher.md)
 * [Architecture](Resources/doc/architecture.md)
@@ -162,17 +159,14 @@ We use [docker](https://docs.docker.com/engine/installation/) and [docker-compos
 Install the bundle dev dependencies:
 ```sh
 $ make composer-update
-$ make yarn cmd="install"
 ```
 
 To execute unit tests:
 ```sh
 $ make phpunit
-$ make karma options='--single-run'
 ```
 
 [build-image]: https://img.shields.io/travis/IDCI-Consulting/ExtraFormBundle.svg?style=flat
 [build-url]: https://travis-ci.org/IDCI-Consulting/ExtraFormBundle
 [insight-image]: https://insight.sensiolabs.com/projects/6b163476-64da-450a-8c34-3b1e5225bde2/mini.png
 [insight-url]: https://insight.sensiolabs.com/projects/6b163476-64da-450a-8c34-3b1e5225bde2
-
