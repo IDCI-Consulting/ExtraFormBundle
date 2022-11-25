@@ -1,31 +1,31 @@
 ExtraFormBuilderType
 ====================
 
-ExtraFormBuilderType is a Symfony2 FormType [define as service](http://symfony.com/doc/current/book/forms.html#defining-your-forms-as-services).
+ExtraFormBuilderType is a Symfony FormType [define as service](http://symfony.com/doc/current/book/forms.html#defining-your-forms-as-services).
 This FormType will allow you to generate just a part of a Form.
 
 Here is a quick example :
 ```php
 $form = $this
     ->createFormBuilder()
-    ->add('my_form', 'extra_form_builder', array(
-        'configuration' => array(
-            'first_name' => array(
+    ->add('my_form', 'extra_form_builder', [
+        'configuration' => [
+            'first_name' => [
                 'extra_form_type' => 'text',
-                'options' => array(
+                'options' => [
                     'label' => 'Prénom',
-                ),
-                'constraints' => array(),
-            ),
-            'last_name' => array(
+                ],
+                'constraints' => [],
+            ],
+            'last_name' => [
                 'extra_form_type' => 'text',
-                'options' => array(
+                'options' => [
                     'label' => 'Nom',
-                ),
-                'constraints' => array(),
-            )
-        ),
-    ))
+                ],
+                'constraints' => [],
+            ]
+        ],
+    ])
     ->getForm()
 ;
 ```
@@ -46,25 +46,25 @@ This transformation is done using EventSubscriber, to choose one, specify the
 `transform_method` option:
 ```php
 $form = $this
-    ->add('my_form', 'extra_form_builder', array(
-        'configuration' => array(
-            'first_name' => array(
+    ->add('my_form', 'extra_form_builder', [
+        'configuration' => [
+            'first_name' => [
                 'extra_form_type' => 'text',
-                'options' => array(
+                'options' => [
                     'label' => 'Prénom',
-                ),
-                'constraints' => array(),
-            ),
-            'last_name' => array(
+                ],
+                'constraints' => [],
+            ],
+            'last_name' => [
                 'extra_form_type' => 'text',
-                'options' => array(
+                'options' => [
                     'label' => 'Nom',
-                ),
-                'constraints' => array(),
-            )
-        ),
+                ],
+                'constraints' => [],
+            ]
+        ],
         'transform_method' => 'jsonize',
-    ))
+    ])
     ->getForm()
 ;
 ```

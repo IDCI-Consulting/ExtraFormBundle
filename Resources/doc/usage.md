@@ -9,9 +9,12 @@ The `idci_extra_form.builder` service is the main service that you will use in o
 
 To use it:
 ```php
-$builder = $this
-    ->get(ExtraFormBuilderInterface::class)
-    ->build(array(
+use IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilderInterface;
+...
+
+public function myAction(ExtraFormBuilderInterface $extraFormBuilder)
+{
+    $builder = $extraFormBuilder->build([
         'first_name' => array(
             'extra_form_type' => 'text',
             'options' => array(
@@ -26,22 +29,22 @@ $builder = $this
             ),
             'constraints' => array(),
         )
-    ))
-;
+    ]);
+}
 ```
 
-Now you get a Symfony2 [FormBuilder](https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/FormBuilder.php) object.
+Now you get a Symfony [FormBuilder](https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/FormBuilder.php) object.
 So simply call the getForm() method :
 ```php
 $form = $builder->getForm();
 ```
 
-And follow the usual process with symfony2 forms :
+And follow the usual process with symfony forms :
 Return a view from your controller
 ```php
-return array(
+return [
     'form' => $form->createView()
-);
+];
 ```
 
 Finally you could display it in your twig :
@@ -53,49 +56,48 @@ Finally you could display it in your twig :
 
 Instead of injecting a configuration array in the `build()` method, you may use a Configuration fetcher as shown after :
 ```php
-$form = $this
-    ->get(ExtraFormBuilderInterface::class)
-    ->build('identity_form', array())
-    ->getForm()
-;
+public function myAction(ExtraFormBuilderInterface $extraFormBuilder)
+{
+    $form = $extraFormBuilder->build('identity_form', [])->getForm();
+}
 ```
 See the [ConfigurationFetcher](configuration_fetcher.md) documentation to learn how to create a configuration.
 
-## As Symfony2 a FormType
+## As Symfony a FormType
 
 In this case you must create a form first, and then add a field using the special
 FormType *extra_form_builder*. The generated form will be a field of the created form.
 ```php
 $form = $this
     ->createFormBuilder()
-    ->add('my_form', 'extra_form_builder', array(
-        'configuration' => array(
-            'first_name' => array(
+    ->add('my_form', 'extra_form_builder', [
+        'configuration' => [
+            'first_name' => [
                 'extra_form_type' => 'text',
-                'options' => array(
+                'options' => [
                     'label' => 'Prénom',
-                ),
-                'constraints' => array(),
-            ),
-            'last_name' => array(
+                ],
+                'constraints' => [],
+            ],
+            'last_name' => [
                 'extra_form_type' => 'text',
-                'options' => array(
+                'options' => [
                     'label' => 'Nom',
-                ),
-                'constraints' => array(),
-            )
+                ],
+                'constraints' => [],
+            ]
         ),
-        'parameters' => array(),
+        'parameters' => [],
     ))
     ->getForm()
 ```
 
-And follow the usual process with symfony2 forms :
+And follow the usual process with symfony forms :
 Return a view from your controller
 ```php
-return array(
+return [
     'form' => $form->createView()
-);
+];
 ```
 
 Finally you could display it in your twig

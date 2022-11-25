@@ -1,7 +1,7 @@
 ExtraFormBundle
 ===============
 
-ExtraFormBundle is a Symfony2 bundle that expand existing FormType features to allow dynamic forms generation.
+ExtraFormBundle is a Symfony bundle that expand existing FormType features to allow dynamic forms generation.
 
 This bundle provide:
 * A builder to generate forms from a configuration array. This allow you to configure your forms in any format convertible in an array (yaml, json, etc) and dynamically generate your forms.
@@ -15,32 +15,9 @@ This bundle provide:
 Installation
 ------------
 
-Add dependencies in your `composer.json` file:
-```json
-"require": {
-    ...
-    "idci/extra-form-bundle": "dev-master"
-},
-```
-
-Install these new dependencies in your application using composer:
+Install this bundle using composer:
 ```sh
-$ php composer.phar update
-```
-
-Register needed bundles in your application kernel:
-```php
-<?php
-// app/AppKernel.php
-
-public function registerBundles()
-{
-    $bundles = array(
-        // ...
-        new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
-        new IDCI\Bundle\ExtraFormBundle\IDCIExtraFormBundle(),
-    );
-}
+$ php composer require idci/extra-form-bundle:dev-master
 ```
 
 Import the bundle configuration:

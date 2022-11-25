@@ -28,7 +28,7 @@ idci_extra_form:
     types:
         my_type:
             parent: form
-            form_type: sf2_my_type
+            form_type: sf_my_type
             description: A short description about your FormType
             extra_form_options:
                 my_option1: { extra_form_type: "text", options: {required: false} }

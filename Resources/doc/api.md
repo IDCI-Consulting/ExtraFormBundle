@@ -21,9 +21,3 @@ In case you need to create several forms with fields that are always the same, y
 Have a look at the [controller](../../Controller/ApiController.php).
 
 TODO : Use NelmioApiDocBundle to document the API
-
-## Use case
-
-As a use case, we built a form editor on top of that API.
-
-This editor has been packaged [in a form type](editor.md).
