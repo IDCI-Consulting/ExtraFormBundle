@@ -2,6 +2,7 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
@@ -16,5 +17,5 @@ interface ConfigurationFetcherInterface
      *
      * @return array
      */
-    public function fetch(array $parameters = array());
+    public function fetch(array $parameters = []);
 }

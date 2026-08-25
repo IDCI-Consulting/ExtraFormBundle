@@ -2,6 +2,7 @@
 
 /**
  * @author:  Baptiste BOUCHEREAU <baptiste.bouchereau@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
@@ -17,23 +18,20 @@ class ExtraFormConstraintTest extends \PHPUnit_Framework_TestCase
      */
     private $extraFormConstraint;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setUp()
     {
-        $configuration = array(
+        $configuration = [
             'class' => NotBlank::class,
             'description' => 'Not blank constraint',
-            'extra_form_options' => array(
-                'message' => array(
+            'extra_form_options' => [
+                'message' => [
                     'extra_form_type' => 'text',
-                    'options' => array(
+                    'options' => [
                         'required' => false,
-                    ),
-                ),
-            ),
-        );
+                    ],
+                ],
+            ],
+        ];
 
         $this->extraFormConstraint = new ExtraFormConstraint($configuration);
     }
@@ -61,14 +59,14 @@ class ExtraFormConstraintTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetExtraFormOptions()
     {
-        $options = array(
-            'message' => array(
+        $options = [
+            'message' => [
                 'extra_form_type' => 'text',
-                'options' => array(
+                'options' => [
                     'required' => false,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $this->assertEquals($options, $this->extraFormConstraint->getExtraFormOptions());
     }

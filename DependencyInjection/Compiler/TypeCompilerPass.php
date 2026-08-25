@@ -2,29 +2,27 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
 namespace IDCI\Bundle\ExtraFormBundle\DependencyInjection\Compiler;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\DependencyInjection\ChildDefinition;
 use IDCI\Bundle\ExtraFormBundle\Exception\UndefinedExtraFormTypeException;
 use IDCI\Bundle\ExtraFormBundle\Exception\WrongExtraFormTypeOptionException;
-use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistryInterface;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeInterface;
+use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistryInterface;
+use Symfony\Component\DependencyInjection\ChildDefinition;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 class TypeCompilerPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->has(ExtraFormTypeInterface::class) ||
-            !$container->has(ExtraFormTypeRegistryInterface::class)
+        if (!$container->has(ExtraFormTypeInterface::class)
+            || !$container->has(ExtraFormTypeRegistryInterface::class)
         ) {
             return;
         }
@@ -32,7 +30,7 @@ class TypeCompilerPass implements CompilerPassInterface
         $registryDefinition = $container->findDefinition(ExtraFormTypeRegistryInterface::class);
 
         $types = $container->getParameter('idci_extra_form.types');
-        $extraFormOptions = array();
+        $extraFormOptions = [];
         foreach ($types as $blockPrefix => $configuration) {
             $serviceDefinition = new ChildDefinition(ExtraFormTypeInterface::class);
 
@@ -59,7 +57,7 @@ class TypeCompilerPass implements CompilerPassInterface
 
             $registryDefinition->addMethodCall(
                 'setType',
-                array($blockPrefix, new Reference($this->getDefinitionName($blockPrefix)))
+                [$blockPrefix, new Reference($this->getDefinitionName($blockPrefix))]
             );
 
             $extraFormOptions[$blockPrefix] = $configuration['extra_form_options'];
@@ -69,11 +67,7 @@ class TypeCompilerPass implements CompilerPassInterface
         foreach ($extraFormOptions as $blockPrefix => $options) {
             foreach ($options as $optionName => $optionValue) {
                 if (!$container->hasDefinition($this->getDefinitionName($optionValue['extra_form_type']))) {
-                    throw new WrongExtraFormTypeOptionException(
-                        $blockPrefix,
-                        $optionName,
-                        sprintf('Undefined ExtraFormType "%s"', $optionValue['extra_form_type'])
-                    );
+                    throw new WrongExtraFormTypeOptionException($blockPrefix, $optionName, sprintf('Undefined ExtraFormType "%s"', $optionValue['extra_form_type']));
                 }
             }
         }
@@ -81,8 +75,6 @@ class TypeCompilerPass implements CompilerPassInterface
 
     /**
      * Get definition name.
-     *
-     * @param string $name
      *
      * @return string
      */

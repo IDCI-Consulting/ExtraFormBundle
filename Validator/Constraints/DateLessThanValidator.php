@@ -2,6 +2,7 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
@@ -11,9 +12,6 @@ use Symfony\Component\Validator\Constraints\LessThanValidator;
 
 class DateLessThanValidator extends LessThanValidator
 {
-    /**
-     * {@inheritdoc}
-     */
     protected function compareValues($value1, $value2)
     {
         $value1 = DateValidatorTool::cleanDateValue($value1);

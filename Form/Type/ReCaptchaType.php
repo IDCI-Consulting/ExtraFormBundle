@@ -53,15 +53,10 @@ class ReCaptchaType extends AbstractType
      */
     private $authorizationChecker;
 
-    /**
-     * @param array                         $configurationParameters
-     * @param RequestStack                  $requestStack
-     * @param AuthorizationCheckerInterface $authorizationChecker
-     */
     public function __construct(
         array $configurationParameters,
         RequestStack $requestStack,
-        AuthorizationCheckerInterface $authorizationChecker = null
+        ?AuthorizationCheckerInterface $authorizationChecker = null,
     ) {
         $this->enabled = $configurationParameters['enabled'];
         $this->apiEndpoint = $configurationParameters['api_endpoint'];
@@ -70,23 +65,17 @@ class ReCaptchaType extends AbstractType
         $this->authorizationChecker = $authorizationChecker;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('reCaptchaResponse', HiddenType::class, array(
-                'constraints' => array(
+            ->add('reCaptchaResponse', HiddenType::class, [
+                'constraints' => [
                     new ReCaptchaVerified($options['private_key']),
-                ),
-            ))
+                ],
+            ])
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $language = !empty($options['language']) ?
@@ -94,21 +83,18 @@ class ReCaptchaType extends AbstractType
             $this->requestStack->getMasterRequest()->getLocale()
         ;
 
-        $view->vars = array_replace($view->vars, array(
+        $view->vars = array_replace($view->vars, [
             'api_endpoint' => $this->apiEndpoint,
             'bind_selector' => $options['bind_selector'],
             'enabled' => $this->isEnabled(),
             'language' => $language,
             'url_challenge' => sprintf('%s?hl=%s', sprintf('%s.js', $this->apiEndpoint), $language),
-        ));
+        ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $defaultAttributes = array(
+        $defaultAttributes = [
             'data-async' => false,
             'data-badge' => null,
             'data-bind' => null,
@@ -121,18 +107,18 @@ class ReCaptchaType extends AbstractType
             'data-size' => 'normal',
             'data-theme' => 'light',
             'data-type' => 'image',
-        );
+        ];
 
         $resolver
-            ->setRequired(array(
+            ->setRequired([
                 'private_key',
                 'public_key',
-            ))
-            ->setDefaults(array(
+            ])
+            ->setDefaults([
                 'attr' => $defaultAttributes,
                 'bind_selector' => null,
                 'language' => null,
-            ))
+            ])
             ->setNormalizer('attr', function (Options $options, $value) use ($defaultAttributes) {
                 $value = array_replace_recursive($defaultAttributes, $value);
                 $value['data-sitekey'] = $options['public_key'];
@@ -159,9 +145,6 @@ class ReCaptchaType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'extra_form_recaptcha';

@@ -2,6 +2,7 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
@@ -13,18 +14,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RangeType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'min' => 0,
                 'max' => 100,
                 'step' => 1,
                 'value' => null,
-            ))
+            ])
             ->setNormalizer(
                 'value',
                 function (OptionsResolver $options, $value) {
@@ -39,26 +37,24 @@ class RangeType extends AbstractType
                 'attr',
                 function (OptionsResolver $options, $value) {
                     return array_merge(
-                        array(
+                        [
                             'min' => $options['min'],
                             'max' => $options['max'],
                             'step' => $options['step'],
                             'value' => $options['value'],
-                        ),
+                        ],
                         $value
                     );
                 }
             )
-            ->setAllowedTypes('min', array('integer'))
-            ->setAllowedTypes('max', array('integer'))
-            ->setAllowedTypes('step', array('integer'))
-            ->setAllowedTypes('value', array('null'))
+            ->setAllowedTypes('min', ['integer'])
+            ->setAllowedTypes('max', ['integer'])
+            ->setAllowedTypes('step', ['integer'])
+            ->setAllowedTypes('value', ['null'])
         ;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @deprecated
      */
     public function setDefaultOptions(OptionsResolver $resolver)
@@ -66,17 +62,11 @@ class RangeType extends AbstractType
         $this->configureOptions($resolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent()
     {
         return TextType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'extra_form_range';

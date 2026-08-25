@@ -2,41 +2,33 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
 namespace IDCI\Bundle\ExtraFormBundle\Form\Event;
 
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class RawEventSubscriber implements EventSubscriberInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents()
     {
-        return array(
-            FormEvents::PRE_SET_DATA => array('preSetData', 1),
-            FormEvents::SUBMIT => array('submit', 900),
-        );
+        return [
+            FormEvents::PRE_SET_DATA => ['preSetData', 1],
+            FormEvents::SUBMIT => ['submit', 900],
+        ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function preSetData(FormEvent $event)
     {
         $data = $event->getData();
 
-        $event->setData(array('raw' => $data));
+        $event->setData(['raw' => $data]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function submit(FormEvent $event)
     {
         $data = $event->getData();

@@ -2,6 +2,7 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
@@ -9,20 +10,17 @@ namespace IDCI\Bundle\ExtraFormBundle\DependencyInjection\Compiler;
 
 use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherInterface;
 use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherRegistry;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\ChildDefinition;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 class ConfigurationFetcherCompilerPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->has(ConfigurationFetcherInterface::class) ||
-            !$container->hasDefinition(ConfigurationFetcherRegistry::class)
+        if (!$container->has(ConfigurationFetcherInterface::class)
+            || !$container->hasDefinition(ConfigurationFetcherRegistry::class)
         ) {
             return;
         }
@@ -41,7 +39,7 @@ class ConfigurationFetcherCompilerPass implements CompilerPassInterface
 
             $registryDefinition->addMethodCall(
                 'setFetcher',
-                array($name, new Reference($serviceName))
+                [$name, new Reference($serviceName)]
             );
         }
 
@@ -50,7 +48,7 @@ class ConfigurationFetcherCompilerPass implements CompilerPassInterface
             foreach ($tags as $attributes) {
                 $registryDefinition->addMethodCall(
                     'setFetcher',
-                    array($attributes['alias'], new Reference($id))
+                    [$attributes['alias'], new Reference($id)]
                 );
             }
         }

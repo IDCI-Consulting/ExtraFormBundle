@@ -2,6 +2,7 @@
 
 /**
  * @author:  Baptiste BOUCHEREAU <baptiste.bouchereau@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
@@ -26,17 +27,17 @@ class ConfiguredTypeRepository extends EntityRepository
         foreach ($tags as $key => $tag) {
             $operator = substr($tag, 0, 1);
 
-            if ($operator === '+' || $operator === '-') {
+            if ('+' === $operator || '-' === $operator) {
                 $tag = substr($tag, 1);
             }
 
             $literalExpr = $qb->expr()->literal('%'.$tag.'%');
 
-            if ($operator === '-') {
+            if ('-' === $operator) {
                 $qb->andWhere($qb->expr()->notLike('c.tags', $literalExpr));
-            } elseif ($operator === '+') {
+            } elseif ('+' === $operator) {
                 $qb->andWhere($qb->expr()->like('c.tags', $literalExpr));
-            } elseif ($key === 0) {
+            } elseif (0 === $key) {
                 $qb->where($qb->expr()->like('c.tags', $literalExpr));
             } else {
                 $qb->orWhere($qb->expr()->like('c.tags', $literalExpr));
@@ -62,7 +63,7 @@ class ConfiguredTypeRepository extends EntityRepository
         ;
 
         $tagStrings = array_map('current', $qb->getQuery()->getScalarResult());
-        $distinctTags = array();
+        $distinctTags = [];
 
         foreach ($tagStrings as $tagString) {
             foreach (explode(',', $tagString) as $tag) {

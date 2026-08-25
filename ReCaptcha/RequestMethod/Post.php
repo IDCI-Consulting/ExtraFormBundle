@@ -46,8 +46,8 @@ class Post implements RequestMethod
     public function submit(RequestParameters $params)
     {
         $peer_key = version_compare(PHP_VERSION, '5.6.0', '<') ? 'CN_name' : 'peer_name';
-        $options = array(
-            'http' => array(
+        $options = [
+            'http' => [
                 'header' => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method' => 'POST',
                 'content' => $params->toQueryString(),
@@ -55,18 +55,18 @@ class Post implements RequestMethod
                 'verify_peer' => true,
                 // Force the peer validation to use www.google.com
                 $peer_key => 'www.google.com',
-            ),
-        );
+            ],
+        ];
 
         if (null !== $this->httpProxy['host'] && null !== $this->httpProxy['port']) {
-            $options = array_replace_recursive($options, array(
-                'http' => array(
+            $options = array_replace_recursive($options, [
+                'http' => [
                     'header' => "Content-type: application/x-www-form-urlencoded\r\n".sprintf('Proxy-Authorization: Basic %s', base64_encode($this->httpProxy['auth'])),
                     'proxy' => sprintf('tcp://%s:%s', $this->httpProxy['host'], $this->httpProxy['port']),
                     // While this is a non-standard request format, some proxy servers require it.
                     'request_fulluri' => true,
-                ),
-            ));
+                ],
+            ]);
         }
 
         $context = stream_context_create($options);

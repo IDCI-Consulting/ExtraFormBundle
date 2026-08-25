@@ -2,15 +2,16 @@
 
 /**
  * @author:  Arthur FARRUGIA <farrugia.arthur@gmail.com>
+ *
  * @license: MIT
  */
 
 namespace IDCI\Bundle\ExtraFormBundle\Form\Type;
 
+use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistryInterface;
 
 class ExtraFormConstraintChoiceType extends AbstractType
 {
@@ -21,35 +22,28 @@ class ExtraFormConstraintChoiceType extends AbstractType
 
     /**
      * Constructor.
-     *
-     * @param ExtraFormConstraintRegistryInterface $registry
      */
     public function __construct(ExtraFormConstraintRegistryInterface $registry)
     {
         $this->registry = $registry;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choices = array();
+        $choices = [];
 
         foreach ($this->registry->getConstraints() as $alias => $type) {
             $choices[$alias] = $type->getDescription();
         }
 
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'choices' => $choices,
-            ))
+            ])
         ;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @deprecated
      */
     public function setDefaultOptions(OptionsResolver $resolver)
@@ -57,17 +51,11 @@ class ExtraFormConstraintChoiceType extends AbstractType
         $this->configureOptions($resolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent()
     {
         return ChoiceType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'extra_form_constraint_choice';

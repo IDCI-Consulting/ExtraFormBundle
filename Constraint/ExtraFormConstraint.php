@@ -2,6 +2,7 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
@@ -26,8 +27,6 @@ class ExtraFormConstraint implements ExtraFormConstraintInterface
 
     /**
      * Constructor.
-     *
-     * @param array $configuration
      */
     public function __construct(array $configuration)
     {
@@ -36,25 +35,16 @@ class ExtraFormConstraint implements ExtraFormConstraintInterface
         $this->extraFormOptions = $configuration['extra_form_options'];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getClassName()
     {
         return $this->className;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription()
     {
         return $this->description;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExtraFormOptions()
     {
         return $this->extraFormOptions;

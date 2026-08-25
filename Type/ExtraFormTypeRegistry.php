@@ -2,6 +2,7 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
@@ -16,9 +17,6 @@ class ExtraFormTypeRegistry implements ExtraFormTypeRegistryInterface
      */
     protected $types;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setType($alias, ExtraFormTypeInterface $type)
     {
         $this->types[$alias] = $type;
@@ -26,17 +24,11 @@ class ExtraFormTypeRegistry implements ExtraFormTypeRegistryInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTypes()
     {
         return $this->types;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType($alias)
     {
         if (!is_string($alias)) {
@@ -50,9 +42,6 @@ class ExtraFormTypeRegistry implements ExtraFormTypeRegistryInterface
         return $this->types[$alias];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasType($alias)
     {
         return isset($this->types[$alias]);

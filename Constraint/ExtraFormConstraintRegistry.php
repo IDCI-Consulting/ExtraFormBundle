@@ -2,6 +2,7 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
@@ -16,9 +17,6 @@ class ExtraFormConstraintRegistry implements ExtraFormConstraintRegistryInterfac
      */
     protected $constraints;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setConstraint($alias, ExtraFormConstraintInterface $constraint)
     {
         $this->constraints[$alias] = $constraint;
@@ -26,17 +24,11 @@ class ExtraFormConstraintRegistry implements ExtraFormConstraintRegistryInterfac
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getConstraints()
     {
         return $this->constraints;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getConstraint($alias)
     {
         if (!is_string($alias)) {
@@ -50,9 +42,6 @@ class ExtraFormConstraintRegistry implements ExtraFormConstraintRegistryInterfac
         return $this->constraints[$alias];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasConstraint($alias)
     {
         return isset($this->constraints[$alias]);

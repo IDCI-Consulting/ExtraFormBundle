@@ -16,17 +16,11 @@ class UploadedFileToPathTransformer implements DataTransformerInterface
         $this->uploadsDir = $uploadsDir;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function transform($value)
     {
         return null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function reverseTransform($uploadedFile)
     {
         if (null === $uploadedFile) {

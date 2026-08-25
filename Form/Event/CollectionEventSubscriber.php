@@ -2,17 +2,18 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
 namespace IDCI\Bundle\ExtraFormBundle\Form\Event;
 
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormEvent;
+use IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class CollectionEventSubscriber implements EventSubscriberInterface
 {
@@ -23,33 +24,28 @@ class CollectionEventSubscriber implements EventSubscriberInterface
 
     /**
      * Constructor.
-     *
-     * @param array $options
      */
     public function __construct(array $options)
     {
         $this->options = $options;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents()
     {
-        return array(
-            FormEvents::PRE_SET_DATA => array(
-                array('preSetData', 1),
-                array('buildCollection', 0),
-            ),
-            FormEvents::PRE_SUBMIT => array(
-                array('preSubmitData', 2),
-                array('changeData', 1),
-                array('buildCollection', 0),
-            ),
-            FormEvents::SUBMIT => array(
-                array('onSubmit', 50),
-            ),
-        );
+        return [
+            FormEvents::PRE_SET_DATA => [
+                ['preSetData', 1],
+                ['buildCollection', 0],
+            ],
+            FormEvents::PRE_SUBMIT => [
+                ['preSubmitData', 2],
+                ['changeData', 1],
+                ['buildCollection', 0],
+            ],
+            FormEvents::SUBMIT => [
+                ['onSubmit', 50],
+            ],
+        ];
     }
 
     /**
@@ -68,8 +64,6 @@ class CollectionEventSubscriber implements EventSubscriberInterface
 
     /**
      * Pre set data.
-     *
-     * @param FormEvent $event
      */
     public function preSetData(FormEvent $event)
     {
@@ -82,8 +76,6 @@ class CollectionEventSubscriber implements EventSubscriberInterface
 
     /**
      * Pre submit data.
-     *
-     * @param FormEvent $event
      */
     public function preSubmitData(FormEvent $event)
     {
@@ -91,7 +83,7 @@ class CollectionEventSubscriber implements EventSubscriberInterface
         $data = $event->getData();
 
         if (null === $data || '' === $data) {
-            $data = array();
+            $data = [];
         }
 
         foreach ($form as $name => $child) {
@@ -104,8 +96,7 @@ class CollectionEventSubscriber implements EventSubscriberInterface
     /**
      * Build collection.
      *
-     * @param FormEvent $event
-     * @param string    $eventName
+     * @param string $eventName
      */
     public function buildCollection(FormEvent $event, $eventName)
     {
@@ -121,12 +112,12 @@ class CollectionEventSubscriber implements EventSubscriberInterface
                 $required
             ;
             $options['attr'] = array_replace(
-                isset($options['attr']) ? $options['attr'] : array(),
-                array(
+                isset($options['attr']) ? $options['attr'] : [],
+                [
                     'data-collection-id' => $this->options['collection_id'],
                     'data-display' => $displayed ? 'show' : 'hide',
                     'data-position' => $i,
-                )
+                ]
             );
 
             if (!$displayed) {
@@ -135,28 +126,26 @@ class CollectionEventSubscriber implements EventSubscriberInterface
 
             $form->add($i, $this->options['type'], $options);
 
-            $form->get($i)->add('__to_remove', CheckboxType::class, array(
+            $form->get($i)->add('__to_remove', CheckboxType::class, [
                 'mapped' => false,
                 'required' => false,
                 'data' => !$displayed,
-                'attr' => array(
+                'attr' => [
                     'class' => 'idci_collection_item_remove',
-                ),
-            ));
+                ],
+            ]);
         }
     }
 
     /**
      * Change data.
-     *
-     * @param FormEvent $event
      */
     public function changeData(FormEvent $event)
     {
         $data = $event->getData();
 
         if (null === $data) {
-            $data = array();
+            $data = [];
         }
 
         if ($data instanceof \Doctrine\Common\Collections\Collection) {
@@ -168,8 +157,6 @@ class CollectionEventSubscriber implements EventSubscriberInterface
 
     /**
      * On submit.
-     *
-     * @param FormEvent $event
      */
     public function onSubmit(FormEvent $event)
     {
@@ -177,7 +164,7 @@ class CollectionEventSubscriber implements EventSubscriberInterface
         $data = $event->getData();
 
         if (null === $data) {
-            $data = array();
+            $data = [];
         }
 
         if (!is_array($data) && !($data instanceof \Traversable && $data instanceof \ArrayAccess)) {
@@ -185,12 +172,12 @@ class CollectionEventSubscriber implements EventSubscriberInterface
         }
 
         // The data mapper only adds, but does not remove items, so do this here
-        $toDelete = array();
+        $toDelete = [];
 
         foreach ($data as $name => $child) {
             if (null === $child || (
-                $form->get($name)->has('__to_remove') &&
-                true === $form->get($name)->get('__to_remove')->getData()
+                $form->get($name)->has('__to_remove')
+                && true === $form->get($name)->get('__to_remove')->getData()
             )) {
                 $toDelete[] = $name;
             }
@@ -210,9 +197,8 @@ class CollectionEventSubscriber implements EventSubscriberInterface
     /**
      * Is displayable.
      *
-     * @param FormEvent $event
-     * @param int       $i
-     * @param string    $eventName
+     * @param int    $i
+     * @param string $eventName
      *
      * @return bool
      */
@@ -238,8 +224,8 @@ class CollectionEventSubscriber implements EventSubscriberInterface
         }
 
         foreach ($item as $k => $v) {
-            if (FormEvents::PRE_SUBMIT === $eventName &&
-                HiddenType::class === get_class($form->get($i)->get($k)->getConfig()->getType()->getInnerType())
+            if (FormEvents::PRE_SUBMIT === $eventName
+                && HiddenType::class === get_class($form->get($i)->get($k)->getConfig()->getType()->getInnerType())
             ) {
                 continue;
             }

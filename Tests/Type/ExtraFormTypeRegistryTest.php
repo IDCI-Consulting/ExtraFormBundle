@@ -2,13 +2,14 @@
 
 /**
  * @author:  Baptiste BOUCHEREAU <baptiste.bouchereau@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
 namespace IDCI\Bundle\ExtraFormBundle\Tests\Type;
 
-use IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException;
 use IDCI\Bundle\ExtraFormBundle\Exception\InvalidArgumentException;
+use IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormType;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistry;
 
@@ -19,34 +20,31 @@ class ExtraFormTypeRegistryTest extends \PHPUnit_Framework_TestCase
      */
     private $extraFormType;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setUp()
     {
-        $configuration = array(
+        $configuration = [
             'block_prefix' => 'html',
             'description' => 'Html text field',
             'icon' => 'code',
             'parent' => 'form',
             'abstract' => false,
             'form_type' => 'extra_form_html',
-            'extra_form_options' => array(
-                'content' => array(
+            'extra_form_options' => [
+                'content' => [
                     'extra_form_type' => 'textarea',
-                    'options' => array(
+                    'options' => [
                         'required' => false,
-                    ),
-                ),
-                'mapped' => array(
+                    ],
+                ],
+                'mapped' => [
                     'extra_form_type' => 'checkbox',
-                    'options' => array(
+                    'options' => [
                         'required' => false,
                         'data' => false,
-                    ),
-                ),
-            ),
-        );
+                    ],
+                ],
+            ],
+        ];
 
         $this->extraFormType = new ExtraFormType($configuration);
     }
@@ -82,7 +80,7 @@ class ExtraFormTypeRegistryTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEmpty($registry->getType('html'));
 
         $this->expectException(UnexpectedTypeException::class);
-        $registry->getType(array());
+        $registry->getType([]);
 
         $this->expectException(InvalidArgumentException::class);
         $registry->getType('no_blank');
