@@ -2,6 +2,7 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
@@ -27,26 +28,23 @@ class IDCIExtraFormExtension extends Extension implements PrependExtensionInterf
         // Attempt to prepend the doctrine configuration only if the bundle is registered in the kernel
         // This make doctrine an optional dependency
         if (isset($bundles['DoctrineBundle'])) {
-            $config = array(
-                'orm' => array(
-                    'mappings' => array(
-                        'IDCIExtraFormBundle' => array(
+            $config = [
+                'orm' => [
+                    'mappings' => [
+                        'IDCIExtraFormBundle' => [
                             'type' => 'xml',
                             'dir' => 'Resources/config/doctrine/',
                             'prefix' => 'IDCI\Bundle\ExtraFormBundle\Model',
                             'is_bundle' => true,
-                        ),
-                    ),
-                ),
-            );
+                        ],
+                    ],
+                ],
+            ];
 
             $container->prependExtensionConfig('doctrine', $config);
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();

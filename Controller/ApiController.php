@@ -2,12 +2,12 @@
 
 namespace IDCI\Bundle\ExtraFormBundle\Controller;
 
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\RequestParam;
-use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\View\View;
 use IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilderInterface;
@@ -36,7 +36,7 @@ class ApiController extends AbstractFOSRestController
      */
     public function getExtraFormTypesAction(
         $_format,
-        ExtraFormTypeRegistryInterface $extraFormTypeRegistry
+        ExtraFormTypeRegistryInterface $extraFormTypeRegistry,
     ) {
         $view = View::create()->setFormat($_format);
 
@@ -73,13 +73,10 @@ class ApiController extends AbstractFOSRestController
         $type,
         ExtraFormTypeRegistryInterface $registry,
         FormFactoryInterface $formFactory,
-        ExtraFormBuilderInterface $extraFormBuilder
+        ExtraFormBuilderInterface $extraFormBuilder,
     ) {
-        if (!($registry->hasType($type))) {
-            throw new NotFoundHttpException(sprintf(
-                'The Type `%s` was not found',
-                $type
-            ));
+        if (!$registry->hasType($type)) {
+            throw new NotFoundHttpException(sprintf('The Type `%s` was not found', $type));
         }
 
         $view = View::create()->setFormat($_format);
@@ -89,13 +86,13 @@ class ApiController extends AbstractFOSRestController
             $form = $extraFormBuilder
                 ->build(
                     $options,
-                    array(),
+                    [],
                     null,
                     $formFactory->createNamedBuilder(
                         null,
                         'form',
                         null,
-                        array('csrf_protection' => false)
+                        ['csrf_protection' => false]
                     )
                 )
                 ->getForm()
@@ -125,7 +122,7 @@ class ApiController extends AbstractFOSRestController
      */
     public function getExtraFormConstraintsAction(
         $_format,
-        ExtraFormConstraintRegistryInterface $registry
+        ExtraFormConstraintRegistryInterface $registry,
     ) {
         $view = View::create()->setFormat($_format);
 
@@ -160,13 +157,10 @@ class ApiController extends AbstractFOSRestController
         $constraint,
         ExtraFormConstraintRegistryInterface $registry,
         FormFactoryInterface $formFactory,
-        ExtraFormBuilderInterface $extraFormBuilder
+        ExtraFormBuilderInterface $extraFormBuilder,
     ) {
-        if (!($registry->hasConstraint($constraint))) {
-            throw new NotFoundHttpException(sprintf(
-                'The Constraint `%s` was not found',
-                $constraint
-            ));
+        if (!$registry->hasConstraint($constraint)) {
+            throw new NotFoundHttpException(sprintf('The Constraint `%s` was not found', $constraint));
         }
 
         $view = View::create()->setFormat($_format);
@@ -176,13 +170,13 @@ class ApiController extends AbstractFOSRestController
             $form = $extraFormBuilder
                 ->build(
                     $options,
-                    array(),
+                    [],
                     null,
                     $formFactory->createNamedBuilder(
                         null,
                         'form',
                         null,
-                        array('csrf_protection' => false)
+                        ['csrf_protection' => false]
                     )
                 )
                 ->getForm()
@@ -212,7 +206,7 @@ class ApiController extends AbstractFOSRestController
      */
     public function getConfiguredExtraFormTypesAction(Request $request, $_format)
     {
-        $tags = $request->query->has('tags') ? $request->query->get('tags') : array();
+        $tags = $request->query->has('tags') ? $request->query->get('tags') : [];
 
         $view = View::create()->setFormat($_format);
         $types = $this
@@ -263,13 +257,11 @@ class ApiController extends AbstractFOSRestController
      *   description="The name of the configured type",
      *   allowBlank=false
      * )
-     *
      * @RequestParam(
      *   name="configuration",
      *   description="The configured type configuration",
      *   allowBlank=false
      * )
-     *
      * @RequestParam(
      *   name="tags",
      *   description="The configured type tags",
@@ -327,7 +319,6 @@ class ApiController extends AbstractFOSRestController
      *   description="The configured type configuration",
      *   allowBlank=false
      * ),
-     *
      * @RequestParam(
      *   name="tags",
      *   description="The configured type tags",
@@ -347,7 +338,7 @@ class ApiController extends AbstractFOSRestController
         ;
 
         if (null === $configuredType) {
-            return new Response('No configured type found with name ' . $name, Response::HTTP_NOT_FOUND);
+            return new Response('No configured type found with name '.$name, Response::HTTP_NOT_FOUND);
         }
 
         $configuredType->setConfiguration($paramFetcher->get('configuration'));
@@ -387,7 +378,7 @@ class ApiController extends AbstractFOSRestController
         ;
 
         if (null === $configuredType) {
-            return new Response('No configured type found with name ' . $name, Response::HTTP_NOT_FOUND);
+            return new Response('No configured type found with name '.$name, Response::HTTP_NOT_FOUND);
         }
 
         $em->remove($configuredType);

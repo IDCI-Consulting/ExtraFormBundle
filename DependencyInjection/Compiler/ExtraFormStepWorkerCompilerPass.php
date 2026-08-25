@@ -2,27 +2,25 @@
 
 /**
  * @author:  Thomas Prelot <tprelot@gmail.com>
+ *
  * @license: MIT
  */
 
 namespace IDCI\Bundle\ExtraFormBundle\DependencyInjection\Compiler;
 
 use IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilder;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 
 class ExtraFormStepWorkerCompilerPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container)
     {
         // Process it only if the step bundle is loaded.
-        if (!class_exists('IDCI\Bundle\StepBundle\Configuration\Worker\ConfigurationWorkerRegistryInterface') ||
-            !$container->has(
+        if (!class_exists('IDCI\Bundle\StepBundle\Configuration\Worker\ConfigurationWorkerRegistryInterface')
+            || !$container->has(
                 'IDCI\Bundle\StepBundle\Configuration\Worker\ConfigurationWorkerRegistryInterface'
             )
         ) {
@@ -46,7 +44,7 @@ class ExtraFormStepWorkerCompilerPass implements CompilerPassInterface
 
         $registryDefinition->addMethodCall(
             'setWorker',
-            array('extra_form_builder', new Reference($workerServiceId))
+            ['extra_form_builder', new Reference($workerServiceId)]
         );
     }
 }

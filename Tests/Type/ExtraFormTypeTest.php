@@ -2,6 +2,7 @@
 
 /**
  * @author:  Baptiste BOUCHEREAU <baptiste.bouchereau@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
@@ -16,34 +17,31 @@ class ExtraFormTypeTest extends \PHPUnit_Framework_TestCase
      */
     private $extraFormType;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setUp()
     {
-        $configuration = array(
+        $configuration = [
             'block_prefix' => 'html',
             'description' => 'Html text field',
             'icon' => 'code',
             'parent' => null,
             'abstract' => false,
             'form_type' => 'extra_form_html',
-            'extra_form_options' => array(
-                'content' => array(
+            'extra_form_options' => [
+                'content' => [
                     'extra_form_type' => 'textarea',
-                    'options' => array(
+                    'options' => [
                         'required' => false,
-                    ),
-                ),
-                'mapped' => array(
+                    ],
+                ],
+                'mapped' => [
                     'extra_form_type' => 'checkbox',
-                    'options' => array(
+                    'options' => [
                         'required' => false,
                         'data' => false,
-                    ),
-                ),
-            ),
-        );
+                    ],
+                ],
+            ],
+        ];
 
         $this->extraFormType = new ExtraFormType($configuration);
     }
@@ -113,21 +111,21 @@ class ExtraFormTypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetExtraFormOptions()
     {
-        $options = array(
-            'content' => array(
+        $options = [
+            'content' => [
                 'extra_form_type' => 'textarea',
-                'options' => array(
+                'options' => [
                     'required' => false,
-                ),
-            ),
-            'mapped' => array(
+                ],
+            ],
+            'mapped' => [
                 'extra_form_type' => 'checkbox',
-                'options' => array(
+                'options' => [
                     'required' => false,
                     'data' => false,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $this->assertEquals($options, $this->extraFormType->getExtraFormOptions());
     }

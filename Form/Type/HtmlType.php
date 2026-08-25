@@ -2,21 +2,19 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
 namespace IDCI\Bundle\ExtraFormBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class HtmlType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $content = $options['content'];
@@ -27,20 +25,15 @@ class HtmlType extends AbstractType
         $view->vars['content'] = $content;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'content' => null,
             'mapped' => false,
-        ));
+        ]);
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @deprecated
      */
     public function setDefaultOptions(OptionsResolver $resolver)
@@ -48,9 +41,6 @@ class HtmlType extends AbstractType
         $this->configureOptions($resolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'extra_form_html';

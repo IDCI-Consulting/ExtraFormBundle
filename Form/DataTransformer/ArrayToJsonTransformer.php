@@ -2,6 +2,7 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
@@ -11,9 +12,6 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class ArrayToJsonTransformer implements DataTransformerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function transform($value)
     {
         if (null === $value) {
@@ -27,9 +25,6 @@ class ArrayToJsonTransformer implements DataTransformerInterface
         return $value;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function reverseTransform($value)
     {
         $decoded = json_decode($value, true, 512, JSON_PRETTY_PRINT);

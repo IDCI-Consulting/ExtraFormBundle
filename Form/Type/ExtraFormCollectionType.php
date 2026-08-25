@@ -2,25 +2,23 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
 namespace IDCI\Bundle\ExtraFormBundle\Form\Type;
 
+use IDCI\Bundle\ExtraFormBundle\Form\Event\CollectionEventSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\FormView;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use IDCI\Bundle\ExtraFormBundle\Form\Event\CollectionEventSubscriber;
 
 class ExtraFormCollectionType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $prototype = $builder->create(
@@ -28,35 +26,32 @@ class ExtraFormCollectionType extends AbstractType
             $options['type'],
             array_merge(
                 $options['options'],
-                array(
+                [
                     'required' => false,
                     'attr' => array_merge(
                         $options['options']['attr'],
-                        array(
+                        [
                             'data-collection-id' => $options['collection_id'],
                             'data-display' => 'prototype',
-                        )
+                        ]
                     ),
-                )
+                ]
             )
         );
-        $prototype->add('__to_remove', CheckboxType::class, array(
+        $prototype->add('__to_remove', CheckboxType::class, [
             'mapped' => false,
             'required' => false,
             'data' => true,
-            'attr' => array(
+            'attr' => [
                 'class' => 'unchangeable_field idci_collection_item_remove',
-            ),
-        ));
+            ],
+        ]);
 
         $builder->setAttribute('prototype', $prototype->getForm());
 
         $builder->addEventSubscriber(new CollectionEventSubscriber($options));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars['min_items'] = $options['min_items'];
@@ -67,31 +62,28 @@ class ExtraFormCollectionType extends AbstractType
         $view->vars['prototype'] = $form->getConfig()->getAttribute('prototype')->createView($view);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'min_items' => 1,
                 'max_items' => 10,
                 'type' => TextareaType::class,
-                'add_button' => array(),
-                'remove_button' => array(),
-                'options' => array(),
+                'add_button' => [],
+                'remove_button' => [],
+                'options' => [],
                 'collection_id' => 'default',
-            ))
+            ])
             ->setNormalizer(
                 'add_button',
                 function (OptionsResolver $options, $value) {
                     $attr = ($options['min_items'] == $options['max_items']) ?
-                        array('style' => 'display:none;') :
-                        array()
+                        ['style' => 'display:none;'] :
+                        []
                     ;
 
                     return array_replace_recursive(
-                        array('label' => 'add', 'attr' => $attr),
+                        ['label' => 'add', 'attr' => $attr],
                         $value
                     );
                 }
@@ -100,12 +92,12 @@ class ExtraFormCollectionType extends AbstractType
                 'remove_button',
                 function (OptionsResolver $options, $value) {
                     $attr = ($options['min_items'] == $options['max_items']) ?
-                        array('style' => 'display:none;') :
-                        array()
+                        ['style' => 'display:none;'] :
+                        []
                     ;
 
                     return array_replace_recursive(
-                        array('label' => 'remove', 'attr' => $attr),
+                        ['label' => 'remove', 'attr' => $attr],
                         $value
                     );
                 }
@@ -114,24 +106,22 @@ class ExtraFormCollectionType extends AbstractType
                 'options',
                 function (OptionsResolver $options, $value) {
                     return array_merge(
-                        array(
+                        [
                             'label' => ' ',
-                            'attr' => array(),
+                            'attr' => [],
                             'compound' => true,
-                        ),
+                        ],
                         $value
                     );
                 }
             )
-            ->setAllowedTypes('add_button', array('array'))
-            ->setAllowedTypes('remove_button', array('array'))
-            ->setAllowedTypes('collection_id', array('string'))
+            ->setAllowedTypes('add_button', ['array'])
+            ->setAllowedTypes('remove_button', ['array'])
+            ->setAllowedTypes('collection_id', ['string'])
         ;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @deprecated
      */
     public function setDefaultOptions(OptionsResolver $resolver)
@@ -139,9 +129,6 @@ class ExtraFormCollectionType extends AbstractType
         $this->configureOptions($resolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'extra_form_collection';

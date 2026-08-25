@@ -2,6 +2,7 @@
 
 /**
  * @author:  Eddie BARRACO <eddie.barraco@idci-consulting.fr>
+ *
  * @license: MIT
  */
 

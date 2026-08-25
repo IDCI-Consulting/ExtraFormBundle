@@ -2,16 +2,16 @@
 
 /**
  * @author:  Baptiste BOUCHEREAU <baptiste.bouchereau@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
 namespace IDCI\Bundle\ExtraFormBundle\Tests\Constraint;
 
 use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraint;
-use IDCI\Bundle\ExtraFormBundle\Tests\Constraint;
 use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistry;
-use IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException;
 use IDCI\Bundle\ExtraFormBundle\Exception\InvalidArgumentException;
+use IDCI\Bundle\ExtraFormBundle\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ExtraFormConstraintRegistryTest extends \PHPUnit_Framework_TestCase
@@ -21,23 +21,20 @@ class ExtraFormConstraintRegistryTest extends \PHPUnit_Framework_TestCase
      */
     private $extraFormConstraint;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setUp()
     {
-        $configuration = array(
+        $configuration = [
             'class' => NotBlank::class,
             'description' => 'Not blank constraint',
-            'extra_form_options' => array(
-                'message' => array(
+            'extra_form_options' => [
+                'message' => [
                     'extra_form_type' => 'text',
-                    'options' => array(
+                    'options' => [
                         'required' => false,
-                    ),
-                ),
-            ),
-        );
+                    ],
+                ],
+            ],
+        ];
 
         $this->extraFormConstraint = new ExtraFormConstraint($configuration);
     }
@@ -73,7 +70,7 @@ class ExtraFormConstraintRegistryTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEmpty($registry->getConstraint('not_blank'));
 
         $this->expectException(UnexpectedTypeException::class);
-        $registry->getConstraint(array());
+        $registry->getConstraint([]);
 
         $this->expectException(InvalidArgumentException::class);
         $registry->getConstraint('no_blank');

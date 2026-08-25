@@ -6,6 +6,7 @@ use IDCI\Bundle\ExtraFormBundle\Form\DataTransformer\ArrayToJsonTransformer;
 
 /**
  * @author:  Eddie BARRACO <eddie.barraco@idci-consulting.fr>
+ *
  * @license: MIT
  */
 class ArrayToJsonTransformerTest extends \PHPUnit_Framework_TestCase
@@ -18,9 +19,6 @@ class ArrayToJsonTransformerTest extends \PHPUnit_Framework_TestCase
      */
     private $arrayToJsonTransformer;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setUp()
     {
         $this->json = <<<EOF
@@ -31,12 +29,12 @@ class ArrayToJsonTransformerTest extends \PHPUnit_Framework_TestCase
     }
 }
 EOF;
-        $this->array = array(
-            'test' => array(
+        $this->array = [
+            'test' => [
                 'valueA' => 'test',
                 'valueB' => 'test2',
-            ),
-        );
+            ],
+        ];
 
         $this->arrayToJsonTransformer = new ArrayToJsonTransformer();
     }

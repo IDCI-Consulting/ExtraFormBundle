@@ -2,18 +2,19 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
 namespace IDCI\Bundle\ExtraFormBundle\Configuration\Builder;
 
+use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherInterface;
+use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherRegistry;
+use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistryInterface;
+use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherRegistry;
-use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherInterface;
-use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistryInterface;
-use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistryInterface;
 
 class ExtraFormBuilder implements ExtraFormBuilderInterface
 {
@@ -46,10 +47,10 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
      * @param ExtraFormConstraintRegistryInterface $constraintRegistry           the constraint registry
      */
     public function __construct(
-        FormFactoryInterface                 $formFactory,
-        ConfigurationFetcherRegistry         $configurationFetcherRegistry,
-        ExtraFormTypeRegistryInterface       $typeRegistry,
-        ExtraFormConstraintRegistryInterface $constraintRegistry
+        FormFactoryInterface $formFactory,
+        ConfigurationFetcherRegistry $configurationFetcherRegistry,
+        ExtraFormTypeRegistryInterface $typeRegistry,
+        ExtraFormConstraintRegistryInterface $constraintRegistry,
     ) {
         $this->formFactory = $formFactory;
         $this->configurationFetcherRegistry = $configurationFetcherRegistry;
@@ -59,28 +60,23 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
 
     /**
      * Define the field configuration using the option resolver component.
-     *
-     * @param OptionsResolver $resolver
      */
     protected function configureField(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'extra_form_type' => 'text',
-                'options' => array(),
-                'constraints' => array(),
-            ))
+                'options' => [],
+                'constraints' => [],
+            ])
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function build(
         $configuration,
-        array $parameters = array(),
+        array $parameters = [],
         $data = null,
-        FormBuilderInterface $formBuilder = null
+        ?FormBuilderInterface $formBuilder = null,
     ) {
         if (null === $formBuilder) {
             $formBuilder = $this->formFactory->createBuilder();
@@ -117,8 +113,6 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
     /**
      * Build form type.
      *
-     * @param array $field
-     *
      * @return string
      */
     protected function buildFormType(array $field)
@@ -134,8 +128,6 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
     /**
      * Build constraint.
      *
-     * @param array $constraint
-     *
      * @return Symfony\Component\Validator\Constraint
      */
     protected function buildConstraint(array $constraint)
@@ -146,7 +138,7 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
         ;
 
         $className = $extraFormConstraint->getClassName();
-        $options = isset($constraint['options']) ? $constraint['options'] : array();
+        $options = isset($constraint['options']) ? $constraint['options'] : [];
 
         return new $className($options);
     }
@@ -155,7 +147,6 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
      * Build form options.
      *
      * @param string     $name
-     * @param array      $field
      * @param array|null $data
      *
      * @return array
@@ -167,7 +158,7 @@ class ExtraFormBuilder implements ExtraFormBuilderInterface
             $field['options']['options'] = $this->buildFormOptions('', $field['options']);
         }
 
-        $constraints = array();
+        $constraints = [];
         foreach ($field['constraints'] as $constraint) {
             $constraints[] = $this->buildConstraint($constraint);
         }

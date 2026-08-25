@@ -2,6 +2,7 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
@@ -46,8 +47,6 @@ class ExtraFormType implements ExtraFormTypeInterface
 
     /**
      * Constructor.
-     *
-     * @param array $configuration
      */
     public function __construct(array $configuration)
     {
@@ -60,49 +59,31 @@ class ExtraFormType implements ExtraFormTypeInterface
         $this->extraFormOptions = $configuration['extra_form_options'];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return $this->blockPrefix;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFormTypeName()
     {
         return $this->getBlockPrefix();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFormType()
     {
         return $this->formType;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent()
     {
         return $this->parent;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription()
     {
         return $this->description;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getIcon()
     {
         if (null === $this->icon && null !== $this->getParent()) {
@@ -112,17 +93,11 @@ class ExtraFormType implements ExtraFormTypeInterface
         return $this->icon;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isAbstract()
     {
         return $this->abstract;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExtraFormOptions()
     {
         if (null === $this->getParent()) {

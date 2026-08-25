@@ -2,6 +2,7 @@
 
 /**
  * @author:  Baptiste BOUCHEREAU <baptiste.bouchereau@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
@@ -19,9 +20,6 @@ class ExtraFormBuilderTest extends WebTestCase
      */
     private $extraFormBuilder;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUp()
     {
         require_once __DIR__.'/../../AppKernel.php';
@@ -39,59 +37,59 @@ class ExtraFormBuilderTest extends WebTestCase
      */
     public function typesProvider()
     {
-        return array(
-            array('birthday', array('label' => 'birthday_label')),
-            array('captcha'),
-            array('checkbox'),
-            array('choice'),
-            array('country'),
-            array('date'),
-            array('datetime'),
-            array('email'),
-            array('extra_form_builder', array('configuration' => array())),
-            array('extra_form_collection'),
-            array(
+        return [
+            ['birthday', ['label' => 'birthday_label']],
+            ['captcha'],
+            ['checkbox'],
+            ['choice'],
+            ['country'],
+            ['date'],
+            ['datetime'],
+            ['email'],
+            ['extra_form_builder', ['configuration' => []]],
+            ['extra_form_collection'],
+            [
                 'extra_form_collection',
-                array(
+                [
                     'type' => ExtraFormCollectionType::class,
                     'label' => 'collection_test',
-                    'attr' => array('class' => 'test'),
-                    'constraints' => array(array(
+                    'attr' => ['class' => 'test'],
+                    'constraints' => [[
                         'extra_form_constraint' => 'not_blank',
-                        'options' => array(
+                        'options' => [
                             'message' => 'this value should not be blank',
-                        ),
-                    )),
-                ),
-            ),
-            array('extra_form_json_textarea'),
-            array('extra_form_range'),
-            array('html'),
-            array('iban'),
-            array('integer'),
-            array('money'),
-            array('number'),
-            array('password'),
-            array('percent'),
-            array('repeated'),
-            array('text'),
-            array(
+                        ],
+                    ]],
+                ],
+            ],
+            ['extra_form_json_textarea'],
+            ['extra_form_range'],
+            ['html'],
+            ['iban'],
+            ['integer'],
+            ['money'],
+            ['number'],
+            ['password'],
+            ['percent'],
+            ['repeated'],
+            ['text'],
+            [
                 'text',
-                array('label' => 'firstname'),
-                array(array(
+                ['label' => 'firstname'],
+                [[
                     'extra_form_constraint' => 'length',
-                    'options' => array(
+                    'options' => [
                         'min' => '3',
                         'max' => '50',
                         'minMessage' => 'too short',
                         'maxMessage' => 'too long',
-                    ),
-                )),
-            ),
-            array('textarea'),
-            array('time'),
-            array('url'),
-        );
+                    ],
+                ]],
+            ],
+            ['textarea'],
+            ['time'],
+            ['url'],
+        ];
     }
 
     /**
@@ -103,15 +101,15 @@ class ExtraFormBuilderTest extends WebTestCase
      * @param array  $options
      * @param array  $constraints
      */
-    public function testBuild($type, $options = array(), $constraints = array())
+    public function testBuild($type, $options = [], $constraints = [])
     {
-        $builder = $this->extraFormBuilder->build(array(
-            sprintf('field_%s', $type) => array(
+        $builder = $this->extraFormBuilder->build([
+            sprintf('field_%s', $type) => [
                 'extra_form_type' => $type,
                 'constraints' => $constraints,
                 'options' => $options,
-            ),
-        ));
+            ],
+        ]);
 
         $form = $builder->getForm();
 

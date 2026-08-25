@@ -6,9 +6,6 @@ use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeInterface;
 
 class ConfiguredType implements ExtraFormTypeInterface
 {
-    /**
-     * @var mixed
-     */
     protected $id;
 
     /**
@@ -32,7 +29,7 @@ class ConfiguredType implements ExtraFormTypeInterface
     protected $configuration;
 
     /**
-     *  @var ExtraFormTypeInterface
+     * @var ExtraFormTypeInterface
      */
     protected $extraFormType;
 
@@ -63,8 +60,6 @@ class ConfiguredType implements ExtraFormTypeInterface
 
     /**
      * Returns the id.
-     *
-     * @return mixed
      */
     public function getId()
     {
@@ -85,17 +80,11 @@ class ConfiguredType implements ExtraFormTypeInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return $this->blockPrefix;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFormTypeName()
     {
         if (null === $this->extraFormType) {
@@ -105,9 +94,6 @@ class ConfiguredType implements ExtraFormTypeInterface
         return $this->extraFormType->getBlockPrefix();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFormType()
     {
         if (null === $this->extraFormType) {
@@ -117,9 +103,6 @@ class ConfiguredType implements ExtraFormTypeInterface
         return $this->extraFormType->getFormType();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent()
     {
         if (null === $this->extraFormType) {
@@ -143,9 +126,6 @@ class ConfiguredType implements ExtraFormTypeInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription()
     {
         if (null !== $this->description) {
@@ -159,9 +139,6 @@ class ConfiguredType implements ExtraFormTypeInterface
         return null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getIcon()
     {
         if (null === $this->extraFormType) {
@@ -171,9 +148,6 @@ class ConfiguredType implements ExtraFormTypeInterface
         return $this->extraFormType->getIcon();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isAbstract()
     {
         if (null === $this->extraFormType) {
@@ -183,9 +157,6 @@ class ConfiguredType implements ExtraFormTypeInterface
         return $this->extraFormType->isAbstract();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExtraFormOptions()
     {
         if (null === $this->extraFormType) {
@@ -196,7 +167,7 @@ class ConfiguredType implements ExtraFormTypeInterface
         $options = $this->extraFormType->getExtraFormOptions();
 
         foreach ($configurationArray['extra_form_options'] as $optionName => $optionValue) {
-            if ($optionName === 'configuration') {
+            if ('configuration' === $optionName) {
                 $options[$optionName]['options']['data'] = json_encode($optionValue);
             } else {
                 $options[$optionName]['options']['data'] = $optionValue;
@@ -256,8 +227,6 @@ class ConfiguredType implements ExtraFormTypeInterface
 
     /**
      * Set extraFormType.
-     *
-     * @param ExtraFormTypeInterface $extraFormType
      *
      * @return ConfiguredType
      */

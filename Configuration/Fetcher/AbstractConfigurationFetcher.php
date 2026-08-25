@@ -2,6 +2,7 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
@@ -11,10 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractConfigurationFetcher implements ConfigurationFetcherInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function fetch(array $parameters = array())
+    public function fetch(array $parameters = [])
     {
         $resolver = new OptionsResolver();
         $this->setDefaultParameters($resolver);
@@ -24,8 +22,6 @@ abstract class AbstractConfigurationFetcher implements ConfigurationFetcherInter
 
     /**
      * Set default parameters.
-     *
-     * @param OptionsResolver $resolver
      */
     protected function setDefaultParameters(OptionsResolver $resolver)
     {
@@ -34,11 +30,9 @@ abstract class AbstractConfigurationFetcher implements ConfigurationFetcherInter
     /**
      * Fetch the configuration.
      *
-     * @param array $parameters
-     *
      * @return array
      *
      * @throw  FetchConfigurationException
      */
-    abstract protected function doFetch(array $parameters = array());
+    abstract protected function doFetch(array $parameters = []);
 }

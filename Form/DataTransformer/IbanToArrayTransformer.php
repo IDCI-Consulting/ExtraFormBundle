@@ -2,6 +2,7 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: GPL
  */
 
@@ -23,7 +24,7 @@ class IbanToArrayTransformer implements DataTransformerInterface
         if (null !== $in && !is_array($in)) {
             $in = strtoupper($in);
 
-            return array(
+            return [
                 'c1' => substr($in, 0, 4),
                 'c2' => substr($in, 4, 4),
                 'c3' => substr($in, 8, 4),
@@ -32,7 +33,7 @@ class IbanToArrayTransformer implements DataTransformerInterface
                 'c6' => substr($in, 20, 4),
                 'c7' => substr($in, 24, 3),
                 'c8' => substr($in, 27),
-            );
+            ];
         }
 
         return $in;

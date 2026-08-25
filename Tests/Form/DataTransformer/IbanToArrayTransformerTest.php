@@ -6,6 +6,7 @@ use IDCI\Bundle\ExtraFormBundle\Form\DataTransformer\IbanToArrayTransformer;
 
 /**
  * @author:  Eddie BARRACO <eddie.barraco@idci-consulting.fr>
+ *
  * @license: MIT
  */
 class IbanToArrayTransformerTest extends \PHPUnit_Framework_TestCase
@@ -18,13 +19,10 @@ class IbanToArrayTransformerTest extends \PHPUnit_Framework_TestCase
      */
     private $ibanToArrayTransformer;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setUp()
     {
         $this->iban = 'GR1601101250000000012300695';
-        $this->array = array(
+        $this->array = [
             'c1' => 'GR16',
             'c2' => '0110',
             'c3' => '1250',
@@ -33,7 +31,7 @@ class IbanToArrayTransformerTest extends \PHPUnit_Framework_TestCase
             'c6' => '2300',
             'c7' => '695',
             'c8' => '',
-        );
+        ];
 
         $this->ibanToArrayTransformer = new IbanToArrayTransformer();
     }

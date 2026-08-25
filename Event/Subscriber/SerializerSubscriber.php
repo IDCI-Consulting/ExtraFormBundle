@@ -4,9 +4,9 @@ namespace IDCI\Bundle\ExtraFormBundle\Event\Subscriber;
 
 use IDCI\Bundle\ExtraFormBundle\Model\ConfiguredType;
 use IDCI\Bundle\ExtraFormBundle\Type\ExtraFormTypeRegistryInterface;
+use JMS\Serializer\EventDispatcher\Events;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
-use JMS\Serializer\EventDispatcher\Events;
 
 /**
  * SerializerSubscriber.
@@ -20,31 +20,24 @@ class SerializerSubscriber implements EventSubscriberInterface
 
     /**
      * Constructor.
-     *
-     * @param ExtraFormTypeRegistryInterface $registry
      */
     public function __construct(ExtraFormTypeRegistryInterface $registry)
     {
         $this->registry = $registry;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents()
     {
-        return array(
-            array(
+        return [
+            [
                 'event' => Events::PRE_SERIALIZE,
                 'method' => 'onPreSerialize',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
      * Method called on pre serialize event.
-     *
-     * @param ObjectEvent $event
      */
     public function onPreSerialize(ObjectEvent $event)
     {

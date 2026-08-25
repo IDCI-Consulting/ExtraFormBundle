@@ -2,18 +2,18 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
 namespace IDCI\Bundle\ExtraFormBundle\Form\Type;
 
+use IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilderInterface;
+use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherInterface;
+use IDCI\Bundle\ExtraFormBundle\Form\Event\RawEventSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher\ConfigurationFetcherInterface;
-use IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilderInterface;
-use IDCI\Bundle\ExtraFormBundle\Form\Event\RawEventSubscriber;
-use IDCI\Bundle\ExtraFormBundle\Form\Type\JsonTextareaType;
 
 class ExtraFormBuilderType extends AbstractType
 {
@@ -21,17 +21,12 @@ class ExtraFormBuilderType extends AbstractType
 
     /**
      * Constructor.
-     *
-     * @param ExtraFormBuilderInterface $extraFormBuilder
      */
     public function __construct(ExtraFormBuilderInterface $extraFormBuilder)
     {
         $this->extraFormBuilder = $extraFormBuilder;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if (null !== $options['transform_method']) {
@@ -58,38 +53,33 @@ class ExtraFormBuilderType extends AbstractType
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setRequired(array(
+            ->setRequired([
                 'configuration',
-            ))
+            ])
             ->setAllowedTypes(
                 'configuration',
-                array(
+                [
                     'string',
                     'array',
                     ConfigurationFetcherInterface::class,
-                )
+                ]
             )
-            ->setDefaults(array(
+            ->setDefaults([
                 'inherit_data' => false,
-                'parameters' => array(),
+                'parameters' => [],
                 'transform_method' => null,
-            ))
+            ])
             ->setAllowedValues(
                 'transform_method',
-                array(null, 'jsonize', 'serialize')
+                [null, 'jsonize', 'serialize']
             )
         ;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @deprecated
      */
     public function setDefaultOptions(OptionsResolver $resolver)
@@ -97,9 +87,6 @@ class ExtraFormBuilderType extends AbstractType
         $this->configureOptions($resolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'extra_form_builder';

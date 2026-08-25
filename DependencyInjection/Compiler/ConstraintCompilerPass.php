@@ -2,6 +2,7 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
@@ -9,20 +10,17 @@ namespace IDCI\Bundle\ExtraFormBundle\DependencyInjection\Compiler;
 
 use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintInterface;
 use IDCI\Bundle\ExtraFormBundle\Constraint\ExtraFormConstraintRegistryInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\ChildDefinition;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 class ConstraintCompilerPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->has(ExtraFormConstraintInterface::class) ||
-            !$container->has(ExtraFormConstraintRegistryInterface::class)
+        if (!$container->has(ExtraFormConstraintInterface::class)
+            || !$container->has(ExtraFormConstraintRegistryInterface::class)
         ) {
             return;
         }
@@ -41,7 +39,7 @@ class ConstraintCompilerPass implements CompilerPassInterface
 
             $registryDefinition->addMethodCall(
                 'setConstraint',
-                array($name, new Reference($this->getDefinitionName($name)))
+                [$name, new Reference($this->getDefinitionName($name))]
             );
         }
     }

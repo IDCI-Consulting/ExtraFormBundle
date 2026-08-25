@@ -2,6 +2,7 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
@@ -20,9 +21,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder('idci_extra_form');
@@ -55,7 +53,7 @@ class Configuration implements ConfigurationInterface
         $builder = new TreeBuilder('types');
         $node = $builder->getRootNode();
         $node
-            ->defaultValue(array())
+            ->defaultValue([])
             ->useAttributeAsKey('id')
             ->prototype('array')
                 ->children()
@@ -65,13 +63,13 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('description')->defaultNull()->end()
                     ->scalarNode('icon')->defaultNull()->end()
                     ->arrayNode('extra_form_options')
-                        ->defaultValue(array())
+                        ->defaultValue([])
                         ->useAttributeAsKey('id')
                         ->prototype('array')
                             ->children()
                                 ->scalarNode('extra_form_type')->isRequired()->end()
                                 ->arrayNode('options')
-                                    ->defaultValue(array())->useAttributeAsKey('id')->prototype('variable')->end()
+                                    ->defaultValue([])->useAttributeAsKey('id')->prototype('variable')->end()
                                 ->end()
                             ->end()
                         ->end()
@@ -93,20 +91,20 @@ class Configuration implements ConfigurationInterface
         $builder = new TreeBuilder('constraints');
         $node = $builder->getRootNode();
         $node
-            ->defaultValue(array())
+            ->defaultValue([])
             ->useAttributeAsKey('id')
             ->prototype('array')
                 ->children()
                     ->scalarNode('class')->isRequired()->end()
                     ->scalarNode('description')->defaultNull()->end()
                     ->arrayNode('extra_form_options')
-                        ->defaultValue(array())
+                        ->defaultValue([])
                         ->useAttributeAsKey('name')
                         ->prototype('array')
                             ->children()
                                 ->scalarNode('extra_form_type')->isRequired()->end()
                                 ->arrayNode('options')
-                                    ->defaultValue(array())->useAttributeAsKey('id')->prototype('variable')->end()
+                                    ->defaultValue([])->useAttributeAsKey('id')->prototype('variable')->end()
                                 ->end()
                             ->end()
                         ->end()
@@ -128,28 +126,28 @@ class Configuration implements ConfigurationInterface
         $builder = new TreeBuilder('configurations');
         $node = $builder->getRootNode();
         $node
-            ->defaultValue(array())
+            ->defaultValue([])
             ->useAttributeAsKey('id')
             ->prototype('array')
                 ->children()
                     ->scalarNode('name')->defaultNull()->end()
                     ->arrayNode('fields')
-                        ->defaultValue(array())
+                        ->defaultValue([])
                         ->useAttributeAsKey('id')
                         ->prototype('array')
                             ->children()
                                 ->scalarNode('extra_form_type')->isRequired()->end()
                                 ->arrayNode('options')
-                                    ->defaultValue(array())->useAttributeAsKey('id')->prototype('variable')->end()
+                                    ->defaultValue([])->useAttributeAsKey('id')->prototype('variable')->end()
                                 ->end()
                                 ->arrayNode('constraints')
-                                    ->defaultValue(array())->prototype('variable')->end()
+                                    ->defaultValue([])->prototype('variable')->end()
                                 ->end()
                             ->end()
                         ->end()
                     ->end()
                     ->arrayNode('options')
-                        ->defaultValue(array())
+                        ->defaultValue([])
                         ->useAttributeAsKey('id')
                         ->prototype('variable')
                         ->end()
@@ -187,7 +185,7 @@ class Configuration implements ConfigurationInterface
                         ->booleanNode('enabled')->defaultTrue()->end()
                         ->booleanNode('enable_host_check')->defaultFalse()->end()
                         ->scalarNode('api_endpoint')->defaultValue('https://www.google.com/recaptcha/api')->end()
-                        ->arrayNode('trusted_roles')->prototype('scalar')->treatNullLike(array())->end()
+                        ->arrayNode('trusted_roles')->prototype('scalar')->treatNullLike([])->end()
                     ->end()
                 ->end()
             ->end()

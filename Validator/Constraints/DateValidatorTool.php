@@ -2,6 +2,7 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
@@ -12,9 +13,7 @@ abstract class DateValidatorTool
     /**
      * Clean the given date.
      *
-     * @param mixed $value
-     *
-     * @return DateTime | false if not well converted
+     * @return DateTime|false if not well converted
      */
     public static function cleanDateValue($value)
     {

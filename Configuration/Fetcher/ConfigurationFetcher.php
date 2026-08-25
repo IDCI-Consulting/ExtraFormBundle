@@ -2,6 +2,7 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
@@ -13,18 +14,13 @@ class ConfigurationFetcher extends AbstractConfigurationFetcher
 
     /**
      * Constructor.
-     *
-     * @param array $raw
      */
     public function __construct(array $raw)
     {
         $this->raw = $raw;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function doFetch(array $parameters = array())
+    public function doFetch(array $parameters = [])
     {
         return $this->raw['fields'];
     }

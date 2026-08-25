@@ -61,15 +61,10 @@ class ReCaptchaVerifiedValidator extends ConstraintValidator
      */
     protected $recaptchaApiEndpoint;
 
-    /**
-     * @param array                              $recaptchaConfiguration
-     * @param RequestStack                       $requestStack
-     * @param AuthorizationCheckerInterface|null $authorizationChecker
-     */
     public function __construct(
         array $recaptchaConfiguration,
         RequestStack $requestStack,
-        AuthorizationCheckerInterface $authorizationChecker = null
+        ?AuthorizationCheckerInterface $authorizationChecker = null,
     ) {
         $this->enabled = $recaptchaConfiguration['parameters']['enabled'];
         $this->httpProxy = $recaptchaConfiguration['http_proxy'];
@@ -80,9 +75,6 @@ class ReCaptchaVerifiedValidator extends ConstraintValidator
         $this->requestStack = $requestStack;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate($value, Constraint $constraint)
     {
         // if recaptcha is disabled, always valid

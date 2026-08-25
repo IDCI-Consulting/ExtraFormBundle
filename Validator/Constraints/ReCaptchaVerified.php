@@ -23,17 +23,11 @@ class ReCaptchaVerified extends Constraint
         $this->privateKey = $privateKey;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets()
     {
         return Constraint::PROPERTY_CONSTRAINT;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy()
     {
         return 'idci_extra_form_recaptcha.verified';

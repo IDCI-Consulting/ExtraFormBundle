@@ -2,15 +2,16 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
 namespace IDCI\Bundle\ExtraFormBundle\Configuration\Fetcher;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Doctrine\ORM\EntityManager;
 use Doctrine\Common\Util\Inflector;
+use Doctrine\ORM\EntityManager;
 use IDCI\Bundle\ExtraFormBundle\Exception\FetchConfigurationException;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DoctrineConfigurationFetcher extends AbstractConfigurationFetcher
 {
@@ -18,35 +19,27 @@ class DoctrineConfigurationFetcher extends AbstractConfigurationFetcher
 
     /**
      * Constructor.
-     *
-     * @param EntityManager $entityManager
      */
     public function __construct(EntityManager $entityManager)
     {
         $this->entityManager = $entityManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setDefaultParameters(OptionsResolver $resolver)
     {
         parent::setDefaultParameters($resolver);
 
         $resolver
-            ->setRequired(array('class', 'criteria', 'property'))
-            ->setAllowedTypes(array(
+            ->setRequired(['class', 'criteria', 'property'])
+            ->setAllowedTypes([
                 'class' => 'string',
                 'criteria' => 'array',
                 'property' => 'string',
-            ))
+            ])
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function doFetch(array $parameters = array())
+    public function doFetch(array $parameters = [])
     {
         $entity = $this
             ->entityManager
@@ -55,10 +48,7 @@ class DoctrineConfigurationFetcher extends AbstractConfigurationFetcher
         ;
 
         if (null === $entity) {
-            throw new FetchConfigurationException(
-                'doctrine',
-                $parameters
-            );
+            throw new FetchConfigurationException('doctrine', $parameters);
         }
 
         $getter = sprintf(
@@ -68,20 +58,12 @@ class DoctrineConfigurationFetcher extends AbstractConfigurationFetcher
 
         $rc = new \ReflectionClass($entity);
         if (!$rc->hasMethod($getter)) {
-            throw new FetchConfigurationException(
-                'doctrine',
-                $parameters,
-                sprintf(
-                    'Undefined method \'%s\' in \'%s\' class',
-                    $getter,
-                    get_class($entity)
-                )
-            );
+            throw new FetchConfigurationException('doctrine', $parameters, sprintf('Undefined method \'%s\' in \'%s\' class', $getter, get_class($entity)));
         }
 
         $rawConfiguration = call_user_func_array(
-            array($entity, $getter),
-            array()
+            [$entity, $getter],
+            []
         );
 
         return json_decode($rawConfiguration, true);

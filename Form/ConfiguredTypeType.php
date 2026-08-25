@@ -2,6 +2,7 @@
 
 /**
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ *
  * @license: MIT
  */
 
@@ -15,37 +16,29 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ConfiguredTypeType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('blockPrefix')
             ->add('description')
-            ->add('tags', TagsType::class, array(
+            ->add('tags', TagsType::class, [
                 'required' => false,
                 'url' => '/api/configured-extra-form-types-tags.json',
-            ))
+            ])
             ->add('configuration')
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => ConfiguredType::class,
-            ))
+            ])
         ;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @deprecated
      */
     public function setDefaultOptions(OptionsResolver $resolver)
@@ -53,9 +46,6 @@ class ConfiguredTypeType extends AbstractType
         $this->configureOptions($resolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'idci_extraform_configured_type_type';

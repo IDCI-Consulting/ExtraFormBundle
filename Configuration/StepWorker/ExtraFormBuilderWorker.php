@@ -2,15 +2,16 @@
 
 /**
  * @author:  Thomas Prelot <tprelot@gmail.com>
+ *
  * @license: MIT
  */
 
 namespace IDCI\Bundle\ExtraFormBundle\Configuration\StepWorker;
 
+use IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilderInterface;
+use IDCI\Bundle\StepBundle\Configuration\Worker\ConfigurationWorkerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use IDCI\Bundle\StepBundle\Configuration\Worker\ConfigurationWorkerInterface;
-use IDCI\Bundle\ExtraFormBundle\Configuration\Builder\ExtraFormBuilderInterface;
 
 class ExtraFormBuilderWorker implements ConfigurationWorkerInterface
 {
@@ -39,25 +40,22 @@ class ExtraFormBuilderWorker implements ConfigurationWorkerInterface
     public function setDefaultParameters(OptionsResolver $resolver)
     {
         $resolver
-            ->setRequired(array('configuration'))
-            ->setDefaults(array(
-                'parameters' => array(),
-                'data' => array(),
+            ->setRequired(['configuration'])
+            ->setDefaults([
+                'parameters' => [],
+                'data' => [],
                 'formBuilder' => null,
-            ))
+            ])
             ->setAllowedTypes(
-                'formBuilder', array(
+                'formBuilder', [
                     'null',
                     FormBuilderInterface::class,
-                )
+                ]
             )
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function work(array $parameters = array())
+    public function work(array $parameters = [])
     {
         $resolver = new OptionsResolver();
         $this->setDefaultParameters($resolver);
