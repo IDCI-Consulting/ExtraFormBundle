@@ -95,7 +95,7 @@ class ReCaptchaVerifiedValidator extends ConstraintValidator
         $requestMethod = new Post($this->recaptchaApiEndpoint, $this->httpProxy);
 
         $recaptcha = new ReCaptcha($constraint->getPrivateKey(), $requestMethod);
-        $response = $recaptcha->verify($value, $remoteip);
+        $response = $recaptcha->verify((string) $value, $remoteip);
 
         if (!$response->isSuccess()) {
             $this->context->addViolation($constraint->message);
