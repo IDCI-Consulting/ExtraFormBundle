@@ -43,7 +43,7 @@ class Post implements RequestMethod
      *
      * @return string Body of the reCAPTCHA response
      */
-    public function submit(RequestParameters $params)
+    public function submit(RequestParameters $params): string
     {
         $peer_key = version_compare(PHP_VERSION, '5.6.0', '<') ? 'CN_name' : 'peer_name';
         $options = [
@@ -71,6 +71,6 @@ class Post implements RequestMethod
 
         $context = stream_context_create($options);
 
-        return file_get_contents($this->recaptchaVerifyUrl, false, $context);
+        return (string) file_get_contents($this->recaptchaVerifyUrl, false, $context);
     }
 }
